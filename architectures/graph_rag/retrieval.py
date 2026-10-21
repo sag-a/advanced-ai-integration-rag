@@ -11,7 +11,7 @@ from rag_core.config import AppError
 from rag_core.retrieval import RetrievalResult
 from rag_core.store import retrieve
 from .index import load_index, normalized, read_documents
-from .tracing import stage
+from rag_core.callbacks import report_stage
 
 
 def matches(alias, question):
@@ -191,20 +191,13 @@ class GraphRetriever:
 
     def _retrieve(self, question, emit):
         started = time.perf_counter()
-        warnings = []
-        with stage(
-            self.settings,
-            "graph-vector-seeds",
-            {"question": question, "top_k": min(3, self.settings.top_k)},
-            warnings,
-        ) as output:
-            seed_result = retrieve(
-                self.collection,
-                replace(self.settings, top_k=min(3, self.settings.top_k)),
-                question,
-            )
-            seeds, seconds = seed_result.documents, seed_result.elapsed_seconds
-            output.update(passages=[d.model_dump() for d in seeds], elapsed_seconds=seconds)
+        seed_result = retrieve(
+            self.collection,
+            replace(self.settings, top_k=min(3, self.settings.top_k)),
+            question,
+        )
+        seeds, seconds = seed_result.documents, seed_result.elapsed_seconds
+        report_stage("graph-vector-seeds", f"{len(seeds)} seed passages in {seconds:.2f}s")
         emit("seeds_selected", documents=seeds, elapsed_seconds=seconds)
         seed_time = time.perf_counter()
         if any(
@@ -214,17 +207,12 @@ class GraphRetriever:
             raise AppError(
                 "Chroma passages changed after graph validation. Reopen the collection and use a matching index."
             )
-        with stage(
-            self.settings,
+        details = expand(self.graph, self.documents, seeds, question)
+        report_stage(
             "graph-traversal",
-            {
-                "seed_ids": [d.id for d in seeds],
-                "index_fingerprint": self.graph["fingerprint"],
-            },
-            warnings,
-        ) as output:
-            details = expand(self.graph, self.documents, seeds, question)
-            output.update(details)
+            f"{len(details['anchors'])} anchors, {details['traversed_count']} relationships, "
+            f"{details['expansion_count']} new passages",
+        )
         traversal_time = time.perf_counter()
         emit(
             "anchors_selected",
@@ -238,64 +226,58 @@ class GraphRetriever:
             emit("hop_completed", hop=hop, relationships=edges, new_passages=len(added))
             seen_chunks.update(added)
         selection_started = time.perf_counter()
-        with stage(
-            self.settings,
-            "graph-passage-selection",
-            {"candidate_ids": details["candidate_ids"], "rrf_constant": 60},
-            warnings,
-        ) as output:
-            if not details["graph_used"]:
-                docs = seeds
-                if self.settings.top_k > len(seeds):
-                    docs = retrieve(self.collection, self.settings, question).documents
-            else:
-                candidates = details["candidate_ids"]
-                try:
-                    result = self.collection.query(
-                        query_texts=[question],
-                        n_results=len(candidates),
-                        where={
-                            "$and": [
-                                {"corpus_id": {"$eq": self.graph["contract"]["corpus_id"]}},
-                                {"chunk_id": {"$in": candidates}},
-                            ]
-                        },
-                        include=["distances"],
-                    )
-                    ids, distances = result["ids"][0], result["distances"][0]
-                    if (
-                        set(ids) != set(candidates)
-                        or len(ids) != len(candidates)
-                        or not all(math.isfinite(d) for d in distances)
-                    ):
-                        raise ValueError("incomplete candidate ranking")
-                    distance_map = dict(zip(ids, distances, strict=True))
-                    selected = fuse(
-                        ids,
-                        details["graph_order"],
-                        [d.id for d in seeds],
-                        self.settings.top_k,
-                    )
-                    docs = [
-                        self.by_id[i].model_copy(
-                            update={
-                                "metadata": {
-                                    **self.by_id[i].metadata,
-                                    "distance": distance_map[i],
-                                }
+        if not details["graph_used"]:
+            docs = seeds
+            if self.settings.top_k > len(seeds):
+                docs = retrieve(self.collection, self.settings, question).documents
+        else:
+            candidates = details["candidate_ids"]
+            try:
+                result = self.collection.query(
+                    query_texts=[question],
+                    n_results=len(candidates),
+                    where={
+                        "$and": [
+                            {"corpus_id": {"$eq": self.graph["contract"]["corpus_id"]}},
+                            {"chunk_id": {"$in": candidates}},
+                        ]
+                    },
+                    include=["distances"],
+                )
+                ids, distances = result["ids"][0], result["distances"][0]
+                if (
+                    set(ids) != set(candidates)
+                    or len(ids) != len(candidates)
+                    or not all(math.isfinite(d) for d in distances)
+                ):
+                    raise ValueError("incomplete candidate ranking")
+                distance_map = dict(zip(ids, distances, strict=True))
+                selected = fuse(
+                    ids,
+                    details["graph_order"],
+                    [d.id for d in seeds],
+                    self.settings.top_k,
+                )
+                docs = [
+                    self.by_id[i].model_copy(
+                        update={
+                            "metadata": {
+                                **self.by_id[i].metadata,
+                                "distance": distance_map[i],
                             }
-                        )
-                        for i in selected
-                    ]
-                except Exception as error:
-                    raise AppError(
-                        "Graph candidate ranking failed. Check Chroma; no answer was generated."
-                    ) from error
-            output.update(
-                passages=[d.model_dump() for d in docs],
-                elapsed_seconds=time.perf_counter() - selection_started,
-            )
-        details["trace_warnings"] = warnings
+                        }
+                    )
+                    for i in selected
+                ]
+            except Exception as error:
+                raise AppError(
+                    "Graph candidate ranking failed. Check Chroma; no answer was generated."
+                ) from error
+        report_stage(
+            "graph-passage-selection",
+            f"{len(docs)} passages selected"
+            + (" with graph fusion" if details["graph_used"] else ", vector fallback"),
+        )
         details["selected_graph_ids"] = [
             d.id for d in docs if details["graph_used"] and d.id not in details["seed_ids"]
         ]

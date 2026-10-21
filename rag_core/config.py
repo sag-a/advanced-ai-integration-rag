@@ -22,7 +22,6 @@ class Settings:
     extras: dict = field(default_factory=dict)
     top_k: int = 6
     env_file: Path = Path(".env")
-    langfuse: bool = False
     temperature: float | None = None
 
     def __post_init__(self):

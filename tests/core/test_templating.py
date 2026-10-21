@@ -28,18 +28,14 @@ def test_default_prompt_bytes_and_ids_are_unchanged(name):
 def test_legacy_bundle_ids_and_graph_schema_stay_compatible():
     from rag_core import prompts
     from rag_core.templating import bundle_identity, render
-    from rag_core.observability import trace_metadata
     from architectures.agentic_rag.prompts import research_prompts
     from architectures.graph_rag.index import contract
     from tests.architectures.test_graph_rag import documents
-    from evals.judges import AnthropicJudge
 
     assert bundle_identity(prompts.for_settings(Settings()))["prompt_id"] == LEGACY["core_id"]
-    assert trace_metadata(Settings())["prompt_id"] == LEGACY["core_id"]
     assert bundle_identity(research_prompts(Settings()))["prompt_id"] == LEGACY["research_id"]
     assert contract(documents(), Settings())["prompt_id"] == LEGACY["ids"]["extraction"]
     assert render("extraction").prompt_id == LEGACY["ids"]["extraction"]
-    assert AnthropicJudge(None, "test").configuration["prompt_id"] == LEGACY["judge_id"]
 
 
 def test_conditionals_loops_filters_and_custom_identity():

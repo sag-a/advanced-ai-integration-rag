@@ -1,0 +1,2673 @@
+{
+  "run_id": "60f2d7c0a8ae4eb2a5453c7763ccfb5a",
+  "created_at": "2026-10-22T00:15:47.724068+03:00",
+  "configuration": {
+    "architecture": "classic_rag",
+    "collection": "magenta_course_pdf_v1",
+    "top_k": 3,
+    "model": "claude-haiku-4-5-20251001",
+    "corpus_id": "42c33f2efea444fa5ce70f1ee4fef12285ecf19d513a111b47b41f1c701e4cd3",
+    "embedding_contract": {
+      "model": "nomic-ai/nomic-embed-text-v2-moe",
+      "revision": "1066b6599d099fbb93dfcb64f9c37a7c9e503e85",
+      "code_repository": "nomic-ai/nomic-bert-2048",
+      "code_revision": "7710840340a098cfb869c4f65e87cf2b1b70caca",
+      "dimensions": 768,
+      "pooling": "attention-mask-mean+l2",
+      "prefixes": {
+        "document": "search_document: ",
+        "query": "search_query: "
+      },
+      "max_tokens": 512,
+      "truncation": false
+    },
+    "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+    "prompt_template_ids": {
+      "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+      "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+    },
+    "history_message_limit": 6,
+    "temperature": 0,
+    "architectures": [
+      "classic_rag"
+    ],
+    "split": "dev",
+    "mode": "full",
+    "dataset_id": "d19dd28b52f7c6e0cf13875cc8e359b51394dfb11713c14fc766507bf192812b",
+    "embedding_contract_id": "7ae18f95d75c5b542e5140b8a1a80b17f92aff6e037f9e3caa29eeafacd9c67b",
+    "judge": {
+      "model": "claude-haiku-4-5-20251001",
+      "temperature": 0,
+      "validation_retries": 1,
+      "prompt_id": "844ef430f6e6cab5066bdc3ed32081d5a451bce9abd81e4ea96c6a583971ddac",
+      "schema_id": "50b8cb8809e58ac6f21ef9fc826de8c366e056e2a823c52bc9bb6aef7f1d5130"
+    },
+    "architecture_checks": {},
+    "cost": null,
+    "cost_note": "No verified price table; usage is reported separately from monetary cost.",
+    "subset": false,
+    "unavailable_plugins": {}
+  },
+  "complete": true,
+  "rows": [
+    {
+      "architecture": "classic_rag",
+      "case_id": "s01-enrollment",
+      "type": "factual",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Ποιες υπηρεσίες πρέπει να έχω και τι πρέπει να κάνω στην εφαρμογή για να γίνω μέλος του Magenta Moments;",
+        "answer": "Για να γίνετε μέλος του Magenta Moments, πρέπει:\n\n**Υπηρεσίες που πρέπει να έχετε:**\nΝα είστε ενεργός πελάτης τουλάχιστον μιας από τις ακόλουθες υπηρεσίες:\n- Σταθερή τηλεφωνία\n- Συμβόλαιο κινητής\n- Κάρτα κινητής (Telekom Κάρτα & WHAT'S UP)\n- Συνδρομητική τηλεόραση Magenta TV\n\n**Τι πρέπει να κάνετε στην εφαρμογή:**\n1. Να είστε ταυτοποιημένος χρήστης σε μία από τις εφαρμογές Telekom App ή WHAT'S UP\n2. Να επισκεφθείτε την ενότητα Magenta Moments στην εφαρμογή\n3. Να εγγραφείτε στο Πρόγραμμα αποδεχόμενοι τους Όρους και Προϋποθέσεις\n\n**Ειδική περίπτωση για WHAT'S UP:**\nΕάν χρησιμοποιείτε την εφαρμογή WHAT'S UP, πρέπει να δημιουργήσετε Ταυτότητα Χρήστη (Telekom Id) ή να συνδεθείτε με αυτή, όταν επισκεφθείτε για πρώτη φορά την ενότητα Magenta Moments.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 1 · §2.1\n[2] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 1 · §2.2",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται\nότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.1"
+          },
+          {
+            "id": "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.2 Με την ενεργοποίηση του Magenta Moments, το Μέλος δηλώνει ότι πληροί\nτις προϋποθέσεις  που ορίζονται στην Ενότητα 2.1 των παρόντων Όρων και\nΠροϋποθέσεων και αποδέχεται  ότι η Εταιρεία μπορεί να το αποκλείσει από το\nΠρόγραμμα εάν δεν πληροί τις ανωτέρω προϋποθέσεις.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.2"
+          },
+          {
+            "id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην\nενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το\nMagenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να  ενεργοποιήσει ξανά\nτο Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των\nπαρόντων Όρων και Προϋποθέσεων.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.5"
+          }
+        ],
+        "citations": [
+          {
+            "id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται\nότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.1"
+          },
+          {
+            "id": "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.2 Με την ενεργοποίηση του Magenta Moments, το Μέλος δηλώνει ότι πληροί\nτις προϋποθέσεις  που ορίζονται στην Ενότητα 2.1 των παρόντων Όρων και\nΠροϋποθέσεων και αποδέχεται  ότι η Εταιρεία μπορεί να το αποκλείσει από το\nΠρόγραμμα εάν δεν πληροί τις ανωτέρω προϋποθέσεις.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.2"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 9.215453957905993,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "112ee21e",
+            "selected_ids": [
+              "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+              "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+              "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 6.2603569170460105,
+            "usage": {
+              "input_tokens": 2683,
+              "output_tokens": 539,
+              "total_tokens": 3222,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 15.482585333986208,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "Να είστε ενεργός πελάτης τουλάχιστον μιας από τις ακόλουθες υπηρεσίες:\n- Σταθερή τηλεφωνία\n- Συμβόλαιο κινητής\n- Κάρτα κινητής (Telekom Κάρτα & WHAT'S UP)\n- Συνδρομητική τηλεόραση Magenta TV"
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "Να είστε ταυτοποιημένος χρήστης σε μία από τις εφαρμογές Telekom App ή WHAT'S UP"
+          },
+          {
+            "index": 2,
+            "status": "met",
+            "quote": "Να επισκεφθείτε την ενότητα Magenta Moments στην εφαρμογή\n3. Να εγγραφείτε στο Πρόγραμμα αποδεχόμενοι τους Όρους και Προϋποθέσεις"
+          }
+        ],
+        "claims": [
+          {
+            "quote": "Να είστε ενεργός πελάτης τουλάχιστον μιας από τις ακόλουθες υπηρεσίες:\n- Σταθερή τηλεφωνία\n- Συμβόλαιο κινητής\n- Κάρτα κινητής (Telekom Κάρτα & WHAT'S UP)\n- Συνδρομητική τηλεόραση Magenta TV",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Να είστε ταυτοποιημένος χρήστης σε μία από τις εφαρμογές Telekom App ή WHAT'S UP",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Να επισκεφθείτε την ενότητα Magenta Moments στην εφαρμογή",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Να εγγραφείτε στο Πρόγραμμα αποδεχόμενοι τους Όρους και Προϋποθέσεις",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Εάν χρησιμοποιείτε την εφαρμογή WHAT'S UP, πρέπει να δημιουργήσετε Ταυτότητα Χρήστη (Telekom Id) ή να συνδεθείτε με αυτή, όταν επισκεφθείτε για πρώτη φορά την ενότητα Magenta Moments.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 6.2603569170460105,
+          "usage": {
+            "input_tokens": 2683,
+            "output_tokens": 539,
+            "total_tokens": 3222,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 8.305511165992357,
+                "usage": {
+                  "input_tokens": 6402,
+                  "output_tokens": 942,
+                  "total_tokens": 7344,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "Να είστε ενεργός πελάτης τουλάχιστον μιας από τις ακόλουθες υπηρεσίες:\n- Σταθερή τηλεφωνία\n- Συμβόλαιο κινητής\n- Κάρτα κινητής (Telekom Κάρτα & WHAT'S UP)\n- Συνδρομητική τηλεόραση Magenta TV"
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "Να είστε ταυτοποιημένος χρήστης σε μία από τις εφαρμογές Telekom App ή WHAT'S UP"
+                  },
+                  {
+                    "index": 2,
+                    "status": "met",
+                    "quote": "Να επισκεφθείτε την ενότητα Magenta Moments στην εφαρμογή\n3. Να εγγραφείτε στο Πρόγραμμα αποδεχόμενοι τους Όρους και Προϋποθέσεις"
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "Να είστε ενεργός πελάτης τουλάχιστον μιας από τις ακόλουθες υπηρεσίες:\n- Σταθερή τηλεφωνία\n- Συμβόλαιο κινητής\n- Κάρτα κινητής (Telekom Κάρτα & WHAT'S UP)\n- Συνδρομητική τηλεόραση Magenta TV",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Να είστε ταυτοποιημένος χρήστης σε μία από τις εφαρμογές Telekom App ή WHAT'S UP",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Να επισκεφθείτε την ενότητα Magenta Moments στην εφαρμογή",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Να εγγραφείτε στο Πρόγραμμα αποδεχόμενοι τους Όρους και Προϋποθέσεις",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Εάν χρησιμοποιείτε την εφαρμογή WHAT'S UP, πρέπει να δημιουργήσετε Ταυτότητα Χρήστη (Telekom Id) ή να συνδεθείτε με αυτή, όταν επισκεφθείτε για πρώτη φορά την ενότητα Magenta Moments.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 8.305738625000231,
+          "usage": {
+            "input_tokens": 6402,
+            "output_tokens": 942,
+            "total_tokens": 7344
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s02-rejoining",
+      "type": "factual",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Απενεργοποίησα το προφίλ μου στο Magenta Moments. Μπορώ να το ενεργοποιήσω αμέσως ξανά;",
+        "answer": "Σύμφωνα με τους Όρους και Προϋποθέσεις του Magenta Moments, δεν μπορείτε να ενεργοποιήσετε ξανά το προφίλ σας αμέσως. Μετά την απενεργοποίηση του προφίλ σας, μπορείτε να ενεργοποιήσετε ξανά το Πρόγραμμα μόνο μετά από 24 ώρες, υπό τις προϋποθέσεις που ορίζονται στο άρθρο 2.1 των Όρων και Προϋποθέσεων.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 1 · §2.5",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην\nενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το\nMagenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να  ενεργοποιήσει ξανά\nτο Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των\nπαρόντων Όρων και Προϋποθέσεων.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.5"
+          },
+          {
+            "id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.5 Με την ενεργοποίηση των push notifications, τα Μέλη μπορούν να λαμβάνουν\nειδοποιήσεις σχετικά με το Πρόγραμμα, όπως (ενδεικτικά, αλλά όχι\nπεριοριστικά): καλωσόρισμα και onboarding, λήξη των «Καρδιών», απόκτηση\n«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών\nπροβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1\nχλμ. από ένα γεωγραφικά εντοπισμένο κουπόνι στο πορτοφόλι τους (που έχει ήδη\nδιεκδικήσει), ενημέρωση όταν ένα νέο μέλος που προσκλήθηκε από το Μέλος\nεγγράφεται στο Magenta Moments, καθώς και επικοινωνία σχετική με τα\nδιαθέσιμα παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.5"
+          },
+          {
+            "id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.4 Οι προσφορές και τα προνόμια του Magenta Moments παρέχονται σύμφωνα\nμε τη χρήση που κάνει το Μέλος μέσω της συμμετοχής του στις δραστηριότητες\nτου Magenta Moments και της χρήσης της Εφαρμογής του\n(συμπεριλαμβανομένων των σελίδων και των υπηρεσιών που επισκέπτεται).\nΚάθε Μέλος μπορεί να εξατομικεύσει την εμπειρία του στο Magenta Moments\nπροσθέτοντας προαιρετικά ψευδώνυμο, τρόπο ζωής, ενδιαφέροντα, ηλικία, φύλο\nκαι τοποθεσία κατά την συμπλήρωση του π ροφίλ του. Η παροχή αυτών των\nστοιχείων είναι προαιρετική και επιτρέπει στο Μέλος να λαμβάνει\nπροσωποποιημένες προσφορές. Τα επιπλέον δεδομένα που παρέχει το Μέλος\nστην ενότητα Magenta Moments μπορούν να τροποποιηθούν ή να διαγραφούν\nαπό αυτό ανά πάσα στιγ μή μέσω των ρυθμίσεων της Εφαρμογής  του και στην\nπερίπτωση αυτή θα σταματήσει να λαμβάνει προσωποποιημένες προσφορές.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.4"
+          }
+        ],
+        "citations": [
+          {
+            "id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην\nενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το\nMagenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να  ενεργοποιήσει ξανά\nτο Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των\nπαρόντων Όρων και Προϋποθέσεων.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.5"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.29122933303005993,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "079d8f5f",
+            "selected_ids": [
+              "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+              "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+              "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 3.06165095907636,
+            "usage": {
+              "input_tokens": 2734,
+              "output_tokens": 260,
+              "total_tokens": 2994,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 3.364633292076178,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "δεν μπορείτε να ενεργοποιήσετε ξανά το προφίλ σας αμέσως. Μετά την απενεργοποίηση του προφίλ σας, μπορείτε να ενεργοποιήσετε ξανά το Πρόγραμμα μόνο μετά από 24 ώρες"
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "υπό τις προϋποθέσεις που ορίζονται στο άρθρο 2.1 των Όρων και Προϋποθέσεων"
+          }
+        ],
+        "claims": [
+          {
+            "quote": "δεν μπορείτε να ενεργοποιήσετε ξανά το προφίλ σας αμέσως",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "μπορείτε να ενεργοποιήσετε ξανά το Πρόγραμμα μόνο μετά από 24 ώρες",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "υπό τις προϋποθέσεις που ορίζονται στο άρθρο 2.1 των Όρων και Προϋποθέσεων",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 3.06165095907636,
+          "usage": {
+            "input_tokens": 2734,
+            "output_tokens": 260,
+            "total_tokens": 2994,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 4.960876291966997,
+                "usage": {
+                  "input_tokens": 5450,
+                  "output_tokens": 512,
+                  "total_tokens": 5962,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "δεν μπορείτε να ενεργοποιήσετε ξανά το προφίλ σας αμέσως. Μετά την απενεργοποίηση του προφίλ σας, μπορείτε να ενεργοποιήσετε ξανά το Πρόγραμμα μόνο μετά από 24 ώρες"
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "υπό τις προϋποθέσεις που ορίζονται στο άρθρο 2.1 των Όρων και Προϋποθέσεων"
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "δεν μπορείτε να ενεργοποιήσετε ξανά το προφίλ σας αμέσως",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "μπορείτε να ενεργοποιήσετε ξανά το Πρόγραμμα μόνο μετά από 24 ώρες",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "υπό τις προϋποθέσεις που ορίζονται στο άρθρο 2.1 των Όρων και Προϋποθέσεων",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 4.960975666996092,
+          "usage": {
+            "input_tokens": 5450,
+            "output_tokens": 512,
+            "total_tokens": 5962
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s03-hearts-value",
+      "type": "factual",
+      "language": "en",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Are Hearts real money? Can I cash them out or send them to a friend?",
+        "answer": "No, Hearts are not real money. According to the Magenta Moments Terms and Conditions, Hearts are virtual currency with no monetary value. They cannot be cashed out for money, products, or services, nor can they be transferred to friends. Hearts can only be used within the Magenta Moments program for games (such as lotteries, \"fastest finger first,\" \"spin the wheel,\" and \"scratch card\") and to activate regular offers from the company and its partners.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.2",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          },
+          {
+            "id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.5 Με την ενεργοποίηση των push notifications, τα Μέλη μπορούν να λαμβάνουν\nειδοποιήσεις σχετικά με το Πρόγραμμα, όπως (ενδεικτικά, αλλά όχι\nπεριοριστικά): καλωσόρισμα και onboarding, λήξη των «Καρδιών», απόκτηση\n«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών\nπροβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1\nχλμ. από ένα γεωγραφικά εντοπισμένο κουπόνι στο πορτοφόλι τους (που έχει ήδη\nδιεκδικήσει), ενημέρωση όταν ένα νέο μέλος που προσκλήθηκε από το Μέλος\nεγγράφεται στο Magenta Moments, καθώς και επικοινωνία σχετική με τα\nδιαθέσιμα παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.5"
+          },
+          {
+            "id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται\nότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.1"
+          }
+        ],
+        "citations": [
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.26677500002551824,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "bc670588",
+            "selected_ids": [
+              "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+              "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+              "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 2.3331711249193177,
+            "usage": {
+              "input_tokens": 3021,
+              "output_tokens": 168,
+              "total_tokens": 3189,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 2.6045212080935016,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "Hearts are virtual currency with no monetary value."
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "They cannot be cashed out for money, products, or services"
+          },
+          {
+            "index": 2,
+            "status": "met",
+            "quote": "nor can they be transferred to friends"
+          }
+        ],
+        "claims": [
+          {
+            "quote": "Hearts are not real money",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Hearts are virtual currency with no monetary value",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "They cannot be cashed out for money, products, or services",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "nor can they be transferred to friends",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Hearts can only be used within the Magenta Moments program for games (such as lotteries, \"fastest finger first,\" \"spin the wheel,\" and \"scratch card\") and to activate regular offers from the company and its partners",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 2.3331711249193177,
+          "usage": {
+            "input_tokens": 3021,
+            "output_tokens": 168,
+            "total_tokens": 3189,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 3.949291207944043,
+                "usage": {
+                  "input_tokens": 6240,
+                  "output_tokens": 433,
+                  "total_tokens": 6673,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "Hearts are virtual currency with no monetary value."
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "They cannot be cashed out for money, products, or services"
+                  },
+                  {
+                    "index": 2,
+                    "status": "met",
+                    "quote": "nor can they be transferred to friends"
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "Hearts are not real money",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Hearts are virtual currency with no monetary value",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "They cannot be cashed out for money, products, or services",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "nor can they be transferred to friends",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Hearts can only be used within the Magenta Moments program for games (such as lotteries, \"fastest finger first,\" \"spin the wheel,\" and \"scratch card\") and to activate regular offers from the company and its partners",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 3.9493734169518575,
+          "usage": {
+            "input_tokens": 6240,
+            "output_tokens": 433,
+            "total_tokens": 6673
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s04-expiry-followup",
+      "type": "followup",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Πότε λήγουν οι Καρδιές του Magenta Moments;",
+        "answer": "Οι Καρδιές του Magenta Moments λήγουν σε μηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ. Δηλαδή, έχουν διάρκεια ισχύος 1 έτος.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.3",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          },
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          },
+          {
+            "id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.5 Με την ενεργοποίηση των push notifications, τα Μέλη μπορούν να λαμβάνουν\nειδοποιήσεις σχετικά με το Πρόγραμμα, όπως (ενδεικτικά, αλλά όχι\nπεριοριστικά): καλωσόρισμα και onboarding, λήξη των «Καρδιών», απόκτηση\n«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών\nπροβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1\nχλμ. από ένα γεωγραφικά εντοπισμένο κουπόνι στο πορτοφόλι τους (που έχει ήδη\nδιεκδικήσει), ενημέρωση όταν ένα νέο μέλος που προσκλήθηκε από το Μέλος\nεγγράφεται στο Magenta Moments, καθώς και επικοινωνία σχετική με τα\nδιαθέσιμα παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.5"
+          }
+        ],
+        "citations": [
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "rewrite": {
+            "elapsed_seconds": 0.9637813749723136,
+            "usage": {
+              "input_tokens": 1065,
+              "output_tokens": 73,
+              "total_tokens": 1138,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          },
+          "retrieval_seconds": 0.06801466597244143,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "58ba411d",
+            "selected_ids": [
+              "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+              "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+              "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 2.164077208028175,
+            "usage": {
+              "input_tokens": 2580,
+              "output_tokens": 178,
+              "total_tokens": 2758,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 3.1991582079790533,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "Οι Καρδιές του Magenta Moments λήγουν"
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "έχουν διάρκεια ισχύος 1 έτος"
+          },
+          {
+            "index": 2,
+            "status": "met",
+            "quote": "την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ."
+          }
+        ],
+        "claims": [
+          {
+            "quote": "Οι Καρδιές του Magenta Moments λήγουν σε μηνιαία βάση",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "έχουν διάρκεια ισχύος 1 έτος",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 0.9637813749723136,
+          "usage": {
+            "input_tokens": 1065,
+            "output_tokens": 73,
+            "total_tokens": 1138,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 2.164077208028175,
+          "usage": {
+            "input_tokens": 2580,
+            "output_tokens": 178,
+            "total_tokens": 2758,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 4.017663624952547,
+                "usage": {
+                  "input_tokens": 4958,
+                  "output_tokens": 438,
+                  "total_tokens": 5396,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "Οι Καρδιές του Magenta Moments λήγουν"
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "έχουν διάρκεια ισχύος 1 έτος"
+                  },
+                  {
+                    "index": 2,
+                    "status": "met",
+                    "quote": "την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ."
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "Οι Καρδιές του Magenta Moments λήγουν σε μηνιαία βάση",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "έχουν διάρκεια ισχύος 1 έτος",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 4.017721667070873,
+          "usage": {
+            "input_tokens": 4958,
+            "output_tokens": 438,
+            "total_tokens": 5396
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s05-code-reuse",
+      "type": "factual",
+      "language": "en",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "I used a code for one offer yesterday. Can I use that code again for the same offer?",
+        "answer": "No, you cannot use the same code again for the same offer. According to the Magenta Moments Terms and Conditions, a code that has been used for an offer is cancelled only for that specific offer and cannot be reused.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 4 · §7.2\n[2] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 4 · §7.1",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.2 Κωδικός που χρησιμοποιήθηκε σε μία προσφορά ακυρώνεται μόνο γι α τη\nσυγκεκριμένη προσφορά και δεν μπορεί να επαναχρησιμοποιηθεί.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.2"
+          },
+          {
+            "id": "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.1 Κάθε Κωδικός μπορεί να χρησιμοποιηθεί μία φορά σε κάθε προσφορά\nσύμφωνα με τους όρους αυτής.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.1"
+          },
+          {
+            "id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.1 Κάθε προσφορά που παρέχεται στο Magenta Moments διέπεται από τους\nδικούς της όρους και προϋποθέσεις συμμετοχής και το Μέλος θα πρέπει να\nενημερώνεται για αυτούς από την σελίδα κάθε προσφοράς μέσα από την\nΕφαρμογή.  Οι εταιρείες /συνεργάτες που παρέχουν τις προσφορές έχουν το\nδικαίωμα να μεταβάλουν ελεύθερα τις τιμές τους ή/και τους όρους παροχής των\nπροσφορών τους . Οι προσφορές και τα κουπόνια τους έχουν περιορισμένη\nπερίοδο ισχύος, η οποία αναφέρεται στη σελίδα  κάθε  προσφοράς και στις\nεικόνες των κουπονιών. Κάθε κωδικός Κουπονιού μπορεί να χρησιμοποιηθεί μόνο\nμία φορά και σε μία μόνο προσφορά.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.1"
+          }
+        ],
+        "citations": [
+          {
+            "id": "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.2 Κωδικός που χρησιμοποιήθηκε σε μία προσφορά ακυρώνεται μόνο γι α τη\nσυγκεκριμένη προσφορά και δεν μπορεί να επαναχρησιμοποιηθεί.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.2"
+          },
+          {
+            "id": "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.1 Κάθε Κωδικός μπορεί να χρησιμοποιηθεί μία φορά σε κάθε προσφορά\nσύμφωνα με τους όρους αυτής.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.1"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.14052866701968014,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "6bbeceb4",
+            "selected_ids": [
+              "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+              "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3",
+              "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 1.4482685830444098,
+            "usage": {
+              "input_tokens": 2037,
+              "output_tokens": 119,
+              "total_tokens": 2156,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 1.5930962080601603,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "a code that has been used for an offer is cancelled only for that specific offer"
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "cannot be reused"
+          }
+        ],
+        "claims": [
+          {
+            "quote": "No, you cannot use the same code again for the same offer.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "a code that has been used for an offer is cancelled only for that specific offer and cannot be reused",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 1.4482685830444098,
+          "usage": {
+            "input_tokens": 2037,
+            "output_tokens": 119,
+            "total_tokens": 2156,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 2.5525797919835895,
+                "usage": {
+                  "input_tokens": 4031,
+                  "output_tokens": 238,
+                  "total_tokens": 4269,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "a code that has been used for an offer is cancelled only for that specific offer"
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "cannot be reused"
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "No, you cannot use the same code again for the same offer.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "a code that has been used for an offer is cancelled only for that specific offer and cannot be reused",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 2.552709416951984,
+          "usage": {
+            "input_tokens": 4031,
+            "output_tokens": 238,
+            "total_tokens": 4269
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s06-accidental-redemption",
+      "type": "factual",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.3333333333333333,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Δεν χρησιμοποίησα τον κωδικό, αλλά πάτησα κατά λάθος «Σήμανση ως εξαργυρωμένο». Παραμένει έγκυρος για χρήση;",
+        "answer": "Σύμφωνα με τους Όρους Χρήσης, εάν πατήσατε κατά λάθος το κουμπί «Σήμανση ως εξαργυρωμένο» χωρίς να έχετε χρησιμοποιήσει τον κωδικό, δυστυχώς ο κωδικός δεν παραμένει έγκυρος για χρήση. Όταν ένας κωδικός χαρακτηριστεί ως εξαργυρωμένος, δεν μπορεί να χρησιμοποιηθεί στη συνέχεια, ακόμη και αν αυτό έγινε κατά λάθος.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 4 · §7.4",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.4 Αν ένας Κωδικός χαρακτηριστεί ως εξαργυρωμένος παρόλο που δεν έχει\nχρησιμοποιηθεί από το Μέλος , (πατώντας το κουμπί «Σήμανση ως\nεξαργυρωμένο») δεν μπορεί να χρησιμοποιηθεί στη συνέχεια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.4"
+          },
+          {
+            "id": "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.2 Κωδικός που χρησιμοποιήθηκε σε μία προσφορά ακυρώνεται μόνο γι α τη\nσυγκεκριμένη προσφορά και δεν μπορεί να επαναχρησιμοποιηθεί.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.2"
+          },
+          {
+            "id": "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.3 Πριν τη χρήση του κάθε Κωδικός ελέγχεται εάν είναι ενεργός και αν περαιτέρω\nμπορεί να χρησιμοποιηθεί, σύμφωνα με τα αναφερόμενα στην παρούσα\nπαράγραφο 7. Σε περίπτωση που έχει παρέλθει ο χρόνος ισχύος του, θεωρείται\nάκυρος και δεν μπορεί να γίνει χρήση του.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.3"
+          }
+        ],
+        "citations": [
+          {
+            "id": "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef",
+            "text": "7. Όροι Χρήσης των κωδικών\n7.4 Αν ένας Κωδικός χαρακτηριστεί ως εξαργυρωμένος παρόλο που δεν έχει\nχρησιμοποιηθεί από το Μέλος , (πατώντας το κουμπί «Σήμανση ως\nεξαργυρωμένο») δεν μπορεί να χρησιμοποιηθεί στη συνέχεια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "7.4"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.21494816709309816,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "f24df214",
+            "selected_ids": [
+              "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef",
+              "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+              "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 2.97096495795995,
+            "usage": {
+              "input_tokens": 2012,
+              "output_tokens": 283,
+              "total_tokens": 2295,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 3.1935600419528782,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "ο κωδικός δεν παραμένει έγκυρος για χρήση. Όταν ένας κωδικός χαρακτηριστεί ως εξαργυρωμένος, δεν μπορεί να χρησιμοποιηθεί στη συνέχεια, ακόμη και αν αυτό έγινε κατά λάθος."
+          }
+        ],
+        "claims": [
+          {
+            "quote": "ο κωδικός δεν παραμένει έγκυρος για χρήση",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Όταν ένας κωδικός χαρακτηριστεί ως εξαργυρωμένος, δεν μπορεί να χρησιμοποιηθεί στη συνέχεια, ακόμη και αν αυτό έγινε κατά λάθος",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 2.97096495795995,
+          "usage": {
+            "input_tokens": 2012,
+            "output_tokens": 283,
+            "total_tokens": 2295,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 3.697432624991052,
+                "usage": {
+                  "input_tokens": 3822,
+                  "output_tokens": 345,
+                  "total_tokens": 4167,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "ο κωδικός δεν παραμένει έγκυρος για χρήση. Όταν ένας κωδικός χαρακτηριστεί ως εξαργυρωμένος, δεν μπορεί να χρησιμοποιηθεί στη συνέχεια, ακόμη και αν αυτό έγινε κατά λάθος."
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "ο κωδικός δεν παραμένει έγκυρος για χρήση",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Όταν ένας κωδικός χαρακτηριστεί ως εξαργυρωμένος, δεν μπορεί να χρησιμοποιηθεί στη συνέχεια, ακόμη και αν αυτό έγινε κατά λάθος",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 3.6975637499708682,
+          "usage": {
+            "input_tokens": 3822,
+            "output_tokens": 345,
+            "total_tokens": 4167
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s07-join-and-expiry",
+      "type": "multihop",
+      "language": "en",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": 1.0,
+        "precision_at_k": 0.6666666666666666,
+        "hit_at_k": 1.0,
+        "reciprocal_rank": 0.5,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": 1.0,
+        "factual_precision": 1.0,
+        "factual_recall": 1.0,
+        "factual_correctness": 1.0,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "How do I register for Magenta Moments, and how long will the Hearts I earn remain valid?",
+        "answer": "To register for Magenta Moments, you must be an active customer of Telekom with a fixed line, mobile contract, prepaid card (Telekom Card & WHAT'S UP), or Magenta TV subscription. You need to be an authenticated user in either the Telekom App or WHAT'S UP application. Then, visit the Magenta Moments section in the app and register in the program by accepting its Terms and Conditions. After registration, you become a member and can claim a Welcome Gift. For WHAT'S UP app users specifically, you must create a Telekom ID or log in with an existing one when you first access the Magenta Moments section.\n\nHearts you earn remain valid for 1 year. They expire on a monthly basis on the 1st day of the 13th month from the date you acquired them, at 12:00 p.m.\n[2] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.3\n[3] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 1 · §2.1",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          },
+          {
+            "id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται\nότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.1"
+          }
+        ],
+        "citations": [
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          },
+          {
+            "id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+            "text": "2.Πώς μπορούν οι χρήστες να συμμετέχουν στο Magenta Moments;\n2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται\nότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 1,
+            "page_end": 1,
+            "clause": "2.1"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.07878054201137275,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "2632d33c",
+            "selected_ids": [
+              "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+              "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+              "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 2.963297834037803,
+            "usage": {
+              "input_tokens": 2757,
+              "output_tokens": 265,
+              "total_tokens": 3022,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 3.0478911250829697,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [
+          {
+            "index": 0,
+            "status": "met",
+            "quote": "You need to be an authenticated user in either the Telekom App or WHAT'S UP application."
+          },
+          {
+            "index": 1,
+            "status": "met",
+            "quote": "visit the Magenta Moments section in the app and register in the program by accepting its Terms and Conditions."
+          },
+          {
+            "index": 2,
+            "status": "met",
+            "quote": "Hearts you earn remain valid for 1 year."
+          },
+          {
+            "index": 3,
+            "status": "met",
+            "quote": "They expire on a monthly basis on the 1st day of the 13th month from the date you acquired them, at 12:00 p.m."
+          }
+        ],
+        "claims": [
+          {
+            "quote": "To register for Magenta Moments, you must be an active customer of Telekom with a fixed line, mobile contract, prepaid card (Telekom Card & WHAT'S UP), or Magenta TV subscription.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "You need to be an authenticated user in either the Telekom App or WHAT'S UP application.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "visit the Magenta Moments section in the app and register in the program by accepting its Terms and Conditions.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "After registration, you become a member and can claim a Welcome Gift.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "For WHAT'S UP app users specifically, you must create a Telekom ID or log in with an existing one when you first access the Magenta Moments section.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Hearts you earn remain valid for 1 year.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "They expire on a monthly basis on the 1st day of the 13th month from the date you acquired them, at 12:00 p.m.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 2.963297834037803,
+          "usage": {
+            "input_tokens": 2757,
+            "output_tokens": 265,
+            "total_tokens": 3022,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 6.038260209024884,
+                "usage": {
+                  "input_tokens": 6258,
+                  "output_tokens": 695,
+                  "total_tokens": 6953,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [
+                  {
+                    "index": 0,
+                    "status": "met",
+                    "quote": "You need to be an authenticated user in either the Telekom App or WHAT'S UP application."
+                  },
+                  {
+                    "index": 1,
+                    "status": "met",
+                    "quote": "visit the Magenta Moments section in the app and register in the program by accepting its Terms and Conditions."
+                  },
+                  {
+                    "index": 2,
+                    "status": "met",
+                    "quote": "Hearts you earn remain valid for 1 year."
+                  },
+                  {
+                    "index": 3,
+                    "status": "met",
+                    "quote": "They expire on a monthly basis on the 1st day of the 13th month from the date you acquired them, at 12:00 p.m."
+                  }
+                ],
+                "claims": [
+                  {
+                    "quote": "To register for Magenta Moments, you must be an active customer of Telekom with a fixed line, mobile contract, prepaid card (Telekom Card & WHAT'S UP), or Magenta TV subscription.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "You need to be an authenticated user in either the Telekom App or WHAT'S UP application.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "visit the Magenta Moments section in the app and register in the program by accepting its Terms and Conditions.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "After registration, you become a member and can claim a Welcome Gift.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "For WHAT'S UP app users specifically, you must create a Telekom ID or log in with an existing one when you first access the Magenta Moments section.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Hearts you earn remain valid for 1 year.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "They expire on a monthly basis on the 1st day of the 13th month from the date you acquired them, at 12:00 p.m.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 6.038386709056795,
+          "usage": {
+            "input_tokens": 6258,
+            "output_tokens": 695,
+            "total_tokens": 6953
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s08-ambiguous-reference",
+      "type": "followup",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": null,
+        "precision_at_k": null,
+        "hit_at_k": null,
+        "reciprocal_rank": null,
+        "status_match": 0.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": null,
+        "factual_precision": 1.0,
+        "factual_recall": null,
+        "factual_correctness": null,
+        "faithfulness": 1.0,
+        "citation_support": 1.0
+      },
+      "output": {
+        "search_query": "Μέχρι πότε ισχύουν τα κουπόνια;",
+        "answer": "Τα κουπόνια έχουν περιορισμένη περίοδο ισχύος, η οποία αναφέρεται στη σελίδα κάθε προσφοράς και στις εικόνες των κουπονιών. Δεν υπάρχει συγκεκριμένη ημερομηνία λήξης που ισχύει για όλα τα κουπόνια, καθώς η διάρκεια ορίζεται ξεχωριστά για κάθε προσφορά.\n\nΣχετικά με τις Καρδιές (το εικονικό νόμισμα του προγράμματος), αυτές έχουν διάρκεια ισχύος 1 έτος και λήγουν σε μηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.1\n[3] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.3",
+        "status": "answered",
+        "passages": [
+          {
+            "id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.1 Κάθε προσφορά που παρέχεται στο Magenta Moments διέπεται από τους\nδικούς της όρους και προϋποθέσεις συμμετοχής και το Μέλος θα πρέπει να\nενημερώνεται για αυτούς από την σελίδα κάθε προσφοράς μέσα από την\nΕφαρμογή.  Οι εταιρείες /συνεργάτες που παρέχουν τις προσφορές έχουν το\nδικαίωμα να μεταβάλουν ελεύθερα τις τιμές τους ή/και τους όρους παροχής των\nπροσφορών τους . Οι προσφορές και τα κουπόνια τους έχουν περιορισμένη\nπερίοδο ισχύος, η οποία αναφέρεται στη σελίδα  κάθε  προσφοράς και στις\nεικόνες των κουπονιών. Κάθε κωδικός Κουπονιού μπορεί να χρησιμοποιηθεί μόνο\nμία φορά και σε μία μόνο προσφορά.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.1"
+          },
+          {
+            "id": "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+            "text": "6. Τι άλλο ισχύει;\n6.3 Οι εκπτώσεις, οι προσφορές, τα κουπόνια κ.λπ., που είναι διαθέσιμα στο\nMagenta Moments δεν μπορούν να συνδυαστούν με άλλες εκπτώσεις,\nπροσφορές, κουπόνια κ.λπ., που παρέχονται στα Μέλη, εκτός εάν αυτό\nεπιτρέπεται ρητά από τους όρους κάθε προσφοράς. Η Εταιρεία δεν ευθύνεται σε\nπερίπτωση αδυναμίας παροχής κάποιας προσφοράς λόγω ανωτέρας βίας ή\nευθύνης της εταιρείας/τρίτου μέρους που την παρέχει.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 3,
+            "page_end": 3,
+            "clause": "6.3"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          }
+        ],
+        "citations": [
+          {
+            "id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.1 Κάθε προσφορά που παρέχεται στο Magenta Moments διέπεται από τους\nδικούς της όρους και προϋποθέσεις συμμετοχής και το Μέλος θα πρέπει να\nενημερώνεται για αυτούς από την σελίδα κάθε προσφοράς μέσα από την\nΕφαρμογή.  Οι εταιρείες /συνεργάτες που παρέχουν τις προσφορές έχουν το\nδικαίωμα να μεταβάλουν ελεύθερα τις τιμές τους ή/και τους όρους παροχής των\nπροσφορών τους . Οι προσφορές και τα κουπόνια τους έχουν περιορισμένη\nπερίοδο ισχύος, η οποία αναφέρεται στη σελίδα  κάθε  προσφοράς και στις\nεικόνες των κουπονιών. Κάθε κωδικός Κουπονιού μπορεί να χρησιμοποιηθεί μόνο\nμία φορά και σε μία μόνο προσφορά.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.1"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "rewrite": {
+            "elapsed_seconds": 0.9638307919958606,
+            "usage": {
+              "input_tokens": 1079,
+              "output_tokens": 73,
+              "total_tokens": 1152,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          },
+          "retrieval_seconds": 0.4175554169341922,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "a92c074e",
+            "selected_ids": [
+              "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+              "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+              "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 3.7297538329148665,
+            "usage": {
+              "input_tokens": 2356,
+              "output_tokens": 359,
+              "total_tokens": 2715,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 5.11616574996151,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [],
+        "claims": [
+          {
+            "quote": "Τα κουπόνια έχουν περιορισμένη περίοδο ισχύος, η οποία αναφέρεται στη σελίδα κάθε προσφοράς και στις εικόνες των κουπονιών.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "Δεν υπάρχει συγκεκριμένη ημερομηνία λήξης που ισχύει για όλα τα κουπόνια, καθώς η διάρκεια ορίζεται ξεχωριστά για κάθε προσφορά.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          },
+          {
+            "quote": "αυτές έχουν διάρκεια ισχύος 1 έτος και λήγουν σε μηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ.",
+            "correctness": "correct",
+            "grounded": true,
+            "cited": true
+          }
+        ]
+      },
+      "stages": {
+        "rewrite": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 0.9638307919958606,
+          "usage": {
+            "input_tokens": 1079,
+            "output_tokens": 73,
+            "total_tokens": 1152,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 3.7297538329148665,
+          "usage": {
+            "input_tokens": 2356,
+            "output_tokens": 359,
+            "total_tokens": 2715,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [
+            {
+              "observation": {
+                "elapsed_seconds": 3.8209727499634027,
+                "usage": {
+                  "input_tokens": 5087,
+                  "output_tokens": 409,
+                  "total_tokens": 5496,
+                  "input_token_details": {
+                    "cache_read": 0,
+                    "cache_creation": 0,
+                    "ephemeral_5m_input_tokens": 0,
+                    "ephemeral_1h_input_tokens": 0
+                  }
+                }
+              },
+              "validation_errors": [],
+              "labels": {
+                "facts": [],
+                "claims": [
+                  {
+                    "quote": "Τα κουπόνια έχουν περιορισμένη περίοδο ισχύος, η οποία αναφέρεται στη σελίδα κάθε προσφοράς και στις εικόνες των κουπονιών.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "Δεν υπάρχει συγκεκριμένη ημερομηνία λήξης που ισχύει για όλα τα κουπόνια, καθώς η διάρκεια ορίζεται ξεχωριστά για κάθε προσφορά.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  },
+                  {
+                    "quote": "αυτές έχουν διάρκεια ισχύος 1 έτος και λήγουν σε μηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ.",
+                    "correctness": "correct",
+                    "grounded": true,
+                    "cited": true
+                  }
+                ]
+              }
+            }
+          ],
+          "elapsed_seconds": 3.821088333032094,
+          "usage": {
+            "input_tokens": 5087,
+            "output_tokens": 409,
+            "total_tokens": 5496
+          }
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s09-private-account",
+      "type": "abstain",
+      "language": "en",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": null,
+        "precision_at_k": null,
+        "hit_at_k": null,
+        "reciprocal_rank": null,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": null,
+        "factual_precision": null,
+        "factual_recall": null,
+        "factual_correctness": null,
+        "faithfulness": null,
+        "citation_support": null
+      },
+      "output": {
+        "search_query": "Please tell me my exact current Hearts balance from my account.",
+        "answer": "The supplied material does not provide enough evidence to answer this question.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.2\n[2] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 2 · §3.3",
+        "status": "insufficient_evidence",
+        "passages": [
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          },
+          {
+            "id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e",
+            "text": "8. Λοιποί όροι Προγράμματος\n8.1 Η Εταιρεία θεωρεί ότι κάθε συμμετέχων στο Πρόγραμμα είναι Πελάτης ή έχει\nεξασφαλίσει τη ρητή συναίνεση ή εξουσιοδότηση του  Πελάτη /νόμιμου κατόχου\nτου αριθμού  που συμμετέχει στο Πρόγραμμα. Ο Κωδικός είναι προσωπικός, δε\nμεταβιβάζεται και μπορεί να αποκτηθεί μόνο μέσω της Εφαρμογής του Πελάτη. H\nΕταιρεία δεν φέρει καμία ευθύνη για την χρήση του στην περίπτωση που ο\nΣυμμετέχων κοινοποίησε εκούσια ή ακούσια τον Κωδικό σε τρίτους. Το\nΠρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή\nκινητής σύνδεσης ή της κάρτας Magenta TV.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 4,
+            "page_end": 4,
+            "clause": "8.1"
+          }
+        ],
+        "citations": [
+          {
+            "id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,\nGermanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς\nχρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.2"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.2770092920400202,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "d4be61b6",
+            "selected_ids": [
+              "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+              "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+              "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 2.1258317910833284,
+            "usage": {
+              "input_tokens": 2474,
+              "output_tokens": 166,
+              "total_tokens": 2640,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 2.407766625052318,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [],
+        "claims": []
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 2.1258317910833284,
+          "usage": {
+            "input_tokens": 2474,
+            "output_tokens": 166,
+            "total_tokens": 2640,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 0,
+          "method": "canonical_refusal",
+          "attempts": [],
+          "elapsed_seconds": 2.095801755785942e-05,
+          "usage": {}
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    },
+    {
+      "architecture": "classic_rag",
+      "case_id": "s10-external-policy",
+      "type": "abstain",
+      "language": "el",
+      "split": "dev",
+      "outcome": "completed",
+      "metrics": {
+        "selected_count": 3,
+        "recall_at_k": null,
+        "precision_at_k": null,
+        "hit_at_k": null,
+        "reciprocal_rank": null,
+        "status_match": 1.0,
+        "citation_membership": 1.0,
+        "evidence_citation_coverage": null,
+        "factual_precision": null,
+        "factual_recall": null,
+        "factual_correctness": null,
+        "faithfulness": null,
+        "citation_support": null
+      },
+      "output": {
+        "search_query": "Για πόσα χρόνια αποθηκεύονται τα δεδομένα μου και σε ποιους αποδέκτες στέλνονται σύμφωνα με την Πολιτική Απορρήτου;",
+        "answer": "Τα παρεχόμενα έγγραφα δεν δίνουν επαρκείς πληροφορίες για να απαντήσω σε αυτή την ερώτηση.\n[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 3 · §5.1",
+        "status": "insufficient_evidence",
+        "passages": [
+          {
+            "id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f",
+            "text": "5. Πώς επεξεργάζονται τα δεδομένα των Μελών στο Πρόγραμμα;\n5.1 Αναλυτικές πληροφορίες σχετικά με τις δραστηριότητες επεξεργασίας\nδεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 3,
+            "page_end": 3,
+            "clause": "5.1"
+          },
+          {
+            "id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.4 Οι προσφορές και τα προνόμια του Magenta Moments παρέχονται σύμφωνα\nμε τη χρήση που κάνει το Μέλος μέσω της συμμετοχής του στις δραστηριότητες\nτου Magenta Moments και της χρήσης της Εφαρμογής του\n(συμπεριλαμβανομένων των σελίδων και των υπηρεσιών που επισκέπτεται).\nΚάθε Μέλος μπορεί να εξατομικεύσει την εμπειρία του στο Magenta Moments\nπροσθέτοντας προαιρετικά ψευδώνυμο, τρόπο ζωής, ενδιαφέροντα, ηλικία, φύλο\nκαι τοποθεσία κατά την συμπλήρωση του π ροφίλ του. Η παροχή αυτών των\nστοιχείων είναι προαιρετική και επιτρέπει στο Μέλος να λαμβάνει\nπροσωποποιημένες προσφορές. Τα επιπλέον δεδομένα που παρέχει το Μέλος\nστην ενότητα Magenta Moments μπορούν να τροποποιηθούν ή να διαγραφούν\nαπό αυτό ανά πάσα στιγ μή μέσω των ρυθμίσεων της Εφαρμογής  του και στην\nπερίπτωση αυτή θα σταματήσει να λαμβάνει προσωποποιημένες προσφορές.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.4"
+          },
+          {
+            "id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+            "text": "3. Πώς λειτουργεί το Magenta Moments;\n3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 2,
+            "page_end": 2,
+            "clause": "3.3"
+          }
+        ],
+        "citations": [
+          {
+            "id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f",
+            "text": "5. Πώς επεξεργάζονται τα δεδομένα των Μελών στο Πρόγραμμα;\n5.1 Αναλυτικές πληροφορίες σχετικά με τις δραστηριότητες επεξεργασίας\nδεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+            "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+            "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+            "page_start": 3,
+            "page_end": 3,
+            "clause": "5.1"
+          }
+        ],
+        "observation": {
+          "prompt_id": "c0da85085babffbc74a25ba16e2a43b6321fb2415b476149322fcb98066911f6",
+          "prompt_template_ids": {
+            "rewrite": "121dd321a3f150ec3c2804bb58f3f2ab94d94b139028ca05a145d5b5b96daaf0",
+            "answer": "7766ad4ebb233eb57030b7dcfd704a8c16cd099be09c7260a486ea6a737c5225"
+          },
+          "retrieval_seconds": 0.07665674993768334,
+          "retrieval_details": {
+            "architecture": "classic_rag",
+            "retrieval_id": "94dccdee",
+            "selected_ids": [
+              "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f",
+              "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+              "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+            ]
+          },
+          "generation": {
+            "elapsed_seconds": 3.9546586249489337,
+            "usage": {
+              "input_tokens": 2365,
+              "output_tokens": 379,
+              "total_tokens": 2744,
+              "input_token_details": {
+                "cache_read": 0,
+                "cache_creation": 0,
+                "ephemeral_5m_input_tokens": 0,
+                "ephemeral_1h_input_tokens": 0
+              }
+            }
+          }
+        },
+        "elapsed_seconds": 4.038779124966823,
+        "retrieval_complete": true,
+        "error": null
+      },
+      "judgment": {
+        "facts": [],
+        "claims": []
+      },
+      "stages": {
+        "rewrite": null,
+        "research": null,
+        "generation": {
+          "completed_calls": 1,
+          "method": "model",
+          "attempts": [],
+          "elapsed_seconds": 3.9546586249489337,
+          "usage": {
+            "input_tokens": 2365,
+            "output_tokens": 379,
+            "total_tokens": 2744,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        },
+        "judge": {
+          "completed_calls": 0,
+          "method": "canonical_refusal",
+          "attempts": [],
+          "elapsed_seconds": 2.2459076717495918e-05,
+          "usage": {}
+        },
+        "note": "Logical calls and returned usage; provider retry attempts or failed-call token usage may be unavailable. Indexing usage is separate. No prices assumed."
+      }
+    }
+  ],
+  "groups": [
+    {
+      "architecture": "classic_rag",
+      "type": "abstain",
+      "language": "el",
+      "attempted": 1,
+      "completed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "citation_support": {
+          "mean": null,
+          "n": 0
+        },
+        "evidence_citation_coverage": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_correctness": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_precision": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_recall": {
+          "mean": null,
+          "n": 0
+        },
+        "faithfulness": {
+          "mean": null,
+          "n": 0
+        },
+        "hit_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "precision_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "recall_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "reciprocal_rank": {
+          "mean": null,
+          "n": 0
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 1
+        },
+        "status_match": {
+          "mean": 1.0,
+          "n": 1
+        }
+      },
+      "mean_seconds": 4.038779124966823
+    },
+    {
+      "architecture": "classic_rag",
+      "type": "abstain",
+      "language": "en",
+      "attempted": 1,
+      "completed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "citation_support": {
+          "mean": null,
+          "n": 0
+        },
+        "evidence_citation_coverage": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_correctness": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_precision": {
+          "mean": null,
+          "n": 0
+        },
+        "factual_recall": {
+          "mean": null,
+          "n": 0
+        },
+        "faithfulness": {
+          "mean": null,
+          "n": 0
+        },
+        "hit_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "precision_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "recall_at_k": {
+          "mean": null,
+          "n": 0
+        },
+        "reciprocal_rank": {
+          "mean": null,
+          "n": 0
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 1
+        },
+        "status_match": {
+          "mean": 1.0,
+          "n": 1
+        }
+      },
+      "mean_seconds": 2.407766625052318
+    },
+    {
+      "architecture": "classic_rag",
+      "type": "factual",
+      "language": "el",
+      "attempted": 3,
+      "completed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "citation_support": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "evidence_citation_coverage": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "factual_correctness": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "factual_precision": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "factual_recall": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "faithfulness": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "hit_at_k": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "precision_at_k": {
+          "mean": 0.3333333333333333,
+          "n": 3
+        },
+        "recall_at_k": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "reciprocal_rank": {
+          "mean": 1.0,
+          "n": 3
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 3
+        },
+        "status_match": {
+          "mean": 1.0,
+          "n": 3
+        }
+      },
+      "mean_seconds": 7.346926222671755
+    },
+    {
+      "architecture": "classic_rag",
+      "type": "factual",
+      "language": "en",
+      "attempted": 2,
+      "completed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "citation_support": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "evidence_citation_coverage": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "factual_correctness": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "factual_precision": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "factual_recall": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "faithfulness": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "hit_at_k": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "precision_at_k": {
+          "mean": 0.3333333333333333,
+          "n": 2
+        },
+        "recall_at_k": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "reciprocal_rank": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 2
+        },
+        "status_match": {
+          "mean": 1.0,
+          "n": 2
+        }
+      },
+      "mean_seconds": 2.098808708076831
+    },
+    {
+      "architecture": "classic_rag",
+      "type": "followup",
+      "language": "el",
+      "attempted": 2,
+      "completed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "citation_support": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "evidence_citation_coverage": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "factual_correctness": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "factual_precision": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "factual_recall": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "faithfulness": {
+          "mean": 1.0,
+          "n": 2
+        },
+        "hit_at_k": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "precision_at_k": {
+          "mean": 0.3333333333333333,
+          "n": 1
+        },
+        "recall_at_k": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "reciprocal_rank": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 2
+        },
+        "status_match": {
+          "mean": 0.5,
+          "n": 2
+        }
+      },
+      "mean_seconds": 4.157661978970282
+    },
+    {
+      "architecture": "classic_rag",
+      "type": "multihop",
+      "language": "en",
+      "attempted": 1,
+      "completed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "metrics": {
+        "citation_membership": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "citation_support": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "evidence_citation_coverage": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "factual_correctness": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "factual_precision": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "factual_recall": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "faithfulness": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "hit_at_k": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "precision_at_k": {
+          "mean": 0.6666666666666666,
+          "n": 1
+        },
+        "recall_at_k": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "reciprocal_rank": {
+          "mean": 0.5,
+          "n": 1
+        },
+        "selected_count": {
+          "mean": 3,
+          "n": 1
+        },
+        "status_match": {
+          "mean": 1.0,
+          "n": 1
+        }
+      },
+      "mean_seconds": 3.0478911250829697
+    }
+  ]
+}

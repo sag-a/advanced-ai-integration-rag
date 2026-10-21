@@ -2,7 +2,7 @@
 
 import streamlit as st
 from rag_core.lesson_log import plain
-from rag_core.observability import scrub
+from rag_core.redact import scrub
 
 
 def show_research(details):

@@ -46,7 +46,7 @@ def test_followup_survives_reruns_but_refresh_and_new_chat_start_empty(tmp_path,
     at.chat_input[0].set_value("Πότε λήγουν οι Καρδιές;").run()
     assert not at.exception
     assert len(at.chat_message) == 2
-    assert at.expander[0].label == "Sources"
+    assert "Sources" in [e.label for e in at.expander]
     assert any("έτος" in item.value for item in at.markdown)
     assert len(setup_ui.calls) == 1
     at.run()
@@ -93,26 +93,21 @@ def test_missing_configuration_is_actionable(tmp_path, monkeypatch):
     assert not at.chat_input
 
 
-def test_cloud_trace_link_survives_reruns_without_reexecuting(tmp_path, setup_ui, monkeypatch):
-    from tests.core.test_observability import FakeTelemetry
+def test_process_steps_go_to_the_terminal_not_the_page(tmp_path, setup_ui, monkeypatch):
+    from io import StringIO
+    from rich.console import Console
 
-    original = ui.run_turn
-    monkeypatch.setattr(
-        ui,
-        "run_turn",
-        lambda *args, **kwargs: original(*args, **kwargs, telemetry=FakeTelemetry()),
-    )
+    terminal = StringIO()
+    monkeypatch.setattr(ui, "TERMINAL", Console(file=terminal, width=200))
     at = app(tmp_path).run()
-    at.chat_input[0].set_value("Question").run()
-    assert any("View trace in Langfuse" in m.value for m in at.markdown)
-    assert len(setup_ui.calls) == 1
-
-    at.run()
+    at.chat_input[0].set_value("Question [2024]").run()
     assert not at.exception
-    assert any(
-        "https://cloud.langfuse.com/project/demo/traces/trace" in m.value for m in at.markdown
-    )
-    assert len(setup_ui.calls) == 1
+    printed = terminal.getvalue()
+    assert "Question [2024]" in printed
+    for node in ("prepare_query", "retrieve", "generate_answer"):
+        assert f"◆ {node} done in" in printed
+    assert not any(e.label.startswith("Process") for e in at.expander)
+    assert not at.toggle
 
 
 @pytest.mark.parametrize("name", ["graph_rag", "agentic_rag"])

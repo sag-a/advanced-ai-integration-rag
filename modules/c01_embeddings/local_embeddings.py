@@ -1,6 +1,7 @@
 """Shared pinned Nomic encoder for the embeddings and vector-database chapters."""
 
 from pathlib import Path
+import warnings
 
 
 EMBEDDING_MODEL = "nomic-ai/nomic-embed-text-v2-moe"
@@ -61,7 +62,10 @@ def load_model(*, allow_download=False):
     config = model_class.config_class.from_json_file(
         str(Path(snapshot) / "config.json")
     )
-    model = CpuNomicModel(config, add_pooling_layer=False)
+    with warnings.catch_warnings():
+        # The pinned CPU path is intended; MegaBlocks is an optional GPU speed-up.
+        warnings.filterwarnings("ignore", message="Install Nomic's megablocks fork")
+        model = CpuNomicModel(config, add_pooling_layer=False)
     weights = load_file(str(Path(snapshot) / "model.safetensors"), device="cpu")
     model.load_state_dict(weights, strict=True)
     model = model.to("cpu").eval()

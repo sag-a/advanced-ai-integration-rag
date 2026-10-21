@@ -159,5 +159,5 @@ passages even for an unsupported question; a high rank is not proof of relevance
 - `telecom_support.txt`: the fictional source document.
 - `__init__.py`: Python package marker.
 
-Continue with [Chapter 2: vector databases](../modules.c02_vector_databases/README.md).
+Continue with [Chapter 2: vector databases](../c02_vector_databases/README.md).
 Later `rag_pipelines` material will be designed separately.

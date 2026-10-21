@@ -208,7 +208,6 @@ def load_index(documents, settings):
 
 
 def prepare(documents, settings, chat, *, resume=False, progress=lambda message: None):
-    from .tracing import stage
 
     manifest = contract(documents, settings)
     cache = index_path(settings).with_name(index_path(settings).name + ".cache")
@@ -245,25 +244,9 @@ def prepare(documents, settings, chat, *, resume=False, progress=lambda message:
                 attempts = []
                 for attempt in range(3):
                     try:
-                        warnings = []
-                        with stage(
-                            settings,
-                            "graph-extraction",
-                            {
-                                "chunk_id": document.id,
-                                "model": settings.model,
-                                "prompt_id": manifest["prompt_id"],
-                            },
-                            warnings,
-                        ) as output:
-                            selected, observation = chat.call(ChunkExtraction, for_settings("extraction", settings).text, payload)
-                            output.update(
-                                extraction=selected.model_dump(),
-                                observation=observation,
-                            )
-                        if warnings:
-                            observation = {**observation, "trace_warnings": warnings}
-                            progress(warnings[0])
+                        selected, observation = chat.call(
+                            ChunkExtraction, for_settings("extraction", settings).text, payload
+                        )
                         attempts.append(observation)
                         relationships = []
                         for relation in selected.relationships:
@@ -314,15 +297,4 @@ def prepare(documents, settings, chat, *, resume=False, progress=lambda message:
             }
         graph = assemble(documents, manifest, rows)
         write_json(index_path(settings), graph)
-        if settings.langfuse:
-            try:
-                from rag_core.observability import get_telemetry
-
-                warning = get_telemetry(settings).flush()
-                if warning:
-                    progress(warning)
-            except Exception:
-                progress(
-                    "Langfuse indexing trace export failed; the validated local graph remains available."
-                )
         return graph

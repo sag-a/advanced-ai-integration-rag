@@ -288,22 +288,17 @@ def test_cycles_alias_types_and_candidate_limits(tmp_path):
     assert graph["ambiguous_aliases"]["καρδιέσ"] == ["b", "c"]
 
 
-def test_graph_tracing_failure_preserves_retrieval(tmp_path, monkeypatch):
+def test_graph_retrieval_reports_stages_only_inside_a_run(tmp_path, monkeypatch):
     import architectures.graph_rag.retrieval as retrieval
-    import architectures.graph_rag.tracing as tracing
 
-    cfg = replace(settings(tmp_path), langfuse=True)
-    prepare(documents(), replace(cfg, langfuse=False), Chat())
-    monkeypatch.setattr(
-        tracing, "get_telemetry", lambda *args: (_ for _ in ()).throw(RuntimeError("secret"))
-    )
+    cfg = settings(tmp_path)
+    prepare(documents(), cfg, Chat())
     monkeypatch.setattr(
         retrieval, "retrieve", lambda *args: RetrievalResult(documents()[:1], 0.01)
     )
+    # Called directly, as `./rag search` does: stage reports are silently skipped.
     result = retrieval.GraphRetriever(Collection(documents()), cfg)("B")
     assert len(result.documents) == 3
-    assert len(result.details["trace_warnings"]) == 3
-    assert "secret" not in str(result.details)
 
 
 def test_streamed_graph_answer_uses_original_passages_and_clears_stale_details(tmp_path):
@@ -329,22 +324,3 @@ def test_streamed_graph_answer_uses_original_passages_and_clears_stale_details(t
     state = turn(graph, "And that?", state["messages"], settings=cfg)
     assert state["answer_status"] == "clarification_needed"
     assert "retrieval_details" not in state["observation"] and len(state["messages"]) == 4
-
-
-def test_trace_initialization_failure_does_not_invalidate_graph_conversation(
-    tmp_path, monkeypatch
-):
-    from tests.core.test_conversation import Chat as AnswerChat, answer, make_graph, turn
-
-    def fail(*args):
-        raise ValueError("private initialization detail")
-
-    monkeypatch.setattr("rag_core.observability.get_telemetry", fail)
-    cfg = replace(settings(tmp_path), langfuse=True)
-    graph = make_graph(AnswerChat(answer()), lambda q: RetrievalResult(documents()[:1], 0), cfg)
-    state = turn(graph, "Question", settings=cfg)
-    assert state["answer_status"] == "answered"
-    assert (
-        "initialization failed" in state["trace_warning"]
-        and "private" not in state["trace_warning"]
-    )

@@ -10,6 +10,7 @@ import sys
 from rich.console import Console
 from rich.text import Text
 
+from rag_core.callbacks import terminal_callback
 from rag_core.config import AppError, Settings
 from rag_core.lesson_log import LessonLog
 from rag_core.registry import REGISTRY, UNAVAILABLE, get, load_all
@@ -36,7 +37,6 @@ def add_settings_arguments(parser):
     # Older running Streamlit processes still pass this now-unused argument.
     parser.add_argument("--history-tokens", type=int, help=argparse.SUPPRESS)
     parser.add_argument("--checkpoint", help=argparse.SUPPRESS)
-    parser.add_argument("--langfuse", action="store_true")
     parser.add_argument(
         "--option",
         action="append",
@@ -75,9 +75,6 @@ def ui_arguments(settings):
         if name == "extras":
             for key, option in value.items():
                 arguments += ["--option", key + "=" + json.dumps(option, default=str)]
-        elif name == "langfuse":
-            if value:
-                arguments += ["--langfuse"]
         elif name != "temperature":
             arguments += ["--" + name.replace("_", "-"), str(value)]
     return arguments
@@ -98,7 +95,11 @@ def parser():
         if name in {"search", "ask"}:
             command.add_argument("question")
         if name in {"ask", "chat"}:
-            command.add_argument("--thread", default="lesson")
+            command.add_argument(
+                "--process",
+                action="store_true",
+                help="Show graph nodes, model calls and tool calls while the turn runs",
+            )
         if name == "prepare":
             command.add_argument("--resume", action="store_true")
         if name == "ui":
@@ -109,11 +110,12 @@ def parser():
 def show(state, log, console):
     console.print(Text(state["messages"][-1].content))
     log.accepted(state)
-    result = state["messages"][-1].additional_kwargs["result"]
-    if result.get("trace_url"):
-        console.print(Text("Langfuse: " + result["trace_url"]))
-    if result.get("trace_warning"):
-        console.print(Text(result["trace_warning"], style="yellow"))
+
+
+def process_callbacks(args, console):
+    if not args.process:
+        return []
+    return [terminal_callback(console)]
 
 
 def chat_loop(graph, settings, args, log, console):
@@ -138,7 +140,8 @@ def chat_loop(graph, settings, args, log, console):
                 continue
             question = pending
         try:
-            result = list(run_turn(graph, question, messages, settings, thread_id=args.thread))[
+            callbacks = process_callbacks(args, console)
+            result = list(run_turn(graph, question, messages, settings, callbacks=callbacks))[
                 -1
             ]["data"]
             messages, pending = result["messages"], None
@@ -222,7 +225,8 @@ def main(argv=None):
         if args.command == "chat":
             chat_loop(graph, settings, args, log, console)
         else:
-            result = list(run_turn(graph, args.question, [], settings, thread_id=args.thread))[
+            callbacks = process_callbacks(args, console)
+            result = list(run_turn(graph, args.question, [], settings, callbacks=callbacks))[
                 -1
             ]["data"]
             show(result, log, console)

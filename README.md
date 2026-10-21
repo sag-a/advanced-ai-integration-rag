@@ -8,34 +8,52 @@ retrievers, one CLI, one Streamlit page and comparable evaluation reports.
 
 ```text
 .
-├── modules/               # lessons, in teaching order
+├── modules/               # lessons, in teaching order (see modules/README.md)
 │   ├── c01_embeddings/        # Nomic embeddings, contextual words, chunking, search
-│   └── c02_vector_databases/  # pgvector + Chroma demos, hybrid search, study guide
+│   ├── c02_vector_databases/  # pgvector + Chroma demos, hybrid search, study guide
+│   ├── c03_classic_rag/       # lesson.html + instructor_notes/
+│   ├── c04_graph_rag/         # lesson.html + instructor_notes/
+│   └── c05_agentic_rag/       # lesson.html + instructor_notes/
 ├── rag_core/              # everything shared: corpus, store, model, answers, LangGraph turn
 ├── architectures/         # one package per retriever: classic_rag, graph_rag, agentic_rag
 ├── app/                   # CLI (./rag) and Streamlit UI, generic over the registry
-├── evals/                 # dataset, metrics, judges, committed reports
+├── evals/                 # Ragas evaluation: cases.jsonl, run.py, reports/
 ├── data/corpus/           # the Magenta Moments PDF
-├── docs/                  # architecture reference pages, prompt-template lesson
-├── tasks/                 # migration plan and progress notes
+├── docs/                  # prompt-template lesson
 ├── tests/                 # core/ and architectures/ suites
-└── compose.chroma.yaml    # Chroma for the RAG architectures (loopback :8004)
+├── compose.chroma.yaml    # Chroma for the RAG architectures (loopback :8004)
+├── SETUP.md               # install uv on macOS/Linux/Windows, run every example
+└── INSTRUCTOR_GUIDE.md    # timetable, demos, whiteboard prompts, common traps
 ```
 
 Dependencies only point inward: `app`/`evals` → `architectures` → `rag_core`.
 `modules/` is teaching material and may import anything.
 
-| Lesson | Start here |
+| Lesson | Teach from | Notes |
+| --- | --- | --- |
+| 1. Embeddings, chunking, semantic search | [c01_embeddings](modules/c01_embeddings/README.md) | [guide](modules/c01_embeddings/GUIDE.md) |
+| 2. Vector databases | [study_guide.html](modules/c02_vector_databases/study_guide.html) | [pgvector](modules/c02_vector_databases/README.md), [Chroma](modules/c02_vector_databases/CHROMA.md) |
+| 3. Classic (base) RAG | [lesson.html](modules/c03_classic_rag/lesson.html) | [README](modules/c03_classic_rag/README.md), [instructor notes](modules/c03_classic_rag/instructor_notes/) |
+| 4. Graph RAG | [lesson.html](modules/c04_graph_rag/lesson.html) | [README](modules/c04_graph_rag/README.md), [instructor notes](modules/c04_graph_rag/instructor_notes/) |
+| 5. Agentic RAG | [lesson.html](modules/c05_agentic_rag/lesson.html) | [README](modules/c05_agentic_rag/README.md), [instructor notes](modules/c05_agentic_rag/instructor_notes/) |
+
+Open the HTML pages in a browser. Press **P** to present one section per screen.
+Instructors: start with [INSTRUCTOR_GUIDE.md](INSTRUCTOR_GUIDE.md).
+
+## Install uv
+
+| System | Command |
 | --- | --- |
-| 1. Embeddings, chunking, semantic search | [modules/c01_embeddings](modules/c01_embeddings/README.md) |
-| 2. Vector databases | [modules/c02_vector_databases](modules/c02_vector_databases/study_guide.html) |
-| 3. Classic (base) RAG | [docs/architectures/base-rag.html](docs/architectures/base-rag.html) |
-| 4. Graph RAG | [docs/architectures/graph-rag.html](docs/architectures/graph-rag.html) |
-| 5. Agentic RAG | [docs/architectures/agentic-rag.html](docs/architectures/agentic-rag.html) |
+| macOS | `curl -LsSf https://astral.sh/uv/install.sh \| sh` or `brew install uv` |
+| Linux | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| Windows (PowerShell) | `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 \| iex"` or `winget install --id=astral-sh.uv -e` |
+
+Open a new terminal and check with `uv --version`. uv installs Python 3.12 itself.
+[SETUP.md](SETUP.md) has the full walkthrough and the commands for every example.
 
 ## Setup
 
-Install Python 3.12, [uv](https://docs.astral.sh/uv/) and Docker. From this directory:
+Install [Docker](https://docs.docker.com/get-docker/) as well. From this directory:
 
 ```bash
 uv sync --all-extras
@@ -44,7 +62,7 @@ cp .env.example .env
 ```
 
 In PowerShell, use `Copy-Item .env.example .env`. Put your Anthropic key in `.env`;
-the tracked example contains placeholders only. Langfuse credentials are optional.
+the tracked example contains placeholders only.
 Shell variables take precedence. Do not commit `.env` or `outputs/`.
 
 Chroma is isolated on loopback port **8004** with its own Docker volume. Existing
@@ -103,16 +121,20 @@ call. Agentic search adds paid, bounded Anthropic research. All accepted answers
 use Anthropic and cite original PDF passages. Exact quotation matching and valid
 citation IDs do not prove semantic correctness; inspect source support.
 
-Add `--langfuse` to trace questions, bounded history, retrieved evidence and final
-answers to the configured Cloud project. Credentials are scrubbed; tracing errors
-warn without discarding an otherwise accepted answer. Use `LANGFUSE_HOST` in `.env`.
+Add `--process` to `ask` or `chat` to watch a turn as it runs: each graph node,
+every model call with its token counts, tool calls, and Graph RAG's seed, traversal
+and selection stages. It is a LangChain callback (`rag_core/callbacks.py`) passed in
+the turn's config, so LangGraph hands it to every nested run, including the Deep
+Agents research loop. `./rag ui` always prints the same steps in the terminal it
+runs in, with a header line per question; the page itself shows only answers,
+sources and each architecture's panel.
 
 Follow-ups use a plain list of messages passed directly into the graph. The CLI
 keeps this list for the current `./rag chat` process; Streamlit keeps it in
 `st.session_state` across widget reruns. Rewriting and generation see the last six
 prior messages (roughly three exchanges). No conversation database is used.
 Refresh, restart, New chat or switching architecture starts an empty history.
-The URL conversation ID groups traces; it cannot restore a saved conversation.
+The URL conversation ID identifies the chat; it cannot restore a saved conversation.
 Failed turns keep their draft out of history and require an explicit Retry click
 or CLI `/retry`. Previously saved SQLite files are left in place but are not read.
 
@@ -125,7 +147,7 @@ Architecture options are owned by the plugin; for example:
 
 Changed corpus or embedding/chunking settings need a new collection. Changed
 graph extraction model, prompt or schema needs a new graph index path. Answer
-prompt changes are recorded in trace/report identity and do not re-embed PDFs.
+prompt changes are recorded in report identity and do not re-embed PDFs.
 Existing prepared collections and completed graph indexes are never
 automatically replaced. The original project's port 8002 data is not used.
 
@@ -142,24 +164,15 @@ Each preview includes the rendered text and a side-by-side default/customized
 comparison. See [the Jinja classroom lesson](docs/prompt-templates.md) for variables,
 conditionals, loops, filters, identity compatibility and safety boundaries.
 
-## Migration checkpoints
+## Evaluation
 
-The course now uses only the original Magenta Moments PDF. The synthetic PDFs
-and their generation tooling were removed at the instructor's request. See
-[data/README.md](data/README.md) and [evals/README.md](evals/README.md).
-Evaluation uses ten reused Magenta-only development scenarios; there is no
-held-out set or frozen baseline for this simplified corpus. Earlier migration
-checkpoints and reports describe historical work, not the current course scope.
+[Ragas](https://docs.ragas.io/) scores 21 Greek and English classroom cases on
+the Magenta Moments PDF. See [evals/README.md](evals/README.md) for the metrics.
 
 ```bash
-uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-only
+uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-only   # free
+uv run --all-extras python -m evals.run --architecture all                            # uses Anthropic
 ```
 
-See [tasks/todo.md](tasks/todo.md). The original requested design is preserved in
-[tasks/migration-plan.md](tasks/migration-plan.md). This fresh project does not
-read old checkpoint files or provide compatibility launchers.
-
-New documents will be **fictional teaching fixtures**, clearly distinguished from
-the supplied Magenta Moments PDF. Held-out Greek questions remain drafts until
-the instructor reviews them. Report ties and regressions honestly; do not tune a
-held-out set until an expected architecture wins.
+These are classroom examples, not a held-out benchmark. Report ties and
+regressions honestly.

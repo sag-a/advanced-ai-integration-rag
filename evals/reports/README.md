@@ -1,3 +1,6 @@
+> New Ragas runs write `.csv` files here. The `.json`/`.md` reports below came from
+> the previous custom evaluator (its own judge and metrics) and are kept as history.
+
 > Historical reports: these measurements used the removed synthetic corpus.
 > The active course now uses only the original Magenta PDF and ten development
 > scenarios. These reports are not directly comparable to new runs.

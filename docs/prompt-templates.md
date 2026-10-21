@@ -77,7 +77,8 @@ Research has two views: `render("research")` reproduces the old constant, while
 the runtime preview reproduces the previously applied constrained-helper name and
 final passage-budget suffix. The replacement now happens inside Jinja. Agentic
 reports retain their default combined legacy ID and additionally record the
-effective runtime prompt identity. The judge in `evals/judges.py` is unchanged.
+effective runtime prompt identity. (Evaluation has since moved to Ragas; the custom judge
+mentioned below no longer exists.)
 
 ## Finish the demonstration
 

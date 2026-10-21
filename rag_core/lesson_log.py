@@ -7,7 +7,7 @@ from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
 
-from .observability import scrub
+from .redact import scrub
 
 
 def plain(value, limit=160):

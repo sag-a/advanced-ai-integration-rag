@@ -163,7 +163,6 @@ def build_graph(chat, retrieve_documents, settings, *, entry=None):
             observations = {**observations, "generation": usage}
         text, cited = format_answer(answer, state["source_map"], state["question"])
         summary = {
-            **config.get("configurable", {}).get("trace_reference", {}),
             "answer_status": answer.status,
             "source_map": cited,
             "search_query": state["search_query"],
@@ -207,66 +206,38 @@ def run_turn(
     settings,
     *,
     streaming=False,
-    thread_id="lesson",
     message_id=None,
-    telemetry=None,
+    callbacks=None,
 ):
     """Pass a message list to the graph; callers retain history only on final.
 
     There is no saved state or conversation database. State events also let the
     evaluator inspect completed retrieval when later answer generation fails.
+    ``callbacks`` are LangChain callback handlers, e.g. ``ProcessCallback``; LangGraph
+    passes them to every node, model call and tool call in the turn.
     """
-    from .observability import get_telemetry, optional_trace
-
     if not question.strip() or len(question.encode("utf-8")) > 4000:
         raise AppError("Use a nonempty question up to 4000 UTF-8 bytes.")
-    warning = None
-    if telemetry is None and settings.langfuse:
-        try:
-            telemetry = get_telemetry(settings)
-        except Exception:
-            warning = (
-                "Langfuse initialization failed; the answer remains available without tracing."
-            )
     message_id = message_id or str(uuid4())
     inputs = {"messages": [*messages, HumanMessage(id=message_id, content=question)]}
-    config = {"configurable": {"stream_answer": streaming}, "recursion_limit": 10}
+    config = {
+        "configurable": {"stream_answer": streaming},
+        "recursion_limit": 10,
+        "callbacks": list(callbacks or []),
+    }
     result = None
     try:
-        with optional_trace(
-            telemetry, question, messages, f"{settings.architecture}:{thread_id}", message_id
-        ) as tracking:
-            if tracking.trace:
-                config["callbacks"] = tracking.trace.callbacks
-                config["configurable"]["trace_reference"] = tracking.trace.reference
-            with closing(
-                graph.stream(inputs, config, stream_mode=["custom", "values"], version="v2")
-            ) as events:
-                for event in events:
-                    if event["type"] == "values":
-                        result = event["data"]
-                        yield {"type": "state", "data": result}
-                    elif streaming:
-                        yield event["data"]
-            if not result or result["messages"][-1].type != "ai":
-                raise AppError("The graph ended without a validated assistant answer.")
-            if tracking.trace:
-                try:
-                    telemetry.finish(tracking.trace, result)
-                except Exception:
-                    tracking.warning = (
-                        "Langfuse trace output could not be recorded; the answer remains valid."
-                    )
-        try:
-            upload_warning = telemetry.flush() if telemetry else None
-        except Exception:
-            upload_warning = "Langfuse upload failed; the answer remains valid."
-        warning = tracking.warning or upload_warning or warning
-        if warning:
-            result["trace_warning"] = warning
-            result["messages"][-1].additional_kwargs["result"]["trace_warning"] = warning
-            if streaming:
-                yield {"type": "warning", "data": warning}
+        with closing(
+            graph.stream(inputs, config, stream_mode=["custom", "values"], version="v2")
+        ) as events:
+            for event in events:
+                if event["type"] == "values":
+                    result = event["data"]
+                    yield {"type": "state", "data": result}
+                elif streaming:
+                    yield event["data"]
+        if not result or result["messages"][-1].type != "ai":
+            raise AppError("The graph ended without a validated assistant answer.")
         yield {"type": "final", "data": result}
     except AppError:
         raise

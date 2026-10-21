@@ -5,13 +5,19 @@ from contextlib import closing
 from dataclasses import replace
 from uuid import uuid4
 
+from rich.console import Console
+from rich.markup import escape
 import streamlit as st
 
+from rag_core.callbacks import terminal_callback
 from rag_core.config import AppError
 from rag_core.registry import REGISTRY, UNAVAILABLE, get, load_all
 from rag_core.graph import build_graph, run_turn
 from app.cli import add_settings_arguments, settings_from
 from app.runtime import create_resources
+
+# Process steps go to the terminal that runs `./rag ui`, not to the page.
+TERMINAL = Console(highlight=False)
 
 
 def read_settings():
@@ -48,16 +54,11 @@ def sidebar(settings, architecture, thread):
         st.code(thread, language=None)
         st.caption(f"Anthropic · {settings.model}\n\nCollection · {settings.collection}")
         st.caption("History lasts for this browser session. Refresh starts an empty chat.")
+        st.caption("Each turn's steps are printed in the terminal running `./rag ui`.")
 
 
 def show_sources(result, architecture):
-    if result.get("trace_url"):
-        st.markdown(f"[View trace in Langfuse]({result['trace_url']})")
-    if result.get("trace_warning"):
-        st.warning(result["trace_warning"])
     details = result.get("observation", {}).get("retrieval_details", {})
-    for warning in details.get("trace_warnings", []):
-        st.warning(warning)
     if details and architecture.render_details:
         architecture.render_details(details)
     if result.get("source_map"):
@@ -74,6 +75,7 @@ def show_sources(result, architecture):
 def stream_answer(graph, messages, settings, pending, architecture):
     with st.chat_message("assistant"):
         progress, label, text = st.empty(), st.empty(), st.empty()
+        TERMINAL.rule(escape(f"{settings.architecture} · {pending['question']}"), style="dim")
         try:
             with closing(
                 run_turn(
@@ -82,8 +84,8 @@ def stream_answer(graph, messages, settings, pending, architecture):
                     messages,
                     settings,
                     streaming=True,
-                    thread_id=pending["thread"],
                     message_id=pending["id"],
+                    callbacks=[terminal_callback(TERMINAL)],
                 )
             ) as events:
                 for event in events:

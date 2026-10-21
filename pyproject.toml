@@ -28,11 +28,14 @@ dependencies = [
 [project.optional-dependencies]
 graph = ["graphviz>=0.19,<1", "networkx>=3,<4", "python-louvain==0.16"]
 agentic = ["deepagents==0.7.19"]
-langfuse = ["langfuse==5.0.2"]
 # Modules c01-c02: chunking comparison, TF-IDF baseline and plots; pgvector demo.
 chapters = ["scikit-learn>=1.5,<2", "langchain-text-splitters>=1,<2", "matplotlib>=3.8,<4"]
 pgvector = ["psycopg[binary]>=3.2,<4", "pgvector>=0.4,<1"]
 dev = ["pytest>=9,<10", "ruff>=0.14,<1"]
+eval = [
+    "langchain-community==0.4.1",
+    "ragas==0.4.3",
+]
 
 [build-system]
 requires = ["hatchling"]
@@ -47,6 +50,8 @@ exclude = [".env", ".env.*", "outputs", ".venv"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+# Ragas 0.4 marks evaluate() and LangchainLLMWrapper deprecated; both work in the pinned 0.4.3.
+filterwarnings = ["ignore::DeprecationWarning:ragas.*", "ignore:LangchainLLMWrapper is deprecated"]
 
 [tool.ruff]
 target-version = "py311"

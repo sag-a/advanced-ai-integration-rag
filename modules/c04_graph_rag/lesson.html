@@ -178,9 +178,41 @@ footer { max-width: 1180px; margin: 0 auto; padding-block: 24px 40px; border-top
 html { scroll-behavior: smooth; }
 section[id] { scroll-margin-top: 24px; }
 
+/* Present mode: one section per screen. Toggle with P or the Present button. */
+.present-btn {
+  font: 600 13px/1 var(--f-body); color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 8px 12px; cursor: pointer;
+}
+.present-btn:hover { border-color: var(--accent); color: var(--accent); }
+.present-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.present-bar { display: none; }
+body.presenting .toc, body.presenting .topbar, body.presenting footer { display: none; }
+body.presenting .shell { display: block; max-width: none; padding-block: 0; }
+body.presenting main { display: block; }
+body.presenting main > section { display: none; }
+body.presenting main > section.current {
+  display: grid; align-content: center; min-height: 100vh; max-width: min(1240px, 100%);
+  margin: 0 auto; padding-block: 48px 72px;
+}
+@media (min-width: 1200px) { body.presenting main > section.current { zoom: 1.3; } }
+body.presenting .present-bar {
+  display: flex; gap: 12px; align-items: center; position: fixed; z-index: 20;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  font: 500 12px/1 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 12px;
+}
+.present-bar button { font: inherit; color: var(--ink); background: none; border: 0; cursor: pointer; padding: 2px 6px; }
+@media print {
+  .toc, .topbar nav, .present-btn, .present-bar { display: none !important; }
+  .shell { display: block; padding-block: 0; }
+  main > section { break-before: page; max-width: none; }
+  main > section:first-child { break-before: auto; }
+  .diagram, .table-wrap, pre { break-inside: avoid; overflow: visible; }
+}
+
 </style>
 <body class="graph">
-<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="https://claude.ai/artifact/GFb7bg7qFrqgtzo3VYVxcH" target="_blank" rel="noopener">Base RAG</a><a href="#top" aria-current="page">Graph RAG</a><a href="https://claude.ai/artifact/WhAsxRnZtGps46c6AcSDXy" target="_blank" rel="noopener">Agentic RAG</a></nav></header>
+<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="#top" aria-current="page">Graph RAG</a><a href="../c05_agentic_rag/lesson.html">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
 <div class="shell">
 <aside class="toc" aria-label="On this page"><p>On this page</p><ol>
 <li><a href="#idea">The idea</a></li>
@@ -334,7 +366,7 @@ section[id] { scroll-margin-top: 24px; }
 ./rag check --architecture graph_rag
 
 <span class="c"># ask, with the traversal shown in the CLI and UI panels</span>
-./rag ask --architecture graph_rag "Πότε λήγουν οι Καρδιές;" --thread graph-demo-1
+./rag ask --process --architecture graph_rag "Πότε λήγουν οι Καρδιές;"   # shows seeds, traversal, selection
 
 <span class="c"># a separate index for another model or collection</span>
 ./rag prepare --architecture graph_rag --model claude-sonnet-4-5 \
@@ -368,4 +400,50 @@ section[id] { scroll-margin-top: 24px; }
 </main>
 </div>
 <footer>Course reference for the advanced-ai-integration-rag repository. Index figures come from outputs/graph_rag/graph.json, created 2026-10-20; file paths are relative to the repository root.</footer>
+<div class="present-bar" id="present-bar" hidden><button type="button" id="present-prev" aria-label="Previous section">←</button><span id="present-count">1 / 1</span><button type="button" id="present-next" aria-label="Next section">→</button><button type="button" id="present-exit">Esc · exit</button></div>
+<script>
+(function () {
+  var sections = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+  var bar = document.getElementById("present-bar");
+  var counter = document.getElementById("present-count");
+  var index = 0;
+  function show(n) {
+    index = Math.max(0, Math.min(sections.length - 1, n));
+    sections.forEach(function (s, k) { s.classList.toggle("current", k === index); });
+    counter.textContent = (index + 1) + " / " + sections.length;
+    if (sections[index].id) history.replaceState(null, "", "#" + sections[index].id);
+    window.scrollTo(0, 0);
+  }
+  function start() {
+    var id = location.hash.slice(1);
+    var found = sections.findIndex(function (s) { return s.id === id; });
+    document.body.classList.add("presenting");
+    bar.hidden = false;
+    document.querySelectorAll("details").forEach(function (d) { d.open = true; });
+    show(found < 0 ? 0 : found);
+  }
+  function stop() {
+    document.body.classList.remove("presenting");
+    bar.hidden = true;
+    sections[index].scrollIntoView();
+  }
+  document.getElementById("present-start").addEventListener("click", start);
+  document.getElementById("present-prev").addEventListener("click", function () { show(index - 1); });
+  document.getElementById("present-next").addEventListener("click", function () { show(index + 1); });
+  document.getElementById("present-exit").addEventListener("click", stop);
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest && e.target.closest("input, textarea, select")) return;
+    var presenting = document.body.classList.contains("presenting");
+    if (!presenting) {
+      if ((e.key === "p" || e.key === "P") && !e.metaKey && !e.ctrlKey && !e.altKey) start();
+      return;
+    }
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(index + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(index - 1); }
+    else if (e.key === "Home") show(0);
+    else if (e.key === "End") show(sections.length - 1);
+    else if (e.key === "Escape") stop();
+  });
+})();
+</script>
 </body>
