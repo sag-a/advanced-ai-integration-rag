@@ -1,0 +1,24 @@
+# Unit 2 only. Public credentials below are for this loopback-only teaching DB.
+name: advanced-rag-pgvector
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.5-pg17-bookworm
+    pull_policy: missing
+    environment:
+      POSTGRES_USER: rag_demo
+      POSTGRES_PASSWORD: ${PGVECTOR_PASSWORD:-rag_demo_local}
+      POSTGRES_DB: rag_demo
+    ports:
+      - "127.0.0.1:${PGVECTOR_PORT:-5434}:5432"
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+      start_period: 5s
+
+volumes:
+  pgvector_data:

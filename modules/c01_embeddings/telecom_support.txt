@@ -1,0 +1,19 @@
+Example Telecom Support Guide
+
+Cancelling a subscription
+To cancel your plan, sign in to your account and open the subscription settings. Select the plan you want to end and confirm the cancellation. Save the confirmation email for your records. This fictional guide is teaching material, not an actual provider's contract or cancellation policy.
+
+Understanding your bill
+Your monthly bill lists the subscription charge, any equipment rental, and additional services. A larger bill may reflect a one-time installation charge or the end of a promotional discount. Compare the current bill with the previous month's bill before contacting support.
+
+Reporting a duplicate charge
+Check whether two entries are completed payments or whether one is a temporary card authorization. If both charges are completed, record the dates and amounts and contact the billing team. Never send a full card number or password in a support message.
+
+Troubleshooting internet connectivity
+If your internet connection stops working, check the router's power and cable connections. Restart the router and wait for it to reconnect. Try a second device to determine whether the problem affects your whole connection or only one device. A red router light may indicate a connection problem; the meaning depends on the router model.
+
+Troubleshooting Wi-Fi
+If a wired connection works but Wi-Fi does not, confirm that Wi-Fi is enabled on the router and on your device. Move closer to the router and check that you selected the correct network. If several devices lose Wi-Fi together, describe that symptom when contacting technical support.
+
+Preparing a support request
+Include a short description of the problem, when it started, and the troubleshooting steps you have already tried. Cancellation requests belong to the account team, payment questions belong to billing, and connectivity problems belong to technical support. These categories also appear in the intent-classification examples.

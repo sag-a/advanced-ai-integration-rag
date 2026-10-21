@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 02 · Vector databases — Instructor study guide</title>
+<style>
+:root{--paper:#faf8f3;--surface:#fff;--ink:#202c30;--muted:#536268;--accent:#126458;--line:#d5dcd7;--tint:#e9f2ed;--warm:#f5ebd5;--code:#183238}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:1.5rem}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--accent);text-underline-offset:3px}a:hover{text-decoration-thickness:2px}button,select,input{font:inherit}button,select{border:1px solid var(--accent);border-radius:4px;padding:.5rem .8rem;background:var(--surface);color:var(--ink)}button{cursor:pointer}button:hover{background:var(--tint)}:focus-visible{outline:3px solid #b55317;outline-offset:4px}.skip{position:absolute;left:1rem;top:-6rem;background:white;padding:1rem;z-index:5}.skip:focus{top:1rem}
+.layout{max-width:1280px;margin:auto;display:grid;grid-template-columns:238px minmax(0,1fr);gap:3rem;padding:2rem}aside{position:sticky;top:2rem;align-self:start;max-height:calc(100vh - 4rem);overflow:auto;font-size:.88rem}.brand{font-weight:800;letter-spacing:.14em;color:var(--accent);font-size:.75rem}nav a{display:block;padding:.35rem 0;text-decoration:none}nav a:hover{text-decoration:underline}.nav-group{border-top:1px solid var(--line);margin-top:1rem;padding-top:1rem}.small{font-size:.85rem;color:var(--muted)}main{min-width:0;max-width:880px}header{border-top:5px solid var(--accent);padding:1.5rem 0 2rem}h1{font-family:Georgia,serif;font-weight:normal;font-size:clamp(2.4rem,5vw,4rem);line-height:1.08;margin:.7rem 0 1rem;letter-spacing:-.03em}h2{font-family:Georgia,serif;font-weight:normal;font-size:2rem;line-height:1.2;margin:0 0 1rem}h3{font-size:1.15rem;line-height:1.4;margin:1.6rem 0 .5rem}p{margin:.7rem 0 1rem}.lead{font-size:1.18rem;max-width:700px}.eyebrow{font-size:.76rem;text-transform:uppercase;letter-spacing:.13em;font-weight:750;color:var(--accent)}section{padding:2rem 0;border-top:1px solid var(--line)}section>p,li{max-width:77ch}ul,ol{padding-left:1.4rem}li{margin:.35rem 0}.callout{background:var(--tint);border-left:4px solid var(--accent);padding:1rem 1.25rem;margin:1.3rem 0}.callout p:last-child{margin-bottom:0}.note{background:var(--warm);border-color:#8e641e}.pair{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}.panel{background:var(--surface);border:1px solid var(--line);padding:1.2rem}.panel h3{margin-top:0}.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.6rem;margin:1rem 0}.flow>div{border-top:3px solid var(--accent);padding:.8rem;background:var(--tint);font-size:.9rem}.flow b{display:block;font-size:.73rem;text-transform:uppercase;letter-spacing:.07em;color:var(--accent)}.table-wrap{overflow-x:auto;margin:1rem 0}table{width:100%;border-collapse:collapse;font-size:.9rem}th,td{text-align:left;vertical-align:top;padding:.7rem;border-bottom:1px solid var(--line)}th{background:var(--tint);font-weight:650}code{font: .86em ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}p code,li code,td code{background:#e9eeea;padding:.1rem .25rem;border-radius:3px}pre{background:var(--code);color:#f2f6f4;padding:1.1rem;overflow-x:auto;border-radius:4px;line-height:1.6;font-size:.87rem;tab-size:2}pre code{font-size:inherit;overflow-wrap:normal}.caption{font-size:.85rem;color:var(--muted)}blockquote{margin:1rem 0;padding:.4rem 1.2rem;border-left:3px solid var(--line);font-family:Georgia,serif;font-size:1.2rem}details{background:var(--surface);border:1px solid var(--line);padding:.9rem 1.1rem;margin:.7rem 0}summary{cursor:pointer;font-weight:650}details p{margin-bottom:.3rem}.controls{display:flex;flex-wrap:wrap;align-items:end;gap:1rem;margin:1rem 0}.controls label{display:grid;gap:.3rem;font-size:.9rem}.result{border-left:3px solid var(--accent);padding:.6rem 1rem;margin:.6rem 0;background:var(--surface)}.result b{display:block}.result span{font-size:.85rem;color:var(--muted)}.checklist{list-style:none;padding:0}.checklist label{display:flex;align-items:start;gap:.65rem;padding:.35rem 0}.checklist input{margin-top:.5rem;width:1.1rem;height:1.1rem;accent-color:var(--accent);flex-shrink:0}.source-list li{margin:.8rem 0}.badge{display:inline-block;border:1px solid var(--line);padding:.2rem .6rem;font-size:.8rem;margin:.2rem .3rem .2rem 0}.print-only{display:none}footer{padding:2rem 0;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:1.2rem;gap:1rem}aside{position:static;max-height:none}nav{display:flex;flex-wrap:wrap;gap:.3rem 1rem}.nav-group{margin-top:.5rem;padding-top:.5rem}aside .small{display:none}main{max-width:none}.flow{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pair{grid-template-columns:1fr}.layout{padding:1rem}h2{font-size:1.7rem}.flow{grid-template-columns:1fr}th,td{padding:.5rem}pre{font-size:.76rem}.controls label,.controls select{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{@page{margin:17mm}body{background:white;font-size:10.5pt}.layout{display:block;max-width:none;padding:0}aside,.no-print,.controls,#filter-results,#filter-status{display:none!important}main{max-width:none}h1{font-size:32pt}h2{font-size:22pt}section{padding:1rem 0}header{padding:1rem 0}.panel,.callout,details,.flow>div{break-inside:avoid}h2,h3{break-after:avoid}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f3f1;color:#172c30;border:1px solid #bbb}pre code{overflow-wrap:anywhere}a{color:inherit}.print-only{display:block}details> :not(summary){display:block!important}.table-wrap{overflow:visible}thead{display:table-header-group}tr{break-inside:avoid}footer{font-size:9pt}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to study guide</a>
+<div class="layout">
+<aside aria-label="Guide navigation">
+<p class="brand">ADVANCED RAG / 02</p>
+<nav aria-label="Contents">
+<a href="#outcomes">01 · What you need to know</a><a href="#mental-model">02 · The retrieval pipeline</a><a href="#record">03 · Inside a stored record</a><a href="#similarity">04 · Distances and top-k</a><a href="#pgvector">05 · M01: PostgreSQL</a><a href="#hnsw">06 · Exact search &amp; HNSW</a><a href="#chroma">07 · M02: Chroma</a><a href="#filters">08 · Try metadata filtering</a><a href="#lifecycle">09 · Update &amp; delete</a><a href="#run">10 · Run the lessons</a><a href="#teach">11 · Classroom plan</a><a href="#quiz">12 · Check your understanding</a><a href="#reading">13 · Reading &amp; glossary</a>
+</nav>
+<div class="nav-group"><button type="button" id="print-button">Print / Save as PDF</button><p class="small">Self-contained study guide. Diagrams and exercises work offline. External readings require internet.</p></div>
+</aside>
+<main id="main">
+<header>
+<div class="eyebrow">Instructor preparation · Chapter 02</div>
+<h1>From embeddings<br>to a searchable database.</h1>
+<p class="lead">Understand what gets stored, how a question finds relevant passages, and how filters and updates keep retrieval useful.</p>
+<span class="badge">M01 · PostgreSQL + pgvector</span><span class="badge">M02 · Chroma</span><span class="badge">Local Nomic v2 MoE</span>
+<p class="small">Aligned with the current course code · 19 October 2026 · Suggested personal study: 75–90 minutes</p>
+</header>
+
+<section id="outcomes">
+<div class="eyebrow">01 / Destination</div><h2>Five things to be able to explain.</h2>
+<ol><li>Why we store the original text and metadata alongside each embedding.</li><li>How a question becomes a vector and retrieves the nearest stored chunks.</li><li>What exact search and approximate search promise—and what they do not.</li><li>How a category filter changes the eligible results.</li><li>Why changing a document can require recomputing its embedding.</li></ol>
+<div class="callout"><strong>Your opening sentence</strong><p>“In Chapter 1, we searched vectors held in Python memory. Now we store those vectors in a database so we can reuse them, search them, and manage the underlying documents.”</p></div>
+<p>This chapter retrieves passages. It does not generate an answer, call Claude, or require an Anthropic key. A future rag_pipelines chapter will take retrieved passages as evidence for generated answers.</p>
+<p>First study the concepts through section 4. Then follow M01 and M02. Keep query-plan tuning as instructor background; participants do not need to understand every Python helper.</p>
+</section>
+
+<section id="mental-model">
+<div class="eyebrow">02 / Two separate flows</div><h2>Prepare documents once. Search many times.</h2>
+<h3>Ingestion: when documents are added or changed</h3>
+<div class="flow" aria-label="Ingestion sequence"><div><b>1 · Load</b>Read the support document.</div><div><b>2 · Split</b>Create manageable text chunks.</div><div><b>3 · Embed</b>Nomic converts each chunk into 768 numbers.</div><div><b>4 · Store</b>Save ID, text, metadata, and vector.</div></div>
+<h3>Retrieval: whenever somebody asks a question</h3>
+<div class="flow" aria-label="Retrieval sequence"><div><b>1 · Ask</b>“I was charged twice.”</div><div><b>2 · Embed</b>Nomic creates the question vector.</div><div><b>3 · Search</b>The database finds nearby document vectors.</div><div><b>4 · Return</b>Read the retrieved passages and their scores.</div></div>
+<p>In both demos, <strong>Nomic runs locally in Python</strong>. M01 explicitly computes vectors before sending them to PostgreSQL. In M02, the Chroma client automatically calls the configured embedding function when given documents or question text; its Docker server stores and searches the vectors.</p>
+<div class="pair"><div class="panel"><h3>What carries over from Chapter 1?</h3><p>The fictional <code>telecom_support.txt</code>, recursive character splitting, the same encoder, and cosine-based retrieval.</p></div><div class="panel"><h3>What is new?</h3><p>Persistent records, database search, an index, metadata filters, and controlled changes to stored records.</p></div></div>
+<p class="caption">The current fixture yields six chunks. Both demos set chunk size to 500 characters and overlap to 50 characters. Recursive boundaries mean the actual overlap can be smaller; 50 is a setting, not a guarantee at every boundary.</p>
+</section>
+
+<section id="record">
+<div class="eyebrow">03 / Data model</div><h2>One chunk, four pieces of information.</h2>
+<div class="table-wrap"><table><caption class="caption">Illustrative Chroma record from the billing topic</caption><thead><tr><th scope="col">Field</th><th scope="col">Example</th><th scope="col">Why keep it?</th></tr></thead><tbody><tr><td>ID</td><td><code>telecom-003</code></td><td>Retrieve, update, or delete the same record reliably.</td></tr><tr><td>Document text</td><td>“Check whether two entries are completed payments…”</td><td>Return readable evidence to the application.</td></tr><tr><td>Metadata</td><td><code>category: billing</code>, source, language, chunk number, model</td><td>Filter results and trace a passage back to its source.</td></tr><tr><td>Embedding</td><td>768 floating-point numbers</td><td>Compare the passage with a question numerically.</td></tr></tbody></table></div>
+<p>The embedding is useful for matching. It does not replace the source text or provide a dependable way to reconstruct it.</p>
+<h3>The embedding agreement</h3>
+<ul><li>Model: <code>nomic-ai/nomic-embed-text-v2-moe</code>; this course uses 768 dimensions.</li><li>Document input: <code>search_document: </code> followed by the chunk.</li><li>Question input: <code>search_query: </code> followed by the question.</li><li>Shared loader: attention-mask mean pooling, then L2 normalization.</li><li>Maximum input: 512 tokens including the prefix. Characters used for chunking and model tokens are different units.</li></ul>
+<div class="callout note"><strong>Same length does not mean same embedding space.</strong><p>Two different models can both return 768 numbers without those numbers being comparable. Changing the encoder or its preprocessing generally requires re-embedding documents. The course uses separate v2 database names to keep the old vectors apart.</p></div>
+<p class="caption">Code reference: <a href="../c01_embeddings/local_embeddings.py">shared local embedding loader</a>. The standalone demos check model metadata and dimensions. M02 also validates the saved embedding-function contract. These checks are not a complete production migration system.</p>
+</section>
+
+<section id="similarity">
+<div class="eyebrow">04 / Ranking</div><h2>Closer vectors become retrieval candidates.</h2>
+<p>Cosine similarity compares vector direction. For these normalized embeddings, the dot product gives the same similarity. Cosine distance is <code>1 − cosine similarity</code>.</p>
+<div class="table-wrap"><table><caption class="caption">Invented numbers for explanation—not measured model results</caption><thead><tr><th scope="col">Passage</th><th scope="col">Cosine similarity ↑</th><th scope="col">Cosine distance ↓</th><th scope="col">Rank</th></tr></thead><tbody><tr><td>Duplicate charge</td><td>0.82</td><td>0.18</td><td>1</td></tr><tr><td>Understanding your bill</td><td>0.67</td><td>0.33</td><td>2</td></tr><tr><td>Wi-Fi troubleshooting</td><td>0.21</td><td>0.79</td><td>3</td></tr></tbody></table></div>
+<p><strong>Top-k</strong> means “return up to k nearest candidates.” It does not mean “return k correct answers.” If the question is unrelated to every document, a nearest-neighbor search can still return something.</p>
+<p>A similarity of 0.82 is not an 82% probability of correctness. Cosine similarity can range from −1 to 1; it is not restricted to positive values.</p>
+<blockquote>Ask the class: “If we ask this telecom collection for a cake recipe, does requesting the top three results make them relevant?”</blockquote>
+<p>Expected answer: no. Relevance checks, answer grounding, and abstention belong to the broader RAG workflow. A universal similarity threshold should not be assumed; calibrate decisions using representative questions and labels.</p>
+</section>
+
+<section id="pgvector">
+<div class="eyebrow">05 / m01_pgvector_demo.py</div><h2>Vectors inside PostgreSQL.</h2>
+<p>pgvector adds vector storage and distance operators to PostgreSQL. Your demo stores content and JSONB metadata beside a <code>vector(768)</code> column. <a href="https://github.com/pgvector/pgvector/tree/v0.8.5#getting-started">Official pgvector introduction ↗</a></p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Stage</th><th scope="col">What students see</th><th scope="col">Underlying file</th></tr></thead><tbody><tr><td><code>setup</code></td><td>Enable the extension; create the schema and table.</td><td><a href="./sql/01_setup.sql">01_setup.sql</a></td></tr><tr><td><code>insert</code></td><td>Embed six chunks; save or update matching IDs.</td><td><a href="./sql/02_insert.sql">02_insert.sql</a></td></tr><tr><td><code>index</code></td><td>Build the HNSW cosine index and update planner statistics.</td><td><a href="./sql/03_index.sql">03_index.sql</a></td></tr><tr><td><code>search</code></td><td>Embed a question; run nearest-neighbor SQL.</td><td><a href="./sql/04_search.sql">04_search.sql</a></td></tr><tr><td><code>explain</code></td><td>Compare query plans and returned IDs.</td><td><a href="./m01_pgvector_demo.py">Python module</a></td></tr></tbody></table></div>
+<h3>The SQL to explain on screen</h3>
+<pre><code>SELECT id, content, metadata,
+       embedding &lt;=&gt; %(query)s AS cosine_distance,
+       1 - (embedding &lt;=&gt; %(query)s) AS cosine_similarity
+FROM rag_pgvector_demo_nomic_v2.documents
+ORDER BY embedding &lt;=&gt; %(query)s
+LIMIT %(top_k)s;</code></pre>
+<p>Read it aloud: “Compare each eligible stored vector with the question, order by smallest distance, and return the first k passages.” The <code>%(query)s</code> and <code>%(top_k)s</code> placeholders are bound by Python’s database driver; this is not a standalone psql command.</p>
+<p>The direct distance expression in <code>ORDER BY</code> supports the matching vector index. Rewriting it as <code>ORDER BY cosine_similarity DESC</code> does not give the index-compatible form. <a href="https://github.com/pgvector/pgvector/tree/v0.8.5#troubleshooting">pgvector query-plan guidance ↗</a></p>
+<p><strong>Repeated inserts:</strong> <code>ON CONFLICT</code> updates existing IDs, avoiding duplicate rows. It does not remove obsolete extra rows if you later shrink the dataset.</p>
+</section>
+
+<section id="hnsw">
+<div class="eyebrow">06 / Instructor background</div><h2>Exact search, approximate search, and evidence.</h2>
+<div class="pair"><div class="panel"><h3>Exact search in this demo</h3><p>Compare against all stored vectors, then sort. It establishes the nearest-neighbor baseline under the chosen metric.</p><p>Think: inspect every book’s matching score before picking the closest.</p></div><div class="panel"><h3>HNSW search</h3><p>Navigate a multilayer graph of connected vectors to find promising neighbors without comparing every vector.</p><p>Think: follow broad shortcuts, then explore locally. A closer vector can be missed.</p></div></div>
+<p>HNSW stands for <strong>Hierarchical Navigable Small World</strong>. Its graph contains vector records; it is not a knowledge graph of entities and facts. The index adds storage, build, and maintenance costs. Search effort can be increased to improve recall at the expense of latency. <a href="https://github.com/pgvector/pgvector/tree/v0.8.5#hnsw">HNSW and its parameters ↗</a></p>
+<h3>What the three query plans demonstrate</h3>
+<ol><li><strong>Exact:</strong> disable index and bitmap scans for this transaction.</li><li><strong>Normal:</strong> let PostgreSQL choose. With six rows, a sequential scan can be sensible.</li><li><strong>Encouraged HNSW:</strong> discourage sequential scans for this transaction; verify an HNSW index scan appears.</li></ol>
+<p>The demo compares returned IDs and exact/HNSW top-k overlap, and checks that planner settings are restored afterward. It does not establish a general speedup or quality result.</p>
+<div class="callout note"><strong>Two different meanings of recall</strong><p><strong>ANN recall:</strong> did approximate search recover the neighbors found by exact search? <strong>Retrieval relevance recall:</strong> did the system retrieve the passages humans marked as useful? Perfect ANN recall can still retrieve irrelevant material if the embedding representation ranks it poorly.</p></div>
+<p><code>EXPLAIN</code> shows the plan. <code>EXPLAIN ANALYZE</code> actually executes the query and reports observations. Separately, <code>ANALYZE table</code> updates planner statistics. Read the first sections of <a href="https://www.postgresql.org/docs/17/using-explain.html">PostgreSQL’s EXPLAIN guide</a>; detailed planner costs are optional.</p>
+<p class="caption">For a meaningful performance experiment, keep data, queries, hardware, filters, and k constant; compare latency and neighbor recall on a larger corpus. Do not infer a production benefit from six rows.</p>
+</section>
+
+<section id="chroma">
+<div class="eyebrow">07 / m02_chroma_demo.py</div><h2>The same retrieval idea through a collection API.</h2>
+<p>A Chroma collection holds records with IDs, documents, embeddings, and metadata. The demo uses collection <code>rag_chroma_demo_nomic_v2_auto</code>, cosine distance, and <code>embedding_function=NomicEmbeddingFunction()</code>. Chroma automatically embeds the text through that configured function. The previous explicit-vector collection is preserved.</p>
+<div class="table-wrap"><table><thead><tr><th scope="col">Operation</th><th scope="col">Purpose</th><th scope="col">In your demo</th></tr></thead><tbody><tr><td><code>create_collection</code></td><td>Prepare the store.</td><td>Configure cosine distance and validate collection metadata.</td></tr><tr><td><code>add</code></td><td>Add new IDs with their data.</td><td>Existing fixture IDs are skipped, not refreshed.</td></tr><tr><td><code>query</code></td><td>Search by nearest vectors.</td><td>Pass <code>query_texts</code>; Chroma embeds the question and searches.</td></tr><tr><td><code>get</code></td><td>Fetch records by IDs or filters.</td><td>Inspect records before and after updates.</td></tr><tr><td><code>update</code></td><td>Change existing records.</td><td>Change text and metadata; Chroma recomputes the vector.</td></tr><tr><td><code>upsert</code></td><td>Insert or update by ID.</td><td>Prepare a repeatable scratch record.</td></tr><tr><td><code>delete</code></td><td>Remove selected records.</td><td>Delete only <code>mutation-demo</code>.</td></tr></tbody></table></div>
+<h3>Configure once, then work with text</h3>
+<pre><code>collection = client.create_collection(
+    name="my_nomic_collection",
+    embedding_function=NomicEmbeddingFunction(),
+    configuration={"hnsw": {"space": "cosine"}},
+)
+collection.add(ids=["doc-1"], documents=["Check duplicate payments with billing."])
+collection.query(query_texts=["I was charged twice"], n_results=1)
+collection.update(ids=["doc-1"], documents=["Contact billing with both payment dates."])</code></pre>
+<p>The adapter adds the document/query prefixes, delegates to the pinned encoder, and saves its model contract as configuration. When reopening, the demo supplies the same embedding function so one lazy model instance is reused. Another Python application must import the adapter to reconstruct it from the saved configuration.</p>
+<p>See <a href="./nomic_embedding_function.py">the adapter</a> and <a href="https://docs.trychroma.com/docs/embeddings/embedding-functions">Chroma’s embedding-function documentation</a>. M02’s add, query, and update calls no longer pass vectors.</p>
+<h3>Optional comparison: hybrid search</h3>
+<p>M02 also supports <code>--method hybrid</code>: Chroma supplies the semantic ranking, a local TF-IDF keyword search supplies another ranking, and reciprocal rank fusion (RRF) combines them. Use <code>--method compare</code> to inspect lexical, dense, and hybrid results together.</p>
+<pre><code>uv run --all-extras python -m modules.c02_vector_databases.m02_chroma_demo search --method compare --query "temporary card authorization" --top-k 3 --candidate-k 10</code></pre>
+<p>For each document, RRF adds <code>1 / (60 + rank)</code> for every branch in which it appears. Missing branches contribute zero. The printed component ranks explain the final score; it is not a cosine similarity or a probability. Both branches use the same category filter when running the <code>filter</code> stage. With no keyword matches, only the dense branch contributes.</p>
+<p>This is <strong>application-side hybrid search</strong> for local Docker Chroma. Chroma’s native hybrid Search API is currently <a href="https://docs.trychroma.com/cloud/search-api/overview">Cloud-only</a>. The keyword branch uses Chapter 2’s TF-IDF helper, not BM25. It reads current stored text for each query and limits this classroom approach to 1,000 eligible records. No re-embedding is needed.</p>
+<p>Ask participants whether an exact phrase and a paraphrase produce different rankings. Inspect relevance before claiming hybrid improves quality. Keep dense search as the baseline; hybrid is optional preparation for future rag_pipelines work.</p>
+<p>Chroma returns one inner result list per query vector. One question therefore still has a nested result shape. You can explain this as “a list of result lists—one list for each question.”</p>
+<p>Read <a href="https://docs.trychroma.com/docs/collections/add-data">adding data</a> and <a href="https://docs.trychroma.com/docs/querying-collections/query-and-get">query versus get</a>. The course module is <a href="./m02_chroma_demo.py">m02_chroma_demo.py</a>.</p>
+</section>
+
+<section id="filters">
+<div class="eyebrow">08 / Interactive illustration</div><h2>Similarity ranks. Metadata restricts eligibility.</h2>
+<p>Question: <strong>“What should I do if I was billed twice?”</strong> Choose a category and a result count below. These fixed scores are invented to illustrate the behavior; this page does not run Nomic or connect to a database.</p>
+<div class="controls"><label for="category">Eligible category<select id="category"><option value="all">All categories</option><option value="billing">Billing</option><option value="technical">Technical</option><option value="cancel">Cancellation</option><option value="absent">Absent category</option></select></label><label for="top-k">Maximum results (k)<select id="top-k"><option value="1">1</option><option value="3" selected>3</option><option value="6">6</option></select></label></div>
+<p id="filter-status" role="status" aria-live="polite"></p><div id="filter-results"></div>
+<noscript><p>Enable JavaScript to use the simulator. The billing filter allows two records; an absent category allows zero.</p></noscript>
+<p class="print-only">Simulator example: with k = 3, all categories return three illustrative candidates; billing returns two; an absent category returns none. A technical filter returns technical passages even though the question is about billing.</p>
+<pre><code>where={"category": {"$eq": "billing"}}</code></pre>
+<p>In the actual Chroma demo, categories are human-assigned tags derived from headings. They are not predictions made by Nomic. Filtering to the wrong category can exclude the best answer.</p>
+<p>This describes logical eligibility, not a promise about the internal execution order of every vector database. In pgvector, filtering combined with an approximate index can reduce the result count because filtering is applied after index scanning. <a href="https://docs.trychroma.com/docs/querying-collections/metadata-filtering">Chroma filters ↗</a> · <a href="https://github.com/pgvector/pgvector/tree/v0.8.5#filtering">pgvector filtering caveat ↗</a></p>
+<div class="callout"><strong>Classroom exercise</strong><p>Predict the results for “billing,” then “technical,” then an absent category. Discuss why requesting three results can return only two—or zero. A category filter is a retrieval rule; it is not automatically an authorization system.</p></div>
+</section>
+
+<section id="lifecycle">
+<div class="eyebrow">09 / Keeping the store correct</div><h2>Changed meaning needs a changed vector.</h2>
+<div class="pair"><div class="panel"><h3>Before</h3><p>“My router is offline and none of my devices can connect to the internet.”</p><p>Category: <code>technical</code><br>Revision: <code>1</code></p></div><div class="panel"><h3>After</h3><p>“My monthly invoice contains two completed charges; I need the billing team to review them.”</p><p>Category: <code>billing</code><br>Revision: <code>2</code></p></div></div>
+<p>The demo keeps the ID <code>mutation-demo</code> and supplies changed text, category, and revision. Chroma automatically recomputes the embedding through the configured function. It reads the record back and prints the size of the vector change.</p>
+<p>If a system changes stored text without refreshing its vector, retrieval can use an outdated meaning. In this configured Chroma example, supplying changed documents without an embeddings argument triggers re-embedding automatically. A metadata-only change generally does not need a new embedding unless that metadata is also part of the encoded text.</p>
+<p>The temporary record takes a fully populated collection from six to seven records; deletion brings it back to six. The <code>all</code> command performs both steps. It preserves the collection and the support passages. <a href="https://docs.trychroma.com/docs/collections/update-data">Update and upsert reference ↗</a></p>
+<div class="callout note"><strong>A practical difference between your two demos</strong><p>PostgreSQL’s <code>insert</code> stage refreshes matching IDs. Chroma’s <code>add</code> stage skips matching IDs. Editing the source file and rerunning Chroma <code>add</code> will not update existing text. Use an explicit update/re-ingestion strategy when changing the dataset.</p></div>
+</section>
+
+<section id="run">
+<div class="eyebrow">10 / Rehearsal commands</div><h2>Prepare before class, then present one stage at a time.</h2>
+<p>You need Docker running, the Python environment, and downloaded local model weights. No provider key is needed. Initial model preparation may download roughly 2 GB; rehearse before class. These commands are for this repository’s current layout.</p>
+<h3>Start both local database services</h3>
+<pre><code>docker compose -f modules/c02_vector_databases/compose.pgvector.yaml up -d --wait
+docker compose -f modules/c02_vector_databases/compose.chroma.yaml up -d --wait
+
+uv sync --all-extras</code></pre>
+<p>The following commands keep every optional extra installed so switching lessons does not remove the other database client.</p>
+<h3>M01 · PostgreSQL + pgvector</h3>
+<pre><code>uv run --all-extras python -m modules.c02_vector_databases.m01_pgvector_demo all</code></pre>
+<p>For teaching, replace <code>all</code> with <code>setup</code>, <code>insert</code>, <code>index</code>, <code>search</code>, or <code>explain</code>. The complete rehearsal also runs an exact baseline before creating/reusing the index.</p>
+<pre><code>uv run --all-extras python -m modules.c02_vector_databases.m01_pgvector_demo search --query "I was charged twice" --top-k 3</code></pre>
+<h3>M02 · Chroma</h3>
+<pre><code>uv run --all-extras python -m modules.c02_vector_databases.m02_chroma_demo all</code></pre>
+<p>Individual stages: <code>create</code>, <code>add</code>, <code>search</code>, <code>filter</code>, <code>update</code>, and <code>delete</code>.</p>
+<pre><code>uv run --all-extras python -m modules.c02_vector_databases.m02_chroma_demo filter --query "I was charged twice" --category billing
+
+uv run --all-extras python -m modules.c02_vector_databases.m02_chroma_demo filter --query "I was charged twice" --category absent-category</code></pre>
+<div class="table-wrap"><table><thead><tr><th scope="col">Detail</th><th scope="col">PostgreSQL</th><th scope="col">Chroma</th></tr></thead><tbody><tr><td>Local endpoint</td><td><code>127.0.0.1:5434</code></td><td><code>127.0.0.1:8002</code></td></tr><tr><td>Store</td><td><code>rag_pgvector_demo_nomic_v2.documents</code></td><td><code>rag_chroma_demo_nomic_v2_auto</code></td></tr><tr><td>Interface</td><td>SQL through Psycopg</td><td>Python HTTP client</td></tr><tr><td>Persistence</td><td>Dedicated Docker volume</td><td>Dedicated Docker volume</td></tr></tbody></table></div>
+<h3>Stop services while retaining the data</h3>
+<pre><code>docker compose -f modules/c02_vector_databases/compose.pgvector.yaml down
+docker compose -f modules/c02_vector_databases/compose.chroma.yaml down</code></pre>
+<p>Restarting with <code>up -d --wait</code> reuses the volumes. Volume deletion is not part of this lesson.</p>
+<h3>If something goes wrong</h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Symptom</th><th scope="col">First check</th></tr></thead><tbody><tr><td>Cannot connect</td><td>Docker running? Correct Compose service started? Default port available?</td></tr><tr><td>Missing table or collection</td><td>Run PostgreSQL <code>setup</code> or Chroma <code>create</code> first.</td></tr><tr><td>Empty store</td><td>Run <code>insert</code> or <code>add</code> before searching.</td></tr><tr><td>Missing database client</td><td>Keep both <code>--extra</code> flags on your uv commands.</td></tr><tr><td>Model mismatch</td><td>Check the model and store name. Do not mix encoders just because dimensions match.</td></tr><tr><td>Normal query ignores HNSW</td><td>Six rows may favor a sequential scan. Use the <code>explain</code> stage to inspect the actual plans.</td></tr><tr><td>Results do not reflect edited text</td><td>Chroma add skips existing IDs. Update the records and their vectors.</td></tr><tr><td>No filtered results</td><td>Check category spelling and whether any stored metadata matches.</td></tr></tbody></table></div>
+</section>
+
+<section id="teach">
+<div class="eyebrow">11 / Facilitation</div><h2>A 60-minute chapter, with a clear stopping point.</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col">Minutes</th><th scope="col">Show / explain</th><th scope="col">Ask participants</th></tr></thead><tbody><tr><td>0–5</td><td>Chapter 1 → persistent retrieval. Draw the two flows.</td><td>“Which work happens at ingestion, and which happens per question?”</td></tr><tr><td>5–15</td><td>Inspect one record; explain text, metadata, and vector.</td><td>“Why is the vector alone insufficient?”</td></tr><tr><td>15–30</td><td>M01 setup, insert, search; show the four SQL files.</td><td>“What does the distance operator return?”</td></tr><tr><td>30–40</td><td>Introduce HNSW; briefly inspect normal and encouraged plans.</td><td>“What would count as evidence of a speedup?”</td></tr><tr><td>40–50</td><td>M02 search, billing filter, wrong category, empty category.</td><td>“Can the filter remove the right answer?”</td></tr><tr><td>50–55</td><td>Update and delete the temporary record.</td><td>“Which fields must change together?”</td></tr><tr><td>55–60</td><td>Explain-back and self-check.</td><td>“Trace a question from input to retrieved text.”</td></tr></tbody></table></div>
+<p><strong>For participants who are not Python-heavy:</strong> explain the data entering and leaving each operation. You can run the commands while they predict and interpret the outputs. Avoid spending class time on connection helpers or exception handling.</p>
+<p><strong>If time is short:</strong> keep M01’s storage/search path and M02’s filtering demonstration. Defer detailed query plans and tuning. The definition of done is explaining the retrieval flow and the update/filter consequences.</p>
+<h3>Before you teach</h3>
+<ul class="checklist"><li><label><input type="checkbox">I have rehearsed both numbered modules using the classroom machine.</label></li><li><label><input type="checkbox">The model weights are available locally and both Docker services start.</label></li><li><label><input type="checkbox">I can explain cosine distance without calling it a confidence percentage.</label></li><li><label><input type="checkbox">I can show a filter that returns fewer than k results.</label></li><li><label><input type="checkbox">I can explain why a text change needs a new vector.</label></li><li><label><input type="checkbox">I have a saved demo output available if a local service fails.</label></li></ul>
+<p class="caption">Checkboxes are for this reading session; the page does not save your progress.</p>
+</section>
+
+<section id="quiz">
+<div class="eyebrow">12 / Explain it before revealing it</div><h2>Questions your students may ask.</h2>
+<p>Answer each question aloud, then expand it. These answers are also included when printing.</p>
+<details><summary>1. Does the vector database create the embeddings?</summary><p>M01 explicitly calls the local encoder. M02 configures Nomic as a Chroma embedding function, so the Chroma Python client calls it automatically for document writes and text queries. The model still runs on your machine, not inside the Docker database server.</p></details>
+<details><summary>2. Why do both questions and documents use the same model?</summary><p>They need a compatible coordinate space. The model uses different task prefixes for queries and documents, but both outputs are designed to be compared in that space.</p></details>
+<details><summary>3. Is an exact search guaranteed to answer correctly?</summary><p>No. It finds the nearest vectors according to the distance metric. The nearest passage can still be irrelevant or incomplete. Answer correctness is a separate concern.</p></details>
+<details><summary>4. If top-k is three, why did the billing filter return two?</summary><p>Only two records match the billing category in the current fixture. The filter restricts the eligible set; k is a maximum, not a requirement to invent or include other records.</p></details>
+<details><summary>5. Why might PostgreSQL ignore our new HNSW index?</summary><p>For a tiny table, a scan and sort can be cheaper. Index existence does not guarantee index usage. Inspect the query plan instead of guessing.</p></details>
+<details><summary>6. Is HNSW the same as GraphRAG?</summary><p>No. HNSW is a graph-based index over vectors used to find neighbors. GraphRAG generally retrieves using relationships among entities or other graph-structured knowledge. They solve different parts of retrieval.</p></details>
+<details><summary>7. Can I replace Nomic with another 768-dimensional model?</summary><p>You can change models, but must re-embed the corpus and queries consistently. The same vector length does not establish compatibility. Use a separate store during migration and validate the new retrieval results.</p></details>
+<details><summary>8. What happens if we update the text but keep the old embedding?</summary><p>If an application explicitly supplies an old vector with changed text, retrieval can be misleading. Our configured M02 instead passes changed documents without embeddings, so Chroma recomputes their vectors automatically.</p></details>
+<details><summary>9. Is Chroma better than PostgreSQL?</summary><p>These small demos do not establish a winner. Compare the fit: PostgreSQL integrates vectors with SQL and relational data; Chroma exposes a collection-oriented retrieval API. Choose against your own data, operations, filtering requirements, and measured workload.</p></details>
+<details><summary>10. Are we using the Greek Magenta PDF here?</summary><p>No. These two demos currently load the fictional English telecom support text. Using the Greek PDF would require document ingestion, suitable chunk metadata, and evaluation on Greek questions.</p></details>
+<details><summary>11. Does a metadata filter secure customer data?</summary><p>Only if it is part of a correctly enforced access-control design. This demo’s user-selectable category is a teaching filter. Production authorization must derive permitted scope from trusted identity and enforce it consistently.</p></details>
+<details><summary>12. What persists when the Python program exits?</summary><p>The database records remain in the services’ Docker volumes. Python’s loaded model and in-memory variables do not. A later search loads the encoder to embed its question and reuses the stored document vectors.</p></details>
+</section>
+
+<section id="reading">
+<div class="eyebrow">13 / Reference shelf</div><h2>Read with a question in mind.</h2>
+<ol class="source-list"><li><a href="./README.md">Your M01 guide</a> and <a href="./CHROMA.md">your M02 guide</a><br><span class="small">Start here. Which stage changes data, and which stage only reads it?</span></li><li><a href="https://github.com/pgvector/pgvector/tree/v0.8.5#getting-started">pgvector 0.8.5: Getting Started, Storing, Querying</a><br><span class="small">How do vector columns and distance operators fit into SQL? This version matches the course’s container.</span></li><li><a href="https://github.com/pgvector/pgvector/tree/v0.8.5#hnsw">pgvector: Indexing and HNSW</a><br><span class="small">What do approximate indexes trade for speed? Save detailed tuning for later.</span></li><li><a href="https://docs.trychroma.com/docs/collections/add-data">Chroma: Adding Data</a> and <a href="https://docs.trychroma.com/docs/querying-collections/query-and-get">Query and Get</a><br><span class="small">How do configured embeddings, IDs, and nested query results work?</span></li><li><a href="https://docs.trychroma.com/docs/querying-collections/metadata-filtering">Chroma: Metadata Filtering</a><br><span class="small">How do you express a category restriction with where and $eq?</span></li><li><a href="https://docs.trychroma.com/docs/collections/update-data">Chroma: Update and Upsert</a><br><span class="small">How do existing and new IDs behave?</span></li><li><a href="https://www.postgresql.org/docs/17/using-explain.html">PostgreSQL 17: Using EXPLAIN</a><br><span class="small">Optional instructor depth. Recognize Seq Scan, Index Scan, and Sort.</span></li></ol>
+<p class="caption">External references checked 19 October 2026. Chroma’s online documentation evolves; the course pins its client and server image to 1.5.9. Use the repository guides for the exact classroom setup. Local source links work while this file stays in its course directory.</p>
+<h3>Quick glossary</h3>
+<div class="table-wrap"><table><thead><tr><th scope="col">Term</th><th scope="col">Plain meaning</th></tr></thead><tbody><tr><td>Embedding</td><td>A numeric representation used to compare inputs.</td></tr><tr><td>Dimension</td><td>One coordinate in that representation; 768 numbers here.</td></tr><tr><td>Metadata</td><td>Attributes stored beside the text, such as category or source.</td></tr><tr><td>Top-k</td><td>The maximum number of nearest candidates requested.</td></tr><tr><td>Index</td><td>An additional structure that supports a search strategy.</td></tr><tr><td>ANN</td><td>Approximate nearest-neighbor search; may miss exact nearest neighbors.</td></tr><tr><td>Upsert</td><td>Insert an ID if absent; update it if present.</td></tr><tr><td>Persistence</td><td>Keeping stored data beyond the current program run.</td></tr><tr><td>Re-ingestion</td><td>Processing changed sources and refreshing the stored records.</td></tr></tbody></table></div>
+</section>
+<footer>Chapter 02 · Instructor study guide. Based on the numbered standalone database demos. Fictional support policies; illustrative simulator scores. No API calls, external scripts, fonts, or analytics are loaded by this page.</footer>
+</main></div>
+<script>
+const examples = [
+  {title:'Reporting a duplicate charge', category:'billing', similarity:0.82},
+  {title:'Understanding your bill', category:'billing', similarity:0.67},
+  {title:'Preparing a support request', category:'general', similarity:0.48},
+  {title:'Cancelling a subscription', category:'cancel', similarity:0.31},
+  {title:'Troubleshooting Wi-Fi', category:'technical', similarity:0.21},
+  {title:'Troubleshooting internet connectivity', category:'technical', similarity:0.18}
+];
+const category = document.getElementById('category');
+const topK = document.getElementById('top-k');
+function renderResults() {
+  const eligible = examples.filter(item => category.value === 'all' || item.category === category.value);
+  const results = eligible.slice(0, Number(topK.value));
+  document.getElementById('filter-status').textContent = `${eligible.length} eligible records · ${results.length} returned · maximum requested: ${topK.value}. Illustrative scores only.`;
+  const container = document.getElementById('filter-results');
+  container.replaceChildren();
+  if (!results.length) {
+    const empty = document.createElement('p');
+    empty.textContent = 'No records match this category. A nearest-neighbor query cannot return an eligible passage from an empty set.';
+    container.append(empty);
+  }
+  results.forEach((item, index) => {
+    const row = document.createElement('div'); row.className = 'result';
+    const title = document.createElement('b'); title.textContent = `${index + 1}. ${item.title}`;
+    const detail = document.createElement('span'); detail.textContent = `Category: ${item.category} · Similarity: ${item.similarity.toFixed(2)} · Distance: ${(1-item.similarity).toFixed(2)}`;
+    row.append(title, detail); container.append(row);
+  });
+}
+category.addEventListener('change', renderResults);
+topK.addEventListener('change', renderResults);
+renderResults();
+document.getElementById('print-button').addEventListener('click', () => window.print());
+let openBeforePrint = [];
+window.addEventListener('beforeprint', () => {
+  openBeforePrint = Array.from(document.querySelectorAll('details'), el => el.open);
+  document.querySelectorAll('details').forEach(el => { el.open = true; });
+});
+window.addEventListener('afterprint', () => {
+  document.querySelectorAll('details').forEach((el, index) => { el.open = openBeforePrint[index] ?? false; });
+});
+</script>
+</body>
+</html>

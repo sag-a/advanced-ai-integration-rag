@@ -1,0 +1,348 @@
+<title>Base RAG Field Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: spec-sheet reference page. Sticky contents rail on wide screens, one 70ch reading column, diagrams break wider. Each architecture owns one accent. */
+:root {
+  --paper: #f4f6f8;
+  --panel: #ffffff;
+  --ink: #16202b;
+  --muted: #566372;
+  --rule: #d6dce4;
+  --code-bg: #e9edf2;
+  --teal: #0a7468;
+  --teal-soft: #dcefec;
+  --ochre: #9a5400;
+  --ochre-soft: #f6e8d6;
+  --cobalt: #2a4ccf;
+  --cobalt-soft: #e0e6fb;
+  --pos: #1d7a3a;
+  --neg: #b42318;
+  --cond: #9a6700;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
+    --rule: #2a3440; --code-bg: #1d2630;
+    --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
+    --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+    --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
+  --rule: #2a3440; --code-bg: #1d2630;
+  --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
+  --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+  --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
+}
+body.base { --accent: var(--teal); --accent-soft: var(--teal-soft); }
+body.agentic { --accent: var(--ochre); --accent-soft: var(--ochre-soft); }
+body.graph { --accent: var(--cobalt); --accent-soft: var(--cobalt-soft); }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 var(--f-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+code, kbd { font-family: var(--f-mono); font-size: 0.86em; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; }
+pre { font: 13.5px/1.6 var(--f-mono); background: var(--code-bg); padding: 14px 16px; border-radius: 6px; overflow-x: auto; margin: 0; }
+pre code { background: none; padding: 0; font-size: inherit; }
+pre .c { color: var(--muted); }
+
+.topbar {
+  max-width: 1180px; margin: 0 auto; padding-block: 18px 0;
+  display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+}
+.course { font: 500 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tabs a {
+  font: 600 13px/1 var(--f-body); text-decoration: none; color: var(--muted);
+  padding: 8px 12px; border-radius: 999px; border: 1px solid var(--rule);
+}
+.tabs a:hover { color: var(--ink); border-color: var(--muted); }
+.tabs a[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+.shell { max-width: 1180px; margin: 0 auto; display: grid; gap: 48px; grid-template-columns: 1fr; padding-block: 28px 80px; }
+@media (min-width: 1000px) { .shell { grid-template-columns: 200px minmax(0, 1fr); } }
+.toc { display: none; }
+@media (min-width: 1000px) {
+  .toc { display: block; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  .toc p { font: 500 11px/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 6px 0 12px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 1px solid var(--rule); }
+  .toc a { display: block; padding: 4px 0 4px 14px; margin-left: -1px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; font-size: 14px; }
+  .toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+}
+
+main { min-width: 0; display: grid; gap: 56px; }
+main > section { display: grid; gap: 16px; max-width: 74ch; }
+main > section.wide { max-width: none; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.02; font-weight: 700; }
+h2 { font-size: 27px; line-height: 1.2; font-weight: 650; display: flex; gap: 12px; align-items: baseline; }
+h2 .tag { font: 500 12px/1 var(--f-mono); color: var(--accent); letter-spacing: 0.04em; }
+h3 { font-size: 18px; font-weight: 650; }
+p, ul, ol { margin: 0; }
+ul, ol { padding-left: 1.3em; display: grid; gap: 6px; }
+.muted { color: var(--muted); }
+
+.hero { display: grid; gap: 18px; max-width: 78ch; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 19px; line-height: 1.55; color: var(--ink); }
+.spec {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); margin-top: 6px;
+}
+.spec div { padding: 12px 16px 14px 0; display: grid; gap: 4px; align-content: start; }
+.spec dt { font: 500 11px/1.2 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.spec dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.spec dl { display: contents; }
+
+figure { margin: 0; display: grid; gap: 10px; }
+.diagram { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; min-width: 640px; color: var(--ink); }
+figcaption { font-size: 14px; color: var(--muted); max-width: 74ch; }
+svg text { font-family: var(--f-body); fill: currentColor; }
+svg .mono { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); }
+svg .lbl { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+svg .t { font-size: 13px; font-weight: 600; }
+svg .lane { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; fill: var(--muted); }
+svg .box { fill: var(--panel); stroke: currentColor; stroke-width: 1.2; }
+svg .box.hot { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+svg .box.dim { fill: var(--code-bg); stroke: var(--rule); }
+svg .edge { stroke: currentColor; stroke-width: 1.3; fill: none; }
+svg .edge.hot { stroke: var(--accent); stroke-width: 2; }
+svg .fence { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 6 5; }
+svg .pos { stroke: var(--pos); }
+svg .neg { stroke: var(--neg); stroke-dasharray: 5 4; }
+svg .ah { fill: currentColor; }
+svg .ah.hot { fill: var(--accent); }
+svg .ah.pos { fill: var(--pos); stroke: none; }
+svg .ah.neg { fill: var(--neg); stroke: none; }
+svg .dot { fill: currentColor; }
+
+.steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.steps > li::before { content: counter(s, decimal-leading-zero); font: 600 13px/1.6 var(--f-mono); color: var(--accent); grid-row: span 2; }
+.steps h3 { font-size: 16px; }
+.steps p { color: var(--ink); }
+.steps .where { grid-column: 2; font: 12.5px/1.4 var(--f-mono); color: var(--muted); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+tr:last-child td { border-bottom: 0; }
+thead th { font: 500 11px/1.3 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--code-bg); }
+tbody th { font-weight: 600; white-space: nowrap; }
+td.here, th.here { background: var(--accent-soft); }
+thead th.here { color: var(--accent); }
+
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 16px; }
+.card p { font-size: 15px; }
+
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; display: grid; gap: 6px; }
+.note strong { font-family: var(--f-display); }
+
+.pitfalls { list-style: none; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.pitfalls li { padding: 12px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.pitfalls b { font-weight: 600; }
+.pitfalls span { color: var(--muted); font-size: 15px; }
+
+.q { display: grid; gap: 12px; }
+.q details { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 16px; }
+.q summary { cursor: pointer; font-weight: 600; }
+.q summary .gr { font-weight: 400; color: var(--muted); }
+.q details > div { padding-top: 10px; display: grid; gap: 8px; font-size: 15px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 12.5px/1.4 var(--f-mono); color: var(--muted); }
+.legend i { display: inline-block; width: 22px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 6px; }
+.legend .p { border-color: var(--pos); }
+.legend .n { border-color: var(--neg); border-top-style: dashed; }
+
+footer { max-width: 1180px; margin: 0 auto; padding-block: 24px 40px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 24px; }
+
+</style>
+<body class="base">
+<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="#top" aria-current="page">Base RAG</a><a href="https://claude.ai/artifact/MNK99JhPNf46AcSpBjYqR7" target="_blank" rel="noopener">Graph RAG</a><a href="https://claude.ai/artifact/WhAsxRnZtGps46c6AcSDXy" target="_blank" rel="noopener">Agentic RAG</a></nav></header>
+<div class="shell">
+<aside class="toc" aria-label="On this page"><p>On this page</p><ol>
+<li><a href="#idea">The idea</a></li>
+<li><a href="#flow">Data flow</a></li>
+<li><a href="#steps">Step by step</a></li>
+<li><a href="#answer">Answer contract</a></li>
+<li><a href="#identity">Index identity</a></li>
+<li><a href="#run">Run it</a></li>
+<li><a href="#demo">Demo questions</a></li>
+<li><a href="#pitfalls">Pitfalls</a></li>
+<li><a href="#compare">Compared</a></li>
+</ol></aside>
+<main>
+
+<section class="hero" id="idea">
+<span class="eyebrow">architecture · classic_rag</span>
+<h1>Base RAG</h1>
+<p class="lede">Embed the question, fetch the six closest passages from Chroma, and have Claude answer only from them, citing passage numbers the application can verify. Every other architecture in the course is this pipeline with a different <code>retrieve</code> step.</p>
+<dl class="spec">
+<div><dt>Retriever</dt><dd>architectures/classic_rag/retriever.py</dd></div>
+<div><dt>Vector store</dt><dd>Chroma 1.5.9 · port 8004</dd></div>
+<div><dt>Embedder</dt><dd>Nomic v2 MoE · 768-d · local</dd></div>
+<div><dt>Answer model</dt><dd>claude-haiku-4-5</dd></div>
+<div><dt>Passages per answer</dt><dd>top_k = 6 (1–20)</dd></div>
+<div><dt>Calls per turn</dt><dd>1, or 2 on follow-ups</dd></div>
+</dl>
+</section>
+
+<section class="wide" id="flow">
+<h2>Data flow <span class="tag">prepare once · ask often</span></h2>
+<figure>
+<div class="diagram"><svg viewBox="0 0 880 250" role="img" aria-label="Preparation embeds clause chunks of the PDF into Chroma once. Each question is embedded with the same model, matched against Chroma for the top six passages, answered by Claude, and its citations are checked.">
+<defs><marker id="ab" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+<marker id="abh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah hot"/></marker></defs>
+<text x="10" y="46" class="lane">PREPARE</text>
+<text x="10" y="206" class="lane">ASK</text>
+<rect x="110" y="20" width="130" height="48" rx="6" class="box"/><text x="175" y="41" text-anchor="middle" class="t">PDF corpus</text><text x="175" y="57" text-anchor="middle" class="mono">1 Greek T&amp;C file</text>
+<line x1="240" y1="44" x2="263" y2="44" class="edge" marker-end="url(#ab)"/>
+<rect x="265" y="20" width="130" height="48" rx="6" class="box"/><text x="330" y="41" text-anchor="middle" class="t">Clause chunks</text><text x="330" y="57" text-anchor="middle" class="mono">≤512 tok · 0 overlap</text>
+<line x1="395" y1="44" x2="418" y2="44" class="edge" marker-end="url(#ab)"/>
+<rect x="420" y="20" width="130" height="48" rx="6" class="box"/><text x="485" y="41" text-anchor="middle" class="t">Nomic encoder</text><text x="485" y="57" text-anchor="middle" class="mono">search_document:</text>
+<line x1="485" y1="68" x2="485" y2="98" class="edge" marker-end="url(#ab)"/>
+<rect x="420" y="100" width="130" height="48" rx="6" class="box dim"/><text x="485" y="121" text-anchor="middle" class="t">Chroma</text><text x="485" y="137" text-anchor="middle" class="mono">cosine · 30 chunks</text>
+<rect x="110" y="180" width="130" height="48" rx="6" class="box"/><text x="175" y="201" text-anchor="middle" class="t">Question</text><text x="175" y="217" text-anchor="middle" class="mono">Greek or English</text>
+<line x1="240" y1="204" x2="263" y2="204" class="edge" marker-end="url(#ab)"/>
+<rect x="265" y="180" width="130" height="48" rx="6" class="box"/><text x="330" y="201" text-anchor="middle" class="t">Nomic encoder</text><text x="330" y="217" text-anchor="middle" class="mono">search_query:</text>
+<line x1="395" y1="204" x2="418" y2="204" class="edge hot" marker-end="url(#abh)"/>
+<rect x="420" y="180" width="130" height="48" rx="6" class="box hot"/><text x="485" y="201" text-anchor="middle" class="t">Top-6 search</text><text x="485" y="217" text-anchor="middle" class="mono">n_results = top_k</text>
+<line x1="485" y1="148" x2="485" y2="178" class="edge hot" marker-end="url(#abh)"/>
+<text x="495" y="167" class="lbl">nearest vectors</text>
+<line x1="550" y1="204" x2="573" y2="204" class="edge" marker-end="url(#ab)"/>
+<rect x="575" y="180" width="130" height="48" rx="6" class="box"/><text x="640" y="201" text-anchor="middle" class="t">generate_answer</text><text x="640" y="217" text-anchor="middle" class="mono">Claude · Answer</text>
+<line x1="705" y1="204" x2="728" y2="204" class="edge" marker-end="url(#ab)"/>
+<rect x="730" y="180" width="130" height="48" rx="6" class="box"/><text x="795" y="201" text-anchor="middle" class="t">Checked answer</text><text x="795" y="217" text-anchor="middle" class="mono">PDF page footers</text>
+</svg></div>
+<figcaption>The same pinned encoder runs twice with different task prefixes: <code>search_document:</code> for passages at preparation and <code>search_query:</code> for questions. Changing either side means a new collection.</figcaption>
+</figure>
+<figure>
+<div class="diagram"><svg viewBox="0 0 860 150" role="img" aria-label="The shared LangGraph turn: START, prepare_query, retrieve, generate_answer, END. Only the retrieve node changes between architectures; here it is make_retriever.">
+<defs><marker id="a-base" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker></defs>
+<circle cx="30" cy="62" r="10" class="dot"/><text x="30" y="96" text-anchor="middle" class="mono">START</text>
+<line x1="42" y1="62" x2="78" y2="62" class="edge" marker-end="url(#a-base)"/>
+<rect x="80" y="38" width="160" height="48" rx="6" class="box"/>
+<text x="160" y="60" text-anchor="middle" class="t">prepare_query</text><text x="160" y="76" text-anchor="middle" class="mono">rewrite if follow-up</text>
+<line x1="240" y1="62" x2="328" y2="62" class="edge" marker-end="url(#a-base)"/>
+<text x="284" y="54" text-anchor="middle" class="lbl">search_query</text>
+<rect x="330" y="38" width="160" height="48" rx="6" class="box hot"/>
+<text x="410" y="60" text-anchor="middle" class="t">retrieve</text><text x="410" y="76" text-anchor="middle" class="mono">make_retriever</text>
+<line x1="490" y1="62" x2="578" y2="62" class="edge" marker-end="url(#a-base)"/>
+<text x="534" y="54" text-anchor="middle" class="lbl">documents</text>
+<rect x="580" y="38" width="160" height="48" rx="6" class="box"/>
+<text x="660" y="60" text-anchor="middle" class="t">generate_answer</text><text x="660" y="76" text-anchor="middle" class="mono">Answer schema</text>
+<line x1="740" y1="62" x2="806" y2="62" class="edge" marker-end="url(#a-base)"/>
+<text x="772" y="54" text-anchor="middle" class="lbl">answer</text>
+<circle cx="820" cy="62" r="10" class="dot"/><circle cx="820" cy="62" r="14" fill="none" stroke="currentColor"/><text x="820" y="96" text-anchor="middle" class="mono">END</text>
+<text x="160" y="118" text-anchor="middle" class="mono">0–1 model call</text>
+<text x="410" y="118" text-anchor="middle" class="mono" style="fill:var(--accent)">1 Chroma query · top_k 6</text>
+<text x="660" y="118" text-anchor="middle" class="mono">1 model call</text>
+</svg></div>
+<figcaption>Every architecture runs the same LangGraph turn from <code>rag_core/graph.py</code>. The registry swaps only the highlighted <code>retrieve</code> node, so the answer prompt, citation checks and refusals stay identical and results stay comparable.</figcaption>
+</figure>
+</section>
+
+<section id="steps">
+<h2>Step by step <span class="tag">one turn</span></h2>
+<ol class="steps">
+<li><h3>Prepare the corpus (once)</h3><p>The PDF is split on its clause numbering into chunks of at most 512 Nomic tokens with no overlap. Each chunk keeps its source file, PDF SHA-256, physical page range, clause label and chunk index as metadata, then is embedded and added to Chroma in batches of four.</p><span class="where">rag_core/corpus.py · rag_core/store.py prepare()</span></li>
+<li><h3>Rewrite follow-ups</h3><p>On the first message the question is used as is. On a follow-up, Claude sees the last six messages and returns a <code>Rewrite</code>: either a standalone <code>search_query</code> or a <code>clarification</code> question, never both. An ambiguous pronoun produces a clarification instead of a guess.</p><span class="where">rag_core/graph.py prepare_query · templates/rewrite.j2</span></li>
+<li><h3>Retrieve</h3><p>One Chroma query with the search query, <code>n_results = top_k</code>, filtered to the current <code>corpus_id</code>. Each hit carries its cosine distance. No model call happens here.</p><span class="where">rag_core/store.py retrieve() · classic_rag/retriever.py</span></li>
+<li><h3>Generate</h3><p>Claude receives a JSON payload with the question, the search query, recent history and the numbered evidence. It returns an <code>Answer</code> with text, cited source numbers and a status. The prompt is a Jinja template; runtime data never enters it.</p><span class="where">rag_core/graph.py generate_answer · templates/answer.j2</span></li>
+<li><h3>Validate and format</h3><p>The application rejects unknown or duplicate citation numbers, strips inline <code>[n]</code> markers, and appends footers built from metadata, for example <code>[1] Magenta_Moments_Terms_Conditions_gr.pdf · PDF p. 3 · §3.3</code>.</p><span class="where">rag_core/answers.py format_answer()</span></li>
+</ol>
+</section>
+
+<section id="answer">
+<h2>Answer contract <span class="tag">three statuses</span></h2>
+<div class="cards">
+<div class="card"><h3><code>answered</code></h3><p>Must cite at least one source number from the evidence map. The footer lists only cited passages.</p></div>
+<div class="card"><h3><code>insufficient_evidence</code></h3><p>The model's text is replaced by a fixed refusal, in Greek or English depending on which script dominates the question.</p></div>
+<div class="card"><h3><code>clarification_needed</code></h3><p>Asks one short question and may cite nothing. Comes from the rewrite step or the generator.</p></div>
+</div>
+<div class="note"><strong>What validation proves</strong><p>A passing check means every citation points at a passage that was actually retrieved. It does not prove the passage supports the claim. That is what the eval judges in <code>evals/</code> measure.</p></div>
+</section>
+
+<section id="identity">
+<h2>Index identity <span class="tag">why “prepare a new collection”</span></h2>
+<p>Every chunk and the collection itself store three fingerprints. Opening a collection whose fingerprints differ from the current code fails fast instead of silently mixing vectors.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Fingerprint</th><th scope="col">Hash of</th><th scope="col">Changes when</th></tr></thead>
+<tbody>
+<tr><th scope="row"><code>corpus_id</code></th><td>PDF names and SHA-256 hashes</td><td>A PDF is added, removed or edited</td></tr>
+<tr><th scope="row"><code>embedding_contract_id</code></th><td>Model, revision, dims, pooling, prefixes, 512 max tokens</td><td>Encoder or prefixes change</td></tr>
+<tr><th scope="row"><code>chunk_config_id</code></th><td><code>clauses-v1</code>, 512 tokens, overlap 0</td><td>Chunking rules change</td></tr>
+</tbody></table></div>
+<p class="muted">Prompt changes do not touch the index. They change <code>prompt_id</code> in traces and eval reports instead.</p>
+</section>
+
+<section id="run">
+<h2>Run it</h2>
+<pre><code><span class="c"># once: start Chroma and embed the PDF</span>
+docker compose -f compose.chroma.yaml up -d --wait
+./rag prepare
+./rag check
+
+<span class="c"># retrieval only: no Anthropic call, shows the 6 passages</span>
+./rag search "Πότε λήγουν οι Καρδιές;"
+
+<span class="c"># full turn, one thread per demo keeps traces apart</span>
+./rag ask "Πότε λήγουν οι Καρδιές;" --thread base-demo-1
+./rag ask "Can I exchange hearts for cash?" --top-k 3
+
+<span class="c"># interactive and UI (http://127.0.0.1:8504)</span>
+./rag chat
+./rag ui</code></pre>
+</section>
+
+<section id="demo">
+<h2>Demo questions</h2>
+<div class="q">
+<details open><summary>Πότε λήγουν οι Καρδιές; <span class="gr">· When do Hearts expire?</span></summary><div><p>Direct lookup. The expiry clause states a calendar rule: Hearts last one year and expire monthly on the 1st day of the 13th month after acquisition. Point out that the answer keeps the PDF's rule verbatim instead of saying “about a year”.</p></div></details>
+<details><summary>“And can I transfer them?” as a follow-up</summary><div><p>Shows the rewrite step. Run it in <code>./rag chat</code> after the first question and the search query becomes a standalone question about transferring Hearts.</p></div></details>
+<details><summary>“Can I use it for that?” as the first message</summary><div><p>No referent, so the turn should end with <code>clarification_needed</code> and no sources.</p></div></details>
+<details><summary>What is my current Hearts balance?</summary><div><p>Personal account data is not in the corpus. Expect <code>insufficient_evidence</code> and the fixed refusal, even though retrieval still returned six passages. Nonempty retrieval does not prove relevance.</p></div></details>
+</div>
+</section>
+
+<section id="pitfalls">
+<h2>Pitfalls before class</h2>
+<ul class="pitfalls">
+<li><b>Bracketed numbers are read as citations.</b><span>An answer containing “[2024]” is treated as a reference to source 2024 and the whole turn is rejected. Mostly affects dates or years in brackets.</span></li>
+<li><b><code>ask</code> defaults to the thread “lesson”.</b><span>Every demo lands in the same trace group. Pass <code>--thread</code> per demo when tracing with <code>--langfuse</code>.</span></li>
+<li><b>Rewrite must choose exactly one field.</b><span>If the model returns both or neither of <code>search_query</code> and <code>clarification</code>, the turn fails with an error instead of guessing.</span></li>
+<li><b>History is six messages.</b><span>Roughly three exchanges. A subject introduced earlier than that can be lost, which then shows up as a clarification.</span></li>
+</ul>
+</section>
+
+<section class="wide" id="compare">
+<h2>Compared with the other two</h2>
+<div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col" class="here">Base RAG</th><th scope="col">Graph RAG</th><th scope="col">Agentic RAG</th></tr></thead><tbody><tr><th scope="row">Retrieval</th><td class="here">One cosine query, top 6 passages</td><td>3 vector seeds, then up to 2 graph hops, fused with RRF</td><td>Agent plans searches, reads clauses, selects evidence</td></tr><tr><th scope="row">Model calls while retrieving</th><td class="here">0</td><td>0</td><td>Up to 14 (coordinator + helper)</td></tr><tr><th scope="row">Extra preparation</th><td class="here">None beyond chunk + embed</td><td>One Claude extraction per passage (30)</td><td>None. Skills ship with the code</td></tr><tr><th scope="row">Answer step</th><td class="here">Shared</td><td>Shared</td><td>Shared</td></tr><tr><th scope="row">Best at</th><td class="here">Direct factual lookups</td><td>Facts linked across distant passages</td><td>Multi-topic questions that need planning</td></tr><tr><th scope="row">Typical failure</th><td class="here">Evidence split across chunks the query doesn't resemble</td><td>Index contract mismatch after a config change</td><td>A budget runs out and the turn is rejected</td></tr></tbody></table></div>
+</section>
+
+</main>
+</div>
+<footer>Course reference for the advanced-ai-integration-rag repository. Facts are taken from the code on branch advanced-rag-archirectures; file paths are relative to the repository root.</footer>
+</body>

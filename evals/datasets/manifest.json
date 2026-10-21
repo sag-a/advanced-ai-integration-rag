@@ -1,0 +1,14 @@
+{
+  "version": "draft-v1",
+  "case_count": 10,
+  "dataset_id": "d19dd28b52f7c6e0cf13875cc8e359b51394dfb11713c14fc766507bf192812b",
+  "corpus_id": "42c33f2efea444fa5ce70f1ee4fef12285ecf19d513a111b47b41f1c701e4cd3",
+  "sources": [
+    {
+      "source": "Magenta_Moments_Terms_Conditions_gr.pdf",
+      "pdf_sha256": "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2",
+      "pages": 5
+    }
+  ],
+  "annotation_policy": "Canonical PDF clauses; recall measures labeled source coverage, not every relevant paraphrase. Reused classroom scenarios are development examples, not an unseen generalization benchmark."
+}
