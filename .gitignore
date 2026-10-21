@@ -2,7 +2,13 @@
 .env.*
 !.env.example
 .venv/
-outputs/
+# Generated files stay local, except the prepared Graph RAG index: rebuilding it
+# costs about 30 Anthropic calls, and it is valid for the default PDF, collection
+# and model on any machine.
+outputs/*
+!outputs/graph_rag/
+outputs/graph_rag/*
+!outputs/graph_rag/graph.json
 __pycache__/
 *.pyc
 .DS_Store

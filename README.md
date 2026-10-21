@@ -64,7 +64,9 @@ cp .env.example .env
 
 In PowerShell, use `Copy-Item .env.example .env`. Put your Anthropic key in `.env`;
 the tracked example contains placeholders only.
-Shell variables take precedence. Do not commit `.env` or `outputs/`.
+Shell variables take precedence. Do not commit `.env` or `outputs/`; the one
+exception is the prepared Graph RAG index, `outputs/graph_rag/graph.json`, which ships
+with the repository so a fresh clone can use Graph RAG without rebuilding it.
 
 Chroma is isolated on loopback port **8004** with its own Docker volume. Existing
 course collections on port 8002 are not modified. The client/server version is

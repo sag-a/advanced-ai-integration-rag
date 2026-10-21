@@ -1,0 +1,2751 @@
+{
+  "complete": true,
+  "contract": {
+    "version": 2,
+    "schema_id": "70954e08a691d59bd8f42acb834bbbf184c520d2bf8791ea5319e79765ca7c51",
+    "collection": "magenta_course_pdf_v1",
+    "corpus_id": "42c33f2efea444fa5ce70f1ee4fef12285ecf19d513a111b47b41f1c701e4cd3",
+    "sources": [
+      [
+        "Magenta_Moments_Terms_Conditions_gr.pdf",
+        "a2e492bd4a7e31b6aaba418ed25c2ef600af2862bbb5a5b3abf686f80ee52bc2"
+      ]
+    ],
+    "embedding_contract_id": "7ae18f95d75c5b542e5140b8a1a80b17f92aff6e037f9e3caa29eeafacd9c67b",
+    "chunk_config_id": "febf0307ae54e75cdabd73c7b3d75ca908b08995b5a29b0854c74085a17d507e",
+    "extraction_model": "claude-haiku-4-5-20251001",
+    "prompt_id": "6a4dcc8eb069d57526f89a59baae274d8caae6f6952b719f5cdb1dbc4458d649",
+    "temperature": 0,
+    "passages": "14facf4d76d50bcbc6752389f8585ec50401bfcbf287d15c14abe104e2a9db57"
+  },
+  "fingerprint": "5d5fa8f234ff64b390b61d066cfd4312de5ad84861f9fe094916d13c5f00ded6",
+  "created_at": "2026-10-20T21:56:20.330990+00:00",
+  "entities": {
+    "magenta_moments": {
+      "id": "magenta_moments",
+      "label": "Magenta Moments",
+      "type": "program",
+      "aliases": [
+        "Magenta Moments",
+        "Program",
+        "magenta_moments",
+        "Πρόγραμμα"
+      ],
+      "chunk_ids": [
+        "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a",
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+        "c5c13a734f7932fb10bbd95f39dfa6e3bfd28264a6d53b19a6ee9d1b0b888d7f",
+        "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120",
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f",
+        "18b1be2a7095caa2184fdb880443d6ab6d7991e13eb5df1ae6239028cc4556f4",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583",
+        "a307d68f3e02b8338528a72d6d8859de034e2184714409188f17bbe0d028f41b",
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29",
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "ote": {
+      "id": "ote",
+      "label": "ORGANISMOS TILIPIKOINONION TIS ELLADOS A.E.",
+      "type": "organization",
+      "aliases": [
+        "Company",
+        "ORGANISMOS TILIPIKOINONION TIS ELLADOS A.E.",
+        "ote",
+        "Εταιρεία",
+        "ΟΡΓΑΝΙΣΜΟΣ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ ΤΗΣ ΕΛΛΑΔΟΣ Α. Ε."
+      ],
+      "chunk_ids": [
+        "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a",
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+        "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120",
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583",
+        "a307d68f3e02b8338528a72d6d8859de034e2184714409188f17bbe0d028f41b",
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29",
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "exclusive_experiences": {
+      "id": "exclusive_experiences",
+      "label": "exclusive experiences",
+      "type": "concept",
+      "aliases": [
+        "exclusive experiences",
+        "exclusive_experiences",
+        "αποκλειστικές εμπειρίες"
+      ],
+      "chunk_ids": [
+        "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+      ]
+    },
+    "privileges_gifts_offers": {
+      "id": "privileges_gifts_offers",
+      "label": "privileges, gifts and offers",
+      "type": "concept",
+      "aliases": [
+        "privileges, gifts and offers",
+        "privileges_gifts_offers",
+        "προνόμια, δώρα και προσφορές"
+      ],
+      "chunk_ids": [
+        "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a",
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+      ]
+    },
+    "partner_network": {
+      "id": "partner_network",
+      "label": "partner network",
+      "type": "concept",
+      "aliases": [
+        "partner network",
+        "partner_network",
+        "δίκτυο συνεργατών"
+      ],
+      "chunk_ids": [
+        "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a"
+      ]
+    },
+    "active_customers": {
+      "id": "active_customers",
+      "label": "active customers",
+      "type": "concept",
+      "aliases": [
+        "active customers",
+        "active_customers",
+        "ενεργοί πελάτες"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120"
+      ]
+    },
+    "fixed_line": {
+      "id": "fixed_line",
+      "label": "fixed line",
+      "type": "concept",
+      "aliases": [
+        "fixed line",
+        "fixed_line",
+        "σταθερής"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+      ]
+    },
+    "mobile_contract": {
+      "id": "mobile_contract",
+      "label": "mobile contract",
+      "type": "concept",
+      "aliases": [
+        "mobile contract",
+        "mobile_contract",
+        "συμβολαίου κινητής"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+      ]
+    },
+    "prepaid_mobile": {
+      "id": "prepaid_mobile",
+      "label": "prepaid mobile",
+      "type": "concept",
+      "aliases": [
+        "prepaid mobile",
+        "prepaid_mobile",
+        "καρτοκινητής"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "telekom_card": {
+      "id": "telekom_card",
+      "label": "Telekom Κάρτα",
+      "type": "concept",
+      "aliases": [
+        "Telekom Card",
+        "Telekom Κάρτα",
+        "telekom_card"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "whats_up": {
+      "id": "whats_up",
+      "label": "WHAT'S UP",
+      "type": "program",
+      "aliases": [
+        "WHAT'S UP",
+        "whats_up"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "magenta_tv": {
+      "id": "magenta_tv",
+      "label": "Magenta TV",
+      "type": "program",
+      "aliases": [
+        "Magenta TV",
+        "magenta_tv",
+        "συνδρομητικής τηλεόρασης Magenta TV"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+      ]
+    },
+    "telekom_app": {
+      "id": "telekom_app",
+      "label": "Telekom App",
+      "type": "program",
+      "aliases": [
+        "Application",
+        "Telekom App",
+        "telekom_app",
+        "Εφαρμογή",
+        "αντίστοιχη Εφαρμογή"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "c5c13a734f7932fb10bbd95f39dfa6e3bfd28264a6d53b19a6ee9d1b0b888d7f",
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "e08188fa4f6942b90303b83c00f97f9bb7016ce946d7052bad877c403ffdf93f",
+        "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+      ]
+    },
+    "authenticated_users": {
+      "id": "authenticated_users",
+      "label": "authenticated users",
+      "type": "concept",
+      "aliases": [
+        "authenticated users",
+        "authenticated_users",
+        "ταυτοποιημένοι χρήστες"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "welcome_gift": {
+      "id": "welcome_gift",
+      "label": "Welcome Gift",
+      "type": "concept",
+      "aliases": [
+        "Welcome Gift",
+        "welcome_gift",
+        "Δώρο Καλωσορίσματος"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "telekom_id": {
+      "id": "telekom_id",
+      "label": "Telekom Id",
+      "type": "concept",
+      "aliases": [
+        "Telekom Id",
+        "telekom_id",
+        "Ταυτότητα Χρήστη"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+      ]
+    },
+    "program_membership": {
+      "id": "program_membership",
+      "label": "program membership",
+      "type": "concept",
+      "aliases": [
+        "Member",
+        "program membership",
+        "program_membership",
+        "Μέλος"
+      ],
+      "chunk_ids": [
+        "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481",
+        "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213",
+        "c5c13a734f7932fb10bbd95f39dfa6e3bfd28264a6d53b19a6ee9d1b0b888d7f",
+        "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120",
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e",
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583",
+        "a307d68f3e02b8338528a72d6d8859de034e2184714409188f17bbe0d028f41b",
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac",
+        "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+      ]
+    },
+    "program_withdrawal": {
+      "id": "program_withdrawal",
+      "label": "program withdrawal",
+      "type": "action",
+      "aliases": [
+        "exit",
+        "program withdrawal",
+        "program_withdrawal",
+        "αποχώρηση"
+      ],
+      "chunk_ids": [
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+      ]
+    },
+    "app_deletion": {
+      "id": "app_deletion",
+      "label": "app deletion",
+      "type": "action",
+      "aliases": [
+        "app deletion",
+        "app_deletion",
+        "delete application",
+        "διαγραφή της Εφαρμογής"
+      ],
+      "chunk_ids": [
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+      ]
+    },
+    "profile_deactivation": {
+      "id": "profile_deactivation",
+      "label": "profile deactivation",
+      "type": "action",
+      "aliases": [
+        "disable profile",
+        "profile deactivation",
+        "profile_deactivation",
+        "απενεργοποίηση του προφίλ"
+      ],
+      "chunk_ids": [
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+      ]
+    },
+    "program_reactivation": {
+      "id": "program_reactivation",
+      "label": "program reactivation",
+      "type": "action",
+      "aliases": [
+        "program reactivation",
+        "program_reactivation",
+        "re-enable",
+        "ενεργοποίηση ξανά"
+      ],
+      "chunk_ids": [
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+      ]
+    },
+    "twenty_four_hours": {
+      "id": "twenty_four_hours",
+      "label": "24 hours",
+      "type": "duration",
+      "aliases": [
+        "24 hours",
+        "24 ώρες",
+        "twenty_four_hours"
+      ],
+      "chunk_ids": [
+        "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+      ]
+    },
+    "offer": {
+      "id": "offer",
+      "label": "offer",
+      "type": "concept",
+      "aliases": [
+        "offer",
+        "offers",
+        "προσφορά",
+        "προσφορές"
+      ],
+      "chunk_ids": [
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3",
+        "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29"
+      ]
+    },
+    "coupon": {
+      "id": "coupon",
+      "label": "coupon",
+      "type": "coupon",
+      "aliases": [
+        "coupon",
+        "Κωδικός",
+        "κουπόνι",
+        "κουπόνια",
+        "κωδικός",
+        "κωδικός Κουπονιού"
+      ],
+      "chunk_ids": [
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3",
+        "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b",
+        "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e",
+        "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "partner": {
+      "id": "partner",
+      "label": "partner",
+      "type": "organization",
+      "aliases": [
+        "partner",
+        "third parties",
+        "εταιρείες",
+        "συνεργάτες",
+        "τρίτες εταιρείες"
+      ],
+      "chunk_ids": [
+        "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460",
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29",
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "hearts": {
+      "id": "hearts",
+      "label": "hearts",
+      "type": "concept",
+      "aliases": [
+        "hearts",
+        "Καρδιές",
+        "καρδιές"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+      ]
+    },
+    "box_delivery_app": {
+      "id": "box_delivery_app",
+      "label": "BOX delivery app",
+      "type": "program",
+      "aliases": [
+        "BOX delivery app",
+        "box_delivery_app"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "germanos_app": {
+      "id": "germanos_app",
+      "label": "Germanos app",
+      "type": "program",
+      "aliases": [
+        "Germanos app",
+        "germanos_app"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "magenta_insurance": {
+      "id": "magenta_insurance",
+      "label": "Magenta Insurance",
+      "type": "program",
+      "aliases": [
+        "Magenta Insurance",
+        "magenta_insurance"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "virtual_currency": {
+      "id": "virtual_currency",
+      "label": "virtual currency",
+      "type": "concept",
+      "aliases": [
+        "virtual currency",
+        "virtual_currency",
+        "εικονικό νόμισμα"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "cash": {
+      "id": "cash",
+      "label": "cash",
+      "type": "concept",
+      "aliases": [
+        "cash",
+        "μετρητά"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "products": {
+      "id": "products",
+      "label": "products",
+      "type": "concept",
+      "aliases": [
+        "products",
+        "προϊόντα"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+      ]
+    },
+    "services": {
+      "id": "services",
+      "label": "services",
+      "type": "concept",
+      "aliases": [
+        "services",
+        "υπηρεσίες"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+      ]
+    },
+    "games": {
+      "id": "games",
+      "label": "games",
+      "type": "concept",
+      "aliases": [
+        "games",
+        "παιχνίδια"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9",
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+      ]
+    },
+    "lotteries": {
+      "id": "lotteries",
+      "label": "lotteries",
+      "type": "concept",
+      "aliases": [
+        "lotteries",
+        "κληρώσεις"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "fastest_finger_first": {
+      "id": "fastest_finger_first",
+      "label": "fastest finger first",
+      "type": "concept",
+      "aliases": [
+        "fastest finger first",
+        "fastest_finger_first"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "spin_the_wheel": {
+      "id": "spin_the_wheel",
+      "label": "spin the wheel",
+      "type": "concept",
+      "aliases": [
+        "spin the wheel",
+        "spin_the_wheel"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "scratch_card": {
+      "id": "scratch_card",
+      "label": "scratch card",
+      "type": "concept",
+      "aliases": [
+        "scratch card",
+        "scratch_card"
+      ],
+      "chunk_ids": [
+        "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+      ]
+    },
+    "one_year": {
+      "id": "one_year",
+      "label": "one year",
+      "type": "duration",
+      "aliases": [
+        "1 year",
+        "1 έτος",
+        "one year",
+        "one_year"
+      ],
+      "chunk_ids": [
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+      ]
+    },
+    "thirteen_months": {
+      "id": "thirteen_months",
+      "label": "thirteen months",
+      "type": "duration",
+      "aliases": [
+        "13 months",
+        "13ου μήνα",
+        "thirteen months",
+        "thirteen_months"
+      ],
+      "chunk_ids": [
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+      ]
+    },
+    "monthly_basis": {
+      "id": "monthly_basis",
+      "label": "monthly basis",
+      "type": "concept",
+      "aliases": [
+        "monthly basis",
+        "monthly_basis",
+        "μηνιαία βάση"
+      ],
+      "chunk_ids": [
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+      ]
+    },
+    "first_day": {
+      "id": "first_day",
+      "label": "first day",
+      "type": "concept",
+      "aliases": [
+        "1η ημέρα",
+        "first day",
+        "first_day"
+      ],
+      "chunk_ids": [
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+      ]
+    },
+    "noon": {
+      "id": "noon",
+      "label": "noon",
+      "type": "concept",
+      "aliases": [
+        "12:00 PM",
+        "12:00 μ.μ.",
+        "noon"
+      ],
+      "chunk_ids": [
+        "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+      ]
+    },
+    "personalized_offers": {
+      "id": "personalized_offers",
+      "label": "personalized offers",
+      "type": "concept",
+      "aliases": [
+        "personalized offers",
+        "personalized_offers",
+        "προσωποποιημένες προσφορές"
+      ],
+      "chunk_ids": [
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+      ]
+    },
+    "profile_customization": {
+      "id": "profile_customization",
+      "label": "profile customization",
+      "type": "action",
+      "aliases": [
+        "profile customization",
+        "profile_customization",
+        "εξατομίκευση"
+      ],
+      "chunk_ids": [
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+      ]
+    },
+    "member_profile": {
+      "id": "member_profile",
+      "label": "member profile",
+      "type": "concept",
+      "aliases": [
+        "member profile",
+        "member_profile",
+        "προφίλ"
+      ],
+      "chunk_ids": [
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+      ]
+    },
+    "member_data": {
+      "id": "member_data",
+      "label": "member data",
+      "type": "concept",
+      "aliases": [
+        "member data",
+        "member_data",
+        "δεδομένα των Μελών",
+        "στοιχεία"
+      ],
+      "chunk_ids": [
+        "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10",
+        "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+      ]
+    },
+    "push_notifications": {
+      "id": "push_notifications",
+      "label": "push notifications",
+      "type": "concept",
+      "aliases": [
+        "push notifications",
+        "push_notifications"
+      ],
+      "chunk_ids": [
+        "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+      ]
+    },
+    "damage_liability": {
+      "id": "damage_liability",
+      "label": "damage or problems",
+      "type": "concept",
+      "aliases": [
+        "damage or problems",
+        "damage_liability",
+        "responsibility",
+        "ευθύνη",
+        "ζημιές ή προβλήματα"
+      ],
+      "chunk_ids": [
+        "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058",
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0",
+        "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29",
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "data_processing": {
+      "id": "data_processing",
+      "label": "data processing",
+      "type": "action",
+      "aliases": [
+        "data processing",
+        "data_processing",
+        "επεξεργασία δεδομένων"
+      ],
+      "chunk_ids": [
+        "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+      ]
+    },
+    "privacy_policy": {
+      "id": "privacy_policy",
+      "label": "Privacy Policy",
+      "type": "concept",
+      "aliases": [
+        "Privacy Policy",
+        "privacy_policy",
+        "Πολιτική Απορρήτου"
+      ],
+      "chunk_ids": [
+        "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+      ]
+    },
+    "terms_conditions": {
+      "id": "terms_conditions",
+      "label": "Terms and Conditions",
+      "type": "concept",
+      "aliases": [
+        "Terms and Conditions",
+        "terms_conditions",
+        "Όροι και Προϋποθέσεις",
+        "Παρόντες Όροι και Προϋποθέσεις",
+        "όρους"
+      ],
+      "chunk_ids": [
+        "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f",
+        "e08188fa4f6942b90303b83c00f97f9bb7016ce946d7052bad877c403ffdf93f",
+        "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583",
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "indefinite_duration": {
+      "id": "indefinite_duration",
+      "label": "indefinite duration",
+      "type": "duration",
+      "aliases": [
+        "indefinite duration",
+        "indefinite_duration",
+        "αόριστη διάρκεια"
+      ],
+      "chunk_ids": [
+        "18b1be2a7095caa2184fdb880443d6ab6d7991e13eb5df1ae6239028cc4556f4"
+      ]
+    },
+    "discount": {
+      "id": "discount",
+      "label": "discount",
+      "type": "concept",
+      "aliases": [
+        "discount",
+        "εκπτώσεις"
+      ],
+      "chunk_ids": [
+        "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0"
+      ]
+    },
+    "dispute_resolution": {
+      "id": "dispute_resolution",
+      "label": "dispute resolution",
+      "type": "action",
+      "aliases": [
+        "dispute resolution",
+        "dispute_resolution",
+        "διαφορά",
+        "παράπονο"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "consumer_ombudsman": {
+      "id": "consumer_ombudsman",
+      "label": "Consumer Ombudsman",
+      "type": "organization",
+      "aliases": [
+        "Consumer Ombudsman",
+        "consumer_ombudsman",
+        "Συνήγορος του Καταναλωτή"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "athens_courts": {
+      "id": "athens_courts",
+      "label": "Athens Courts",
+      "type": "organization",
+      "aliases": [
+        "Athens Courts",
+        "athens_courts",
+        "δικαστήρια των Αθηνών"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "greek_law": {
+      "id": "greek_law",
+      "label": "Greek Law",
+      "type": "concept",
+      "aliases": [
+        "Greek Law",
+        "greek_law",
+        "Ελληνικό Δίκαιο"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "european_union": {
+      "id": "european_union",
+      "label": "European Union",
+      "type": "organization",
+      "aliases": [
+        "European Union",
+        "european_union",
+        "Ευρωπαϊκή Ένωση"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "phone_contact": {
+      "id": "phone_contact",
+      "label": "phone contact 13888",
+      "type": "concept",
+      "aliases": [
+        "phone contact 13888",
+        "phone_contact",
+        "κλήσης στο 13888"
+      ],
+      "chunk_ids": [
+        "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+      ]
+    },
+    "coupon_validity": {
+      "id": "coupon_validity",
+      "label": "coupon validity",
+      "type": "condition",
+      "aliases": [
+        "coupon validity",
+        "coupon_validity",
+        "validity period",
+        "ισχύς κωδικού",
+        "προθεσμίες"
+      ],
+      "chunk_ids": [
+        "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e",
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "coupon_active_status": {
+      "id": "coupon_active_status",
+      "label": "coupon active status",
+      "type": "condition",
+      "aliases": [
+        "active",
+        "active status",
+        "coupon active status",
+        "coupon_active_status",
+        "ενεργός"
+      ],
+      "chunk_ids": [
+        "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e"
+      ]
+    },
+    "coupon_usability": {
+      "id": "coupon_usability",
+      "label": "coupon usability",
+      "type": "condition",
+      "aliases": [
+        "can be used",
+        "coupon usability",
+        "coupon_usability",
+        "usability",
+        "χρησιμοποιησιμότητα"
+      ],
+      "chunk_ids": [
+        "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e",
+        "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef"
+      ]
+    },
+    "customer": {
+      "id": "customer",
+      "label": "customer",
+      "type": "concept",
+      "aliases": [
+        "customer",
+        "Πελάτες",
+        "Πελάτης",
+        "πελάτες"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "ticket_availability": {
+      "id": "ticket_availability",
+      "label": "ticket availability",
+      "type": "condition",
+      "aliases": [
+        "ticket availability",
+        "ticket_availability",
+        "εισιτηρίων",
+        "θέσεων"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+      ]
+    },
+    "activity": {
+      "id": "activity",
+      "label": "activity",
+      "type": "concept",
+      "aliases": [
+        "activity",
+        "δραστηριότητες"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "service_availability": {
+      "id": "service_availability",
+      "label": "service availability",
+      "type": "condition",
+      "aliases": [
+        "service availability",
+        "service_availability",
+        "διαθεσιμότητα εξυπηρέτησης"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "pizza_fan": {
+      "id": "pizza_fan",
+      "label": "PIZZA FAN",
+      "type": "organization",
+      "aliases": [
+        "PIZZA FAN",
+        "pizza_fan"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "call_center": {
+      "id": "call_center",
+      "label": "call center",
+      "type": "concept",
+      "aliases": [
+        "call center",
+        "call_center",
+        "τηλεφωνικό κέντρο"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "distribution_network": {
+      "id": "distribution_network",
+      "label": "distribution network",
+      "type": "concept",
+      "aliases": [
+        "distribution network",
+        "distribution_network",
+        "δίκτυο διανομής"
+      ],
+      "chunk_ids": [
+        "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+      ]
+    },
+    "force_majeure": {
+      "id": "force_majeure",
+      "label": "force majeure",
+      "type": "condition",
+      "aliases": [
+        "extraordinary events",
+        "force majeure",
+        "force_majeure",
+        "ανωτέρας βίας"
+      ],
+      "chunk_ids": [
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "film_screening": {
+      "id": "film_screening",
+      "label": "film screening",
+      "type": "activity",
+      "aliases": [
+        "film screening",
+        "film_screening",
+        "προβολές ταινιών",
+        "ταινιών"
+      ],
+      "chunk_ids": [
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "performance": {
+      "id": "performance",
+      "label": "performance",
+      "type": "activity",
+      "aliases": [
+        "performance",
+        "παραστάσεις",
+        "παραστάσεων"
+      ],
+      "chunk_ids": [
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c",
+        "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+      ]
+    },
+    "distributor": {
+      "id": "distributor",
+      "label": "distributor",
+      "type": "organization",
+      "aliases": [
+        "distributor",
+        "distributor responsibility",
+        "διανομέα"
+      ],
+      "chunk_ids": [
+        "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+      ]
+    },
+    "ticket": {
+      "id": "ticket",
+      "label": "ticket",
+      "type": "concept",
+      "aliases": [
+        "ticket",
+        "εισιτήριο",
+        "εισιτηρίων"
+      ],
+      "chunk_ids": [
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+      ]
+    },
+    "internet_access": {
+      "id": "internet_access",
+      "label": "internet access",
+      "type": "concept",
+      "aliases": [
+        "internet access",
+        "internet_access",
+        "διαδίκτυο",
+        "πρόσβαση"
+      ],
+      "chunk_ids": [
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+      ]
+    },
+    "electronic_purchase": {
+      "id": "electronic_purchase",
+      "label": "electronic purchase",
+      "type": "action",
+      "aliases": [
+        "electronic purchase",
+        "electronic_purchase",
+        "αγορά εισιτηρίων μέσω ηλεκτρονικών σελίδων"
+      ],
+      "chunk_ids": [
+        "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+      ]
+    }
+  },
+  "relationships": [
+    {
+      "source": "magenta_moments",
+      "target": "ote",
+      "statement": "Magenta Moments is the rewards program (Πρόγραμμα) of ORGANISMOS TILIPIKOINONION TIS ELLADOS A.E. (ΟΡΓΑΝΙΣΜΟΣ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ ΤΗΣ ΕΛΛΑΔΟΣ Α. Ε.), headquartered in Marousi, Attica (Kifisias Ave. no. 99), with tax ID 094019425, KEFODE Attica, GEMI no. 1037501000.",
+      "polarity": "positive",
+      "quote": "Το Magenta Moments είναι το  πρόγραμμα επιβράβευσης  (εφεξής\n«Πρόγραμμα») του ΟΡΓΑΝΙΣΜΟΥ ΤΗΛΕΠΙΚΟΙΝΩΝΙΩΝ ΤΗΣ ΕΛΛΑΔΟΣ Α. Ε. (εφεξής\n«Εταιρεία») που εδρεύει στο Μαρούσι Αττικής (Λεωφ. Κηφισίας αρ. 99), με ΑΦΜ\n094019425, ΚΕΦΟΔΕ Αττικής, αρ.ΓΕ.ΜΗ. 1037501000. Τα μέλη του προγράμματος",
+      "id": "r0",
+      "chunk_id": "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "exclusive_experiences",
+      "statement": "Members of Magenta Moments program can enjoy exclusive experiences (αποκλειστικές εμπειρίες).",
+      "polarity": "positive",
+      "quote": "094019425, ΚΕΦΟΔΕ Αττικής, αρ.ΓΕ.ΜΗ. 1037501000. Τα μέλη του προγράμματος\nMagenta Moments μπορούν να απολαύσουν  αποκλειστικές εμπειρίες,  καθώς και",
+      "id": "r1",
+      "chunk_id": "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "privileges_gifts_offers",
+      "statement": "Members of Magenta Moments program can enjoy numerous privileges, gifts and offers (προνόμια, δώρα και προσφορές).",
+      "polarity": "positive",
+      "quote": "Magenta Moments μπορούν να απολαύσουν  αποκλειστικές εμπειρίες,  καθώς και\nπολυάριθμα προνόμια, δώρα και προσφορές από ένα ευρύ δίκτυο συνεργατών",
+      "id": "r2",
+      "chunk_id": "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a"
+    },
+    {
+      "source": "privileges_gifts_offers",
+      "target": "partner_network",
+      "statement": "Privileges, gifts and offers come from a wide network of partners (δίκτυο συνεργατών) in Greece and abroad.",
+      "polarity": "positive",
+      "quote": "πολυάριθμα προνόμια, δώρα και προσφορές από ένα ευρύ δίκτυο συνεργατών\nστην Ελλάδα και το εξωτερικό.",
+      "id": "r3",
+      "chunk_id": "802329e1a6e814e3c1030929ba821768fabd7a7e8a64232d05c8754273f2584a"
+    },
+    {
+      "source": "active_customers",
+      "target": "magenta_moments",
+      "statement": "Active customers of fixed line, mobile contract, prepaid mobile Telekom Κάρτα & WHAT'S UP or/and Magenta TV subscription can participate in Magenta Moments",
+      "polarity": "positive",
+      "quote": "2.1   Στο Magenta Moments μπορούν να συμμετέχουν οι  ενεργοί πελάτες\nσταθερής, συμβολαίου κινητής, καρτοκινητής Telekom Κάρτα & WHAT’S UP ή/και\nσυνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι",
+      "id": "r4",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "authenticated_users",
+      "target": "magenta_moments",
+      "statement": "Authenticated users in one of the applications Telekom App or WHAT'S UP can participate in Magenta Moments",
+      "polarity": "positive",
+      "quote": "συνδρομητικής τηλεόρασης Magenta TV της Εταιρείας  που είναι ταυτοποιημένοι\nχρήστες σε μία από τις  εφαρμογές Telekom App ή WHAT’S UP (εφεξής\n«Εφαρμογή/-ές») και οι οποίοι θα ονομάζονται εφεξής «Πελάτες». Επισημαίνεται",
+      "id": "r5",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "whats_up",
+      "target": "magenta_moments",
+      "statement": "Only WHAT'S UP connections can register in the WHAT'S UP application for Magenta Moments",
+      "polarity": "positive",
+      "quote": "ότι στην εφαρμογή WHAT’S UP μπορούν να εγγραφούν μόνο συνδέσεις WHAT’S\nUP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην",
+      "id": "r6",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "active_customers",
+      "target": "program_membership",
+      "statement": "Customers must visit the Magenta Moments section in the Application and register in the Program accepting its Terms and Conditions. After registration in Magenta Moments, the customer becomes a member of the Program",
+      "polarity": "positive",
+      "quote": "UP. Οι Πελάτες πρέπει να επισκεφθούν την ενότητα Magenta Moments στην\nΕφαρμογή και να  εγγραφούν  στο Πρόγραμμα αποδεχόμενοι τους Όρους και\nΠροϋποθέσεις του. Μετά την εγγραφή του στο  Magenta Moments, ο πελάτης\nγίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το",
+      "id": "r7",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "program_membership",
+      "target": "welcome_gift",
+      "statement": "A member of the Program can claim the Welcome Gift",
+      "polarity": "positive",
+      "quote": "γίνεται μέλος του Προγράμματος  (εφεξής «Μέλος») και μπορεί να διεκδικήσει το\nΔώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει",
+      "id": "r8",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "whats_up",
+      "target": "telekom_id",
+      "statement": "For the WHAT'S UP application, customers must create a Telekom Id or if they already have one, connect with it when they visit the Magenta Moments section for the first time in order to have access to the Program",
+      "polarity": "positive",
+      "quote": "Δώρο Καλωσορίσματος. Ειδικά για την εφαρμογή WHAT’S UP, οι  πελάτες πρέπει\nνα δημιουργήσουν Ταυτότητα Χρήστη (« Telekom Id») ή αν έχουν ήδη να\nσυνδεθούν με αυτή, μόλις επισκεφθούν για πρώτη φορά την ενότητα Magenta\nMoments, ώστε να έχουν πρόσβαση στο Πρόγραμμα.",
+      "id": "r9",
+      "chunk_id": "d31cdb015e2856c64546556773735729e7ea557a07c7afb7f70ef022c01c4481"
+    },
+    {
+      "source": "program_membership",
+      "target": "magenta_moments",
+      "statement": "Με την ενεργοποίηση του Magenta Moments, το Μέλος δηλώνει ότι πληροί τις προϋποθέσεις που ορίζονται στην Ενότητα 2.1 των παρόντων Όρων και Προϋποθέσεων",
+      "polarity": "positive",
+      "quote": "2.2 Με την ενεργοποίηση του Magenta Moments, το Μέλος δηλώνει ότι πληροί\nτις προϋποθέσεις  που ορίζονται στην Ενότητα 2.1 των παρόντων Όρων και",
+      "id": "r10",
+      "chunk_id": "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213"
+    },
+    {
+      "source": "ote",
+      "target": "program_membership",
+      "statement": "η Εταιρεία μπορεί να το αποκλείσει από το Πρόγραμμα εάν δεν πληροί τις ανωτέρω προϋποθέσεις",
+      "polarity": "conditional",
+      "quote": "Προϋποθέσεων και αποδέχεται  ότι η Εταιρεία μπορεί να το αποκλείσει από το\nΠρόγραμμα εάν δεν πληροί τις ανωτέρω προϋποθέσεις.",
+      "id": "r11",
+      "chunk_id": "2773c9c048260f061dbec5c978fa51d7ee248b8f9a96c051cd75bc48046ab213"
+    },
+    {
+      "source": "program_membership",
+      "target": "magenta_moments",
+      "statement": "Το Μέλος μπορεί να έχει πρόσβαση στο Magenta Moments αποκλειστικά μέσω της Εφαρμογής.",
+      "polarity": "positive",
+      "quote": "2.3 Το Μέλος μπορεί να έχει πρόσβαση στο Magenta Moments αποκλειστικά\nμέσω της Εφαρμογής.",
+      "id": "r12",
+      "chunk_id": "c5c13a734f7932fb10bbd95f39dfa6e3bfd28264a6d53b19a6ee9d1b0b888d7f"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "telekom_app",
+      "statement": "Το Magenta Moments είναι προσβάσιμο αποκλειστικά μέσω της Εφαρμογής.",
+      "polarity": "positive",
+      "quote": "2.3 Το Μέλος μπορεί να έχει πρόσβαση στο Magenta Moments αποκλειστικά\nμέσω της Εφαρμογής.",
+      "id": "r13",
+      "chunk_id": "c5c13a734f7932fb10bbd95f39dfa6e3bfd28264a6d53b19a6ee9d1b0b888d7f"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "program_membership",
+      "statement": "Η συμμετοχή στο Πρόγραμμα λήγει αυτόματα εάν το Μέλος σταματήσει να είναι πελάτης της Εταιρείας σύμφωνα με τον όρο 2.1.",
+      "polarity": "conditional",
+      "quote": "2.4 Η συμμετοχή στο Πρόγραμμα λήγει αυτόματα εάν το Μέλος σταματήσει να\nείναι πελάτης της Εταιρείας  σύμφωνα με τον όρο 2.1.",
+      "id": "r14",
+      "chunk_id": "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120"
+    },
+    {
+      "source": "program_membership",
+      "target": "ote",
+      "statement": "Η συμμετοχή στο Πρόγραμμα λήγει αυτόματα εάν το Μέλος σταματήσει να είναι πελάτης της Εταιρείας",
+      "polarity": "conditional",
+      "quote": "2.4 Η συμμετοχή στο Πρόγραμμα λήγει αυτόματα εάν το Μέλος σταματήσει να\nείναι πελάτης της Εταιρείας  σύμφωνα με τον όρο 2.1.",
+      "id": "r15",
+      "chunk_id": "b37303b5b318cecbfca3d6fef48ca5c3bffad3155eb7fa15302ba3cf5262e120"
+    },
+    {
+      "source": "program_membership",
+      "target": "program_withdrawal",
+      "statement": "Το Μέλος μπορεί να αποχωρήσει από το Πρόγραμμα διαγράφοντας την Εφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην ενότητα Magenta Moments στην Εφαρμογή.",
+      "polarity": "positive",
+      "quote": "2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην\nενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το",
+      "id": "r16",
+      "chunk_id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+    },
+    {
+      "source": "program_withdrawal",
+      "target": "app_deletion",
+      "statement": "Το Μέλος μπορεί να αποχωρήσει από το Πρόγραμμα διαγράφοντας την Εφαρμογή στην οποία έχει εγγραφεί.",
+      "polarity": "positive",
+      "quote": "2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην",
+      "id": "r17",
+      "chunk_id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+    },
+    {
+      "source": "program_withdrawal",
+      "target": "profile_deactivation",
+      "statement": "Το Μέλος μπορεί να αποχωρήσει από το Πρόγραμμα απενεργοποιώντας το προφίλ του στην ενότητα Magenta Moments στην Εφαρμογή.",
+      "polarity": "positive",
+      "quote": "2.5 Το Μέλος μπορεί επίσης να αποχωρήσει από το Πρόγραμμα διαγράφοντας την\nΕφαρμογή στην οποία έχει εγγραφεί ή απενεργοποιώντας το προφίλ του στην\nενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το",
+      "id": "r18",
+      "chunk_id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+    },
+    {
+      "source": "program_membership",
+      "target": "program_reactivation",
+      "statement": "Μετά την διαγραφή του από το Magenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να ενεργοποιήσει ξανά το Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των παρόντων Όρων και Προϋποθέσεων.",
+      "polarity": "positive",
+      "quote": "ενότητα Magenta Moments στην Εφαρμογή . Μετά την διαγραφή του από το\nMagenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να  ενεργοποιήσει ξανά\nτο Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των\nπαρόντων Όρων και Προϋποθέσεων.",
+      "id": "r19",
+      "chunk_id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+    },
+    {
+      "source": "program_reactivation",
+      "target": "twenty_four_hours",
+      "statement": "Ο πελάτης μπορεί ανά πάσα στιγμή να ενεργοποιήσει ξανά το Πρόγραμμα μετά από 24 ώρες.",
+      "polarity": "conditional",
+      "quote": "Magenta Moments, ο πελάτης μπορεί ανά πάσα στιγμή να  ενεργοποιήσει ξανά\nτο Πρόγραμμα μετά από 24 ώρες, υπό τις προϋποθέσεις του άρθρου 2.1 των",
+      "id": "r20",
+      "chunk_id": "d2cff5ad756e95752061ca6d99af3eb6415d7ae85fd2eec6f21cffbd84c2e69e"
+    },
+    {
+      "source": "offer",
+      "target": "magenta_moments",
+      "statement": "Each offer provided in Magenta Moments is governed by its own terms and conditions of participation",
+      "polarity": "positive",
+      "quote": "3.1 Κάθε προσφορά που παρέχεται στο Magenta Moments διέπεται από τους\nδικούς της όρους και προϋποθέσεις συμμετοχής και το Μέλος θα πρέπει να",
+      "id": "r21",
+      "chunk_id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+    },
+    {
+      "source": "program_membership",
+      "target": "offer",
+      "statement": "The Member must be informed about the terms and conditions of each offer from the offer page within the Application",
+      "polarity": "positive",
+      "quote": "δικούς της όρους και προϋποθέσεις συμμετοχής και το Μέλος θα πρέπει να\nενημερώνεται για αυτούς από την σελίδα κάθε προσφοράς μέσα από την\nΕφαρμογή.  Οι εταιρείες /συνεργάτες που παρέχουν τις προσφορές έχουν το",
+      "id": "r22",
+      "chunk_id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+    },
+    {
+      "source": "partner",
+      "target": "offer",
+      "statement": "Companies/partners that provide the offers have the right to freely change their prices and/or the terms of provision of their offers",
+      "polarity": "positive",
+      "quote": "Εφαρμογή.  Οι εταιρείες /συνεργάτες που παρέχουν τις προσφορές έχουν το\nδικαίωμα να μεταβάλουν ελεύθερα τις τιμές τους ή/και τους όρους παροχής των\nπροσφορών τους . Οι προσφορές και τα κουπόνια τους έχουν περιορισμένη",
+      "id": "r23",
+      "chunk_id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+    },
+    {
+      "source": "offer",
+      "target": "coupon",
+      "statement": "Offers and their coupons have a limited validity period, which is stated on the offer page and in the coupon images",
+      "polarity": "positive",
+      "quote": "προσφορών τους . Οι προσφορές και τα κουπόνια τους έχουν περιορισμένη\nπερίοδο ισχύος, η οποία αναφέρεται στη σελίδα  κάθε  προσφοράς και στις\nεικόνες των κουπονιών. Κάθε κωδικός Κουπονιού μπορεί να χρησιμοποιηθεί μόνο",
+      "id": "r24",
+      "chunk_id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+    },
+    {
+      "source": "coupon",
+      "target": "offer",
+      "statement": "Each coupon code can be used only once and in only one offer",
+      "polarity": "positive",
+      "quote": "εικόνες των κουπονιών. Κάθε κωδικός Κουπονιού μπορεί να χρησιμοποιηθεί μόνο\nμία φορά και σε μία μόνο προσφορά.",
+      "id": "r25",
+      "chunk_id": "8326cd39d62faac8d4e0a6156f1f7c2ce19a3d4d62d900d1951647f2fc538460"
+    },
+    {
+      "source": "program_membership",
+      "target": "hearts",
+      "statement": "Members can earn hearts in various cases including through friend invitations to Magenta Moments, through daily visits to the Magenta Moments section of the Application, and through daily visits and transactions on BOX delivery app, Germanos app, and Magenta Insurance",
+      "polarity": "positive",
+      "quote": "3.2 Στο Magenta Moments, το Μέλος μπορεί να κερδίσει «Καρδιές» σε διάφορες\nπεριπτώσεις (ενδεικτικά, αλλά όχι περιοριστικά: μέσω πρόσκλησης  φίλων στο\nMagenta Moments, μέσω καθημερινών επισκέψεων στην ενότητα Magenta\nMoments της Εφαρμογής   κ.λπ.). Επίσης,  το Μέλος κερδίζει Καρδιές από τις\nκαθημερινές επισκέψεις του και από τις συναλλαγές του στο BOX delivery app,",
+      "id": "r26",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "virtual_currency",
+      "statement": "Hearts are virtual currency without monetary value",
+      "polarity": "positive",
+      "quote": "Germanos app, Magenta Insurance. Οι «Καρδιές» είναι εικονικό νόμισμα χωρίς",
+      "id": "r27",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "cash",
+      "statement": "Hearts cannot be redeemed for cash",
+      "polarity": "negative",
+      "quote": "χρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή",
+      "id": "r28",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "products",
+      "statement": "Hearts cannot be redeemed for products",
+      "polarity": "negative",
+      "quote": "χρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή",
+      "id": "r29",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "services",
+      "statement": "Hearts cannot be redeemed for services",
+      "polarity": "negative",
+      "quote": "χρηματική αξία και δεν μπορούν να εξαργυρωθούν σε μετρητά, προϊόντα ή\nυπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε",
+      "id": "r30",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "program_membership",
+      "statement": "Hearts cannot be transferred",
+      "polarity": "negative",
+      "quote": "υπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε",
+      "id": "r31",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "games",
+      "statement": "Hearts can be used in games included in Magenta Moments",
+      "polarity": "positive",
+      "quote": "υπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,",
+      "id": "r32",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "games",
+      "target": "lotteries",
+      "statement": "Games in Magenta Moments include lotteries",
+      "polarity": "positive",
+      "quote": "παιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,",
+      "id": "r33",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "games",
+      "target": "fastest_finger_first",
+      "statement": "Games in Magenta Moments include fastest finger first",
+      "polarity": "positive",
+      "quote": "\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την",
+      "id": "r34",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "games",
+      "target": "spin_the_wheel",
+      "statement": "Games in Magenta Moments include spin the wheel",
+      "polarity": "positive",
+      "quote": "\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την",
+      "id": "r35",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "games",
+      "target": "scratch_card",
+      "statement": "Games in Magenta Moments include scratch card",
+      "polarity": "positive",
+      "quote": "\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την",
+      "id": "r36",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "offer",
+      "statement": "Hearts can be used for activating regular offers from the Company and its partners that are not games",
+      "polarity": "positive",
+      "quote": "υπηρεσίες, ούτε να μεταφερθούν. Οι «Καρδιές» μπορούν να χρησιμοποιηθούν σε\nπαιχνίδια που περιλαμβάνονται στο Magenta Moments, όπως κληρώσεις,\n\"fastest finger first\", \"spin the whe el\" και \" scratch card \", καθώς και για την\nενεργοποίηση τακτικών προσφορών (από την Εταιρεία και τους συνεργάτες της)\nπου δεν είναι παιχνίδια.",
+      "id": "r37",
+      "chunk_id": "750fa1ef6e15d2509b07bc7f867f6a2834eeeaf257be358ca68cf1db97a1d1e9"
+    },
+    {
+      "source": "hearts",
+      "target": "one_year",
+      "statement": "Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος (Hearts have a validity period of 1 year)",
+      "polarity": "positive",
+      "quote": "3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε",
+      "id": "r38",
+      "chunk_id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+    },
+    {
+      "source": "hearts",
+      "target": "thirteen_months",
+      "statement": "Η λήξη τους πραγματοποιείται σε μηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους, στις 12:00 μ.μ. (Their expiration occurs on a monthly basis, on the 1st day of the 13th month from the date of acquisition, at 12:00 PM)",
+      "polarity": "positive",
+      "quote": "3.3 Οι «Καρδιές» έχουν διάρκεια ισχύος 1 έτος. Η λήξη τους πραγματοποιείται σε\nμηνιαία βάση, την 1η ημέρα του 13ου μήνα από την ημερομηνία απόκτησής τους,\nστις 12:00 μ.μ.",
+      "id": "r39",
+      "chunk_id": "f4d19179ec524d988d4620e140aea608119716e7eb7677c3b0868d59435760b4"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "offer",
+      "statement": "Οι προσφορές και τα προνόμια του Magenta Moments παρέχονται σύμφωνα με τη χρήση που κάνει το Μέλος μέσω της συμμετοχής του στις δραστηριότητες του Magenta Moments και της χρήσης της Εφαρμογής του (συμπεριλαμβανομένων των σελίδων και των υπηρεσιών που επισκέπτεται).",
+      "polarity": "positive",
+      "quote": "3.4 Οι προσφορές και τα προνόμια του Magenta Moments παρέχονται σύμφωνα\nμε τη χρήση που κάνει το Μέλος μέσω της συμμετοχής του στις δραστηριότητες\nτου Magenta Moments και της χρήσης της Εφαρμογής του\n(συμπεριλαμβανομένων των σελίδων και των υπηρεσιών που επισκέπτεται).",
+      "id": "r40",
+      "chunk_id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+    },
+    {
+      "source": "program_membership",
+      "target": "profile_customization",
+      "statement": "Κάθε Μέλος μπορεί να εξατομικεύσει την εμπειρία του στο Magenta Moments προσθέτοντας προαιρετικά ψευδώνυμο, τρόπο ζωής, ενδιαφέροντα, ηλικία, φύλο και τοποθεσία κατά την συμπλήρωση του προφίλ του.",
+      "polarity": "positive",
+      "quote": "Κάθε Μέλος μπορεί να εξατομικεύσει την εμπειρία του στο Magenta Moments\nπροσθέτοντας προαιρετικά ψευδώνυμο, τρόπο ζωής, ενδιαφέροντα, ηλικία, φύλο\nκαι τοποθεσία κατά την συμπλήρωση του π ροφίλ του. Η παροχή αυτών των",
+      "id": "r41",
+      "chunk_id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+    },
+    {
+      "source": "member_data",
+      "target": "personalized_offers",
+      "statement": "Η παροχή αυτών των στοιχείων είναι προαιρετική και επιτρέπει στο Μέλος να λαμβάνει προσωποποιημένες προσφορές.",
+      "polarity": "positive",
+      "quote": "και τοποθεσία κατά την συμπλήρωση του π ροφίλ του. Η παροχή αυτών των\nστοιχείων είναι προαιρετική και επιτρέπει στο Μέλος να λαμβάνει\nπροσωποποιημένες προσφορές. Τα επιπλέον δεδομένα που παρέχει το Μέλος",
+      "id": "r42",
+      "chunk_id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+    },
+    {
+      "source": "program_membership",
+      "target": "member_data",
+      "statement": "Τα επιπλέον δεδομένα που παρέχει το Μέλος στην ενότητα Magenta Moments μπορούν να τροποποιηθούν ή να διαγραφούν από αυτό ανά πάσα στιγμή μέσω των ρυθμίσεων της Εφαρμογής του.",
+      "polarity": "positive",
+      "quote": "προσωποποιημένες προσφορές. Τα επιπλέον δεδομένα που παρέχει το Μέλος\nστην ενότητα Magenta Moments μπορούν να τροποποιηθούν ή να διαγραφούν\nαπό αυτό ανά πάσα στιγ μή μέσω των ρυθμίσεων της Εφαρμογής  του και στην",
+      "id": "r43",
+      "chunk_id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+    },
+    {
+      "source": "member_data",
+      "target": "personalized_offers",
+      "statement": "Στην περίπτωση διαγραφής των δεδομένων θα σταματήσει να λαμβάνει προσωποποιημένες προσφορές.",
+      "polarity": "negative",
+      "quote": "από αυτό ανά πάσα στιγ μή μέσω των ρυθμίσεων της Εφαρμογής  του και στην\nπερίπτωση αυτή θα σταματήσει να λαμβάνει προσωποποιημένες προσφορές.",
+      "id": "r44",
+      "chunk_id": "cb44d22048983fd05f963c583d9185aa622256734570ea169cdf0c0d44625d10"
+    },
+    {
+      "source": "program_membership",
+      "target": "push_notifications",
+      "statement": "With the activation of push notifications, Members can receive notifications related to the Program",
+      "polarity": "positive",
+      "quote": "3.5 Με την ενεργοποίηση των push notifications, τα Μέλη μπορούν να λαμβάνουν\nειδοποιήσεις σχετικά με το Πρόγραμμα, όπως (ενδεικτικά, αλλά όχι",
+      "id": "r45",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "push_notifications",
+      "target": "magenta_moments",
+      "statement": "Push notifications provide notifications related to the Magenta Moments Program, including welcome and onboarding, hearts expiry, hearts acquisition, coupon expiry, hearts return (in case of technical issues), offer packages, notifications when within 1 km radius of a geographically located coupon in their wallet (already claimed), update when a new member invited by the Member registers in Magenta Moments, and communication related to available games",
+      "polarity": "positive",
+      "quote": "3.5 Με την ενεργοποίηση των push notifications, τα Μέλη μπορούν να λαμβάνουν\nειδοποιήσεις σχετικά με το Πρόγραμμα, όπως (ενδεικτικά, αλλά όχι\nπεριοριστικά): καλωσόρισμα και onboarding, λήξη των «Καρδιών», απόκτηση\n«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών\nπροβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1\nχλμ. από ένα γεωγραφικά εντοπισμένο κουπόνι στο πορτοφόλι τους (που έχει ήδη\nδιεκδικήσει), ενημέρωση όταν ένα νέο μέλος που προσκλήθηκε από το Μέλος\nεγγράφεται στο Magenta Moments, καθώς και επικοινωνία σχετική με τα\nδιαθέσιμα παιχνίδια.",
+      "id": "r46",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "push_notifications",
+      "target": "hearts",
+      "statement": "Push notifications include notifications about hearts expiry and hearts acquisition",
+      "polarity": "positive",
+      "quote": "περιοριστικά): καλωσόρισμα και onboarding, λήξη των «Καρδιών», απόκτηση\n«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών",
+      "id": "r47",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "push_notifications",
+      "target": "coupon",
+      "statement": "Push notifications include notifications about coupon expiry and notifications when Members are within 1 km radius of a geographically located coupon in their wallet (that has already been claimed)",
+      "polarity": "positive",
+      "quote": "«Καρδιών», λήξη κουπονιών, επιστροφή «Καρ διών» (σε περίπτωση τεχνικών\nπροβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1\nχλμ. από ένα γεωγραφικά εντοπισμένο κουπόνι στο πορτοφόλι τους (που έχει ήδη\nδιεκδικήσει), ενημέρωση όταν ένα νέο μέλος που προσκλήθηκε από το Μέλος",
+      "id": "r48",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "push_notifications",
+      "target": "offer",
+      "statement": "Push notifications include offer packages",
+      "polarity": "positive",
+      "quote": "προβλημάτων), πακέτα προσφορών,  ειδοποιήσεις όταν βρίσκονται σε ακτίνα 1",
+      "id": "r49",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "push_notifications",
+      "target": "games",
+      "statement": "Push notifications include communication related to available games",
+      "polarity": "positive",
+      "quote": "εγγράφεται στο Magenta Moments, καθώς και επικοινωνία σχετική με τα\nδιαθέσιμα παιχνίδια.",
+      "id": "r50",
+      "chunk_id": "051704621fe92268b234b6dbb89b5a85a4b7b847b4987a50737597522128d790"
+    },
+    {
+      "source": "ote",
+      "target": "offer",
+      "statement": "Η Εταιρεία παρέχει εκπτώσεις, προσφορές και εμπειρίες από συνεργάτες της",
+      "polarity": "positive",
+      "quote": "4.1 Η Εταιρεία παρέχει εκπτώσεις, προσφορές και εμπειρίες από συνεργάτες της",
+      "id": "r51",
+      "chunk_id": "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+    },
+    {
+      "source": "ote",
+      "target": "exclusive_experiences",
+      "statement": "Η Εταιρεία παρέχει εκπτώσεις, προσφορές και εμπειρίες από συνεργάτες της",
+      "polarity": "positive",
+      "quote": "4.1 Η Εταιρεία παρέχει εκπτώσεις, προσφορές και εμπειρίες από συνεργάτες της",
+      "id": "r52",
+      "chunk_id": "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+    },
+    {
+      "source": "partner",
+      "target": "magenta_moments",
+      "statement": "τρίτα μέρη που συμμετέχουν στο Magenta Moments",
+      "polarity": "positive",
+      "quote": "(δηλαδή τρίτα μέρη  που συμμετέχουν στο Magenta Moments). Η Εταιρεία δεν",
+      "id": "r53",
+      "chunk_id": "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "Η Εταιρεία δεν φέρει καμία ευθύνη για τυχόν ζημιές ή προβλήματα που προκύπτουν από τη χρήση προϊόντων και υπηρεσιών αυτών των τρίτων μερών",
+      "polarity": "negative",
+      "quote": "φέρει καμία ευθύνη για τυχόν ζημιές ή προβλήματα που προκύπτουν από τη\nχρήση προϊόντων και υπηρεσιών αυτών των τρίτων μερών.",
+      "id": "r54",
+      "chunk_id": "a7d1a8fd1e27d4ac9ec9dc81d6f0ed668081710bbbdfd241c37cd7fd331ef058"
+    },
+    {
+      "source": "ote",
+      "target": "offer",
+      "statement": "Η Εταιρεία δεν αποτελεί συμβαλλόμενο μέρος ή πάροχο υπηρεσιών για τις προσφορές τρίτων.",
+      "polarity": "negative",
+      "quote": "4.2 Η Εταιρεία δεν αποτελεί συμβαλλόμενο μέρος ή πάροχο υπηρεσιών για τις\nπροσφορές τρίτων. Ισχύουν οι όροι και προϋποθέσεις χρήσης του εκάστοτε",
+      "id": "r55",
+      "chunk_id": "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8"
+    },
+    {
+      "source": "partner",
+      "target": "offer",
+      "statement": "Ισχύουν οι όροι και προϋποθέσεις χρήσης του εκάστοτε τρίτου μέρους, οι οποίοι περιγράφονται αναλυτικά στη σελίδα λεπτομερειών κάθε προσφοράς στην ενότητα Magenta Moments της Εφαρμογής του Μέλους.",
+      "polarity": "positive",
+      "quote": "προσφορές τρίτων. Ισχύουν οι όροι και προϋποθέσεις χρήσης του εκάστοτε\nτρίτου μέρους, οι οποίοι περιγράφονται αναλυτικά στη σελίδα λεπτομερειών\nκάθε προσφοράς στην στην ενότητα Magenta Moments  της Εφαρμογής του\nΜέλους.",
+      "id": "r56",
+      "chunk_id": "dc6cddd27297b029744003f519ce5f9d633c907af41846ed3e2870e2357513d8"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "member_data",
+      "statement": "Detailed information about data processing activities for member data in Magenta Moments is included in the Privacy Policy attached to the Terms and Conditions",
+      "polarity": "positive",
+      "quote": "5. Πώς επεξεργάζονται τα δεδομένα των Μελών στο Πρόγραμμα;\n5.1 Αναλυτικές πληροφορίες σχετικά με τις δραστηριότητες επεξεργασίας\nδεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+      "id": "r57",
+      "chunk_id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+    },
+    {
+      "source": "member_data",
+      "target": "data_processing",
+      "statement": "Member data is processed in Magenta Moments with detailed information about data processing activities included in the Privacy Policy",
+      "polarity": "positive",
+      "quote": "5. Πώς επεξεργάζονται τα δεδομένα των Μελών στο Πρόγραμμα;\n5.1 Αναλυτικές πληροφορίες σχετικά με τις δραστηριότητες επεξεργασίας\nδεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+      "id": "r58",
+      "chunk_id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+    },
+    {
+      "source": "privacy_policy",
+      "target": "data_processing",
+      "statement": "The Privacy Policy contains detailed information about data processing activities in Magenta Moments",
+      "polarity": "positive",
+      "quote": "5.1 Αναλυτικές πληροφορίες σχετικά με τις δραστηριότητες επεξεργασίας\nδεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+      "id": "r59",
+      "chunk_id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+    },
+    {
+      "source": "privacy_policy",
+      "target": "terms_conditions",
+      "statement": "The Privacy Policy is attached to the Terms and Conditions",
+      "polarity": "positive",
+      "quote": "δεδομένων στο Magenta Moments περιλαμβάνονται στην Πολιτική Απορρήτου\nπου επισυνάπτεται στους παρόντες Όρους και Προϋποθέσεις.",
+      "id": "r60",
+      "chunk_id": "e16765bd4eedad6e2140f792ce60e8ea32b338f6890446eb346f5ddd9ea38f6f"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "indefinite_duration",
+      "statement": "Το Πρόγραμμα έχει αόριστη διάρκεια.",
+      "polarity": "positive",
+      "quote": "6.1 Το  Πρόγραμμα έχει αόριστη διάρκεια.",
+      "id": "r61",
+      "chunk_id": "18b1be2a7095caa2184fdb880443d6ab6d7991e13eb5df1ae6239028cc4556f4"
+    },
+    {
+      "source": "terms_conditions",
+      "target": "telekom_app",
+      "statement": "For matters not regulated by the present Terms and Conditions, particularly in relation to the use of the corresponding Application, the respective terms and conditions apply.",
+      "polarity": "positive",
+      "quote": "6.2 Σε θέματα που δεν ρυθμίζονται από τους παρόντες Όρους και Προϋποθέσεις,\nιδίως σε σχέση με  τη χρήση της αντίστοιχης Εφαρμογής  υπερισχύουν οι\nαντίστοιχοι όροι και προϋποθέσεις.",
+      "id": "r62",
+      "chunk_id": "e08188fa4f6942b90303b83c00f97f9bb7016ce946d7052bad877c403ffdf93f"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "discount",
+      "statement": "Discounts available in Magenta Moments cannot be combined with other discounts, offers, coupons etc. provided to Members, unless explicitly permitted by the terms of each offer",
+      "polarity": "negative",
+      "quote": "6.3 Οι εκπτώσεις, οι προσφορές, τα κουπόνια κ.λπ., που είναι διαθέσιμα στο\nMagenta Moments δεν μπορούν να συνδυαστούν με άλλες εκπτώσεις,\nπροσφορές, κουπόνια κ.λπ., που παρέχονται στα Μέλη, εκτός εάν αυτό\nεπιτρέπεται ρητά από τους όρους κάθε προσφοράς. Η Εταιρεία δεν ευθύνεται σε",
+      "id": "r63",
+      "chunk_id": "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "offer",
+      "statement": "Offers available in Magenta Moments cannot be combined with other discounts, offers, coupons etc. provided to Members, unless explicitly permitted by the terms of each offer",
+      "polarity": "negative",
+      "quote": "6.3 Οι εκπτώσεις, οι προσφορές, τα κουπόνια κ.λπ., που είναι διαθέσιμα στο\nMagenta Moments δεν μπορούν να συνδυαστούν με άλλες εκπτώσεις,\nπροσφορές, κουπόνια κ.λπ., που παρέχονται στα Μέλη, εκτός εάν αυτό\nεπιτρέπεται ρητά από τους όρους κάθε προσφοράς. Η Εταιρεία δεν ευθύνεται σε",
+      "id": "r64",
+      "chunk_id": "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "coupon",
+      "statement": "Coupons available in Magenta Moments cannot be combined with other discounts, offers, coupons etc. provided to Members, unless explicitly permitted by the terms of each offer",
+      "polarity": "negative",
+      "quote": "6.3 Οι εκπτώσεις, οι προσφορές, τα κουπόνια κ.λπ., που είναι διαθέσιμα στο\nMagenta Moments δεν μπορούν να συνδυαστούν με άλλες εκπτώσεις,\nπροσφορές, κουπόνια κ.λπ., που παρέχονται στα Μέλη, εκτός εάν αυτό\nεπιτρέπεται ρητά από τους όρους κάθε προσφοράς. Η Εταιρεία δεν ευθύνεται σε",
+      "id": "r65",
+      "chunk_id": "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "The Company is not responsible in case of inability to provide any offer due to force majeure or liability of the company/third party that provides it",
+      "polarity": "negative",
+      "quote": "επιτρέπεται ρητά από τους όρους κάθε προσφοράς. Η Εταιρεία δεν ευθύνεται σε\nπερίπτωση αδυναμίας παροχής κάποιας προσφοράς λόγω ανωτέρας βίας ή\nευθύνης της εταιρείας/τρίτου μέρους που την παρέχει.",
+      "id": "r66",
+      "chunk_id": "e6e9b35bc4048b4efa65817f68fef0562854bf91b4b65c5b2ba4679e870a4ab0"
+    },
+    {
+      "source": "ote",
+      "target": "terms_conditions",
+      "statement": "Η Εταιρεία διατηρεί το δικαίωμα να τροποποιήσει μονομερώς τους παρόντες Όρους και Προϋποθέσεις, με σχετική ειδοποίηση στην Εφαρμογή.",
+      "polarity": "positive",
+      "quote": "6.4 Η Εταιρεία διατηρεί το δικαίωμα να τροποποιήσει μονομερώς τους παρόντες\nΌρους και Προϋποθέσεις, με σχετική ειδοποίηση στην Εφαρμογή. Με την",
+      "id": "r67",
+      "chunk_id": "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583"
+    },
+    {
+      "source": "program_membership",
+      "target": "magenta_moments",
+      "statement": "Με την αποδοχή των τροποποιήσεων, το Μέλος αποδέχεται τη συνέχιση της συμμετοχής του στο Πρόγραμμα.",
+      "polarity": "conditional",
+      "quote": "αποδοχή των τροποποιήσεων, το Μέλος αποδέχεται τη συνέχιση της συμμετοχής\nτου στο Πρόγραμμα.",
+      "id": "r68",
+      "chunk_id": "618b2ade874684cc7d3022a6d6918368d8358851b5d5cb0669c7429dceed4583"
+    },
+    {
+      "source": "ote",
+      "target": "magenta_moments",
+      "statement": "Η Εταιρεία διατηρεί το δικαίωμα να διακόψει μονομερώς το Πρόγραμμα, με σχετική ειδοποίηση προς τα Μέλη. (The Company retains the right to unilaterally terminate the Program, with relevant notice to Members.)",
+      "polarity": "positive",
+      "quote": "6.5 Η Εταιρεία διατηρεί το δικαίωμα να διακόψει μονομερώς το Πρόγραμμα, με\nσχετική ειδοποίηση προς τα Μέλη.",
+      "id": "r69",
+      "chunk_id": "a307d68f3e02b8338528a72d6d8859de034e2184714409188f17bbe0d028f41b"
+    },
+    {
+      "source": "program_membership",
+      "target": "ote",
+      "statement": "Για οποιαδήποτε διαφορά ή παράπονο τυχόν ανακύψει σχετικά με το Πρόγραμμα και την εφαρμογή των παρόντων Όρων, το Μέλος δύναται να απευθύνεται στην Εταιρεία μέσω κλήσης στο 13888.",
+      "polarity": "positive",
+      "quote": "6.6 Για οποιαδήποτε διαφορά ή παράπονο τυχόν ανακύψει σχετικά με το\nΠρόγραμμα και την εφαρμογή των παρόντων Όρων, το Μέλος δύναται να\nαπευθύνεται στην Εταιρεία  μέσω κλήσης στο 13888. Ο Συνήγορος του",
+      "id": "r70",
+      "chunk_id": "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+    },
+    {
+      "source": "consumer_ombudsman",
+      "target": "program_membership",
+      "statement": "Ο Συνήγορος του Καταναλωτή όπου κρίνεται αναγκαίο, αντιμετωπίζει εξωδικαστικά τις ανεπίλυτες διαφορές μεταξύ των Μελών και της Εταιρείας.",
+      "polarity": "positive",
+      "quote": "απευθύνεται στην Εταιρεία  μέσω κλήσης στο 13888. Ο Συνήγορος του\nΚαταναλωτή όπου κρίνεται αναγκαίο, αντιμετωπίζει εξωδικαστικά τις ανεπίλυτες\nδιαφορές μεταξύ των Μελών και της Εταιρείας . Σε περίπτωση που το Μέλος",
+      "id": "r71",
+      "chunk_id": "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+    },
+    {
+      "source": "consumer_ombudsman",
+      "target": "european_union",
+      "statement": "Σε περίπτωση που το Μέλος προέρχεται από άλλο κράτος-μέλος της Ευρωπαϊκής Ένωσης, ο Συνήγορος του Καταναλωτή συντονίζει τις προσπάθειές του με τον αντίστοιχο αρμόδιο φορέα του κράτους-μέλους αυτού, προκειμένου να επιτύχουν την επίλυση της διαφοράς.",
+      "polarity": "conditional",
+      "quote": "διαφορές μεταξύ των Μελών και της Εταιρείας . Σε περίπτωση που το Μέλος\nπροέρχεται από άλλο κράτος- μέλος της Ευρωπαϊκής Ένωσης, ο Συνήγορος του\nΚαταναλωτή συντονίζει τις προσπάθειές του με τον αντίστοιχο αρμόδιο φορέα\nτου κράτους-μέλους αυτού, προκειμένου να επιτύχουν την επίλυση της διαφοράς.",
+      "id": "r72",
+      "chunk_id": "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+    },
+    {
+      "source": "dispute_resolution",
+      "target": "athens_courts",
+      "statement": "Σε περίπτωση μη επίλυσης της διαφοράς κατά τ' ανωτέρω, αρμόδια ορίζονται τα δικαστήρια των Αθηνών.",
+      "polarity": "conditional",
+      "quote": "Σε περίπτωση μη επίλυσης της διαφοράς κατά τ’ ανωτέρω, αρμόδια ορίζονται τα\nδικαστήρια των Αθηνών.",
+      "id": "r73",
+      "chunk_id": "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+    },
+    {
+      "source": "terms_conditions",
+      "target": "greek_law",
+      "statement": "Οι παρόντες Αναλυτικοί Όροι διέπονται από το Ελληνικό Δίκαιο.",
+      "polarity": "positive",
+      "quote": "Οι παρόντες Αναλυτικοί Όροι διέπονται από το Ελληνικό Δίκαιο.",
+      "id": "r74",
+      "chunk_id": "0e46c8bbfc436e2b01174deb3347ae5add3dd150873580722ced63f447747eac"
+    },
+    {
+      "source": "coupon",
+      "target": "offer",
+      "statement": "Each coupon can be used once per offer according to these terms",
+      "polarity": "positive",
+      "quote": "7.1 Κάθε Κωδικός μπορεί να χρησιμοποιηθεί μία φορά σε κάθε προσφορά\nσύμφωνα με τους όρους αυτής.",
+      "id": "r75",
+      "chunk_id": "9432e56e28f9d34f94a0458aa3a13ead40dcd8998800ae30c236711daaa7a9f3"
+    },
+    {
+      "source": "coupon",
+      "target": "offer",
+      "statement": "Κωδικός που χρησιμοποιήθηκε σε μία προσφορά ακυρώνεται μόνο για τη συγκεκριμένη προσφορά και δεν μπορεί να επαναχρησιμοποιηθεί.",
+      "polarity": "negative",
+      "quote": "7.2 Κωδικός που χρησιμοποιήθηκε σε μία προσφορά ακυρώνεται μόνο γι α τη\nσυγκεκριμένη προσφορά και δεν μπορεί να επαναχρησιμοποιηθεί.",
+      "id": "r76",
+      "chunk_id": "d36afaa4950d5577a73b5856c7cf512ea9ac6cdee5f5fdae75be2eda782e8b5b"
+    },
+    {
+      "source": "coupon",
+      "target": "coupon_active_status",
+      "statement": "Before using each coupon, it is checked whether it is active",
+      "polarity": "positive",
+      "quote": "7.3 Πριν τη χρήση του κάθε Κωδικός ελέγχεται εάν είναι ενεργός και αν περαιτέρω",
+      "id": "r77",
+      "chunk_id": "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e"
+    },
+    {
+      "source": "coupon",
+      "target": "coupon_usability",
+      "statement": "Before using each coupon, it is checked whether it can further be used, according to the provisions in paragraph 7",
+      "polarity": "positive",
+      "quote": "7.3 Πριν τη χρήση του κάθε Κωδικός ελέγχεται εάν είναι ενεργός και αν περαιτέρω\nμπορεί να χρησιμοποιηθεί, σύμφωνα με τα αναφερόμενα στην παρούσα",
+      "id": "r78",
+      "chunk_id": "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e"
+    },
+    {
+      "source": "coupon",
+      "target": "coupon_validity",
+      "statement": "If the validity period of the coupon has expired, it is considered invalid and cannot be used",
+      "polarity": "negative",
+      "quote": "παράγραφο 7. Σε περίπτωση που έχει παρέλθει ο χρόνος ισχύος του, θεωρείται\nάκυρος και δεν μπορεί να γίνει χρήση του.",
+      "id": "r79",
+      "chunk_id": "2aecb56440264def3a6aeaaafcd60ebc4526bb23f2d74e2499775f83de178a2e"
+    },
+    {
+      "source": "coupon",
+      "target": "coupon_usability",
+      "statement": "A coupon marked as redeemed even though it has not been used by the Member (by clicking the 'Mark as redeemed' button) cannot be used subsequently.",
+      "polarity": "negative",
+      "quote": "7.4 Αν ένας Κωδικός χαρακτηριστεί ως εξαργυρωμένος παρόλο που δεν έχει\nχρησιμοποιηθεί από το Μέλος , (πατώντας το κουμπί «Σήμανση ως\nεξαργυρωμένο») δεν μπορεί να χρησιμοποιηθεί στη συνέχεια.",
+      "id": "r80",
+      "chunk_id": "08395f0b3697085ac5e936254a45aaa23c0f270a6157456582d14b4c7b3340ef"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "program_membership",
+      "statement": "Η Εταιρεία θεωρεί ότι κάθε συμμετέχων στο Πρόγραμμα είναι Πελάτης ή έχει εξασφαλίσει τη ρητή συναίνεση ή εξουσιοδότηση του Πελάτη /νόμιμου κατόχου του αριθμού που συμμετέχει στο Πρόγραμμα.",
+      "polarity": "positive",
+      "quote": "8.1 Η Εταιρεία θεωρεί ότι κάθε συμμετέχων στο Πρόγραμμα είναι Πελάτης ή έχει\nεξασφαλίσει τη ρητή συναίνεση ή εξουσιοδότηση του  Πελάτη /νόμιμου κατόχου\nτου αριθμού  που συμμετέχει στο Πρόγραμμα. Ο Κωδικός είναι προσωπικός, δε",
+      "id": "r81",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "coupon",
+      "target": "program_membership",
+      "statement": "Ο Κωδικός είναι προσωπικός, δε μεταβιβάζεται και μπορεί να αποκτηθεί μόνο μέσω της Εφαρμογής του Πελάτη.",
+      "polarity": "positive",
+      "quote": "του αριθμού  που συμμετέχει στο Πρόγραμμα. Ο Κωδικός είναι προσωπικός, δε\nμεταβιβάζεται και μπορεί να αποκτηθεί μόνο μέσω της Εφαρμογής του Πελάτη. H",
+      "id": "r82",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "H Εταιρεία δεν φέρει καμία ευθύνη για την χρήση του στην περίπτωση που ο Συμμετέχων κοινοποίησε εκούσια ή ακούσια τον Κωδικό σε τρίτους.",
+      "polarity": "negative",
+      "quote": "Εταιρεία δεν φέρει καμία ευθύνη για την χρήση του στην περίπτωση που ο\nΣυμμετέχων κοινοποίησε εκούσια ή ακούσια τον Κωδικό σε τρίτους. Το",
+      "id": "r83",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "fixed_line",
+      "statement": "Το Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή κινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "polarity": "positive",
+      "quote": "Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή\nκινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "id": "r84",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "mobile_contract",
+      "statement": "Το Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή κινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "polarity": "positive",
+      "quote": "Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή\nκινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "id": "r85",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "magenta_moments",
+      "target": "magenta_tv",
+      "statement": "Το Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή κινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "polarity": "positive",
+      "quote": "Πρόγραμμα ισχύει αποκλειστικά για τον Πελάτη με τον αριθμό σταθερής ή\nκινητής σύνδεσης ή της κάρτας Magenta TV.",
+      "id": "r86",
+      "chunk_id": "46a0a6e2d38d0659de1e8155e45b9b533512ee97d4bf16ed045d00ee92a0a98e"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "The Company (OTE) and participating third-party companies do not bear any responsibility towards Customers in case they do not use the Codes within the deadlines specified by these terms or in case the Codes cannot be used due to non-compliance with the terms of each offer (e.g. ticket exhaustion for performances, position exhaustion for activities, or service unavailability due to call center and PIZZA FAN distribution network inability, etc.)",
+      "polarity": "negative",
+      "quote": "8.2 H Εταιρεία και οι συμμετέχουσες στο Πρόγραμμα τρίτες εταιρείες δεν φέρουν\nοποιαδήποτε ευθύνη έναντι των Πελατών  σε περίπτωση που αυτοί δεν κάνουν\nχρήση των Κωδικών εντός των καθορισμένων με τους παρόντες όρους\nπροθεσμιών ή σε περίπτωση που δεν μπορεί να γίνει χρήση των Κωδικών λόγω μη\nτήρησης των όρων κάθε προσφοράς  (πχ εξάντλησης εισιτηρίων για τις\nπαραστάσεις, εξάντλησης θέσεων για τις δραστηριότητες, ή μη διαθεσιμότητα\nεξυπηρέτησης λόγω αδυναμίας του τηλεφωνικού κέντρου και του δικτύου\nδιανομής της PIZZA FAN κλπ). Η διαθεσιμότητα των θέσεων δεν είναι εγγυημένη",
+      "id": "r87",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "partner",
+      "target": "damage_liability",
+      "statement": "Participating third-party companies do not bear any responsibility towards Customers in case they do not use the Codes within the deadlines specified by these terms or in case the Codes cannot be used due to non-compliance with the terms of each offer",
+      "polarity": "negative",
+      "quote": "8.2 H Εταιρεία και οι συμμετέχουσες στο Πρόγραμμα τρίτες εταιρείες δεν φέρουν\nοποιαδήποτε ευθύνη έναντι των Πελατών  σε περίπτωση που αυτοί δεν κάνουν\nχρήση των Κωδικών εντός των καθορισμένων με τους παρόντες όρους\nπροθεσμιών ή σε περίπτωση που δεν μπορεί να γίνει χρήση των Κωδικών λόγω μη\nτήρησης των όρων κάθε προσφοράς  (πχ εξάντλησης εισιτηρίων για τις\nπαραστάσεις, εξάντλησης θέσεων για τις δραστηριότητες, ή μη διαθεσιμότητα\nεξυπηρέτησης λόγω αδυναμίας του τηλεφωνικού κέντρου και του δικτύου\nδιανομής της PIZZA FAN κλπ). Η διαθεσιμότητα των θέσεων δεν είναι εγγυημένη",
+      "id": "r88",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "customer",
+      "target": "coupon",
+      "statement": "Customers do not use the Codes within the deadlines specified by these terms",
+      "polarity": "conditional",
+      "quote": "οποιαδήποτε ευθύνη έναντι των Πελατών  σε περίπτωση που αυτοί δεν κάνουν\nχρήση των Κωδικών εντός των καθορισμένων με τους παρόντες όρους\nπροθεσμιών ή σε περίπτωση που δεν μπορεί να γίνει χρήση των Κωδικών λόγω μη",
+      "id": "r89",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "coupon",
+      "target": "coupon_validity",
+      "statement": "Codes must be used within the deadlines specified by these terms",
+      "polarity": "positive",
+      "quote": "χρήση των Κωδικών εντός των καθορισμένων με τους παρόντες όρους\nπροθεσμιών ή σε περίπτωση που δεν μπορεί να γίνει χρήση των Κωδικών λόγω μη",
+      "id": "r90",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "coupon",
+      "target": "offer",
+      "statement": "Codes cannot be used in case of non-compliance with the terms of each offer (e.g. ticket exhaustion for performances, position exhaustion for activities, or service unavailability due to call center and PIZZA FAN distribution network inability)",
+      "polarity": "conditional",
+      "quote": "προθεσμιών ή σε περίπτωση που δεν μπορεί να γίνει χρήση των Κωδικών λόγω μη\nτήρησης των όρων κάθε προσφοράς  (πχ εξάντλησης εισιτηρίων για τις\nπαραστάσεις, εξάντλησης θέσεων για τις δραστηριότητες, ή μη διαθεσιμότητα\nεξυπηρέτησης λόγω αδυναμίας του τηλεφωνικού κέντρου και του δικτύου\nδιανομής της PIZZA FAN κλπ). Η διαθεσιμότητα των θέσεων δεν είναι εγγυημένη",
+      "id": "r91",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "ticket_availability",
+      "target": "customer",
+      "statement": "The availability of positions is not guaranteed and Customers do not retain any priority over other customers",
+      "polarity": "negative",
+      "quote": "διανομής της PIZZA FAN κλπ). Η διαθεσιμότητα των θέσεων δεν είναι εγγυημένη\nκαι οι Πελάτες δε διατηρούν καμία προτεραιότητα έναντι των υπόλοιπων\nπελατών. Η μη διαθεσιμότητα θέσεων ή μη διαθεσιμότητα εξυπηρέτησης λόγω",
+      "id": "r92",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "service_availability",
+      "target": "ote",
+      "statement": "Service unavailability due to call center and distribution network inability does not raise any obligation towards the Customer from the Company",
+      "polarity": "negative",
+      "quote": "πελατών. Η μη διαθεσιμότητα θέσεων ή μη διαθεσιμότητα εξυπηρέτησης λόγω\nαδυναμίας του τηλεφωνικού κέντρου και του δικτύου δεν εγείρει καμία\nυποχρέωση προς τον Πελάτη, από την Εταιρεία, ή προς οποιαδήποτε άλλη τρίτη\nεταιρεία/φορέα συμμετέχει στο Πρόγραμμα.",
+      "id": "r93",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "service_availability",
+      "target": "partner",
+      "statement": "Service unavailability due to call center and distribution network inability does not raise any obligation towards the Customer from any other third-party company/entity participating in the Program",
+      "polarity": "negative",
+      "quote": "πελατών. Η μη διαθεσιμότητα θέσεων ή μη διαθεσιμότητα εξυπηρέτησης λόγω\nαδυναμίας του τηλεφωνικού κέντρου και του δικτύου δεν εγείρει καμία\nυποχρέωση προς τον Πελάτη, από την Εταιρεία, ή προς οποιαδήποτε άλλη τρίτη\nεταιρεία/φορέα συμμετέχει στο Πρόγραμμα.",
+      "id": "r94",
+      "chunk_id": "f15b2c88a13c0b397df3f9a514357bf68191fb2468eb24d095c63372f4dbd3a6"
+    },
+    {
+      "source": "partner",
+      "target": "offer",
+      "statement": "Third parties/organizations participating in the Program retain the right to change their prices and offers without notice.",
+      "polarity": "positive",
+      "quote": "8.2 Οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα διατηρούν το\nδικαίωμα μεταβολής των τιμών και των προσφορών τους χωρίς προειδοποίηση.",
+      "id": "r95",
+      "chunk_id": "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "The Company bears no responsibility for these changes.",
+      "polarity": "negative",
+      "quote": "H Εταιρεία δεν φέρει καμία ευθύνη για τις αλλαγές αυτές.",
+      "id": "r96",
+      "chunk_id": "fa82c518035ecae57e13931071c11452c877c3f638d4ee3ad3c5a23cb854ab29"
+    },
+    {
+      "source": "ote",
+      "target": "ticket_availability",
+      "statement": "The Company reserves the right regarding the availability of seats in cases of force majeure or extraordinary events",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές",
+      "id": "r97",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "partner",
+      "target": "ticket_availability",
+      "statement": "Third parties/organizations participating in the Program reserve the right regarding the availability of seats in cases of force majeure or extraordinary events",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές",
+      "id": "r98",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "ote",
+      "target": "film_screening",
+      "statement": "The Company reserves the right in all cases where film screenings are cancelled or postponed due to the responsibility of the distributor or due to responsibility of third parties",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές\nταινιών ή παραστάσεων ακυρώνονται ή αναβάλλονται από υπαιτιότητα τ ου\nδιανομέα τους ή από υπαιτιότητα τρίτων.",
+      "id": "r99",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "partner",
+      "target": "film_screening",
+      "statement": "Third parties/organizations participating in the Program reserve the right in all cases where film screenings are cancelled or postponed due to the responsibility of the distributor or due to responsibility of third parties",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές\nταινιών ή παραστάσεων ακυρώνονται ή αναβάλλονται από υπαιτιότητα τ ου\nδιανομέα τους ή από υπαιτιότητα τρίτων.",
+      "id": "r100",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "ote",
+      "target": "performance",
+      "statement": "The Company reserves the right in all cases where performances are cancelled or postponed due to the responsibility of the distributor or due to responsibility of third parties",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές\nταινιών ή παραστάσεων ακυρώνονται ή αναβάλλονται από υπαιτιότητα τ ου\nδιανομέα τους ή από υπαιτιότητα τρίτων.",
+      "id": "r101",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "partner",
+      "target": "performance",
+      "statement": "Third parties/organizations participating in the Program reserve the right in all cases where performances are cancelled or postponed due to the responsibility of the distributor or due to responsibility of third parties",
+      "polarity": "conditional",
+      "quote": "8.3 Η Εταιρεία και οι τρίτες εταιρείες/φορείς που συμμετέχουν στο Πρόγραμμα\nεπιφυλάσσονται ως προς τη διαθεσιμότητα των θέσεων σε περιπτώσεις\nανωτέρας βίας ή έκτακτων γεγονότων και για όλες τις περιπτώσεις που προβολές\nταινιών ή παραστάσεων ακυρώνονται ή αναβάλλονται από υπαιτιότητα τ ου\nδιανομέα τους ή από υπαιτιότητα τρίτων.",
+      "id": "r102",
+      "chunk_id": "d8c10bc6df61d58c1b47d49d5107d35f95bfbc0ab79fd60a044ba4904bcb4a3c"
+    },
+    {
+      "source": "electronic_purchase",
+      "target": "internet_access",
+      "statement": "Η αγορά εισιτηρίων μέσω ηλεκτρονικών σελίδων προϋποθέτει πρόσβαση των ενδιαφερομένων στο διαδίκτυο με δικά τους τεχνικά μέσα.",
+      "polarity": "positive",
+      "quote": "8.4 Η αγορά εισιτηρίων μέσω ηλεκτρονικών σελίδων προϋποθέτει πρόσβαση των\nενδιαφερομένων στο διαδίκτυο με δικά τους τεχνικά μέσα. Η Εταιρεία δεν",
+      "id": "r103",
+      "chunk_id": "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+    },
+    {
+      "source": "ote",
+      "target": "internet_access",
+      "statement": "Η Εταιρεία δεν αναλαμβάνει καμία υποχρέωση αναφορικά με την εξασφάλιση, την υποβοήθηση της πρόσβασης σε χώρους διαδικτύου ή την παροχή διευκολύνσεων σε κάθε ενδιαφερόμενο.",
+      "polarity": "negative",
+      "quote": "ενδιαφερομένων στο διαδίκτυο με δικά τους τεχνικά μέσα. Η Εταιρεία δεν\nαναλαμβάνει καμία υποχρέωση αναφορικά με την εξασφάλιση, την υποβοήθηση\nτης πρόσβασης σε χώρους διαδικτύου ή την παροχή διευκολύνσεων σε κάθε\nενδιαφερόμενο. Η πρόσβαση σε δικτυακούς τόπους για την αγορά εισιτηρίων ή",
+      "id": "r104",
+      "chunk_id": "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+    },
+    {
+      "source": "ticket",
+      "target": "internet_access",
+      "statement": "Η πρόσβαση σε δικτυακούς τόπους για την αγορά εισιτηρίων ή προϊόντων, επιτρέπεται μόνο υπό τους όρους λειτουργίας του οικείου διακομιστή (server) και τις τεχνικές και λοιπές προϋποθέσεις και προδιαγραφές αυτού.",
+      "polarity": "conditional",
+      "quote": "ενδιαφερόμενο. Η πρόσβαση σε δικτυακούς τόπους για την αγορά εισιτηρίων ή\nπροϊόντων, επιτρέπεται μόνο υπό τους όρους λειτουργίας του οικείου διακομιστή\n(server) και τις τεχνικές και λοιπές προϋποθέσεις και προδιαγραφές αυτού.",
+      "id": "r105",
+      "chunk_id": "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "Η Εταιρεία και οι συμμετέχουσες τρίτες εταιρείες δεν ευθύνονται για οποιαδήποτε επιβάρυνση των Πελατών εκ της άνω αιτίας.",
+      "polarity": "negative",
+      "quote": "Περαιτέρω, η Εταιρεία και οι συμμετέχουσες τρίτες εταιρείες δεν ευθύνονται για\nοποιαδήποτε επιβάρυνση των Πελατών  εκ της άνω αιτίας.",
+      "id": "r106",
+      "chunk_id": "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+    },
+    {
+      "source": "partner",
+      "target": "damage_liability",
+      "statement": "Η Εταιρεία και οι συμμετέχουσες τρίτες εταιρείες δεν ευθύνονται για οποιαδήποτε επιβάρυνση των Πελατών εκ της άνω αιτίας.",
+      "polarity": "negative",
+      "quote": "Περαιτέρω, η Εταιρεία και οι συμμετέχουσες τρίτες εταιρείες δεν ευθύνονται για\nοποιαδήποτε επιβάρυνση των Πελατών  εκ της άνω αιτίας.",
+      "id": "r107",
+      "chunk_id": "6863e06b95c512e077dc1e1a2f9717a1199d6028815486f0fd4308a9a71ab3ec"
+    },
+    {
+      "source": "ote",
+      "target": "coupon",
+      "statement": "The Company's responsibility is limited exclusively and solely to the issuance of Codes (Κωδικών).",
+      "polarity": "positive",
+      "quote": "8.5 Η ευθύνη της Εταιρείας περιορίζεται αποκλειστικά και μόνο στην έκδοση των\nΚωδικών. Διευκρινίζεται ότι η Εταιρεία και οι συμμετέχουσες τρίτες",
+      "id": "r108",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "ote",
+      "target": "damage_liability",
+      "statement": "The Company bears no responsibility (δεν φέρουν καμία ευθύνη) and Customers do not retain any claim, demand or right against the Company in case force majeure events such as weather conditions or abnormal operation of information systems of third parties participating in the Program prevent any of the above Program services.",
+      "polarity": "negative",
+      "quote": "8.5 Η ευθύνη της Εταιρείας περιορίζεται αποκλειστικά και μόνο στην έκδοση των\nΚωδικών. Διευκρινίζεται ότι η Εταιρεία και οι συμμετέχουσες τρίτες\nεταιρείες/φορείς δεν φέρουν καμία ευθύνη και οι Πελάτες δεν διατηρούν καμία\nαπαίτηση, αξίωση ή δικαίωμα κατά αυτών σε περίπτωση που λόγω ανωτέρας\nβίας, όπως ενδεικτικά αναφερόμενων καιρικών συνθηκών, μη κανονική\nλειτουργία των πληροφοριακών συστημάτων των τρίτων εταιρειών που\nσυμμετέχουν στο Πρόγραμμα δεν είναι δυνατή κάποια από τις παραπάνω\nπαροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την",
+      "id": "r109",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "partner",
+      "target": "damage_liability",
+      "statement": "The participating third parties/entities (συμμετέχουσες τρίτες εταιρείες/φορείς) bear no responsibility (δεν φέρουν καμία ευθύνη) and Customers do not retain any claim, demand or right against them in case force majeure events such as weather conditions or abnormal operation of information systems of third parties participating in the Program prevent any of the above Program services.",
+      "polarity": "negative",
+      "quote": "Κωδικών. Διευκρινίζεται ότι η Εταιρεία και οι συμμετέχουσες τρίτες\nεταιρείες/φορείς δεν φέρουν καμία ευθύνη και οι Πελάτες δεν διατηρούν καμία\nαπαίτηση, αξίωση ή δικαίωμα κατά αυτών σε περίπτωση που λόγω ανωτέρας\nβίας, όπως ενδεικτικά αναφερόμενων καιρικών συνθηκών, μη κανονική\nλειτουργία των πληροφοριακών συστημάτων των τρίτων εταιρειών που\nσυμμετέχουν στο Πρόγραμμα δεν είναι δυνατή κάποια από τις παραπάνω\nπαροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την",
+      "id": "r110",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "customer",
+      "target": "damage_liability",
+      "statement": "Customers do not retain any claim, demand or right (δεν διατηρούν καμία απαίτηση, αξίωση ή δικαίωμα) against the Company and third parties in case force majeure events such as weather conditions or abnormal operation of information systems prevent Program services.",
+      "polarity": "negative",
+      "quote": "εταιρείες/φορείς δεν φέρουν καμία ευθύνη και οι Πελάτες δεν διατηρούν καμία\nαπαίτηση, αξίωση ή δικαίωμα κατά αυτών σε περίπτωση που λόγω ανωτέρας\nβίας, όπως ενδεικτικά αναφερόμενων καιρικών συνθηκών, μη κανονική\nλειτουργία των πληροφοριακών συστημάτων των τρίτων εταιρειών που\nσυμμετέχουν στο Πρόγραμμα δεν είναι δυνατή κάποια από τις παραπάνω\nπαροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την",
+      "id": "r111",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "ote",
+      "target": "performance",
+      "statement": "The Company bears no responsibility (δεν φέρει καμία ευθύνη) for cancellation of performances (ακύρωσης παραστάσεων).",
+      "polarity": "negative",
+      "quote": "παροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την\nπερίπτωση ακύρωσης παραστάσεων ή προβολών καθώς και για τη μετάβαση των",
+      "id": "r112",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "ote",
+      "target": "film_screening",
+      "statement": "The Company bears no responsibility (δεν φέρει καμία ευθύνη) for cancellation of screenings (προβολών).",
+      "polarity": "negative",
+      "quote": "παροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την\nπερίπτωση ακύρωσης παραστάσεων ή προβολών καθώς και για τη μετάβαση των",
+      "id": "r113",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    },
+    {
+      "source": "ote",
+      "target": "customer",
+      "statement": "The Company bears no responsibility (δεν φέρει καμία ευθύνη) for the travel of Customers (τη μετάβαση των Πελατών) to the premises of third parties participating in the Program.",
+      "polarity": "negative",
+      "quote": "παροχές του Προγράμματος. Η Εταιρεία δεν φέρει καμία ευθύνη για την\nπερίπτωση ακύρωσης παραστάσεων ή προβολών καθώς και για τη μετάβαση των\nΠελατών στους χώρους των τρίτων εταιρειών που συμμετέχουν στο Πρόγραμμα.",
+      "id": "r114",
+      "chunk_id": "4fb4463bdb75f76d0bed4401182b37e8aafc98b70a75ce5c63d34a647f9e9b18"
+    }
+  ],
+  "ambiguous_aliases": {
+    "εισιτηρίων": [
+      "ticket",
+      "ticket_availability"
+    ]
+  },
+  "indexing_observations": [
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 8.428228124976158,
+          "usage": {
+            "input_tokens": 1787,
+            "output_tokens": 907,
+            "total_tokens": 2694,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 12.139345917035826,
+          "usage": {
+            "input_tokens": 2509,
+            "output_tokens": 1511,
+            "total_tokens": 4020,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 5.264963041990995,
+          "usage": {
+            "input_tokens": 2538,
+            "output_tokens": 581,
+            "total_tokens": 3119,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 3.900704792002216,
+          "usage": {
+            "input_tokens": 2410,
+            "output_tokens": 452,
+            "total_tokens": 2862,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 5.108216499909759,
+          "usage": {
+            "input_tokens": 2443,
+            "output_tokens": 631,
+            "total_tokens": 3074,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 10.97540629201103,
+          "usage": {
+            "input_tokens": 2651,
+            "output_tokens": 1275,
+            "total_tokens": 3926,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 7.31646233308129,
+          "usage": {
+            "input_tokens": 3068,
+            "output_tokens": 818,
+            "total_tokens": 3886,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 15.384789792005904,
+          "usage": {
+            "input_tokens": 3350,
+            "output_tokens": 1947,
+            "total_tokens": 5297,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 5.945431041996926,
+          "usage": {
+            "input_tokens": 3383,
+            "output_tokens": 651,
+            "total_tokens": 4034,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 12.653568084002472,
+          "usage": {
+            "input_tokens": 4082,
+            "output_tokens": 1396,
+            "total_tokens": 5478,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 8.629679125035182,
+          "usage": {
+            "input_tokens": 4125,
+            "output_tokens": 979,
+            "total_tokens": 5104,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 8.61665412504226,
+          "usage": {
+            "input_tokens": 3904,
+            "output_tokens": 1018,
+            "total_tokens": 4922,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 7.288089249981567,
+          "usage": {
+            "input_tokens": 3979,
+            "output_tokens": 777,
+            "total_tokens": 4756,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 5.874661916983314,
+          "usage": {
+            "input_tokens": 3900,
+            "output_tokens": 704,
+            "total_tokens": 4604,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 2.8611294159200042,
+          "usage": {
+            "input_tokens": 3935,
+            "output_tokens": 272,
+            "total_tokens": 4207,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 3.520026749931276,
+          "usage": {
+            "input_tokens": 4093,
+            "output_tokens": 320,
+            "total_tokens": 4413,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 8.136997209046967,
+          "usage": {
+            "input_tokens": 4317,
+            "output_tokens": 931,
+            "total_tokens": 5248,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 7.197862375061959,
+          "usage": {
+            "input_tokens": 4216,
+            "output_tokens": 753,
+            "total_tokens": 4969,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 4.7481505000032485,
+          "usage": {
+            "input_tokens": 4115,
+            "output_tokens": 463,
+            "total_tokens": 4578,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 14.0397500830004,
+          "usage": {
+            "input_tokens": 4618,
+            "output_tokens": 1565,
+            "total_tokens": 6183,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 2.533816042006947,
+          "usage": {
+            "input_tokens": 4429,
+            "output_tokens": 242,
+            "total_tokens": 4671,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 3.2373781660571694,
+          "usage": {
+            "input_tokens": 4468,
+            "output_tokens": 312,
+            "total_tokens": 4780,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 4.909587415982969,
+          "usage": {
+            "input_tokens": 4570,
+            "output_tokens": 546,
+            "total_tokens": 5116,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 3.47526562504936,
+          "usage": {
+            "input_tokens": 4698,
+            "output_tokens": 342,
+            "total_tokens": 5040,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 14.01862429198809,
+          "usage": {
+            "input_tokens": 4997,
+            "output_tokens": 1603,
+            "total_tokens": 6600,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 15.819987958995625,
+          "usage": {
+            "input_tokens": 5260,
+            "output_tokens": 1873,
+            "total_tokens": 7133,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 5.886839332990348,
+          "usage": {
+            "input_tokens": 5051,
+            "output_tokens": 605,
+            "total_tokens": 5656,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 9.593421041034162,
+          "usage": {
+            "input_tokens": 5179,
+            "output_tokens": 1159,
+            "total_tokens": 6338,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 12.559285208000802,
+          "usage": {
+            "input_tokens": 5616,
+            "output_tokens": 1422,
+            "total_tokens": 7038,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "attempts": [
+        {
+          "elapsed_seconds": 13.77285191603005,
+          "usage": {
+            "input_tokens": 5815,
+            "output_tokens": 1626,
+            "total_tokens": 7441,
+            "input_token_details": {
+              "cache_read": 0,
+              "cache_creation": 0,
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "extraction_schema_id": "70954e08a691d59bd8f42acb834bbbf184c520d2bf8791ea5319e79765ca7c51"
+}
