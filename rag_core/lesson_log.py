@@ -33,6 +33,34 @@ def passage_table(documents, origins=None):
     return table
 
 
+def preview(document):
+    """The passage text, without a repeated section heading when the clause follows it."""
+    lines = document.page_content.splitlines()
+    clause = document.metadata.get("clause", "")
+    if clause and len(lines) > 1 and lines[1].lstrip().startswith(clause):
+        lines = lines[1:]
+    return plain(" ".join(" ".join(lines).split()), 80)
+
+
+def print_passages(console, title, documents, score_name, scores, previous=None):
+    """Print one passage per row: rank, page, clause, score and the start of the text."""
+    table = Table(title=title, title_justify="left", header_style="bold cyan", box=None)
+    columns = ("#", "was #") if previous else ("#",)
+    for column in (*columns, "page", "§", score_name, "text"):
+        table.add_column(column, overflow="fold")
+    for rank, (document, value) in enumerate(zip(documents, scores, strict=True), 1):
+        tags = document.metadata
+        table.add_row(
+            str(rank),
+            *([str(previous[rank - 1])] if previous else []),
+            str(tags["page_start"]),
+            plain(tags.get("clause", "")),
+            f"{value:.4f}",
+            preview(document),
+        )
+    console.print(table)
+
+
 class LessonLog:
     def __init__(self, renderer=None, console=None):
         self.renderer = renderer

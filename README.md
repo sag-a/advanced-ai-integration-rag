@@ -15,10 +15,11 @@ retrievers, one CLI, one Streamlit page and comparable evaluation reports.
 │   ├── c04_graph_rag/         # lesson.html + instructor_notes/
 │   └── c05_agentic_rag/       # lesson.html + instructor_notes/
 ├── rag_core/              # everything shared: corpus, store, model, answers, LangGraph turn
-├── architectures/         # one package per retriever: classic_rag, graph_rag, agentic_rag
+├── architectures/         # one package per retriever: classic (+ optional reranker), graph, agentic, hybrid, jev
 ├── app/                   # CLI (./rag) and Streamlit UI, generic over the registry
 ├── evals/                 # Ragas evaluation: cases.jsonl, run.py, reports/
 ├── data/corpus/           # the Magenta Moments PDF
+├── data/corpus-tariffs/   # harder corpus: COSMOTE 2019 price list (see data/README.md)
 ├── docs/                  # prompt-template lesson
 ├── tests/                 # core/ and architectures/ suites
 ├── compose.chroma.yaml    # Chroma for the RAG architectures (loopback :8004)

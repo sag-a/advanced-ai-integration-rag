@@ -1,7 +1,6 @@
 > **Historical record, kept for instructor reference.** Measured on 19–20 October 2026
 > with the retired `base_rag_architecture` package, before the migration to `rag_core` and
-> `./rag`, and on an earlier PDF (SHA-256 `a2e492…`; the current `data/corpus` file is
-> `b1ee7f…`). Commands and paths below no longer run. Use `./rag` and
+> `./rag`, on the same PDF that is in `data/corpus` (SHA-256 `a2e492…`). Commands and paths below no longer run. Use `./rag` and
 > `python -m evals.run` instead. The observations, failures and teaching examples still apply.
 
 # Observe and evaluate the RAG with Langfuse Cloud

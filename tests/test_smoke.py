@@ -25,5 +25,5 @@ def test_packages_import(package):
 
 def test_example_contains_only_empty_credentials():
     values = dotenv_values(Path(__file__).parents[1] / ".env.example")
-    assert set(values) == {"ANTHROPIC_API_KEY"}
+    assert set(values) == {"ANTHROPIC_API_KEY", "OPENROUTER_API_KEY"}
     assert all(value == "" for value in values.values())

@@ -30,7 +30,7 @@ whiteboard prompt.
 | 13:00–13:50 | 4. Graph RAG | [c04 lesson](modules/c04_graph_rag/lesson.html) |
 | 13:50–14:05 | Break | |
 | 14:05–14:55 | 5. Agentic RAG | [c05 lesson](modules/c05_agentic_rag/lesson.html) |
-| 14:55–15:30 | Comparison and evaluation: same question, three architectures | `#compare` section of any lesson page |
+| 14:55–15:30 | Comparison and evaluation; optionally dense vs hybrid on the tariffs corpus | `#compare` section of any lesson page |
 
 Present lessons 3–5 with **P** (one section per screen, ← → to move, Esc to exit).
 
@@ -157,6 +157,63 @@ Failing closed is cheaper than a confident partial answer.
   simple questions Base RAG is the better tool; say so.
 - Abstentions lower faithfulness and citation-support scores. Explain why using
   [MEASUREMENTS.md](modules/c05_agentic_rag/instructor_notes/MEASUREMENTS.md).
+
+## Optional: a gate before the LLM with Jev (15 min)
+
+**Must land:** a small decision model can decide *whether* to answer before the
+expensive model runs. Abstaining early saves a call and avoids answering from the
+wrong passages, but every false refusal is a lost correct answer.
+
+**Demo:** with `--process`, ask Jev RAG "What is my current Hearts balance?" The
+gate prints P = 0.07 and `generate_answer` makes no model call. Then ask "Πότε
+λήγουν οι Καρδιές;": P = 0.99, and Claude answers.
+
+**Whiteboard:** *“Our first gate asked whether the passages contain the information
+needed. It refused three answerable questions. Why, and what fixed it?”* All three
+needed several clauses, and the top 6 held only some of them. Asking whether the
+passages answer the question "at least in part" kept every answerable question
+while still blocking the three unanswerable ones (see `evals/README.md`).
+
+**Trap:** students assume a stricter gate is safer. It's only safer against one
+kind of error.
+
+**Extension: Jev as supervisor.** Add `--option route=true`. Jev now picks the
+document before any search: ask a Magenta question, a tariffs question and "What's
+the weather in Athens tomorrow?" and point at the `Jev router:` line for each. Ask
+why "What is my Hearts balance?" routes to Magenta instead of "neither": the router
+judges the topic, the gate judges whether the answer is there. Two small decisions
+with one job each are easier to test than one decision doing both.
+
+## Optional: dense vs hybrid on a harder corpus (20 min)
+
+**Must land:** keyword search helps when many passages look alike and the
+question names an exact number, and it fails on spelling and extraction noise.
+Neither method wins everywhere.
+
+**Setup (before class):** `./rag prepare --corpus data/corpus-tariffs --collection cosmote_tariffs_v1`.
+The corpus is OTE's 2019 residential price list; say that the prices are historical.
+
+**Demo:** run the two `./rag search` commands in [SETUP.md](SETUP.md) for "Double
+Play 24 XL 500 free minutes". Seven programs are called "Double Play 24 XL", and only
+§4 (page 5) has 500 free minutes. Classic's top 3 are all other 24 XL plans (150 and
+360 minutes); Hybrid ranks §4 second because the keyword "500" matches. Both still
+rank §48 first, so point out that hybrid improved the list, not the top hit. Then run
+the tariffs evaluation at `--top-k 3` and `--top-k 6` for both architectures (commands
+in [evals/README.md](evals/README.md#harder-corpus-tariffs)).
+
+**Whiteboard:** *“Hybrid scores 0.73 at k=3 but 0.82 at k=6, while dense goes from
+0.56 to 0.92. Why does hybrid gain less from depth?”* Fusion fills the extra slots
+with keyword matches from other plans that share the same boilerplate, so more
+depth adds distractors as well as the right passage.
+
+**Extension:** add `--option rerank=true` to Classic RAG. On this corpus the
+reranker reaches 0.897 recall at k=3, beating both plain dense (0.564) and hybrid
+(0.731), and the terminal prints the passages before and after reranking. Download
+the weights before class (`SETUP.md`, step 3).
+
+**Trap:** the Bulgaria case. The PDF text reads "Bulgar ia" in the program asked
+about, so keyword search confidently picks other programs. Inspect the extracted
+text before trusting either method.
 
 ## Closing: compare and evaluate
 

@@ -159,14 +159,35 @@ def evaluate_architecture(name, settings, cases, retrieval_only, progress=print)
     return rows
 
 
+def options(items):
+    """KEY=VALUE pairs; values are read as JSON when possible (true, 20, "text")."""
+    extras = {}
+    for item in items:
+        key, separator, value = item.partition("=")
+        if not separator or not key:
+            raise AppError("Use --option KEY=VALUE.")
+        try:
+            extras[key] = json.loads(value)
+        except ValueError:
+            extras[key] = value
+    return extras
+
+
 def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--architecture", default="all", help="all, or one registered architecture")
     p.add_argument(
         "--retrieval-only", action="store_true", help="ID-based retrieval scores, no model calls"
     )
+    p.add_argument("--cases", type=Path, default=CASES, help="JSONL file of cases")
     p.add_argument("--case", action="append", default=[], help="Run only this case ID (repeatable)")
+    p.add_argument("--corpus", type=Path, default=Settings().corpus)
+    p.add_argument("--collection", default=Settings().collection)
     p.add_argument("--top-k", type=int, default=Settings().top_k)
+    p.add_argument(
+        "--option", action="append", default=[], metavar="KEY=VALUE",
+        help="Architecture option, as for ./rag, e.g. rerank=true (repeatable)",
+    )
     p.add_argument("--output", type=Path, help="CSV path (default: evals/reports/<time>.csv)")
     return p
 
@@ -176,10 +197,16 @@ def main(argv=None):
 
     args = parser().parse_args(argv)
     try:
-        cases = load_cases(ids=args.case)
+        cases = load_cases(args.cases, ids=args.case)
         load_all()
         names = list(REGISTRY) if args.architecture == "all" else [get(args.architecture).name]
-        settings = Settings(top_k=args.top_k, temperature=0)
+        settings = Settings(
+            corpus=args.corpus,
+            collection=args.collection,
+            top_k=args.top_k,
+            temperature=0,
+            extras=options(args.option),
+        )
         rows = [
             row
             for name in names

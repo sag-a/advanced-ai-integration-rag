@@ -56,10 +56,11 @@ git clone git@github.com:sag-a/advanced-ai-integration-rag.git
 cd advanced-ai-integration-rag
 uv sync --all-extras                             # creates .venv with every dependency
 uv run python -m rag_core.embeddings --download  # Nomic v2 MoE weights, about 2 GB, once
+uv run --all-extras python -m rag_core.reranker --download  # reranker for --option rerank=true and jev_rag, about 2.3 GB
 cp .env.example .env                             # PowerShell: Copy-Item .env.example .env
 ```
 
-Put your key in `.env` as `ANTHROPIC_API_KEY=...`.
+Put your key in `.env` as `ANTHROPIC_API_KEY=...`. Jev RAG also needs `OPENROUTER_API_KEY=...`.
 Never commit `.env`; only `.env.example` with empty values is tracked.
 
 Every lesson uses the same pinned Nomic model, so the single download covers all of
@@ -121,6 +122,8 @@ Classic (base) RAG:
 ```bash
 ./rag ask "Πότε λήγουν οι Καρδιές;"
 ./rag ask --process "Πότε λήγουν οι Καρδιές;"      # show each node and model call
+./rag search --option rerank=true "Πότε λήγουν οι Καρδιές;"   # print passages before and after reranking
+./rag ask --option rerank=true --option rerank_candidates=12 "Πότε λήγουν οι Καρδιές;"
 ./rag ask --option answer_style=detailed "Πότε λήγουν οι Καρδιές;"
 ```
 
@@ -138,6 +141,34 @@ Agentic RAG:
 ```bash
 ./rag ask --process --architecture agentic_rag "Πότε λήγουν οι Καρδιές;"
 ./rag chat --architecture agentic_rag --option max_searches=3
+```
+
+Hybrid RAG (dense + keywords) on the harder tariffs corpus, prepared once (about 25 s):
+
+```bash
+./rag prepare --corpus data/corpus-tariffs --collection cosmote_tariffs_v1
+./rag search  --corpus data/corpus-tariffs --collection cosmote_tariffs_v1 --architecture classic_rag "Double Play 24 XL 500 free minutes"
+./rag search  --corpus data/corpus-tariffs --collection cosmote_tariffs_v1 --architecture hybrid_rag  "Double Play 24 XL 500 free minutes"
+```
+
+Jev RAG: rerank, then a Jev gate that abstains before the answer model when the
+passages don't contain the answer (needs `OPENROUTER_API_KEY`; about $0.0001 per question):
+
+```bash
+./rag ask --process --architecture jev_rag "What is my current Hearts balance?"   # gate abstains, no Claude call
+./rag ask --process --architecture jev_rag "Πότε λήγουν οι Καρδιές;"              # gate passes, Claude answers
+./rag ask --architecture jev_rag --option reranker=jev --option gate_threshold=0.6 "…"
+```
+
+Add `--option route=true` and Jev first acts as a supervisor: it picks the Magenta
+Moments collection, the tariffs collection, or "neither" (abstain at once). Both
+collections must be prepared:
+
+```bash
+./rag ask --process --architecture jev_rag --option route=true "Πότε λήγουν οι Καρδιές;"                 # → magenta
+./rag ask --process --architecture jev_rag --option route=true "Which Double Play 24 XL has 500 minutes?" # → tariffs
+./rag ask --process --architecture jev_rag --option route=true "What's the weather in Athens tomorrow?"   # → neither
+./rag ui --architecture jev_rag --option route=true
 ```
 
 Terminal conversation:

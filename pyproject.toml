@@ -28,6 +28,7 @@ dependencies = [
 [project.optional-dependencies]
 graph = ["graphviz>=0.19,<1", "networkx>=3,<4", "python-louvain==0.16"]
 agentic = ["deepagents==0.7.19"]
+hybrid = ["scikit-learn>=1.5,<2"]
 # Modules c01-c02: chunking comparison, TF-IDF baseline and plots; pgvector demo.
 chapters = ["scikit-learn>=1.5,<2", "langchain-text-splitters>=1,<2", "matplotlib>=3.8,<4"]
 pgvector = ["psycopg[binary]>=3.2,<4", "pgvector>=0.4,<1"]

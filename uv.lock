@@ -1508,6 +1508,9 @@ graph = [
     { name = "networkx" },
     { name = "python-louvain" },
 ]
+hybrid = [
+    { name = "scikit-learn" },
+]
 pgvector = [
     { name = "pgvector" },
     { name = "psycopg", extra = ["binary"] },
@@ -1543,12 +1546,13 @@ requires-dist = [
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.14,<1" },
     { name = "safetensors", specifier = "==0.8.0" },
     { name = "scikit-learn", marker = "extra == 'chapters'", specifier = ">=1.5,<2" },
+    { name = "scikit-learn", marker = "extra == 'hybrid'", specifier = ">=1.5,<2" },
     { name = "streamlit", specifier = "==1.65.0" },
     { name = "torch", marker = "sys_platform != 'darwin'", specifier = "==2.14.1", index = "https://download.pytorch.org/whl/cpu" },
     { name = "torch", marker = "sys_platform == 'darwin'", specifier = "==2.14.1" },
     { name = "transformers", specifier = "==5.19.0" },
 ]
-provides-extras = ["graph", "agentic", "chapters", "pgvector", "dev", "eval"]
+provides-extras = ["graph", "agentic", "hybrid", "chapters", "pgvector", "dev", "eval"]
 
 [[package]]
 name = "markdown-it-py"

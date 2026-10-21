@@ -61,6 +61,8 @@ ARCHITECTURE_OPTIONS = {
     "max_model_calls",
     "max_tool_calls",
     "deadline_seconds",
+    "rerank",  # classic_rag validates the values itself
+    "rerank_candidates",
 }
 ENTITY_TYPES = (
     "program",
