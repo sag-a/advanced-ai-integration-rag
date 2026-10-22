@@ -54,3 +54,26 @@ def test_provider_error_does_not_expose_provider_message():
     with pytest.raises(AppError, match="Anthropic request failed") as error:
         chat.call(Answer, "system", {})
     assert "private connection" not in str(error.value)
+
+
+
+def test_temperature_is_sent_only_to_models_that_still_accept_it(monkeypatch):
+    from dataclasses import replace
+    from rag_core.model import accepts_temperature
+
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    assert accepts_temperature("claude-haiku-4-5-20251001")
+    assert not accepts_temperature("claude-haiku-5-5")
+    assert not accepts_temperature("claude-opus-4-7")
+    assert AnthropicChat(replace(Settings(), temperature=0)).model.temperature == 0
+    current = AnthropicChat(replace(Settings(), model="claude-haiku-5-5", temperature=0))
+    assert current.model.temperature is None
+
+
+def test_graph_contract_records_the_temperature_actually_sent():
+    from dataclasses import replace
+    from architectures.graph_rag.index import contract
+    from tests.architectures.test_graph_rag import documents
+
+    assert contract(documents(), Settings())["temperature"] == 0
+    assert contract(documents(), replace(Settings(), model="claude-haiku-5-5"))["temperature"] is None

@@ -1,4 +1,4 @@
-# Advanced AI Integration & RAG — Unit 2, Part 2: ChromaDB
+# Lesson 2, part 2: ChromaDB
 
 Configure a collection's embedding function, add text documents, perform similarity
 and metadata-filtered searches, then update and delete a temporary record.
@@ -18,7 +18,7 @@ docker compose -f modules/c02_vector_databases/compose.chroma.yaml up -d --wait
 The service uses the pinned image `chromadb/chroma:1.5.9`, binds only to
 **127.0.0.1:8002**, and persists data in its own named volume,
 `advanced-rag-chroma_chroma_data`, mounted at `/data`. It runs separately from
-the pgvector demo and the other course's Chroma data. This is a local teaching
+the pgvector demo and from the RAG architectures' Chroma on port 8004. This is a local teaching
 service without authentication; keep its loopback binding.
 
 Install everything from the repository root:

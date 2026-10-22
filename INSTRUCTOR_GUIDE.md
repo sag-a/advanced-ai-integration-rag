@@ -13,7 +13,7 @@ whiteboard prompt.
 
 | Format | Duration | Structure |
 | --- | --- | --- |
-| One day | about 6 h | Five 50-minute lessons, breaks, and a closing comparison |
+| One day | about 7 h | Five lessons, one optional segment, breaks, and a closing comparison |
 | Two half-days | 2 × 3 h | Day 1: lessons 1–3. Day 2: lessons 4–5 and evaluation |
 | Weekly | 5 × 1.5 h | One lesson per week, with the demo questions as homework |
 
@@ -24,13 +24,14 @@ whiteboard prompt.
 | 09:00–09:20 | Setup check: `uv run --all-extras pytest -q`, Docker running | [SETUP.md](SETUP.md) |
 | 09:20–10:10 | 1. Embeddings, chunking, semantic search | [c01 README](modules/c01_embeddings/README.md) |
 | 10:10–10:25 | Break | |
-| 10:25–11:15 | 2. Vector databases: pgvector and Chroma | [c02 study guide](modules/c02_vector_databases/study_guide.html) |
-| 11:15–12:05 | 3. Classic (base) RAG | [c03 lesson](modules/c03_classic_rag/lesson.html) |
-| 12:05–13:00 | Lunch | |
-| 13:00–13:50 | 4. Graph RAG | [c04 lesson](modules/c04_graph_rag/lesson.html) |
-| 13:50–14:05 | Break | |
-| 14:05–14:55 | 5. Agentic RAG | [c05 lesson](modules/c05_agentic_rag/lesson.html) |
-| 14:55–15:30 | Comparison and evaluation; optionally dense vs hybrid on the tariffs corpus | `#compare` section of any lesson page |
+| 10:25–11:25 | 2. Vector databases: pgvector and Chroma (60 min, as planned in the study guide) | [c02 study guide](modules/c02_vector_databases/study_guide.html) |
+| 11:25–12:15 | 3. Classic (base) RAG | [c03 lesson](modules/c03_classic_rag/lesson.html) |
+| 12:15–13:10 | Lunch | |
+| 13:10–14:00 | 4. Graph RAG | [c04 lesson](modules/c04_graph_rag/lesson.html) |
+| 14:00–14:15 | Break | |
+| 14:15–15:05 | 5. Agentic RAG | [c05 lesson](modules/c05_agentic_rag/lesson.html) |
+| 15:05–15:25 | Optional, pick one: Jev gate and router, or dense vs hybrid on the tariffs corpus | Sections below |
+| 15:25–16:00 | Comparison and evaluation | `#compare` section of any lesson page |
 
 Present lessons 3–5 with **P** (one section per screen, ← → to move, Esc to exit).
 
@@ -215,10 +216,28 @@ the weights before class (`SETUP.md`, step 3).
 about, so keyword search confidently picks other programs. Inspect the extracted
 text before trusting either method.
 
+## Labs
+
+Five labs in [`exercises/`](exercises/README.md) fit the two-half-day or weekly formats,
+or work as homework after a one-day course. Each takes 30–45 minutes, is graded by
+offline tests (`uv run --all-extras pytest exercises/<lab>`), and ends with a measure
+step that compares the student's code with the course's numbers.
+
+| Lab | Pairs with | The lesson it lands |
+| --- | --- | --- |
+| 1. BM25 + hybrid | Lesson 2 | Keywords fix look-alike passages, but Greek inflection breaks BM25 |
+| 2. Query decomposition | Lesson 3 | A textbook technique that doesn't pay off here; measure before adopting |
+| 3. Citation validator | Lesson 3 | Membership is not support; numbers are cheap to check |
+| 4. Gate calibration | Jev segment | Tune on dev, report on held-out |
+| 5. Semantic cache | Lesson 3 | Near-misses look more similar than paraphrases |
+
+Grading: the tests are pass/fail. For a graded course, weight the discussion questions at
+the end of each README; they ask students to interpret their measurements.
+
 ## Closing: compare and evaluate
 
-Ask one question with all three architectures and put the passage lists side by
-side. Then run:
+Ask one question with Classic, Graph and Agentic RAG (add Hybrid or Jev if you ran an
+optional segment) and put the passage lists side by side. Then run:
 
 ```bash
 uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-only

@@ -50,8 +50,9 @@ uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-o
 
 The command prints the mean of each score per architecture and writes one row per
 case to `evals/reports/<date>_<time>.csv` (or `--output PATH`). It exits with 1 if
-any case failed. Retrieval-only mode skips the two follow-up cases and Agentic RAG,
-because both need the model.
+any case failed. Retrieval-only mode skips the two follow-up cases, Agentic RAG and
+Jev RAG, because they need a paid model call. `--architecture all` stops if Jev RAG's
+OpenRouter key or the reranker weights are missing; run the others one at a time.
 
 ## What is scored
 

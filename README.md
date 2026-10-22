@@ -1,8 +1,9 @@
 # Advanced RAG course
 
 Teaching code for advanced retrieval-augmented generation: embeddings and vector
-databases first, then one shared RAG core with Classic, Graph and Agentic
-retrievers, one CLI, one Streamlit page and comparable evaluation reports.
+databases first, then one shared RAG core with five retrievers (Classic with an
+optional reranker, Hybrid, Graph, Agentic and Jev), one CLI, one Streamlit page and
+comparable Ragas evaluation reports.
 
 ## Layout
 
@@ -18,6 +19,7 @@ retrievers, one CLI, one Streamlit page and comparable evaluation reports.
 ├── architectures/         # one package per retriever: classic (+ optional reranker), graph, agentic, hybrid, jev
 ├── app/                   # CLI (./rag) and Streamlit UI, generic over the registry
 ├── evals/                 # Ragas evaluation: cases.jsonl, run.py, reports/
+├── exercises/             # five labs: starter, solution, tests, measure script
 ├── data/corpus/           # the Magenta Moments PDF
 ├── data/corpus-tariffs/   # harder corpus: COSMOTE 2019 price list (see data/README.md)
 ├── docs/                  # prompt-template lesson
@@ -37,6 +39,8 @@ Dependencies only point inward: `app`/`evals` → `architectures` → `rag_core`
 | 3. Classic (base) RAG | [lesson.html](modules/c03_classic_rag/lesson.html) | [README](modules/c03_classic_rag/README.md), [instructor notes](modules/c03_classic_rag/instructor_notes/) |
 | 4. Graph RAG | [lesson.html](modules/c04_graph_rag/lesson.html) | [README](modules/c04_graph_rag/README.md), [instructor notes](modules/c04_graph_rag/instructor_notes/) |
 | 5. Agentic RAG | [lesson.html](modules/c05_agentic_rag/lesson.html) | [README](modules/c05_agentic_rag/README.md), [instructor notes](modules/c05_agentic_rag/instructor_notes/) |
+
+Five hands-on labs follow the lessons: see [exercises/README.md](exercises/README.md).
 
 Open the HTML pages in a browser. Press **P** to present one section per screen.
 Instructors: start with [INSTRUCTOR_GUIDE.md](INSTRUCTOR_GUIDE.md).
@@ -80,8 +84,20 @@ explicit model-preparation command; ordinary questions never download weights.
 uv run python -m rag_core.embeddings --download
 ```
 
-This CPU implementation does not require MegaBlocks or an NVIDIA GPU. Nomic's
-optional MegaBlocks speed warning can be ignored on a Mac.
+This CPU implementation does not require MegaBlocks or an NVIDIA GPU; the course
+silences Nomic's optional MegaBlocks speed warning.
+
+### Models
+
+Answers use `claude-haiku-4-5-20251001` by default (`--model` to change). Anthropic
+now lists it as a legacy model: the current Haiku is `claude-haiku-5-5`, and Haiku
+4.5 has no retirement date yet. The course keeps 4.5 because the shipped Graph RAG
+index was extracted with it, and the extraction model is part of the index contract.
+
+Newer Claude models (4.7 and later) reject `temperature`, `top_p` and `top_k`. The
+course sends `temperature=0` (evaluations, graph extraction) only to models that
+still accept it, so `--model claude-haiku-5-5` works for answers; Graph RAG with
+another model needs its own index (`--option graph_index=PATH`).
 
 ## Run the course
 
@@ -139,7 +155,7 @@ prior messages (roughly three exchanges). No conversation database is used.
 Refresh, restart, New chat or switching architecture starts an empty history.
 The URL conversation ID identifies the chat; it cannot restore a saved conversation.
 Failed turns keep their draft out of history and require an explicit Retry click
-or CLI `/retry`. Previously saved SQLite files are left in place but are not read.
+or CLI `/retry`.
 
 Architecture options are owned by the plugin; for example:
 
@@ -152,7 +168,7 @@ Changed corpus or embedding/chunking settings need a new collection. Changed
 graph extraction model, prompt or schema needs a new graph index path. Answer
 prompt changes are recorded in report identity and do not re-embed PDFs.
 Existing prepared collections and completed graph indexes are never
-automatically replaced. The original project's port 8002 data is not used.
+automatically replaced.
 
 ## Prompt templates lesson
 
@@ -170,11 +186,12 @@ conditionals, loops, filters, identity compatibility and safety boundaries.
 ## Evaluation
 
 [Ragas](https://docs.ragas.io/) scores 21 Greek and English classroom cases on
-the Magenta Moments PDF. See [evals/README.md](evals/README.md) for the metrics.
+the Magenta Moments PDF and 14 on the COSMOTE tariffs list. See
+[evals/README.md](evals/README.md) for the metrics and measured results.
 
 ```bash
 uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-only   # free
-uv run --all-extras python -m evals.run --architecture all                            # uses Anthropic
+uv run --all-extras python -m evals.run --architecture all                            # Anthropic; Jev RAG also needs OpenRouter
 ```
 
 These are classroom examples, not a held-out benchmark. Report ties and

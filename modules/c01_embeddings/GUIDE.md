@@ -1,4 +1,4 @@
-# Unit 1: Embeddings — five demonstrations in teaching order
+# Lesson 1: Embeddings — five demonstrations in teaching order
 
 Use these local demonstrations in sequence. Participants predict a result,
 inspect the output, and explain what they observed; reading the Python
@@ -21,8 +21,11 @@ been replaced by the commands below.
 Run from the repository root:
 
 ```bash
-uv sync
+uv sync --all-extras
 ```
+
+Keep `--all-extras`: a plain `uv sync` removes the optional packages that the
+chunking demo and later lessons need.
 
 The embedding examples use local Nomic v2 MoE on CPU. Prepare the environment
 before class: M1, M4, and M5 may download model files on their first run.
@@ -34,8 +37,8 @@ The chunk-boundary comparison does not load an embedding model.
 V2 uses 768 dimensions, masked mean pooling and L2 normalization, with a
 512-token limit including task prefixes and special tokens. Oversized input
 raises an error instead of being silently truncated. No v1.5 layer normalization
-is applied. The local runtime uses Nomic's plain-PyTorch MoE path; its optional
-megablocks performance warning does not require installation for this CPU course.
+is applied. The local runtime uses Nomic's plain-PyTorch MoE path; MegaBlocks is an
+optional GPU speed-up, and the course silences its install suggestion.
 Weights and code take roughly 2 GB on disk. No provider API key is needed.
 
 Existing v1.5 vectors are incompatible even though their dimensions match.
@@ -155,9 +158,9 @@ passages even for an unsupported question; a high rank is not proof of relevance
 
 - `data.py`: shared sentences and support-document loading.
 - `display.py`: vector and similarity output formatting.
-- `local_embeddings.py`: the pinned Nomic encoder shared with Chapter 2.
+- `local_embeddings.py`: the pinned Nomic encoder shared with lesson 2.
 - `telecom_support.txt`: the fictional source document.
 - `__init__.py`: Python package marker.
 
-Continue with [Chapter 2: vector databases](../c02_vector_databases/README.md).
-Later `rag_pipelines` material will be designed separately.
+Continue with [lesson 2: vector databases](../c02_vector_databases/README.md).
+Lessons 3–5 turn retrieved passages into cited answers.

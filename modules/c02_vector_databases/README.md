@@ -1,4 +1,4 @@
-# Advanced AI Integration & RAG — Unit 2: Vector Databases
+# Lesson 2: Vector databases
 
 Start with the [HTML instructor study guide](study_guide.html)
 for explanations, diagrams, a filter simulator, rehearsal commands, and self-check questions.
@@ -15,7 +15,7 @@ Create a table with a vector column, insert real embeddings with JSONB metadata,
 create an HNSW index, and search using SQL. The final stage compares exact,
 normal-planner, and deliberately encouraged HNSW query plans.
 
-This continues Unit 1: the same support document, six passages, Nomic v2 MoE on
+This continues lesson 1: the same support document, six passages, Nomic v2 MoE on
 CPU, and normalized 768-dimensional embeddings. Documents use `search_document:`;
 questions use `search_query:`. No OpenAI key or LLM is needed. The first model
 run may download public weights; later runs can use the existing cache.
@@ -31,8 +31,7 @@ docker compose -f modules/c02_vector_databases/compose.pgvector.yaml up -d --wai
 The configuration uses `pgvector/pgvector:0.8.5-pg17-bookworm`, reusing that
 cached image when available. It creates its own Compose project and named volume,
 `advanced-rag-pgvector_pgvector_data`. The database is exposed only on loopback
-at **127.0.0.1:5434**. It does not use the other course's PostgreSQL 16 data
-directory or its port 5433.
+at **127.0.0.1:5434**.
 
 Public credentials for this local teaching database are user `rag_demo`, password
 `rag_demo_local`, database `rag_demo`. These are demo defaults, not production
@@ -207,7 +206,7 @@ docker compose -f modules/c02_vector_databases/compose.pgvector.yaml down
 ```
 
 The next `up -d --wait` reuses the data. No cleanup command in this lesson deletes
-the volume, and the other course's containers and files remain separate.
+the volume.
 
 ## Sources
 

@@ -11,6 +11,7 @@ import unicodedata
 from rag_core.config import AppError
 from rag_core.templating import for_settings, render
 from rag_core.corpus import digest
+from rag_core.model import accepts_temperature
 from rag_core.store import read_documents as read_documents
 from .schema import ChunkExtraction, Extraction
 
@@ -37,7 +38,8 @@ def contract(documents, settings):
         "chunk_config_id": documents[0].metadata["chunk_config_id"],
         "extraction_model": settings.model,
         "prompt_id": for_settings("extraction", settings).prompt_id,
-        "temperature": 0,
+        # Recorded as sent: newer models no longer accept a temperature at all.
+        "temperature": 0 if accepts_temperature(settings.model) else None,
         "passages": digest(
             [{"id": d.id, "text": d.page_content, "metadata": d.metadata} for d in documents]
         ),

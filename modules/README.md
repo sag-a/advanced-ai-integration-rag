@@ -13,6 +13,8 @@ section per page.
 | 4. Graph RAG | [c04_graph_rag/lesson.html](c04_graph_rag/lesson.html) | 50 min |
 | 5. Agentic RAG | [c05_agentic_rag/lesson.html](c05_agentic_rag/lesson.html) | 50 min |
 
+Labs for these lessons are in [`exercises/`](../exercises/README.md).
+
 Not built yet: `c06_system1_rag` (semantic cache fast path) and `c07_capstone`
 (compare all architectures with `evals`).
 

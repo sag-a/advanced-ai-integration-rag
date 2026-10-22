@@ -10,6 +10,22 @@ from langchain_core.utils.json import parse_partial_json
 
 from .config import AppError
 
+# Sampling parameters (temperature, top_p, top_k) were removed from the Claude API:
+# Claude 4.7 and later models reject them with a 400 error. Only these older model
+# lines still accept them. https://platform.claude.com/docs/en/about-claude/model-deprecations
+ACCEPTS_TEMPERATURE = (
+    "claude-haiku-4-5",
+    "claude-sonnet-4-5",
+    "claude-sonnet-4-6",
+    "claude-opus-4-5",
+    "claude-opus-4-6",
+)
+
+
+def accepts_temperature(model):
+    """True when the model still accepts a temperature setting."""
+    return model.startswith(ACCEPTS_TEMPERATURE)
+
 
 class AnthropicChat:
     def __init__(self, settings, *, max_tokens=1200):
@@ -23,7 +39,7 @@ class AnthropicChat:
             max_tokens=max_tokens,
             **(
                 {"temperature": settings.temperature}
-                if settings.temperature is not None
+                if settings.temperature is not None and accepts_temperature(settings.model)
                 else {}
             ),
         )

@@ -1,4 +1,4 @@
-# Chapter 1 — representations, chunking, and context
+# Lesson 1 — representations, chunking, and context
 
 Suggested teaching time: 50 minutes. Focus on the output and concepts; participants
 do not need to study every implementation detail.
@@ -15,8 +15,8 @@ do not need to study every implementation detail.
 - [Contextual-word explanation and current v2 plots](contextual_embeddings/README.md)
 - [Source modules](./)
 
-The shared Nomic loader lives in the chapter's `local_embeddings.py` and is also
-used by Chapter 2. The fictional telecom text is the active retrieval source.
-The Greek Magenta PDF is retained as a future corpus; it is not yet loaded by the demos.
+The shared Nomic loader lives in this lesson's `local_embeddings.py` and is also
+used by lesson 2. Lessons 1–2 use the fictional telecom text; lessons 3–5 use the
+Greek Magenta Moments PDF in `data/corpus/` with the same pinned encoder.
 
-Next: [Chapter 2](../c02_vector_databases/study_guide.html).
+Next: [Lesson 2](../c02_vector_databases/study_guide.html).

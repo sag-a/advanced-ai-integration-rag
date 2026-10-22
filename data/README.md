@@ -43,5 +43,6 @@ It has its own collection, so the Magenta setup is unaffected:
   --architecture hybrid_rag "Which Double Play 24 XL plan has 500 free minutes?"
 ```
 
-Classic RAG and Hybrid RAG work on it. Graph RAG would need its own index (about
-156 extraction calls), and Agentic RAG's skills are written for Magenta Moments.
+Classic, Hybrid and Jev RAG work on it, and Jev RAG's router (`--option route=true`)
+chooses between it and the Magenta collection. Graph RAG would need its own index
+(about 156 extraction calls), and Agentic RAG's skills are written for Magenta Moments.
