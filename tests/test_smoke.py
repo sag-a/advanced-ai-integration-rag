@@ -12,7 +12,6 @@ from dotenv import dotenv_values
         "architectures.classic_rag",
         "architectures.graph_rag",
         "architectures.agentic_rag",
-        "architectures.system1_rag",
         "app",
         "evals",
         "modules.c01_embeddings.local_embeddings",
