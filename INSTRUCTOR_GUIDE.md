@@ -13,25 +13,32 @@ whiteboard prompt.
 
 | Format | Duration | Structure |
 | --- | --- | --- |
-| One day | about 7 h | Five lessons, one optional segment, breaks, and a closing comparison |
+| One day | 8 h (7 h teaching, 60 min breaks) | Five lessons, a measurement block, one optional segment, production and industry |
 | Two half-days | 2 × 3 h | Day 1: lessons 1–3. Day 2: lessons 4–5 and evaluation |
 | Weekly | 5 × 1.5 h | One lesson per week, with the demo questions as homework |
 
 ## One-day timetable
 
-| Time | Lesson | Teach from |
-| --- | --- | --- |
-| 09:00–09:20 | Setup check: `uv run --all-extras pytest -q`, Docker running | [SETUP.md](SETUP.md) |
-| 09:20–10:10 | 1. Embeddings, chunking, semantic search | [c01 lesson](modules/c01_embeddings/lesson.html) |
-| 10:10–10:25 | Break | |
-| 10:25–11:25 | 2. Vector databases: pgvector and Chroma (60 min, as planned in the study guide) | [c02 study guide](modules/c02_vector_databases/study_guide.html) |
-| 11:25–12:15 | 3. Classic (base) RAG | [c03 lesson](modules/c03_classic_rag/lesson.html) |
-| 12:15–13:10 | Lunch | |
-| 13:10–14:00 | 4. Graph RAG | [c04 lesson](modules/c04_graph_rag/lesson.html) |
-| 14:00–14:15 | Break | |
-| 14:15–15:05 | 5. Agentic RAG | [c05 lesson](modules/c05_agentic_rag/lesson.html) |
-| 15:05–15:25 | Jev gate and router (dense vs hybrid stays available as a spare) | [Section below](#optional-a-gate-before-the-llm-with-jev-15-min) |
-| 15:25–16:00 | Comparison and evaluation | `#compare` section of any lesson page |
+| Time | Segment | Slides | Teach from |
+| --- | --- | --- | --- |
+| 09:00–09:10 | Opening: learning objectives, today's plan | 1–4 | Slides |
+| 09:10–10:20 | 1. Tokens, embeddings, chunking, semantic search | 5–31 | [c01 lesson](modules/c01_embeddings/lesson.html) |
+| 10:20–10:30 | **Break** (start Docker if it isn't up) | | |
+| 10:30–11:25 | 2. Vector databases: pgvector and Chroma | 32–46 | [c02 study guide](modules/c02_vector_databases/study_guide.html) |
+| 11:25–12:25 | 3. Classic RAG, then hybrid and rerank on the tariffs | 47–61 | [c03 lesson](modules/c03_classic_rag/lesson.html), [hybrid section](#optional-dense-vs-hybrid-on-a-harder-corpus-20-min) |
+| 12:25–13:05 | **Lunch** | | |
+| 13:05–13:55 | 3. Measuring and grounding: metrics, `evals.run`, the answer prompt, abstaining | 62–69 | [evals/README.md](evals/README.md), [closing section](#closing-compare-and-evaluate) |
+| 13:55–14:40 | 4. Graph RAG | 70–78 | [c04 lesson](modules/c04_graph_rag/lesson.html) |
+| 14:40–14:50 | **Break** | | |
+| 14:50–15:40 | 5. Agentic RAG, then the five-architecture comparison | 79–83, 85–87 | [c05 lesson](modules/c05_agentic_rag/lesson.html), `#compare` section of any lesson page |
+| 15:40–16:00 | Jev gate and router (optional: the day's only buffer) | 84 | [Section below](#optional-a-gate-before-the-llm-with-jev-15-min) |
+| 16:00–16:20 | RAG in production: streaming in `./rag ui`, retries, cost, prompt injection | 88–96 | Slides, `./rag ui` |
+| 16:20–17:00 | Industry use cases, homework labs, Q&A | 97–108 | [exercises/README.md](exercises/README.md) |
+
+Teaching time is 7 h and breaks are 60 min (10 + 40 + 10). Slide numbers refer to the
+reordered deck. Run the setup check (`uv run --all-extras pytest -q`, Docker running)
+before 09:00; see "Before class" below. Nothing has slack except the Jev slot: if you
+are behind at 15:40, skip it and go straight to production.
 
 Present lessons 1, 3, 4 and 5 with **P** (one section per screen, ← → to move, Esc to exit).
 
@@ -54,7 +61,7 @@ Present lessons 1, 3, 4 and 5 with **P** (one section per screen, ← → to mov
 
 - **Anthropic API or Wi-Fi down:** show the saved transcripts in `outputs/rehearsal/`.
   Lessons 1–2 and every `./rag search` run offline, so the retrieval half still works live.
-- **OpenRouter down:** skip the Jev segment and give the closing comparison its 20 minutes.
+- **OpenRouter down:** skip the Jev segment and use its 20 minutes as buffer for the afternoon.
 - **Docker trouble:** lesson 1 needs no Docker. Restart Docker Desktop during the first break.
 
 ## Lesson 1: Embeddings, chunking, semantic search
@@ -248,6 +255,10 @@ Grading: the tests are pass/fail. For a graded course, weight the discussion que
 the end of each README; they ask students to interpret their measurements.
 
 ## Closing: compare and evaluate
+
+In the one-day timetable this section is split in two. The `evals.run` part opens the
+13:05 measuring block, so every later architecture is judged against a number. The
+side-by-side comparison closes lesson 5 at about 15:30.
 
 Ask one question with Classic, Graph and Agentic RAG (add Hybrid or Jev if you ran an
 optional segment) and put the passage lists side by side. Then run:

@@ -22,3 +22,9 @@ dist/
 graphify-out/
 *.sqlite
 *.sqlite3
+
+# Instructor-only preparation page, local
+preparing.html
+
+# Instructor-only demo run sheet, local
+DEMO_RUNSHEET.md
