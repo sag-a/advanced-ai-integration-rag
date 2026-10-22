@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Mono:wght@400;500;600&display=swap">
 <style>
 /* Layout: spec-sheet reference page. Sticky contents rail on wide screens, one 70ch reading column, diagrams break wider. Each architecture owns one accent. */
 :root {
@@ -25,7 +25,7 @@
   --cond: #9a6700;
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
   --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
-  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --f-mono: "IBM Plex Mono", "Noto Sans Mono", ui-monospace, "SF Mono", Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -110,7 +110,7 @@ ul, ol { padding-left: 1.3em; display: grid; gap: 6px; }
 }
 .spec div { padding: 12px 16px 14px 0; display: grid; gap: 4px; align-content: start; }
 .spec dt { font: 500 11px/1.2 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.spec dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.spec dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .spec dl { display: contents; }
 
 figure { margin: 0; display: grid; gap: 10px; }
@@ -119,7 +119,7 @@ figure { margin: 0; display: grid; gap: 10px; }
 figcaption { font-size: 14px; color: var(--muted); max-width: 74ch; }
 svg text { font-family: var(--f-body); fill: currentColor; }
 svg .mono { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); }
-svg .lbl { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+svg .lbl { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); paint-order: stroke; stroke: var(--panel); stroke-width: 9px; stroke-linejoin: round; }
 svg .t { font-size: 13px; font-weight: 600; }
 svg .lane { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; fill: var(--muted); }
 svg .box { fill: var(--panel); stroke: currentColor; stroke-width: 1.2; }
@@ -239,8 +239,8 @@ body.presenting .present-bar {
 <div><dt>Current index</dt><dd>77 entities · 115 relationships</dd></div>
 <div><dt>Built from</dt><dd>30 passages · claude-haiku-4-5</dd></div>
 <div><dt>Model calls at query time</dt><dd>0 for retrieval</dd></div>
-<div><dt>Traversal limits</dt><dd>4 anchors · 2 hops · 30 edges</dd></div>
-<div><dt>Fusion</dt><dd>Reciprocal rank, k = 60</dd></div>
+<div><dt>Traversal limits</dt><dd>4 start entities · 2 hops · 30 facts</dd></div>
+<div><dt>Final ranking</dt><dd>Seeds first, then graph passages by meaning</dd></div>
 </dl>
 </section>
 
@@ -297,15 +297,14 @@ body.presenting .present-bar {
 </section>
 
 <section id="build">
-<h2>Building the index <span class="tag">prepare · paid · resumable</span></h2>
+<h2>Building the index <span class="tag">prepare · paid · once</span></h2>
 <ol class="steps">
 <li><h3>Read passages from Chroma</h3><p>The graph reuses the exact chunks already in the collection, in chunk order. It never writes to Chroma.</p><span class="where">graph_rag/__init__.py prepare() · store.read_documents</span></li>
 <li><h3>Extract one passage at a time</h3><p>Claude (at temperature 0 on models that still accept one) gets the passage as numbered source lines plus the running entity catalog, and returns a <code>ChunkExtraction</code>: entities with canonical English ids and Greek and English aliases, and relationships with polarity and a first/last line range.</p><span class="where">graph_rag/index.py · schema.py · templates/extraction.j2</span></li>
 <li><h3>Copy quotes, then validate</h3><p>The application copies the quote from the cited lines itself. It rejects duplicate entity ids, relationship endpoints that were not declared, and quotes that are not an exact substring of the passage.</p><span class="where">index.py validate_extraction()</span></li>
-<li><h3>Cache each accepted passage</h3><p>Accepted extractions are written to <code>graph.json.cache/</code> one file per passage. An interrupted build continues with <code>--resume</code> and does not pay again for finished passages. A file lock stops two builds on the same index.</p><span class="where">index.py prepare() · build_lock()</span></li>
-<li><h3>Assemble and publish atomically</h3><p>Entities are merged by normalized id, aliases are collected, and aliases shared by two entities are recorded as ambiguous. The graph is written to a temp file and renamed into place with a fingerprint.</p><span class="where">index.py assemble() · write_json()</span></li>
+<li><h3>Retry with feedback</h3><p>If a check fails, the error goes back to Claude and it tries again, at most three times. A failed passage stops the build, and nothing is saved until every passage succeeds.</p><span class="where">index.py extract()</span></li>
+<li><h3>Merge and save</h3><p>Entities are merged by normalized id and their aliases collected. The graph is saved with a contract of everything it depends on: the PDF, the chunking, the model and the prompt. If any of them changes, the graph is refused.</p><span class="where">index.py assemble() · load_index()</span></li>
 </ol>
-<div class="note"><strong>Ambiguous aliases are excluded on purpose</strong><p>The current index has one: <code>εισιτηρίων</code> (tickets) maps to both <code>ticket</code> and <code>ticket_availability</code>. A question containing it will not use that word to choose anchors.</p></div>
 </section>
 
 <section class="wide" id="query">
@@ -329,17 +328,17 @@ body.presenting .present-bar {
 <text x="772" y="54" text-anchor="middle" class="lbl">answer</text>
 <circle cx="820" cy="62" r="10" class="dot"/><circle cx="820" cy="62" r="14" fill="none" stroke="currentColor"/><text x="820" y="96" text-anchor="middle" class="mono">END</text>
 <text x="160" y="118" text-anchor="middle" class="mono">0–1 model call</text>
-<text x="410" y="118" text-anchor="middle" class="mono" style="fill:var(--accent)">seeds → BFS → RRF</text>
+<text x="410" y="118" text-anchor="middle" class="mono" style="fill:var(--accent)">seeds → walk → rank</text>
 <text x="660" y="118" text-anchor="middle" class="mono">1 model call</text>
 </svg></div>
 <figcaption>Every architecture runs the same LangGraph turn from <code>rag_core/graph.py</code>. The registry swaps only the highlighted <code>retrieve</code> node, so the answer prompt, citation checks and refusals stay identical and results stay comparable.</figcaption>
 </figure>
 <ol class="steps" style="max-width:74ch">
-<li><h3>Vector seeds</h3><p>A normal Chroma query, capped at <code>min(3, top_k)</code> passages. These are the starting points.</p><span class="where">retrieval.py _retrieve · stage “graph-vector-seeds”</span></li>
-<li><h3>Pick anchor entities</h3><p>Entities extracted from the seed passages become candidates. Those whose alias appears as a whole word in the question come first, then by seed order. At most four anchors.</p><span class="where">retrieval.py expand()</span></li>
-<li><h3>Breadth-first walk</h3><p>Follow relationships touching the frontier for up to two hops, stopping at 30 traversed edges or 12 candidate passages. Each edge contributes the passage it was extracted from.</p><span class="where">expand() · max_hops=2, max_edges=30, max_candidates=12</span></li>
-<li><h3>Rank and fuse</h3><p>Chroma ranks only the candidate passages by distance to the question. That vector order and the graph discovery order are fused with reciprocal rank fusion, score = Σ 1/(60 + rank). The best seed is always kept first. The result is cut to <code>top_k</code>.</p><span class="where">retrieval.py fuse()</span></li>
-<li><h3>Fallback</h3><p>If the walk adds no new passages, the retriever falls back to a plain top-k vector search, so Graph RAG is never worse than Base RAG at finding the obvious passage.</p><span class="where">“Graph expansion contributed no additional passages”</span></li>
+<li><h3>Vector seeds</h3><p>A normal Chroma query, capped at <code>min(3, top_k)</code> passages. These are the starting points.</p><span class="where">retrieval.py __call__ · stage “graph-vector-seeds”</span></li>
+<li><h3>Pick start entities</h3><p>Entities extracted from the seed passages are the starting points. Those whose alias appears as a whole word in the question come first, then by seed rank. At most four.</p><span class="where">retrieval.py start_entities()</span></li>
+<li><h3>Breadth-first walk</h3><p>Follow relationships touching the frontier for up to two hops, stopping at 30 facts. Each fact contributes the passage it was extracted from, up to 12 passages including the seeds.</p><span class="where">retrieval.py walk() · MAX_HOPS=2, MAX_FACTS=30, MAX_PASSAGES=12</span></li>
+<li><h3>Rank</h3><p>The three seeds stay first. Chroma ranks the graph's passages by distance to the question, and they fill the remaining places up to <code>top_k</code>, closest first.</p><span class="where">retrieval.py rank()</span></li>
+<li><h3>Fallback</h3><p>If the walk adds too few passages, the remaining places are filled with plain vector results, so Graph RAG always returns <code>top_k</code> passages like Base RAG.</p><span class="where">“Graph expansion contributed no additional passages”</span></li>
 </ol>
 </section>
 
@@ -356,14 +355,13 @@ body.presenting .present-bar {
 <tr><th scope="row"><code>embedding_contract_id</code>, <code>chunk_config_id</code></th><td>Encoder or chunking changes</td></tr>
 <tr><th scope="row"><code>passages</code></th><td>Any chunk text or metadata changes</td></tr>
 </tbody></table></div>
-<p class="muted">Loading also re-checks every quote against its passage, every endpoint, the alias map and the fingerprint.</p>
+<p class="muted">Loading also re-checks that every quote is still in its passage.</p>
 </section>
 
 <section id="run">
 <h2>Run it</h2>
 <pre><code><span class="c"># the index ships with the repository; rebuild only for another model or corpus (about 30 calls)</span>
 ./rag prepare --architecture graph_rag
-./rag prepare --architecture graph_rag --resume
 
 <span class="c"># validate the index against the current code</span>
 ./rag check --architecture graph_rag
@@ -389,15 +387,13 @@ body.presenting .present-bar {
 <h2>Pitfalls before class</h2>
 <ul class="pitfalls">
 <li><b>Any non-default <code>--model</code> breaks Graph RAG.</b><span>The model is part of the index contract, so <code>./rag ask --architecture graph_rag --model …</code> fails with “Graph index is incompatible”. Keep the default model or point <code>graph_index</code> at an index built with that model.</span></li>
-<li><b>The error names a flag that does not exist.</b><span>It says “Prepare a new --index path”. The real option is <code>--option graph_index=PATH</code>.</span></li>
-<li><b><code>check</code> output is long.</b><span>It prints all 30 indexing observations. Pipe it through <code>head</code> or scroll before projecting.</span></li>
 <li><b><code>outputs/graph_rag/expanded-v1</code> belongs to another collection.</b><span>Loading it with the default collection fails as designed. It is not a bug to fix live.</span></li>
 </ul>
 </section>
 
 <section class="wide" id="compare">
 <h2>Compared with the other architectures</h2>
-<div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col">Base RAG</th><th scope="col">Hybrid RAG</th><th scope="col" class="here">Graph RAG</th><th scope="col">Agentic RAG</th><th scope="col">Jev RAG</th></tr></thead><tbody><tr><th scope="row">Retrieval</th><td>One cosine query, top 6 passages; optional bge reranker over 20 candidates</td><td>Dense + TF-IDF keyword candidates, fused with RRF</td><td class="here">3 vector seeds, then up to 2 graph hops, fused with RRF</td><td>Agent plans searches, reads clauses, selects evidence</td><td>20 candidates → bge rerank → Jev gate; optional Jev router picks the document</td></tr><tr><th scope="row">Model calls while retrieving</th><td>0</td><td>0</td><td class="here">0</td><td>Up to 14 (coordinator + helper)</td><td>1 Jev gate call (+1 router, +20 with Jev reranking)</td></tr><tr><th scope="row">Extra preparation</th><td>None; reranker weights (2.3 GB) if enabled</td><td>None; keyword index built in memory</td><td class="here">One Claude extraction per passage (30); the index ships with the repo</td><td>None. Skills ship with the code</td><td>Reranker weights and an OpenRouter key</td></tr><tr><th scope="row">Answer step</th><td>Shared</td><td>Shared</td><td class="here">Shared</td><td>Shared</td><td>Shared, skipped when the gate abstains</td></tr><tr><th scope="row">Best at</th><td>Direct factual lookups</td><td>Exact numbers and names among look-alike passages</td><td class="here">Facts linked across distant passages</td><td>Multi-topic questions that need planning</td><td>Abstaining early when the documents can't answer</td></tr><tr><th scope="row">Typical failure</th><td>Evidence split across chunks the query doesn't resemble</td><td>Extraction noise and spelling variants (“Bulgar ia”)</td><td class="here">Index contract mismatch after a config change</td><td>A budget runs out and the turn is rejected</td><td>A too-strict gate refuses partly answerable questions</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th scope="col"></th><th scope="col">Base RAG</th><th scope="col">Hybrid RAG</th><th scope="col" class="here">Graph RAG</th><th scope="col">Agentic RAG</th><th scope="col">Jev RAG</th></tr></thead><tbody><tr><th scope="row">Retrieval</th><td>One cosine query, top 6 passages; optional bge reranker over 20 candidates</td><td>Dense + TF-IDF keyword candidates, fused with RRF</td><td class="here">3 vector seeds, then up to 2 graph hops; graph passages fill the places after the seeds</td><td>Agent plans searches, reads clauses, selects evidence</td><td>20 candidates → bge rerank → Jev gate; optional Jev router picks the document</td></tr><tr><th scope="row">Model calls while retrieving</th><td>0</td><td>0</td><td class="here">0</td><td>Up to 14 (coordinator + helper)</td><td>1 Jev gate call (+1 router, +20 with Jev reranking)</td></tr><tr><th scope="row">Extra preparation</th><td>None; reranker weights (2.3 GB) if enabled</td><td>None; keyword index built in memory</td><td class="here">One Claude extraction per passage (30); the index ships with the repo</td><td>None. Skills ship with the code</td><td>Reranker weights and an OpenRouter key</td></tr><tr><th scope="row">Answer step</th><td>Shared</td><td>Shared</td><td class="here">Shared</td><td>Shared</td><td>Shared, skipped when the gate abstains</td></tr><tr><th scope="row">Best at</th><td>Direct factual lookups</td><td>Exact numbers and names among look-alike passages</td><td class="here">Facts linked across distant passages</td><td>Multi-topic questions that need planning</td><td>Abstaining early when the documents can't answer</td></tr><tr><th scope="row">Typical failure</th><td>Evidence split across chunks the query doesn't resemble</td><td>Extraction noise and spelling variants (“Bulgar ia”)</td><td class="here">Index contract mismatch after a config change</td><td>A budget runs out and the turn is rejected</td><td>A too-strict gate refuses partly answerable questions</td></tr></tbody></table></div>
 </section>
 
 </main>
