@@ -218,7 +218,7 @@ def prepare(documents, settings, chat, *, resume=False, progress=lambda message:
             return load_index(documents, settings)
         marker = cache / "manifest.json"
         if marker.exists():
-            if json.loads(marker.read_text()) != manifest:
+            if json.loads(marker.read_text(encoding="utf-8")) != manifest:
                 raise AppError("Extraction cache is incompatible. Select a new --index path.")
             if not resume:
                 raise AppError(
@@ -230,7 +230,7 @@ def prepare(documents, settings, chat, *, resume=False, progress=lambda message:
         for document in documents:
             path = cache / (digest(document.id) + ".json")
             if path.exists():
-                row = json.loads(path.read_text())
+                row = json.loads(path.read_text(encoding="utf-8"))
             else:
                 progress(
                     f"Extracting passage {document.metadata['chunk_index'] + 1}/{len(documents)}"
