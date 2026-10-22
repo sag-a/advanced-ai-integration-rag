@@ -10,7 +10,6 @@ from .display import print_similarity, print_vectors
 
 
 def main() -> None:
-    # Pinned official MoE implementation, shared with the course retrieval labs.
     model = LocalEncoder(allow_download=True).load()
     # Keep the SAME prefix on both sides of every similarity comparison.
     inputs = ["search_document: " + text for text in SENTENCES]

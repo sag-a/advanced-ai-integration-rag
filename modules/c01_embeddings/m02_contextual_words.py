@@ -53,8 +53,6 @@ def target_span(text: str, target: str, occurrence: int = 0) -> tuple[int, int]:
     """
     if not target.strip() or occurrence < 0:
         raise ValueError("Target must be nonempty and occurrence nonnegative.")
-    # Match the whole word: searching for "red" must not select "credit".
-    # Escape the target so any punctuation is treated as literal text.
     whole_word_pattern = r"(?<!\w)" + re.escape(target) + r"(?!\w)"
     matches = list(re.finditer(whole_word_pattern, text, re.IGNORECASE))
     if occurrence >= len(matches):
@@ -134,8 +132,7 @@ def extract_vectors(examples=EXAMPLES, *, allow_download=False, layer=-1):
     if encoded["input_ids"].shape[1] > MAX_TOKENS:
         raise ValueError(f"Input exceeds the model limit of {MAX_TOKENS} tokens.")
 
-    # This MoE implementation exposes its blocks, not output_hidden_states.
-    # A temporary hook observes the selected layer without changing its output.
+
     captured = []
 
     def capture_layer(module, inputs, output):
