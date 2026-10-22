@@ -88,22 +88,26 @@ uv run --all-extras python -m modules.c02_vector_databases.m01_pgvector_demo sea
 
 # 5. Inspect exact, normal, and encouraged HNSW plans for that question.
 uv run --all-extras python -m modules.c02_vector_databases.m01_pgvector_demo explain --query "My Wi-Fi stopped working" --top-k 3
+
+# 6. Rank by meaning and by keywords in one SQL query, fused with RRF.
+uv run --all-extras python -m modules.c02_vector_databases.m01_pgvector_demo hybrid --query "second device" --top-k 3
 ```
 
-`setup` and `index` do not load the embedding model. `insert`, `search`, and
-`explain` do. The script reports missing setup/data/index prerequisites with
+`setup` and `index` do not load the embedding model. `insert`, `search`,
+`explain`, and `hybrid` do. The script reports missing setup/data/index prerequisites with
 instructions. `--top-k` must be positive; `--query` must contain text.
 
 ## What the SQL teaches
 
-The four files in `sql/` are printed as they execute:
+The five files in `sql/` are printed as they execute:
 
 | File | Lesson |
 | --- | --- |
-| `01_setup.sql` | Extension, dedicated schema, text, JSONB, and `vector(768)` |
+| `01_setup.sql` | Extension, dedicated schema, text, JSONB, `vector(768)`, and a generated `tsvector` keyword column |
 | `02_insert.sql` | Bound parameters and repeatable `ON CONFLICT` upserts |
-| `03_index.sql` | `USING hnsw (embedding vector_cosine_ops)` and `ANALYZE` |
+| `03_index.sql` | `USING hnsw (embedding vector_cosine_ops)`, a GIN keyword index, and `ANALYZE` |
 | `04_search.sql` | Cosine distance, similarity, and index-compatible ordering |
+| `05_hybrid.sql` | Dense and keyword rankings fused with RRF (k = 60) in one query |
 
 The insert/search files contain **Psycopg named placeholders**, not psql variables;
 run them through the Python module. Values are bound through `Vector` and `Jsonb`
@@ -113,8 +117,8 @@ metadata instead of dumping 768-number vectors or database connection secrets.
 Each row stores the source filename, chunk number, language, and embedding model
 in JSONB. IDs 1–6 correspond to this fixture's chunk numbers. Rehearsals update
 matching IDs; they do not delete additional rows if you later edit the dataset.
-Stored model metadata is checked before searching to avoid mixing embedding
-spaces. Matching dimensions alone do not make different encoders compatible.
+The stored model name records which embedding space each row belongs to.
+Matching dimensions alone do not make different encoders compatible.
 
 `<=>` returns **cosine distance**: smaller values are closer. Similarity is
 `1 - distance`, where larger values are closer. Similarities are not probabilities,
@@ -151,8 +155,32 @@ on this small fixture does not establish recall on a larger corpus. Reported
 query times are observations, not evidence of an HNSW speedup for six rows.
 
 The connection uses autocommit with explicit transaction blocks; `SET LOCAL`
-settings reset when each block exits. A final snapshot verifies they returned
-to their original values. No server-wide settings or index drops are needed.
+settings reset when each block exits. No server-wide settings or index drops are needed.
+
+## Hybrid search in SQL
+
+`hybrid` runs `05_hybrid.sql`, which ranks the passages twice and fuses the two lists:
+
+- **Dense:** the 10 nearest passages by `embedding <=> query`.
+- **Keyword:** passages whose `content_tsv` matches any stemmed query word, ranked
+  by `ts_rank_cd`. PostgreSQL stems English words, so "charged" matches "charges"
+  and "authorization" becomes `author`. The GIN index finds matching rows.
+- **RRF:** each passage scores `1/(60 + dense rank) + 1/(60 + keyword rank)`.
+  A passage missing from one list gets nothing from it.
+
+Each result prints both component ranks, and `ts_headline` marks matched words
+in [brackets]. Try these:
+
+| Query | What happens |
+| --- | --- |
+| `second device` | Dense ranks a billing passage second; keywords lift the Wi-Fi passage into the top 3 |
+| `billing team` | The passage that says "contact the billing team" moves from dense rank 3 to hybrid rank 2 |
+| `promotional discount ended` | Dense ranks the cancellation passage first; keywords rank the bill passage first; RRF ties them |
+
+Chroma's native hybrid `Search` API is Chroma Cloud only, so `m02_chroma_demo
+search --method compare` combines Chroma with TF-IDF in Python instead. Here
+both branches and the fusion run inside PostgreSQL with persistent indexes.
+`ts_rank_cd` is PostgreSQL's own keyword ranking, not BM25.
 
 ## Inspect with SQL directly
 
