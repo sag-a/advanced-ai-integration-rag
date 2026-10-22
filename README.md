@@ -126,11 +126,10 @@ The UI is at <http://127.0.0.1:8504>. On Windows PowerShell, replace `./rag` wit
 `uv run --all-extras python -m app`; all commands have the same arguments.
 
 Graph preparation is explicit and uses Anthropic. It reads the prepared corpus,
-caches accepted extractions and publishes a complete graph atomically:
+extracts each passage in order and saves the graph when all passages succeed:
 
 ```bash
 ./rag prepare --architecture graph_rag
-./rag prepare --architecture graph_rag --resume  # only after an interrupted build
 ./rag ask --architecture graph_rag "Πότε λήγουν οι Καρδιές;"
 ./rag ask --architecture agentic_rag "Πότε λήγουν οι Καρδιές;"
 ```

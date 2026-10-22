@@ -7,12 +7,12 @@ Suggested teaching time: 50 minutes. Teach from [lesson.html](lesson.html); pres
 
 Before class, Claude extracts entities and quoted relationships from every passage
 into `outputs/graph_rag/graph.json`. At question time there is no extra model call:
-three vector seeds pick anchor entities, a breadth-first walk of up to two hops
-collects passages linked to them, and reciprocal rank fusion merges the vector
-and graph orders into the final top 6.
+three vector seeds name the start entities, a breadth-first walk of up to two hops
+collects passages linked to them, and the final top 6 keeps the seeds first and
+fills the rest with graph passages, closest in meaning first.
 
-Code: `architectures/graph_rag/index.py` (build and contract),
-`retrieval.py` (seeds, traversal, fusion), `schema.py`, `templates/extraction.j2`.
+Code: `architectures/graph_rag/index.py` (build and load),
+`retrieval.py` (seeds, start, walk, rank), `schema.py`, `templates/extraction.j2`.
 
 ## Three commands
 

@@ -131,7 +131,6 @@ Graph RAG. The graph index is built once and costs about 30 Anthropic calls:
 
 ```bash
 ./rag prepare --architecture graph_rag            # only if outputs/graph_rag/graph.json is missing
-./rag prepare --architecture graph_rag --resume   # only after an interrupted build
 ./rag check --architecture graph_rag
 ./rag ask --process --architecture graph_rag "Πότε λήγουν οι Καρδιές;"
 ```
@@ -216,8 +215,8 @@ uv run --all-extras python -m evals.run --architecture all                      
 ```text
 ◆ retrieve
   · graph-vector-seeds · 3 seed passages in 9.17s
-  · graph-traversal · 4 anchors, 30 relationships, 8 new passages
-  · graph-passage-selection · 6 passages selected with graph fusion
+  · graph-traversal · 4 start entities, 30 facts, 8 new passages
+  · graph-passage-selection · 6 passages selected
 ◆ retrieve done in 9.24s
 ◆ generate_answer
   ✦ model call · claude-haiku-4-5-20251001

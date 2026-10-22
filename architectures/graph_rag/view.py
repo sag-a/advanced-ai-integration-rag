@@ -139,7 +139,7 @@ def render_panels(self, event, data):
             Group(
                 anchors if data["anchors"] else Text("No seed-linked entities."),
                 Text(
-                    "Question-alias matches are prioritized; ambiguous aliases are excluded.",
+                    "Entities named in the question come first.",
                     style="dim",
                 ),
             ),
@@ -202,7 +202,7 @@ def render_panels(self, event, data):
         )
         rule = (
             Text(
-                "Equal-weight reciprocal-rank fusion (constant 60); highest vector seed retained.",
+                "The vector seeds stay first; graph passages fill the rest, closest in meaning first.",
                 style="dim",
             )
             if data["graph_used"]

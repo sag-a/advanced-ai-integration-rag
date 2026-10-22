@@ -1,295 +1,168 @@
-"""Vector seeds, bounded breadth-first traversal, then original PDF passages."""
+"""Graph RAG retrieval in four steps, with no LLM call:
+
+1. Seeds: the 3 passages closest in meaning to the question (a normal vector search).
+2. Start: the entities those passages mention, entities named in the question first.
+3. Walk: follow relationships for up to 2 hops. Each one points to the passage it came from.
+4. Rank: keep the seeds, then add the graph's passages, closest in meaning first.
+
+Claude later reads the original PDF passages. The graph only helps find them.
+"""
 
 from dataclasses import replace
-import math
 import re
 import time
-import logging
 from uuid import uuid4
 
-from rag_core.config import AppError
+from rag_core.callbacks import report_stage
 from rag_core.retrieval import RetrievalResult
 from rag_core.store import retrieve
 from .index import load_index, normalized, read_documents
-from rag_core.callbacks import report_stage
+
+SEEDS = 3  # passages from the first vector search
+MAX_START = 4  # entities the walk starts from
+MAX_HOPS = 2  # relationship steps away from them
+MAX_FACTS = 30  # relationships followed in total
+MAX_PASSAGES = 12  # seeds plus graph passages, before the final ranking
 
 
-def matches(alias, question):
-    return bool(re.search(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", question))
-
-
-def expand(
-    graph,
-    documents,
-    seeds,
-    query,
-    *,
-    max_anchors=4,
-    max_hops=2,
-    max_edges=30,
-    max_candidates=12,
-):
-    order = {d.id: i for i, d in enumerate(documents)}
-    by_id = {d.id: d for d in documents}
-    seed_ids = [d.id for d in seeds]
-    linked = {
-        key
-        for key, entity in graph["entities"].items()
-        if set(entity["chunk_ids"]) & set(seed_ids)
-    }
-    question = normalized(query)
-    ambiguous = sorted(a for a in graph["ambiguous_aliases"] if matches(a, question))
-    matched = {
-        key
-        for key in linked
-        if any(
-            normalized(a) not in graph["ambiguous_aliases"] and matches(normalized(a), question)
-            for a in graph["entities"][key]["aliases"]
-        )
-    }
-    anchors = sorted(
-        linked,
-        key=lambda key: (
-            key not in matched,
-            min(order[i] for i in graph["entities"][key]["chunk_ids"] if i in seed_ids),
-            key,
-        ),
-    )[:max_anchors]
-    frontier, visited = set(anchors), set(anchors)
-    traversed, seen, candidates, graph_rank = [], set(), list(seed_ids), []
-    for hop in range(1, max_hops + 1):
-        edges = sorted(
-            (
-                r
-                for r in graph["relationships"]
-                if r["id"] not in seen and (r["source"] in frontier or r["target"] in frontier)
-            ),
-            key=lambda r: (order[r["chunk_id"]], r["id"]),
-        )
-        following = set()
-        for edge in edges:
-            if len(traversed) >= max_edges:
-                break
-            chunk = edge["chunk_id"]
-            if chunk not in candidates and len(candidates) >= max_candidates:
-                continue
-            seen.add(edge["id"])
-            traversed.append(
-                {
-                    **edge,
-                    "hop": hop,
-                    "page_start": by_id[chunk].metadata["page_start"],
-                    "page_end": by_id[chunk].metadata["page_end"],
-                    "clause": by_id[chunk].metadata.get("clause", ""),
-                }
-            )
-            if chunk not in candidates:
-                candidates.append(chunk)
-            if chunk not in graph_rank:
-                graph_rank.append(chunk)
-            following.update({edge["source"], edge["target"]} - visited)
-        visited.update(following)
-        frontier = following
-        if not frontier or len(traversed) >= max_edges:
-            break
-    added = [i for i in candidates if i not in seed_ids]
-    return {
-        "architecture": "graph_rag",
-        "index_fingerprint": graph["fingerprint"],
-        "seed_ids": seed_ids,
-        "anchors": anchors,
-        "ambiguous_query_aliases": ambiguous,
-        "relationships": traversed,
-        "entities": [
-            graph["entities"][i]
-            for i in sorted({e for r in traversed for e in (r["source"], r["target"])})
-        ],
-        "candidate_ids": candidates,
-        "graph_order": graph_rank,
-        "expansion_count": len(added),
-        "traversed_count": len(traversed),
-        "graph_used": bool(added),
-        "explanation": f"Graph added {len(added)} candidate passages via {len(traversed)} relationships."
-        if added
-        else "Graph expansion contributed no additional passages; using vector candidates.",
-        "limits": {
-            "anchors": max_anchors,
-            "hops": max_hops,
-            "relationships": max_edges,
-            "candidates": max_candidates,
-        },
-    }
-
-
-def fuse(vector_order, graph_order, seeds, top_k):
-    scores = {}
-    for ranking in (vector_order, graph_order):
-        for rank, identifier in enumerate(ranking, 1):
-            scores[identifier] = scores.get(identifier, 0) + 1 / (60 + rank)
-    ranked = sorted(
-        scores,
-        key=lambda i: (
-            -scores[i],
-            vector_order.index(i) if i in vector_order else len(vector_order),
-            i,
-        ),
-    )
-    first = seeds[:1]
-    return (first + [i for i in ranked if i not in first])[:top_k]
+def mentioned(alias, question):
+    """True when the alias appears in the question as a whole word."""
+    pattern = r"(?<!\w)" + re.escape(normalized(alias)) + r"(?!\w)"
+    return re.search(pattern, normalized(question)) is not None
 
 
 class GraphRetriever:
     def __init__(self, collection, settings, *, reporter=None):
-        self.collection, self.settings = collection, settings
-        self.reporter = reporter
-        self.documents = read_documents(collection)
-        self.graph = load_index(self.documents, settings)
-        self.by_id = {d.id: d for d in self.documents}
+        self.collection, self.settings, self.reporter = collection, settings, reporter
+        documents = read_documents(collection)
+        self.passages = {document.id: document for document in documents}
+        self.graph = load_index(documents, settings)
+        self.request_id = ""
+
+    def log(self, event, **data):
+        """Feed the classroom panels (--process and the UI), when they are attached."""
+        if self.reporter:
+            self.reporter(event, {"request_id": self.request_id, **data})
 
     def __call__(self, question):
-        request_id = uuid4().hex[:8]
-        reporter_available = self.reporter is not None
-
-        def emit(event, **data):
-            nonlocal reporter_available
-            if reporter_available:
-                try:
-                    self.reporter(event, {"request_id": request_id, **data})
-                except Exception:
-                    reporter_available = False
-                    logging.getLogger(__name__).warning(
-                        "Classroom log unavailable; retrieval continues."
-                    )
-
-        emit("retrieval_started", top_k=self.settings.top_k)
-        try:
-            result = self._retrieve(question, emit)
-        except Exception as error:
-            emit("retrieval_failed", error_type=type(error).__name__)
-            raise
-        result.details["retrieval_id"] = request_id
-        emit(
-            "passages_selected",
-            documents=result.documents,
-            elapsed_seconds=result.elapsed_seconds,
-            candidate_count=len(result.details["candidate_ids"]),
-            hops_used=max((edge["hop"] for edge in result.details["relationships"]), default=0),
-            **{
-                key: result.details[key]
-                for key in (
-                    "seed_ids",
-                    "graph_used",
-                    "expansion_count",
-                    "selected_expansion_count",
-                    "traversed_count",
-                    "index_fingerprint",
-                    "limits",
-                )
-            },
-        )
-        return result
-
-    def _retrieve(self, question, emit):
         started = time.perf_counter()
-        seed_result = retrieve(
-            self.collection,
-            replace(self.settings, top_k=min(3, self.settings.top_k)),
-            question,
+        self.request_id = uuid4().hex[:8]
+        self.log("retrieval_started", top_k=self.settings.top_k)
+
+        # 1. Seeds
+        first = retrieve(self.collection, replace(self.settings, top_k=min(SEEDS, self.settings.top_k)), question)
+        seeds = first.documents
+        report_stage("graph-vector-seeds", f"{len(seeds)} seed passages")
+        self.log("seeds_selected", documents=seeds, elapsed_seconds=first.elapsed_seconds)
+
+        # 2. Start
+        start = self.start_entities(seeds, question)
+        self.log("anchors_selected", anchors=[self.graph["entities"][key]["label"] for key in start], ambiguous_aliases=[])
+
+        # 3. Walk
+        facts = self.walk(start)
+        seed_ids = [document.id for document in seeds]
+        added = list(dict.fromkeys(f["chunk_id"] for f in facts if f["chunk_id"] not in seed_ids))
+        added = added[: MAX_PASSAGES - len(seed_ids)]
+        report_stage("graph-traversal", f"{len(start)} start entities, {len(facts)} facts, {len(added)} new passages")
+        known = set(seed_ids)
+        for hop in range(1, MAX_HOPS + 1):
+            hop_facts = [fact for fact in facts if fact["hop"] == hop]
+            if hop_facts:
+                new = {fact["chunk_id"] for fact in hop_facts} - known
+                known |= new
+                self.log("hop_completed", hop=hop, relationships=hop_facts, new_passages=len(new))
+
+        # 4. Rank
+        documents = self.rank(question, seeds, added)
+        report_stage("graph-passage-selection", f"{len(documents)} passages selected")
+        details = self.details(seeds, start, facts, added, documents)
+        elapsed = time.perf_counter() - started
+        self.log(
+            "passages_selected",
+            documents=documents,
+            elapsed_seconds=elapsed,
+            candidate_count=len(seeds) + len(added),
+            hops_used=max((fact["hop"] for fact in facts), default=0),
+            **{key: details[key] for key in ("seed_ids", "graph_used", "selected_expansion_count", "traversed_count", "index_fingerprint", "limits")},
         )
-        seeds, seconds = seed_result.documents, seed_result.elapsed_seconds
-        report_stage("graph-vector-seeds", f"{len(seeds)} seed passages in {seconds:.2f}s")
-        emit("seeds_selected", documents=seeds, elapsed_seconds=seconds)
-        seed_time = time.perf_counter()
-        if any(
-            d.id not in self.by_id or d.page_content != self.by_id[d.id].page_content
-            for d in seeds
-        ):
-            raise AppError(
-                "Chroma passages changed after graph validation. Reopen the collection and use a matching index."
+        return RetrievalResult(documents, elapsed, details)
+
+    def start_entities(self, seeds, question):
+        """Entities mentioned in the seed passages. Named in the question first, then by seed rank."""
+        seed_ids = [document.id for document in seeds]
+        entities = self.graph["entities"]
+
+        def order(key):
+            named = any(mentioned(alias, question) for alias in entities[key]["aliases"])
+            best_seed = min(seed_ids.index(i) for i in entities[key]["chunk_ids"] if i in seed_ids)
+            return (not named, best_seed, key)
+
+        linked = [key for key, entity in entities.items() if set(entity["chunk_ids"]) & set(seed_ids)]
+        return sorted(linked, key=order)[:MAX_START]
+
+    def walk(self, start):
+        """Breadth-first: hop 1 takes every fact touching a start entity, hop 2 every fact touching those."""
+        facts, followed, reached, frontier = [], set(), set(start), set(start)
+        for hop in range(1, MAX_HOPS + 1):
+            next_frontier = set()
+            for fact in self.graph["relationships"]:
+                if len(facts) == MAX_FACTS:
+                    break
+                if fact["id"] in followed or not {fact["source"], fact["target"]} & frontier:
+                    continue
+                followed.add(fact["id"])
+                passage = self.passages[fact["chunk_id"]].metadata
+                facts.append(
+                    {**fact, "hop": hop, "page_start": passage["page_start"], "page_end": passage["page_end"], "clause": passage.get("clause", "")}
+                )
+                next_frontier |= {fact["source"], fact["target"]} - reached
+            reached |= next_frontier
+            frontier = next_frontier
+        return facts
+
+    def rank(self, question, seeds, added):
+        """Seeds first. Then graph passages, closest in meaning first. Top up with vector results if short."""
+        chosen = list(seeds)
+        if added:
+            result = self.collection.query(
+                query_texts=[question],
+                n_results=len(added),
+                where={"$and": [{"corpus_id": {"$eq": self.graph["contract"]["corpus_id"]}}, {"chunk_id": {"$in": added}}]},
+                include=["distances"],
             )
-        details = expand(self.graph, self.documents, seeds, question)
-        report_stage(
-            "graph-traversal",
-            f"{len(details['anchors'])} anchors, {details['traversed_count']} relationships, "
-            f"{details['expansion_count']} new passages",
-        )
-        traversal_time = time.perf_counter()
-        emit(
-            "anchors_selected",
-            anchors=[self.graph["entities"][key]["label"] for key in details["anchors"]],
-            ambiguous_aliases=details["ambiguous_query_aliases"],
-        )
-        seen_chunks = set(details["seed_ids"])
-        for hop in sorted({edge["hop"] for edge in details["relationships"]}):
-            edges = [edge for edge in details["relationships"] if edge["hop"] == hop]
-            added = {edge["chunk_id"] for edge in edges} - seen_chunks
-            emit("hop_completed", hop=hop, relationships=edges, new_passages=len(added))
-            seen_chunks.update(added)
-        selection_started = time.perf_counter()
-        if not details["graph_used"]:
-            docs = seeds
-            if self.settings.top_k > len(seeds):
-                docs = retrieve(self.collection, self.settings, question).documents
-        else:
-            candidates = details["candidate_ids"]
-            try:
-                result = self.collection.query(
-                    query_texts=[question],
-                    n_results=len(candidates),
-                    where={
-                        "$and": [
-                            {"corpus_id": {"$eq": self.graph["contract"]["corpus_id"]}},
-                            {"chunk_id": {"$in": candidates}},
-                        ]
-                    },
-                    include=["distances"],
-                )
-                ids, distances = result["ids"][0], result["distances"][0]
-                if (
-                    set(ids) != set(candidates)
-                    or len(ids) != len(candidates)
-                    or not all(math.isfinite(d) for d in distances)
-                ):
-                    raise ValueError("incomplete candidate ranking")
-                distance_map = dict(zip(ids, distances, strict=True))
-                selected = fuse(
-                    ids,
-                    details["graph_order"],
-                    [d.id for d in seeds],
-                    self.settings.top_k,
-                )
-                docs = [
-                    self.by_id[i].model_copy(
-                        update={
-                            "metadata": {
-                                **self.by_id[i].metadata,
-                                "distance": distance_map[i],
-                            }
-                        }
-                    )
-                    for i in selected
-                ]
-            except Exception as error:
-                raise AppError(
-                    "Graph candidate ranking failed. Check Chroma; no answer was generated."
-                ) from error
-        report_stage(
-            "graph-passage-selection",
-            f"{len(docs)} passages selected"
-            + (" with graph fusion" if details["graph_used"] else ", vector fallback"),
-        )
-        details["selected_graph_ids"] = [
-            d.id for d in docs if details["graph_used"] and d.id not in details["seed_ids"]
-        ]
-        details.update(
-            selected_ids=[d.id for d in docs],
-            seed_passages=[d.model_dump() for d in seeds],
-            selected_passages=[d.model_dump() for d in docs],
-            selected_expansion_count=sum(d.id not in details["seed_ids"] for d in docs)
-            if details["graph_used"]
-            else 0,
-            seed_seconds=seconds,
-            traversal_seconds=traversal_time - seed_time,
-            selection_seconds=time.perf_counter() - selection_started,
-        )
-        return RetrievalResult(docs, time.perf_counter() - started, details)
+            for identifier, distance in zip(result["ids"][0], result["distances"][0], strict=True):
+                passage = self.passages[identifier]
+                chosen.append(passage.model_copy(update={"metadata": {**passage.metadata, "distance": distance}}))
+        if seeds and len(chosen) < self.settings.top_k:
+            ids = {document.id for document in chosen}
+            chosen += [d for d in retrieve(self.collection, self.settings, question).documents if d.id not in ids]
+        return chosen[: self.settings.top_k]
+
+    def details(self, seeds, start, facts, added, documents):
+        """What the UI graph panel and the evaluation report show."""
+        seed_ids = [document.id for document in seeds]
+        selected_ids = [document.id for document in documents]
+        selected_added = [i for i in selected_ids if i in added]
+        touched = sorted({key for fact in facts for key in (fact["source"], fact["target"])})
+        return {
+            "architecture": "graph_rag",
+            "index_fingerprint": self.graph["fingerprint"],
+            "seed_ids": seed_ids,
+            "anchors": start,
+            "relationships": facts,
+            "entities": [self.graph["entities"][key] for key in touched],
+            "candidate_ids": seed_ids + added,
+            "expansion_count": len(added),
+            "selected_expansion_count": len(selected_added),
+            "selected_graph_ids": selected_added,
+            "traversed_count": len(facts),
+            "graph_used": bool(added),
+            "explanation": f"Graph added {len(added)} candidate passages via {len(facts)} relationships."
+            if added
+            else "Graph expansion contributed no additional passages; using vector results.",
+            "limits": {"anchors": MAX_START, "hops": MAX_HOPS, "relationships": MAX_FACTS, "candidates": MAX_PASSAGES},
+            "selected_ids": selected_ids,
+            "seed_passages": [document.model_dump() for document in seeds],
+            "selected_passages": [document.model_dump() for document in documents],
+        }

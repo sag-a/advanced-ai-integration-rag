@@ -21,21 +21,15 @@ def prepare(settings, collection, log):
     if index_path(settings).exists():
         return load_index(read_documents(collection), settings)
     chat = AnthropicChat(replace(settings, temperature=0), max_tokens=2400)
-    return prepare_index(
-        read_documents(collection),
-        settings,
-        chat,
-        resume=settings.extras.get("resume", False),
-        progress=log.progress,
-    )
+    return prepare_index(read_documents(collection), settings, chat, progress=log.progress)
 
 
 def check(settings, collection):
     graph = load_index(read_documents(collection), settings)
     return {
         "index_fingerprint": graph["fingerprint"],
+        "entities": len(graph["entities"]),
         "relationships": len(graph["relationships"]),
-        "indexing_observations": graph.get("indexing_observations", []),
     }
 
 

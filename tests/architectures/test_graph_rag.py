@@ -66,15 +66,10 @@ class Chat:
         if i == self.fail:
             raise AppError("interrupted")
         data = extraction(i)
-        if schema.__name__ == "ChunkExtraction":
-            data["relationships"] = [
-                {
-                    **{k: v for k, v in r.items() if k != "quote"},
-                    "first_line": 1,
-                    "last_line": 1,
-                }
-                for r in data["relationships"]
-            ]
+        data["relationships"] = [
+            {**{k: v for k, v in r.items() if k != "quote"}, "first_line": 1, "last_line": 1}
+            for r in data["relationships"]
+        ]
         return (schema.model_validate(data), {"usage": {"input_tokens": 1}})
 
 
@@ -82,23 +77,45 @@ def settings(tmp_path):
     return Settings(architecture="graph_rag", extras={"graph_index": tmp_path / "graph.json"})
 
 
-def test_repeat_resume_and_identity(tmp_path):
+class Collection:
+    def __init__(self, docs):
+        self.docs = docs
+        self.calls = []
+
+    def get(self, **kwargs):
+        return {
+            "ids": [d.id for d in self.docs],
+            "documents": [d.page_content for d in self.docs],
+            "metadatas": [d.metadata for d in self.docs],
+        }
+
+    def query(self, **kwargs):
+        self.calls.append(kwargs)
+        ids = kwargs["where"]["$and"][1]["chunk_id"]["$in"]
+        return {"ids": [list(reversed(ids))], "distances": [[0.2] * len(ids)]}
+
+
+def test_prepare_builds_once_and_copies_quotes(tmp_path):
     cfg = settings(tmp_path)
-    with pytest.raises(AppError, match="interrupted"):
-        prepare(documents(), cfg, Chat(fail=1))
-    failures = list((tmp_path / "graph.json.cache").glob("*.failed.json"))
-    assert len(failures) == 1
-    assert len(json.loads(failures[0].read_text(encoding="utf-8"))["attempts"]) == 3
-    with pytest.raises(AppError, match="resume"):
-        prepare(documents(), cfg, Chat())
     chat = Chat()
-    graph = prepare(documents(), cfg, chat, resume=True)
-    assert chat.calls == 2
+    graph = prepare(documents(), cfg, chat)
+    assert chat.calls == 3
+    assert len(graph["entities"]) == 4 and len(graph["relationships"]) == 3
     assert graph["relationships"][0]["polarity"] == "negative"
-    assert prepare(documents(), cfg, Chat())["fingerprint"] == graph["fingerprint"]
-    assert load_index(documents(), cfg)["fingerprint"] == graph["fingerprint"]
-    with pytest.raises(AppError, match="incompatible"):
-        load_index(documents(), replace(cfg, model="claude-another"))
+    assert graph["relationships"][0]["quote"] == documents()[0].page_content
+    assert graph["entities"]["b"]["chunk_ids"] == ["0", "1"]
+    assert json.loads(index_path(cfg).read_text(encoding="utf-8"))["complete"]
+    again = Chat()
+    assert prepare(documents(), cfg, again)["fingerprint"] == graph["fingerprint"]
+    assert again.calls == 0
+
+
+def test_failed_extraction_retries_then_stops(tmp_path):
+    chat = Chat(fail=1)
+    with pytest.raises(AppError, match="interrupted"):
+        prepare(documents(), settings(tmp_path), chat)
+    assert chat.calls == 1 + 3
+    assert not index_path(settings(tmp_path)).exists()
 
 
 def test_reusing_a_complete_index_needs_no_chat_client(tmp_path, monkeypatch):
@@ -107,15 +124,26 @@ def test_reusing_a_complete_index_needs_no_chat_client(tmp_path, monkeypatch):
     cfg = settings(tmp_path)
     expected = prepare(documents(), cfg, Chat())
     monkeypatch.setattr(
-        plugin,
-        "AnthropicChat",
-        lambda *args, **kwargs: pytest.fail("No model needed to reuse an index"),
+        plugin, "AnthropicChat", lambda *args, **kwargs: pytest.fail("No model needed to reuse an index")
     )
     result = plugin.prepare(cfg, Collection(documents()), None)
     assert result["fingerprint"] == expected["fingerprint"]
 
 
-def test_invalid_extraction(tmp_path):
+def test_load_index_refuses_stale_or_forged_graphs(tmp_path):
+    cfg = settings(tmp_path)
+    with pytest.raises(AppError, match="missing"):
+        load_index(documents(), cfg)
+    graph = prepare(documents(), cfg, Chat())
+    with pytest.raises(AppError, match="incompatible"):
+        load_index(documents(), replace(cfg, model="claude-another"))
+    graph["relationships"][0]["quote"] = "invented"
+    index_path(cfg).write_text(json.dumps(graph), encoding="utf-8")
+    with pytest.raises(AppError, match="quotes text"):
+        load_index(documents(), cfg)
+
+
+def test_invalid_extraction():
     from architectures.graph_rag.index import validate_extraction
 
     data = extraction(0)
@@ -123,62 +151,65 @@ def test_invalid_extraction(tmp_path):
     with pytest.raises(AppError, match="quotation"):
         validate_extraction(Extraction.model_validate(data), documents()[0])
     data["relationships"][0]["quote"] = documents()[0].page_content
-    data["relationships"][0]["target"] = "missing"
-    with pytest.raises(AppError, match="endpoint"):
-        validate_extraction(Extraction.model_validate(data), documents()[0])
-
-
-def test_endpoint_feedback_identifies_the_missing_entity(tmp_path):
-    from architectures.graph_rag.index import validate_extraction
-
-    data = extraction(0)
     data["relationships"][0]["target"] = "undeclared_benefit"
     with pytest.raises(AppError, match="undeclared_benefit.*entities array"):
         validate_extraction(Extraction.model_validate(data), documents()[0])
 
 
-def test_ambiguous_alias_and_atomic_complete(tmp_path):
-    graph = prepare(documents(), settings(tmp_path), Chat())
-    assert "καρδιέσ" not in graph["ambiguous_aliases"]
-    assert json.loads((tmp_path / "graph.json").read_text(encoding="utf-8"))["complete"]
-    assert not (tmp_path / "graph.json.tmp").exists()
+def test_assemble_rejects_one_entity_with_two_types(tmp_path):
+    from architectures.graph_rag.index import assemble, contract
+
+    extractions = [Extraction.model_validate(extraction(i)) for i in range(3)]
+    extractions[1].entities[0].type = "organization"
+    with pytest.raises(AppError, match="incompatible types"):
+        assemble(documents(), contract(documents(), settings(tmp_path)), extractions)
 
 
-def test_two_hops_cycles_and_bilingual_anchors(tmp_path):
-    from architectures.graph_rag.retrieval import expand
+def retriever(tmp_path, monkeypatch, seeds, top_k=3):
+    import architectures.graph_rag.retrieval as retrieval
 
-    graph = prepare(documents(), settings(tmp_path), Chat())
-    details = expand(graph, documents(), [documents()[0]], "Καρδιές", max_anchors=1)
-    assert details["anchors"] == ["b"]
-    assert "2" in details["candidate_ids"]
-    assert len(details["relationships"]) == 3
-    limited = expand(graph, documents(), [documents()[0]], "B", max_anchors=1, max_edges=1)
-    assert len(limited["relationships"]) == 1
-    assert len(limited["candidate_ids"]) <= 12
-    graph["entities"]["a"]["aliases"].append("Καρδιές")
-    graph["ambiguous_aliases"]["καρδιέσ"] = ["a", "b"]
-    ambiguous = expand(graph, documents(), [documents()[0]], "Καρδιές", max_anchors=1)
-    assert ambiguous["ambiguous_query_aliases"] == ["καρδιέσ"]
+    cfg = replace(settings(tmp_path), top_k=top_k)
+    prepare(documents(), cfg, Chat())
+    monkeypatch.setattr(retrieval, "retrieve", lambda *args: RetrievalResult(seeds, 0.01))
+    return retrieval.GraphRetriever(Collection(documents()), cfg)
 
 
-def test_fusion_retains_seed():
-    from architectures.graph_rag.retrieval import fuse
+def test_start_entities_prefer_names_in_the_question(tmp_path, monkeypatch):
+    graph = retriever(tmp_path, monkeypatch, documents()[:1])
+    assert graph.start_entities(documents()[:1], "Καρδιές") == ["b", "a"]
+    assert graph.start_entities(documents()[:1], "something else") == ["a", "b"]
 
-    assert fuse(["seed", "x", "y"], ["y", "x"], ["seed"], 2) == ["seed", "y"]
+
+def test_walk_follows_two_hops_within_the_fact_limit(tmp_path, monkeypatch):
+    import architectures.graph_rag.retrieval as retrieval
+
+    graph = retriever(tmp_path, monkeypatch, documents()[:1])
+    facts = graph.walk(["a"])
+    assert [(f["id"], f["hop"]) for f in facts] == [("r0", 1), ("r1", 2)]
+    monkeypatch.setattr(retrieval, "MAX_FACTS", 1)
+    assert len(graph.walk(["a", "b"])) == 1
 
 
-def test_foreign_sources_and_modified_fingerprint_rejected(tmp_path):
-    from rag_core.corpus import digest
+def test_retriever_keeps_seeds_first_then_adds_graph_passages(tmp_path, monkeypatch):
+    graph = retriever(tmp_path, monkeypatch, documents()[:1])
+    result = graph("Καρδιές")
+    assert [d.id for d in result.documents] == ["0", "2", "1"]
+    assert result.details["expansion_count"] == 2
+    assert result.details["selected_expansion_count"] == 2
+    assert result.details["graph_used"]
+    assert all(d.page_content == documents()[int(d.id)].page_content for d in result.documents)
+    assert graph.collection.calls[0]["where"]["$and"][0] == {"corpus_id": {"$eq": "corpus"}}
 
-    cfg = settings(tmp_path)
-    graph = prepare(documents(), cfg, Chat())
-    graph["relationships"][0]["chunk_id"] = "foreign"
-    graph["fingerprint"] = digest(
-        {k: graph[k] for k in ("contract", "entities", "relationships")}
-    )
-    index_path(cfg).write_text(json.dumps(graph))
-    with pytest.raises(AppError, match="foreign chunk"):
-        load_index(documents(), cfg)
+
+def test_retriever_falls_back_to_vector_results(tmp_path, monkeypatch):
+    graph = retriever(tmp_path, monkeypatch, documents()[:1])
+    graph.graph["relationships"] = []
+    result = graph("B")
+    assert [d.id for d in result.documents] == ["0"]
+    assert not result.details["graph_used"]
+    assert "contributed no additional" in result.details["explanation"]
+    empty = retriever(tmp_path, monkeypatch, [])
+    assert empty("anything").documents == []
 
 
 def test_graph_explanation_stays_with_the_accepted_message(tmp_path):
@@ -203,102 +234,6 @@ def test_graph_explanation_stays_with_the_accepted_message(tmp_path):
         messages[-1].additional_kwargs["result"]["observation"]["retrieval_details"] == details
     )
     assert len(calls) == 1
-
-
-class Collection:
-    def __init__(self, docs):
-        self.docs = docs
-        self.calls = []
-        self.fail = False
-
-    def get(self, **kwargs):
-        return {
-            "ids": [d.id for d in self.docs],
-            "documents": [d.page_content for d in self.docs],
-            "metadatas": [d.metadata for d in self.docs],
-        }
-
-    def query(self, **kwargs):
-        self.calls.append(kwargs)
-        if self.fail:
-            raise RuntimeError("unavailable")
-        ids = kwargs["where"]["$and"][1]["chunk_id"]["$in"]
-        return {"ids": [list(reversed(ids))], "distances": [[0.2] * len(ids)]}
-
-
-def test_retriever_expansion_fallback_and_explicit_errors(tmp_path, monkeypatch):
-    import architectures.graph_rag.retrieval as retrieval
-
-    cfg = replace(settings(tmp_path), top_k=3)
-    prepare(documents(), cfg, Chat())
-    collection = Collection(documents())
-    monkeypatch.setattr(
-        retrieval, "retrieve", lambda *args: RetrievalResult(documents()[:1], 0.01)
-    )
-    retriever = retrieval.GraphRetriever(collection, cfg)
-    result = retriever("Καρδιές")
-    assert result.documents[0].id == "0"
-    assert {d.id for d in result.documents} == {"0", "1", "2"}
-    assert result.details["expansion_count"] == 2
-    assert result.details["selected_expansion_count"] == 2
-    assert all(
-        (d.page_content == documents()[int(d.id)].page_content for d in result.documents)
-    )
-    assert collection.calls[0]["where"]["$and"][0] == {"corpus_id": {"$eq": "corpus"}}
-    collection.fail = True
-    with pytest.raises(AppError, match="candidate ranking failed"):
-        retriever("B")
-    collection.fail = False
-    retriever.graph["relationships"] = []
-    fallback = retriever("B")
-    assert not fallback.details["graph_used"]
-    assert "contributed no additional" in fallback.details["explanation"]
-    monkeypatch.setattr(retrieval, "retrieve", lambda *args: RetrievalResult([], 0.01))
-    assert retriever("empty").documents == []
-
-    def fail(*args):
-        raise AppError("Chroma unavailable")
-
-    monkeypatch.setattr(retrieval, "retrieve", fail)
-    with pytest.raises(AppError, match="unavailable"):
-        retriever("B")
-
-
-def test_cycles_alias_types_and_candidate_limits(tmp_path):
-    from architectures.graph_rag.retrieval import expand
-
-    graph = prepare(documents(), settings(tmp_path), Chat())
-    graph["relationships"].append(
-        {**graph["relationships"][0], "id": "cycle", "source": "c", "target": "a"}
-    )
-    details = expand(graph, documents(), documents()[:1], "B", max_anchors=1, max_candidates=2)
-    assert details["anchors"] == ["b"]
-    assert len(details["candidate_ids"]) == 2
-    assert len({r["id"] for r in details["relationships"]}) == len(details["relationships"])
-    assert all((r["hop"] <= 2 for r in details["relationships"]))
-    from architectures.graph_rag.index import assemble, contract
-
-    rows = [{"extraction": extraction(i), "observation": {}} for i in range(3)]
-    rows[1]["extraction"]["entities"][0]["type"] = "organization"
-    with pytest.raises(AppError, match="incompatible types"):
-        assemble(documents(), contract(documents(), settings(tmp_path)), rows)
-    rows[1]["extraction"]["entities"][0]["type"] = "concept"
-    rows[1]["extraction"]["entities"][1]["aliases"].append("Καρδιές")
-    graph = assemble(documents(), contract(documents(), settings(tmp_path)), rows)
-    assert graph["ambiguous_aliases"]["καρδιέσ"] == ["b", "c"]
-
-
-def test_graph_retrieval_reports_stages_only_inside_a_run(tmp_path, monkeypatch):
-    import architectures.graph_rag.retrieval as retrieval
-
-    cfg = settings(tmp_path)
-    prepare(documents(), cfg, Chat())
-    monkeypatch.setattr(
-        retrieval, "retrieve", lambda *args: RetrievalResult(documents()[:1], 0.01)
-    )
-    # Called directly, as `./rag search` does: stage reports are silently skipped.
-    result = retrieval.GraphRetriever(Collection(documents()), cfg)("B")
-    assert len(result.documents) == 3
 
 
 def test_streamed_graph_answer_uses_original_passages_and_clears_stale_details(tmp_path):
