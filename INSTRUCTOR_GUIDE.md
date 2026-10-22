@@ -22,7 +22,7 @@ whiteboard prompt.
 | Time | Lesson | Teach from |
 | --- | --- | --- |
 | 09:00–09:20 | Setup check: `uv run --all-extras pytest -q`, Docker running | [SETUP.md](SETUP.md) |
-| 09:20–10:10 | 1. Embeddings, chunking, semantic search | [c01 README](modules/c01_embeddings/README.md) |
+| 09:20–10:10 | 1. Embeddings, chunking, semantic search | [c01 lesson](modules/c01_embeddings/lesson.html) |
 | 10:10–10:25 | Break | |
 | 10:25–11:25 | 2. Vector databases: pgvector and Chroma (60 min, as planned in the study guide) | [c02 study guide](modules/c02_vector_databases/study_guide.html) |
 | 11:25–12:15 | 3. Classic (base) RAG | [c03 lesson](modules/c03_classic_rag/lesson.html) |
@@ -30,10 +30,10 @@ whiteboard prompt.
 | 13:10–14:00 | 4. Graph RAG | [c04 lesson](modules/c04_graph_rag/lesson.html) |
 | 14:00–14:15 | Break | |
 | 14:15–15:05 | 5. Agentic RAG | [c05 lesson](modules/c05_agentic_rag/lesson.html) |
-| 15:05–15:25 | Optional, pick one: Jev gate and router, or dense vs hybrid on the tariffs corpus | Sections below |
+| 15:05–15:25 | Jev gate and router (dense vs hybrid stays available as a spare) | [Section below](#optional-a-gate-before-the-llm-with-jev-15-min) |
 | 15:25–16:00 | Comparison and evaluation | `#compare` section of any lesson page |
 
-Present lessons 3–5 with **P** (one section per screen, ← → to move, Esc to exit).
+Present lessons 1, 3, 4 and 5 with **P** (one section per screen, ← → to move, Esc to exit).
 
 ## Before class
 
@@ -46,6 +46,16 @@ Present lessons 3–5 with **P** (one section per screen, ← → to move, Esc t
 - [ ] Add `--process` to CLI demos so students see each node and model call. With `./rag ui`,
       keep its terminal visible next to the browser: the steps are printed there.
 - [ ] Keep the default `--model`. Any other model makes the graph index incompatible.
+- [ ] Open the four `lesson.html` pages and the lesson 2 study guide in browser tabs.
+- [ ] `./rag check --architecture jev_rag --option route=true` passes (OpenRouter key and
+      both collections) before the Jev segment.
+
+**If something fails in the room:**
+
+- **Anthropic API or Wi-Fi down:** show the saved transcripts in `outputs/rehearsal/`.
+  Lessons 1–2 and every `./rag search` run offline, so the retrieval half still works live.
+- **OpenRouter down:** skip the Jev segment and give the closing comparison its 20 minutes.
+- **Docker trouble:** lesson 1 needs no Docker. Restart Docker Desktop during the first break.
 
 ## Lesson 1: Embeddings, chunking, semantic search
 
@@ -145,8 +155,11 @@ It selects evidence and stops; the shared generator answers.
 [#guard](modules/c05_agentic_rag/lesson.html#guard).
 
 **Demo:** the narrow expiry question, then the two-topic “How do I join … and can I
-transfer my Hearts?” and watch for `delegate`. Finish with `--option max_searches=1`
-to show a rejected turn on purpose.
+transfer my Hearts?”: point at the two skill reads and two searches. It may delegate,
+but that's the model's choice; in rehearsal it didn't. Finish with the **same two-topic
+question** and `--option max_searches=1`: its second search hits the budget and the turn
+is rejected on purpose. (A one-topic question finishes within one search and shows
+nothing.)
 
 **Whiteboard:** *“The agent ran out of budget after finding two good passages.
 Why not answer with those?”* Because it has not shown the evidence is complete.
@@ -246,3 +259,33 @@ uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-o
 Close on the honest finding: on this small corpus all three tie on accuracy. They
 differ in what you can inspect, what they cost, and how they fail. Choosing one is
 an engineering trade-off, not a leaderboard.
+
+End by pointing to the five labs in [`exercises/`](exercises/README.md) as homework. Each
+one starts from a measured weakness of today's systems.
+
+## Questions students are likely to ask
+
+**“Claude can read a million tokens. Why retrieve at all?”** Measured with the course
+tokenizer, the whole Magenta PDF is about 3,500 tokens and the tariffs list about
+44,000; both fit in one prompt. Six retrieved passages are about 1,400 and 2,900 tokens.
+Be honest about the result:
+
+- **For the small Magenta PDF, long context is a real alternative.** Retrieval saves
+  only about 2.5× on input tokens, and the whole document can't miss a clause.
+- **For the tariffs list it saves about 15×** on every question, and the gap grows with
+  the corpus. A thousand PDFs don't fit at all.
+- **Citations and latency still favour retrieval:** each passage carries its page and
+  clause, and a short prompt answers faster.
+
+The middle ground for one small document is long context plus prompt caching: the
+document is cached once and only the question changes. Retrieval earns its place as the
+corpus grows.
+
+**“Why don't you set temperature to 0 for reproducible answers?”** Current Claude models
+(4.7 and later) reject `temperature` entirely; the course sends it only to the older
+default model. Reproducibility now comes from:
+
+- **pinning** the model snapshot, the embedding model and the corpus;
+- **identity hashes** for prompts and indexes, which the course records in every report;
+- **reporting ranges** over repeated runs, not single numbers. Lab 2's two LLM runs gave
+  0.590 and 0.603 on the same cases.

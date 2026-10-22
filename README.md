@@ -34,7 +34,7 @@ Dependencies only point inward: `app`/`evals` → `architectures` → `rag_core`
 
 | Lesson | Teach from | Notes |
 | --- | --- | --- |
-| 1. Embeddings, chunking, semantic search | [c01_embeddings](modules/c01_embeddings/README.md) | [guide](modules/c01_embeddings/GUIDE.md) |
+| 1. Embeddings, chunking, semantic search | [lesson.html](modules/c01_embeddings/lesson.html) | [README](modules/c01_embeddings/README.md), [guide](modules/c01_embeddings/GUIDE.md) |
 | 2. Vector databases | [study_guide.html](modules/c02_vector_databases/study_guide.html) | [pgvector](modules/c02_vector_databases/README.md), [Chroma](modules/c02_vector_databases/CHROMA.md) |
 | 3. Classic (base) RAG | [lesson.html](modules/c03_classic_rag/lesson.html) | [README](modules/c03_classic_rag/README.md), [instructor notes](modules/c03_classic_rag/instructor_notes/) |
 | 4. Graph RAG | [lesson.html](modules/c04_graph_rag/lesson.html) | [README](modules/c04_graph_rag/README.md), [instructor notes](modules/c04_graph_rag/instructor_notes/) |

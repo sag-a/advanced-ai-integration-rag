@@ -18,6 +18,8 @@
   --ochre-soft: #f6e8d6;
   --cobalt: #2a4ccf;
   --cobalt-soft: #e0e6fb;
+  --plum: #84358f;
+  --plum-soft: #f3e3f5;
   --pos: #1d7a3a;
   --neg: #b42318;
   --cond: #9a6700;
@@ -31,7 +33,7 @@
     --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
     --rule: #2a3440; --code-bg: #1d2630;
     --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
-    --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+    --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
     --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
   }
 }
@@ -40,12 +42,13 @@
   --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
   --rule: #2a3440; --code-bg: #1d2630;
   --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
-  --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+  --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
   --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
 }
 body.base { --accent: var(--teal); --accent-soft: var(--teal-soft); }
 body.agentic { --accent: var(--ochre); --accent-soft: var(--ochre-soft); }
 body.graph { --accent: var(--cobalt); --accent-soft: var(--cobalt-soft); }
+body.embeddings { --accent: var(--plum); --accent-soft: var(--plum-soft); }
 
 * { box-sizing: border-box; }
 body {
@@ -212,7 +215,7 @@ body.presenting .present-bar {
 
 </style>
 <body class="graph">
-<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="#top" aria-current="page">Graph RAG</a><a href="../c05_agentic_rag/lesson.html">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
+<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="../c01_embeddings/lesson.html">Embeddings</a><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="#top" aria-current="page">Graph RAG</a><a href="../c05_agentic_rag/lesson.html">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
 <div class="shell">
 <aside class="toc" aria-label="On this page"><p>On this page</p><ol>
 <li><a href="#idea">The idea</a></li>
@@ -377,7 +380,7 @@ body.presenting .present-bar {
 <h2>Demo questions</h2>
 <div class="q">
 <details open><summary>Μπορώ να εξαργυρώσω τις Καρδιές για μετρητά; <span class="gr">· Can I redeem Hearts for cash?</span></summary><div><p>Anchors on <code>hearts</code> and walks the negative edges to cash, products and services. Good for showing that polarity survives extraction: the quote contains the “cannot”.</p></div></details>
-<details><summary>Who can join Magenta Moments and what do members get?</summary><div><p>Two hops: <code>active_customers</code> → <code>magenta_moments</code> → <code>privileges_gifts_offers</code> → <code>partner_network</code>. Compare the passage list with Base RAG on the same question.</p></div></details>
+<details><summary>Who can join Magenta Moments and what do members get?</summary><div><p>Uses both hops and hits the 30-relationship cap. Watch the hub entity <code>magenta_moments</code>: it pulls in edges about the company (<code>ote</code>) and liability, which spend the budget without helping. The answer still cites §2.1 (joining), §1 (what members get) and §3.4. Compare the passage list with Base RAG on the same question.</p></div></details>
 <details><summary>Πότε λήγουν οι Καρδιές; <span class="gr">· When do Hearts expire?</span></summary><div><p>A direct question. The expiry passage is already a seed, so watch whether expansion adds anything. If it adds nothing, the fallback message appears and the answer matches Base RAG.</p></div></details>
 </div>
 </section>

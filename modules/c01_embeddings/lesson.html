@@ -1,0 +1,404 @@
+<title>Embeddings Field Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<style>
+/* Layout: spec-sheet reference page. Sticky contents rail on wide screens, one 70ch reading column, diagrams break wider. Each architecture owns one accent. */
+:root {
+  --paper: #f4f6f8;
+  --panel: #ffffff;
+  --ink: #16202b;
+  --muted: #566372;
+  --rule: #d6dce4;
+  --code-bg: #e9edf2;
+  --teal: #0a7468;
+  --teal-soft: #dcefec;
+  --ochre: #9a5400;
+  --ochre-soft: #f6e8d6;
+  --cobalt: #2a4ccf;
+  --cobalt-soft: #e0e6fb;
+  --plum: #84358f;
+  --plum-soft: #f3e3f5;
+  --pos: #1d7a3a;
+  --neg: #b42318;
+  --cond: #9a6700;
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
+    --rule: #2a3440; --code-bg: #1d2630;
+    --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
+    --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
+    --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
+  --rule: #2a3440; --code-bg: #1d2630;
+  --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
+  --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
+  --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
+}
+body.base { --accent: var(--teal); --accent-soft: var(--teal-soft); }
+body.agentic { --accent: var(--ochre); --accent-soft: var(--ochre-soft); }
+body.graph { --accent: var(--cobalt); --accent-soft: var(--cobalt-soft); }
+body.embeddings { --accent: var(--plum); --accent-soft: var(--plum-soft); }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 var(--f-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+code, kbd { font-family: var(--f-mono); font-size: 0.86em; background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; }
+pre { font: 13.5px/1.6 var(--f-mono); background: var(--code-bg); padding: 14px 16px; border-radius: 6px; overflow-x: auto; margin: 0; }
+pre code { background: none; padding: 0; font-size: inherit; }
+pre .c { color: var(--muted); }
+
+.topbar {
+  max-width: 1180px; margin: 0 auto; padding-block: 18px 0;
+  display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+}
+.course { font: 500 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.tabs { display: flex; gap: 4px; flex-wrap: wrap; }
+.tabs a {
+  font: 600 13px/1 var(--f-body); text-decoration: none; color: var(--muted);
+  padding: 8px 12px; border-radius: 999px; border: 1px solid var(--rule);
+}
+.tabs a:hover { color: var(--ink); border-color: var(--muted); }
+.tabs a[aria-current="page"] { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+.shell { max-width: 1180px; margin: 0 auto; display: grid; gap: 48px; grid-template-columns: 1fr; padding-block: 28px 80px; }
+@media (min-width: 1000px) { .shell { grid-template-columns: 200px minmax(0, 1fr); } }
+.toc { display: none; }
+@media (min-width: 1000px) {
+  .toc { display: block; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; }
+  .toc p { font: 500 11px/1 var(--f-mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 6px 0 12px; }
+  .toc ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; border-left: 1px solid var(--rule); }
+  .toc a { display: block; padding: 4px 0 4px 14px; margin-left: -1px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; font-size: 14px; }
+  .toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+}
+
+main { min-width: 0; display: grid; gap: 56px; }
+main > section { display: grid; gap: 16px; max-width: 74ch; }
+main > section.wide { max-width: none; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(36px, 6vw, 58px); line-height: 1.02; font-weight: 700; }
+h2 { font-size: 27px; line-height: 1.2; font-weight: 650; display: flex; gap: 12px; align-items: baseline; }
+h2 .tag { font: 500 12px/1 var(--f-mono); color: var(--accent); letter-spacing: 0.04em; }
+h3 { font-size: 18px; font-weight: 650; }
+p, ul, ol { margin: 0; }
+ul, ol { padding-left: 1.3em; display: grid; gap: 6px; }
+.muted { color: var(--muted); }
+
+.hero { display: grid; gap: 18px; max-width: 78ch; }
+.eyebrow { font: 500 12px/1 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.lede { font-size: 19px; line-height: 1.55; color: var(--ink); }
+.spec {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  border-top: 2px solid var(--ink); border-bottom: 1px solid var(--rule); margin-top: 6px;
+}
+.spec div { padding: 12px 16px 14px 0; display: grid; gap: 4px; align-content: start; }
+.spec dt { font: 500 11px/1.2 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.spec dd { margin: 0; font-weight: 600; font-variant-numeric: tabular-nums; }
+.spec dl { display: contents; }
+
+figure { margin: 0; display: grid; gap: 10px; }
+.diagram { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 18px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; height: auto; min-width: 640px; color: var(--ink); }
+figcaption { font-size: 14px; color: var(--muted); max-width: 74ch; }
+svg text { font-family: var(--f-body); fill: currentColor; }
+svg .mono { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); }
+svg .lbl { font-family: var(--f-mono); font-size: 10.5px; fill: var(--muted); paint-order: stroke; stroke: var(--panel); stroke-width: 4px; stroke-linejoin: round; }
+svg .t { font-size: 13px; font-weight: 600; }
+svg .lane { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; fill: var(--muted); }
+svg .box { fill: var(--panel); stroke: currentColor; stroke-width: 1.2; }
+svg .box.hot { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+svg .box.dim { fill: var(--code-bg); stroke: var(--rule); }
+svg .edge { stroke: currentColor; stroke-width: 1.3; fill: none; }
+svg .edge.hot { stroke: var(--accent); stroke-width: 2; }
+svg .fence { fill: none; stroke: var(--accent); stroke-width: 1.4; stroke-dasharray: 6 5; }
+svg .pos { stroke: var(--pos); }
+svg .neg { stroke: var(--neg); stroke-dasharray: 5 4; }
+svg .ah { fill: currentColor; }
+svg .ah.hot { fill: var(--accent); }
+svg .ah.pos { fill: var(--pos); stroke: none; }
+svg .ah.neg { fill: var(--neg); stroke: none; }
+svg .dot { fill: currentColor; }
+
+.steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 44px 1fr; gap: 4px 12px; padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.steps > li::before { content: counter(s, decimal-leading-zero); font: 600 13px/1.6 var(--f-mono); color: var(--accent); grid-row: span 2; }
+.steps h3 { font-size: 16px; }
+.steps p { color: var(--ink); }
+.steps .where { grid-column: 2; font: 12.5px/1.4 var(--f-mono); color: var(--muted); }
+
+.table-wrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 8px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--rule); }
+tr:last-child td { border-bottom: 0; }
+thead th { font: 500 11px/1.3 var(--f-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); background: var(--code-bg); }
+tbody th { font-weight: 600; white-space: nowrap; }
+td.here, th.here { background: var(--accent-soft); }
+thead th.here { color: var(--accent); }
+
+.cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.card h3 { font-size: 16px; }
+.card p { font-size: 15px; }
+
+.note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; display: grid; gap: 6px; }
+.note strong { font-family: var(--f-display); }
+
+.pitfalls { list-style: none; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.pitfalls li { padding: 12px 0; border-bottom: 1px solid var(--rule); display: grid; gap: 4px; }
+.pitfalls b { font-weight: 600; }
+.pitfalls span { color: var(--muted); font-size: 15px; }
+
+.q { display: grid; gap: 12px; }
+.q details { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 12px 16px; }
+.q summary { cursor: pointer; font-weight: 600; }
+.q summary .gr { font-weight: 400; color: var(--muted); }
+.q details > div { padding-top: 10px; display: grid; gap: 8px; font-size: 15px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font: 12.5px/1.4 var(--f-mono); color: var(--muted); }
+.legend i { display: inline-block; width: 22px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 6px; }
+.legend .p { border-color: var(--pos); }
+.legend .n { border-color: var(--neg); border-top-style: dashed; }
+
+footer { max-width: 1180px; margin: 0 auto; padding-block: 24px 40px; border-top: 1px solid var(--rule); font-size: 13px; color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 24px; }
+
+/* Present mode: one section per screen. Toggle with P or the Present button. */
+.present-btn {
+  font: 600 13px/1 var(--f-body); color: var(--ink); background: var(--panel);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 8px 12px; cursor: pointer;
+}
+.present-btn:hover { border-color: var(--accent); color: var(--accent); }
+.present-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.present-bar { display: none; }
+body.presenting .toc, body.presenting .topbar, body.presenting footer { display: none; }
+body.presenting .shell { display: block; max-width: none; padding-block: 0; }
+body.presenting main { display: block; }
+body.presenting main > section { display: none; }
+body.presenting main > section.current {
+  display: grid; align-content: center; min-height: 100vh; max-width: min(1240px, 100%);
+  margin: 0 auto; padding-block: 48px 72px;
+}
+@media (min-width: 1200px) { body.presenting main > section.current { zoom: 1.3; } }
+body.presenting .present-bar {
+  display: flex; gap: 12px; align-items: center; position: fixed; z-index: 20;
+  right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  font: 500 12px/1 var(--f-mono); color: var(--muted); font-variant-numeric: tabular-nums;
+  background: var(--panel); border: 1px solid var(--rule); border-radius: 999px; padding: 8px 12px;
+}
+.present-bar button { font: inherit; color: var(--ink); background: none; border: 0; cursor: pointer; padding: 2px 6px; }
+@media print {
+  .toc, .topbar nav, .present-btn, .present-bar { display: none !important; }
+  .shell { display: block; padding-block: 0; }
+  main > section { break-before: page; max-width: none; }
+  main > section:first-child { break-before: auto; }
+  .diagram, .table-wrap, pre { break-inside: avoid; overflow: visible; }
+}
+
+.plots { display: grid; gap: 14px; }
+.plots img { width: 100%; height: auto; border-radius: 6px; border: 1px solid var(--rule); background: #fff; }
+</style>
+<body class="embeddings">
+<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="#top" aria-current="page">Embeddings</a><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="../c04_graph_rag/lesson.html">Graph RAG</a><a href="../c05_agentic_rag/lesson.html">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
+<div class="shell">
+<aside class="toc" aria-label="On this page"><p>On this page</p><ol>
+<li><a href="#idea">The idea</a></li>
+<li><a href="#flow">Text to vector</a></li>
+<li><a href="#demos">Five demos</a></li>
+<li><a href="#context">Same word, new context</a></li>
+<li><a href="#chunking">Chunking</a></li>
+<li><a href="#similarity">Similarity</a></li>
+<li><a href="#languages">Across languages</a></li>
+<li><a href="#run">Run it</a></li>
+<li><a href="#pitfalls">Pitfalls</a></li>
+</ol></aside>
+<main>
+
+<section class="hero" id="idea">
+<span class="eyebrow">lesson 1 · modules/c01_embeddings</span>
+<h1>Embeddings, chunking and semantic search</h1>
+<p class="lede">An embedding turns a piece of text into a list of numbers so that texts with similar meaning land close together. Everything else in the course rests on that: we cut documents into chunks, embed each one, embed the question, and return the closest chunks.</p>
+<dl class="spec">
+<div><dt>Model</dt><dd>nomic-embed-text-v2-moe</dd></div>
+<div><dt>Dimensions</dt><dd>768</dd></div>
+<div><dt>Input limit</dt><dd>512 tokens, prefix included</dd></div>
+<div><dt>Pooling</dt><dd>Masked mean, then L2 norm</dd></div>
+<div><dt>Runs on</dt><dd>Your CPU · no API key</dd></div>
+<div><dt>Time</dt><dd>50 minutes</dd></div>
+</dl>
+</section>
+
+<section class="wide" id="flow">
+<h2>Text to vector <span class="tag">what the encoder does</span></h2>
+<figure>
+<div class="diagram"><svg viewBox="0 0 900 150" role="img" aria-label="A chunk gets a task prefix, is split into tokens, passes through 12 transformer layers that give each token a context-aware vector, the token vectors are averaged and normalized, giving one 768-number vector per chunk.">
+<defs><marker id="ae" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker>
+<marker id="aeh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="ah hot"/></marker></defs>
+<rect x="20" y="40" width="120" height="52" rx="6" class="box"/><text x="80" y="62" text-anchor="middle" class="t">Text</text><text x="80" y="79" text-anchor="middle" class="mono">search_document:</text>
+<line x1="140" y1="66" x2="166" y2="66" class="edge" marker-end="url(#ae)"/>
+<rect x="168" y="40" width="120" height="52" rx="6" class="box"/><text x="228" y="62" text-anchor="middle" class="t">Tokens</text><text x="228" y="79" text-anchor="middle" class="mono">IDs, ≤ 512</text>
+<line x1="288" y1="66" x2="314" y2="66" class="edge" marker-end="url(#ae)"/>
+<rect x="316" y="40" width="120" height="52" rx="6" class="box hot"/><text x="376" y="62" text-anchor="middle" class="t">12 layers</text><text x="376" y="79" text-anchor="middle" class="mono">tokens see context</text>
+<line x1="436" y1="66" x2="462" y2="66" class="edge hot" marker-end="url(#aeh)"/>
+<rect x="464" y="40" width="120" height="52" rx="6" class="box"/><text x="524" y="62" text-anchor="middle" class="t">Token vectors</text><text x="524" y="79" text-anchor="middle" class="mono">768 each</text>
+<line x1="584" y1="66" x2="610" y2="66" class="edge" marker-end="url(#ae)"/>
+<rect x="612" y="40" width="120" height="52" rx="6" class="box"/><text x="672" y="62" text-anchor="middle" class="t">Mean pool</text><text x="672" y="79" text-anchor="middle" class="mono">skip padding</text>
+<line x1="732" y1="66" x2="758" y2="66" class="edge" marker-end="url(#ae)"/>
+<rect x="760" y="40" width="120" height="52" rx="6" class="box"/><text x="820" y="62" text-anchor="middle" class="t">One vector</text><text x="820" y="79" text-anchor="middle" class="mono">length 1</text>
+<text x="376" y="120" text-anchor="middle" class="mono" style="fill:var(--accent)">demo 2 looks inside here</text>
+<text x="820" y="120" text-anchor="middle" class="mono">demos 1, 4, 5 use this</text>
+</svg></div>
+<figcaption>One chunk in, one vector out, whatever the chunk's length. Questions take the same path with the prefix <code>search_query:</code>. The two prefixes put questions and passages into a shared space built for matching them.</figcaption>
+</figure>
+</section>
+
+<section id="demos">
+<h2>Five demos <span class="tag">in teaching order</span></h2>
+<ol class="steps">
+<li><h3>Sentences become vectors</h3><p>Five sentences, one 768-number vector each, and their cosine similarity matrix. Ask students to predict which paraphrase lands closest to the original before you run it.</p><span class="where">m01_nomic_embeddings.py</span></li>
+<li><h3>The same word changes with context</h3><p>"orange" in juice and in paint starts from the same vocabulary vector and ends up somewhere else after the transformer layers. This looks at single tokens, not pooled sentence vectors.</p><span class="where">m02_contextual_words.py</span></li>
+<li><h3>Where to cut a document</h3><p>The same support text split three ways: every 300 characters, recursively at paragraph and line breaks, and by section. No model runs; watch where headings get separated from their instructions.</p><span class="where">m03_chunking_comparison.py</span></li>
+<li><h3>Chunks become vectors</h3><p>Each chunk's character count, Nomic token count and vector shape, with 300-character chunks and an overlap of 50.</p><span class="where">m04_nomic_chunking.py</span></li>
+<li><h3>A question finds passages</h3><p>Embed the question, compare it with every chunk, print the closest. Top-k always returns something, even for a question the text can't answer.</p><span class="where">m05_nomic_semantic_search.py</span></li>
+</ol>
+</section>
+
+<section class="wide" id="context">
+<h2>Same word, new context <span class="tag">measured · layer 12</span></h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Pair</th><th scope="col">Sentences</th><th scope="col">Before context</th><th scope="col">After context</th></tr></thead>
+<tbody>
+<tr><th scope="row">O1 / O2</th><td>I drink an orange juice · The sunset is orange</td><td>1.000</td><td>0.667</td></tr>
+<tr><th scope="row">O2 / O4</th><td>The sunset is orange · She painted the wall orange</td><td>1.000</td><td>0.823</td></tr>
+<tr><th scope="row">R1 / R2</th><td>I ate a red apple · Red is my favourite colour</td><td>0.804</td><td>0.692</td></tr>
+<tr><th scope="row">R1 / R3</th><td>I ate a red apple · I ate a red grape</td><td>1.000</td><td>0.855</td></tr>
+<tr><th scope="row">R4 / R5</th><td>The business is in the red · The company is in the red</td><td>1.000</td><td>0.965</td></tr>
+<tr><th scope="row">O1 / D1</th><td>The same sentence twice</td><td>1.000</td><td>1.000</td></tr>
+</tbody></table></div>
+<figure class="plots">
+<img src="contextual_embeddings/contextual_word_positions.png" alt="Two scatter plots. Before context, every use of orange is one point and red is two points (red and Red). After context, the orange points spread out by meaning: fruit sentences cluster apart from colour sentences, and the financial-idiom red sentences sit apart from the colour ones.">
+<figcaption>Cosine similarity of the target word's vector, before and after the transformer layers. Two traps worth naming: <strong>Red and red are different tokens</strong>, so R1/R2 already differ before context (0.804); use R1/R3 as the clean comparison. And a different vector doesn't prove a different meaning; R1/R3 are both colours. The 2-D plot keeps 64% of the variance, so trust the table over the picture.</figcaption>
+</figure>
+</section>
+
+<section id="chunking">
+<h2>Chunking <span class="tag">boundaries decide what can be found</span></h2>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Strategy</th><th scope="col">Rule</th><th scope="col">Trade-off</th></tr></thead>
+<tbody>
+<tr><th scope="row">Fixed</th><td>Cut every 300 characters</td><td>Predictable sizes; splits words and sentences</td></tr>
+<tr><th scope="row">Recursive</th><td>Prefer paragraphs, then lines, then spaces, within 300 characters</td><td>Keeps more boundaries; can still separate a heading from its instructions</td></tr>
+<tr><th scope="row">Sections</th><td>Keep each heading and its body together</td><td>Keeps meaning together; sections can exceed the size limit</td></tr>
+</tbody></table></div>
+<div class="note"><strong>What lessons 3–5 use</strong><p>The PDF is split by its own clause numbers (§3.3, §7.4), capped at 512 tokens with no overlap. Each chunk also repeats its section heading, so a passage still says which section it belongs to after it is cut out. Characters and tokens are different units: these demos count characters, the model counts tokens.</p></div>
+</section>
+
+<section id="similarity">
+<h2>Similarity <span class="tag">what the number means</span></h2>
+<ul>
+<li><strong>Cosine similarity</strong> compares direction, from −1 to 1. The vectors here have length 1, so cosine, the dot product and Euclidean distance all rank results the same way.</li>
+<li><strong>It is not a probability.</strong> 0.82 does not mean "82% relevant", and there is no universal cut-off.</li>
+<li><strong>Top-k always returns k results.</strong> Ask a telecom collection for a cake recipe and it still hands back three passages. Deciding relevance is a later step (lesson 3's refusal, the Jev gate).</li>
+</ul>
+</section>
+
+<section id="languages">
+<h2>Across languages <span class="tag">why English questions find Greek text</span></h2>
+<p>Nomic v2 is trained on many languages together, so a question and a passage that mean the same thing land close even in different languages. That is why the course can ask "When do Hearts expire?" of a Greek PDF.</p>
+<p class="muted">Close is not the same as closest. In lab 5, "When do Hearts expire?" matched an English question about <em>transferring</em> Hearts (0.47) more closely than the Greek "Πότε λήγουν οι Καρδιές;", while two English questions about different plans scored 0.93. Cross-language matching works, but it is weaker than matching within one language.</p>
+</section>
+
+<section id="run">
+<h2>Run it</h2>
+<pre><code><span class="c"># once, from the repository root (downloads about 2 GB of weights)</span>
+uv sync --all-extras
+uv run --all-extras python -m modules.c01_embeddings.m02_contextual_words --allow-download
+
+<span class="c"># the five demos, in order</span>
+uv run --all-extras python -m modules.c01_embeddings.m01_nomic_embeddings
+uv run --all-extras python -m modules.c01_embeddings.m02_contextual_words
+uv run --all-extras python -m modules.c01_embeddings.m03_chunking_comparison
+uv run --all-extras python -m modules.c01_embeddings.m04_nomic_chunking
+uv run --all-extras python -m modules.c01_embeddings.m05_nomic_semantic_search \
+  --query "There are two completed payments on my card" --top-k 2</code></pre>
+</section>
+
+<section id="pitfalls">
+<h2>Pitfalls</h2>
+<ul class="pitfalls">
+<li><b>Same length, different space.</b><span>Nomic v1.5 also returns 768 numbers, but its vectors can't be compared with v2's. Changing the model means re-embedding everything.</span></li>
+<li><b>Forgetting the prefixes.</b><span>Without <code>search_document:</code> and <code>search_query:</code>, similarities drop quietly; nothing errors.</span></li>
+<li><b>Too long is an error, not a truncation.</b><span>Input over 512 tokens is rejected so no text silently disappears. Split it first.</span></li>
+<li><b>The first run downloads.</b><span>Demos 1, 4 and 5 fetch the weights if they are missing; demo 2 needs <code>--allow-download</code>. Run them once before class.</span></li>
+</ul>
+<p>Next: <a href="../c02_vector_databases/study_guide.html">lesson 2, vector databases</a>.</p>
+</section>
+
+</main>
+</div>
+<footer>Course reference for the advanced-ai-integration-rag repository. Measurements recorded with the pinned Nomic v2 MoE revision 1066b659; file paths are relative to the repository root.</footer>
+<div class="present-bar" id="present-bar" hidden><button type="button" id="present-prev" aria-label="Previous section">←</button><span id="present-count">1 / 1</span><button type="button" id="present-next" aria-label="Next section">→</button><button type="button" id="present-exit">Esc · exit</button></div>
+<script>
+(function () {
+  var sections = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+  var bar = document.getElementById("present-bar");
+  var counter = document.getElementById("present-count");
+  var index = 0;
+  function show(n) {
+    index = Math.max(0, Math.min(sections.length - 1, n));
+    sections.forEach(function (s, k) { s.classList.toggle("current", k === index); });
+    counter.textContent = (index + 1) + " / " + sections.length;
+    if (sections[index].id) history.replaceState(null, "", "#" + sections[index].id);
+    window.scrollTo(0, 0);
+  }
+  function start() {
+    var id = location.hash.slice(1);
+    var found = sections.findIndex(function (s) { return s.id === id; });
+    document.body.classList.add("presenting");
+    bar.hidden = false;
+    document.querySelectorAll("details").forEach(function (d) { d.open = true; });
+    show(found < 0 ? 0 : found);
+  }
+  function stop() {
+    document.body.classList.remove("presenting");
+    bar.hidden = true;
+    sections[index].scrollIntoView();
+  }
+  document.getElementById("present-start").addEventListener("click", start);
+  document.getElementById("present-prev").addEventListener("click", function () { show(index - 1); });
+  document.getElementById("present-next").addEventListener("click", function () { show(index + 1); });
+  document.getElementById("present-exit").addEventListener("click", stop);
+  document.addEventListener("keydown", function (e) {
+    if (e.target.closest && e.target.closest("input, textarea, select")) return;
+    var presenting = document.body.classList.contains("presenting");
+    if (!presenting) {
+      if ((e.key === "p" || e.key === "P") && !e.metaKey && !e.ctrlKey && !e.altKey) start();
+      return;
+    }
+    if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); show(index + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); show(index - 1); }
+    else if (e.key === "Home") show(0);
+    else if (e.key === "End") show(sections.length - 1);
+    else if (e.key === "Escape") stop();
+  });
+})();
+</script>
+</body>

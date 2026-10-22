@@ -19,15 +19,17 @@ Code: `architectures/agentic_rag/retrieval.py` (agent setup), `tools.py`,
 ```bash
 ./rag ask --process --architecture agentic_rag "Πότε λήγουν οι Καρδιές;"
 ./rag ask --architecture agentic_rag "How do I join Magenta Moments, and can I transfer my Hearts?"
-./rag ask --architecture agentic_rag --option max_searches=1 "Can I reuse a redeemed coupon code?"
+./rag ask --architecture agentic_rag --option max_searches=1 "How do I join Magenta Moments, and can I transfer my Hearts?"
 ```
 
 ## What to look for
 
 - The order of events: skill read, searches, clause reads, assessment, selection.
-- The two-topic question is the one most likely to delegate to the helper.
-- With `max_searches=1`, the second search exhausts the budget and the turn is
-  rejected. No partial answer is accepted.
+- The two-topic question reads two skills and searches at least twice. It may delegate
+  one topic to the helper; that is the model's choice and varies between runs.
+- With `max_searches=1`, the two-topic question's second search exhausts the budget and
+  the turn is rejected. No partial answer is accepted. A one-topic question would
+  finish within the budget.
 - It selects fewer passages than Base RAG's fixed six, at the cost of more model
   calls and latency. For simple questions Base RAG may be the better choice.
 

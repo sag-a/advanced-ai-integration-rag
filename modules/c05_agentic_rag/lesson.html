@@ -18,6 +18,8 @@
   --ochre-soft: #f6e8d6;
   --cobalt: #2a4ccf;
   --cobalt-soft: #e0e6fb;
+  --plum: #84358f;
+  --plum-soft: #f3e3f5;
   --pos: #1d7a3a;
   --neg: #b42318;
   --cond: #9a6700;
@@ -31,7 +33,7 @@
     --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
     --rule: #2a3440; --code-bg: #1d2630;
     --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
-    --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+    --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
     --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
   }
 }
@@ -40,12 +42,13 @@
   --paper: #0f141a; --panel: #161d26; --ink: #e5eaf0; --muted: #9aa7b6;
   --rule: #2a3440; --code-bg: #1d2630;
   --teal: #45c4b2; --teal-soft: #12302d; --ochre: #efa548; --ochre-soft: #33240f;
-  --cobalt: #8ba3ff; --cobalt-soft: #1b2445;
+  --cobalt: #8ba3ff; --cobalt-soft: #1b2445; --plum: #dd9ae6; --plum-soft: #34203a;
   --pos: #5cc97c; --neg: #ff7b6e; --cond: #e6b54a;
 }
 body.base { --accent: var(--teal); --accent-soft: var(--teal-soft); }
 body.agentic { --accent: var(--ochre); --accent-soft: var(--ochre-soft); }
 body.graph { --accent: var(--cobalt); --accent-soft: var(--cobalt-soft); }
+body.embeddings { --accent: var(--plum); --accent-soft: var(--plum-soft); }
 
 * { box-sizing: border-box; }
 body {
@@ -212,7 +215,7 @@ body.presenting .present-bar {
 
 </style>
 <body class="agentic">
-<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="../c04_graph_rag/lesson.html">Graph RAG</a><a href="#top" aria-current="page">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
+<header class="topbar" id="top"><span class="course">rag-course · Magenta Moments corpus</span><nav class="tabs" aria-label="Architectures"><a href="../c01_embeddings/lesson.html">Embeddings</a><a href="../c03_classic_rag/lesson.html">Base RAG</a><a href="../c04_graph_rag/lesson.html">Graph RAG</a><a href="#top" aria-current="page">Agentic RAG</a><button type="button" class="present-btn" id="present-start" title="Present one section per screen (P)">Present</button></nav></header>
 <div class="shell">
 <aside class="toc" aria-label="On this page"><p>On this page</p><ol>
 <li><a href="#idea">The idea</a></li>
@@ -400,9 +403,9 @@ uv sync --all-extras
 <h2>Demo questions</h2>
 <div class="q">
 <details open><summary>Πότε λήγουν οι Καρδιές; <span class="gr">· When do Hearts expire?</span></summary><div><p>A narrow question. Expect: read the hearts skill, one or two searches, maybe one <code>read_clause</code>, then a small selection. Compare the passage count with Base RAG's fixed six.</p></div></details>
-<details><summary>How do I join Magenta Moments, and can I transfer my Hearts to someone else?</summary><div><p>Two topics, two skills. This is the question most likely to use <code>write_todos</code> and a delegation. Watch the event log for <code>delegate</code>.</p></div></details>
+<details><summary>How do I join Magenta Moments, and can I transfer my Hearts to someone else?</summary><div><p>Two topics, two skills. Expect both skill reads and at least two searches. It <em>may</em> plan with <code>write_todos</code> or delegate one topic; that is the model's choice. In the 22 October rehearsal it searched twice without delegating.</p></div></details>
 <details><summary>Can I reuse a coupon code after it was marked as redeemed?</summary><div><p>Exercises the coupons skill and its emphasis on negative wording and exceptions.</p></div></details>
-<details><summary>Same question with <code>--option max_searches=1</code></summary><div><p>Shows budgets in action. A second search raises “PDF search budget exhausted” and the turn is rejected rather than answered on thin evidence.</p></div></details>
+<details><summary>The two-topic question with <code>--option max_searches=1</code></summary><div><p>Shows budgets in action. It needs a search per topic, so the second search raises “PDF search budget exhausted” and the turn is rejected rather than answered on thin evidence. A one-topic question would finish within the budget and show nothing.</p></div></details>
 </div>
 </section>
 
