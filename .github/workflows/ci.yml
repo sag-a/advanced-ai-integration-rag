@@ -13,4 +13,7 @@ jobs:
           python-version: '3.12'
       - run: uv sync --all-extras --locked
       - run: uv run --all-extras pytest
+      - run: uv run --all-extras pytest exercises
+        env:
+          LAB_TARGET: solution
       - run: uv run --all-extras ruff check .

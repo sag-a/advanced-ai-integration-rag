@@ -1,0 +1,362 @@
+[
+ {
+  "id": "s01-enrollment",
+  "corpus": "magenta",
+  "question": "Ποιες υπηρεσίες πρέπει να έχω και τι πρέπει να κάνω στην εφαρμογή για να γίνω μέλος του Magenta Moments;",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "s02-rejoining",
+  "corpus": "magenta",
+  "question": "Απενεργοποίησα το προφίλ μου στο Magenta Moments. Μπορώ να το ενεργοποιήσω αμέσως ξανά;",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "s03-hearts-value",
+  "corpus": "magenta",
+  "question": "Are Hearts real money? Can I cash them out or send them to a friend?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "dev"
+ },
+ {
+  "id": "s05-code-reuse",
+  "corpus": "magenta",
+  "question": "I used a code for one offer yesterday. Can I use that code again for the same offer?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "heldout"
+ },
+ {
+  "id": "s06-accidental-redemption",
+  "corpus": "magenta",
+  "question": "Δεν χρησιμοποίησα τον κωδικό, αλλά πάτησα κατά λάθος «Σήμανση ως εξαργυρωμένο». Παραμένει έγκυρος για χρήση;",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "dev"
+ },
+ {
+  "id": "s07-join-and-expiry",
+  "corpus": "magenta",
+  "question": "How do I register for Magenta Moments, and how long will the Hearts I earn remain valid?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "heldout"
+ },
+ {
+  "id": "s11-points-lifetime",
+  "corpus": "magenta",
+  "question": "If I collect loyalty points in the rewards scheme, how long before they disappear, and on what day does that happen?",
+  "answerable": true,
+  "gate_probability": 0.91,
+  "split": "dev"
+ },
+ {
+  "id": "s12-reinstall-tonight",
+  "corpus": "magenta",
+  "question": "Έσβησα την εφαρμογή από το κινητό μου σήμερα το πρωί. Αν την ξαναβάλω απόψε, μπαίνω αμέσως πάλι στο πρόγραμμα επιβράβευσης;",
+  "answerable": true,
+  "gate_probability": 0.96,
+  "split": "heldout"
+ },
+ {
+  "id": "s13-stack-discounts",
+  "corpus": "magenta",
+  "question": "Can I use a deal from the rewards app together with another discount I already have from the company?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "s14-switch-provider",
+  "corpus": "magenta",
+  "question": "Αν κλείσω το συμβόλαιό μου και πάω σε άλλη εταιρεία κινητής, τι γίνεται με τη συμμετοχή μου στο πρόγραμμα;",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "s15-complaint-route",
+  "corpus": "magenta",
+  "question": "Who do I phone if I have a dispute about the rewards scheme, and what happens if it still isn't resolved?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "dev"
+ },
+ {
+  "id": "s16-delete-profile-details",
+  "corpus": "magenta",
+  "question": "Αν σβήσω την ηλικία και τα ενδιαφέροντά μου από το προφίλ, θα συνεχίσω να βλέπω προτάσεις φτιαγμένες για μένα;",
+  "answerable": true,
+  "gate_probability": 0.97,
+  "split": "heldout"
+ },
+ {
+  "id": "s17-prepaid-join-earn-spend",
+  "corpus": "magenta",
+  "question": "I'm on a prepaid plan. How do I get into the rewards scheme, how do I collect points once I'm in, what can I spend them on, and how long do they last?",
+  "answerable": true,
+  "gate_probability": 0.95,
+  "split": "dev"
+ },
+ {
+  "id": "s18-voucher-lifecycle",
+  "corpus": "magenta",
+  "question": "Πήρα έναν κωδικό έκπτωσης: σε πόσες προσφορές μπορώ να τον χρησιμοποιήσω, τι γίνεται αν περάσει η ημερομηνία του, και τι αν πατήσω κατά λάθος ότι τον έχω ήδη χρησιμοποιήσει;",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "heldout"
+ },
+ {
+  "id": "s19-partner-responsibility",
+  "corpus": "magenta",
+  "question": "If a partner raises its prices or a show I booked through the scheme is cancelled, is the company responsible, and whose terms apply to the deal?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "dev"
+ },
+ {
+  "id": "s20-leave-rejoin-exclusion",
+  "corpus": "magenta",
+  "question": "Θέλω να φύγω από το πρόγραμμα: πώς αποχωρώ, πότε μπορώ να ξαναμπώ, και μπορεί η εταιρεία να με αποκλείσει ή να σταματήσει εντελώς το πρόγραμμα;",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "s21-points-alerts-validity-transfer",
+  "corpus": "magenta",
+  "question": "What alerts can I get about my reward points, how long do the points stay valid, and can I give them to my partner?",
+  "answerable": true,
+  "gate_probability": 0.95,
+  "split": "dev"
+ },
+ {
+  "id": "s09-private-account",
+  "corpus": "magenta",
+  "question": "Please tell me my exact current Hearts balance from my account.",
+  "answerable": false,
+  "gate_probability": 0.06,
+  "split": "dev"
+ },
+ {
+  "id": "s10-external-policy",
+  "corpus": "magenta",
+  "question": "Για πόσα χρόνια αποθηκεύονται τα δεδομένα μου και σε ποιους αποδέκτες στέλνονται σύμφωνα με την Πολιτική Απορρήτου;",
+  "answerable": false,
+  "gate_probability": 0.3,
+  "split": "heldout"
+ },
+ {
+  "id": "u01-support-email",
+  "corpus": "magenta",
+  "question": "What is the customer service email address for Magenta Moments?",
+  "answerable": false,
+  "gate_probability": 0.05,
+  "split": "dev"
+ },
+ {
+  "id": "u02-minimum-age",
+  "corpus": "magenta",
+  "question": "Ποια είναι η ελάχιστη ηλικία για να γίνω μέλος του Magenta Moments;",
+  "answerable": false,
+  "gate_probability": 0.12,
+  "split": "heldout"
+ },
+ {
+  "id": "u03-spin-cost",
+  "corpus": "magenta",
+  "question": "How many Hearts does one spin of the wheel cost?",
+  "answerable": false,
+  "gate_probability": 0.14,
+  "split": "dev"
+ },
+ {
+  "id": "u04-partners-thessaloniki",
+  "corpus": "magenta",
+  "question": "Ποιοι συνεργάτες του προγράμματος υπάρχουν στη Θεσσαλονίκη;",
+  "answerable": false,
+  "gate_probability": 0.09,
+  "split": "heldout"
+ },
+ {
+  "id": "u05-start-date",
+  "corpus": "magenta",
+  "question": "When did the Magenta Moments programme start?",
+  "answerable": false,
+  "gate_probability": 0.06,
+  "split": "dev"
+ },
+ {
+  "id": "u06-hearts-per-euro",
+  "corpus": "magenta",
+  "question": "How many Hearts do I get for each euro I spend at Germanos?",
+  "answerable": false,
+  "gate_probability": 0.22,
+  "split": "heldout"
+ },
+ {
+  "id": "t01-24xl-500-minutes",
+  "corpus": "tariffs",
+  "question": "Which COSMOTE Double Play 24 XL plan with a 12-month commitment gives 500 free minutes to mobiles, and what does it cost per month?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "t02-24xl-420-minutes",
+  "corpus": "tariffs",
+  "question": "The 12-month COSMOTE Double Play 24 XL plan with 420 free minutes: where can those minutes be used, and what does it cost?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "t03-fiber100-480-minutes",
+  "corpus": "tariffs",
+  "question": "Which Fiberspeed 100 XL plan gives 480 free minutes, to how many countries, and at what monthly price?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "t04-24s-mobile-rate",
+  "corpus": "tariffs",
+  "question": "On COSMOTE Double Play 24 S with a 12-month commitment, how much does a call to a mobile cost per minute, and how is part of a minute charged?",
+  "answerable": true,
+  "gate_probability": 0.99,
+  "split": "dev"
+ },
+ {
+  "id": "t05-24s-ddi-surcharge",
+  "corpus": "tariffs",
+  "question": "How much more per month does COSMOTE Double Play 24 S (12 months) cost if my landline has 2 channels with DDI?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "t06-24s-18-months",
+  "corpus": "tariffs",
+  "question": "What does COSMOTE Double Play 24 S cost on an 18-month contract, during the commitment and afterwards?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "t07-24l-bulgaria",
+  "corpus": "tariffs",
+  "question": "Can I use the free minutes of the 12-month COSMOTE Double Play 24 L plan to call Bulgaria?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "t08-pensioner-discount",
+  "corpus": "tariffs",
+  "question": "Είμαι 70 χρονών συνταξιούχος. Υπάρχει κάποια έκπτωση στις κλήσεις του σταθερού μου;",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "t09-student-broadband",
+  "corpus": "tariffs",
+  "question": "Is there a cheap home internet deal for students, and what happens to the price after the first year?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "heldout"
+ },
+ {
+  "id": "t10-international-rollover",
+  "corpus": "tariffs",
+  "question": "I call landlines abroad a lot. Is there a package with a big monthly allowance, and do unused minutes carry over?",
+  "answerable": true,
+  "gate_probability": 0.71,
+  "split": "dev"
+ },
+ {
+  "id": "t11-fiber100-two-versions",
+  "corpus": "tariffs",
+  "question": "There are two COSMOTE Double Play Fiberspeed 100 XL plans with 420 free minutes. How do their country lists differ, and what do they cost?",
+  "answerable": true,
+  "gate_probability": 0.96,
+  "split": "heldout"
+ },
+ {
+  "id": "t12-international30-two-versions",
+  "corpus": "tariffs",
+  "question": "COSMOTE Home International 30 Countries is listed twice. How do the two versions differ?",
+  "answerable": true,
+  "gate_probability": 0.98,
+  "split": "dev"
+ },
+ {
+  "id": "t13-compare-24-s-l-xl",
+  "corpus": "tariffs",
+  "question": "Compare the 12-month COSMOTE Double Play 24 S, 24 L and the 24 XL with 420 minutes: monthly price and free minutes.",
+  "answerable": true,
+  "gate_probability": 0.96,
+  "split": "heldout"
+ },
+ {
+  "id": "t14-tv-price",
+  "corpus": "tariffs",
+  "question": "How much does a COSMOTE TV subscription cost per month?",
+  "answerable": false,
+  "gate_probability": 0.28,
+  "split": "dev"
+ },
+ {
+  "id": "u07-installation-fee",
+  "corpus": "tariffs",
+  "question": "How much does installation of a COSMOTE broadband line cost?",
+  "answerable": false,
+  "gate_probability": 0.21,
+  "split": "heldout"
+ },
+ {
+  "id": "u08-1000-mbps",
+  "corpus": "tariffs",
+  "question": "What does the COSMOTE Double Play 1000 Mbps plan cost?",
+  "answerable": false,
+  "gate_probability": 0.12,
+  "split": "dev"
+ },
+ {
+  "id": "u09-roaming-italy",
+  "corpus": "tariffs",
+  "question": "What are the roaming charges in Italy?",
+  "answerable": false,
+  "gate_probability": 0.65,
+  "split": "heldout"
+ },
+ {
+  "id": "u10-upload-speed",
+  "corpus": "tariffs",
+  "question": "What is the upload speed of Fiberspeed 200?",
+  "answerable": false,
+  "gate_probability": 0.49,
+  "split": "dev"
+ },
+ {
+  "id": "u11-netflix",
+  "corpus": "tariffs",
+  "question": "Is Netflix included in any Double Play plan?",
+  "answerable": false,
+  "gate_probability": 0.41,
+  "split": "heldout"
+ },
+ {
+  "id": "u12-free-router",
+  "corpus": "tariffs",
+  "question": "Does the 24 L plan come with a free Wi-Fi router?",
+  "answerable": false,
+  "gate_probability": 0.26,
+  "split": "dev"
+ }
+]
