@@ -11,7 +11,7 @@ from rag_core.config import AppError, Settings
 
 
 LEGACY = json.loads(
-    Path(__file__).parents[1].joinpath("fixtures/legacy_prompts.json").read_text()
+    Path(__file__).parents[1].joinpath("fixtures/legacy_prompts.json").read_text(encoding="utf-8")
 )
 
 

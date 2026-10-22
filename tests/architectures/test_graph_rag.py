@@ -88,7 +88,7 @@ def test_repeat_resume_and_identity(tmp_path):
         prepare(documents(), cfg, Chat(fail=1))
     failures = list((tmp_path / "graph.json.cache").glob("*.failed.json"))
     assert len(failures) == 1
-    assert len(json.loads(failures[0].read_text())["attempts"]) == 3
+    assert len(json.loads(failures[0].read_text(encoding="utf-8"))["attempts"]) == 3
     with pytest.raises(AppError, match="resume"):
         prepare(documents(), cfg, Chat())
     chat = Chat()
@@ -140,7 +140,7 @@ def test_endpoint_feedback_identifies_the_missing_entity(tmp_path):
 def test_ambiguous_alias_and_atomic_complete(tmp_path):
     graph = prepare(documents(), settings(tmp_path), Chat())
     assert "καρδιέσ" not in graph["ambiguous_aliases"]
-    assert json.loads((tmp_path / "graph.json").read_text())["complete"]
+    assert json.loads((tmp_path / "graph.json").read_text(encoding="utf-8"))["complete"]
     assert not (tmp_path / "graph.json.tmp").exists()
 
 
