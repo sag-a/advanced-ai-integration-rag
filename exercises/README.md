@@ -14,6 +14,14 @@ measuring your code against the course's numbers.
 \* Labs 1 and 2 measure against the prepared Chroma collections (see `SETUP.md`): start
 Chroma and run `./rag prepare` for both corpora first. Lab 5 loads the local Nomic encoder.
 
+## Chapter exercises
+
+Short exercises to code live in class, one per chapter. Same layout and commands as the labs.
+
+| Exercise | After | You fix | You see | Cost |
+| --- | --- | --- | --- | --- |
+| [Ch 1. Chunk boundaries](ch01_recursive_chunking/) | lesson 1 | Part 1: a `chunk_size` that cuts a refund rule from its condition. Part 2: Markdown header levels that split a rule from its exception | Retrieval finds the complete rule: 2/2 and 1/1 questions | free |
+
 ## How a lab works
 
 Each folder has a `README.md` (problem, background, tasks, discussion), a `starter.py`
