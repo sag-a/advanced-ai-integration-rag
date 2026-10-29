@@ -28,3 +28,6 @@ preparing.html
 
 # Instructor-only demo run sheet, local
 DEMO_RUNSHEET.md
+
+# Capstone students' local Chroma database
+exercises/capstone_rag/db/

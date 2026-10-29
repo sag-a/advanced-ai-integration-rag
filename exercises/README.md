@@ -21,6 +21,13 @@ Short exercises to code live in class, one per chapter. Same layout and commands
 | Exercise | After | You fix | You see | Cost |
 | --- | --- | --- | --- | --- |
 | [Ch 1. Chunk boundaries](ch01_recursive_chunking/) | lesson 1 | Part 1: a `chunk_size` that cuts a refund rule from its condition. Part 2: Markdown header levels that split a rule from its exception | Retrieval finds the complete rule: 2/2 and 1/1 questions | free |
+| [Ch 2. Chroma queries](ch02_chroma_retrieval/) | lesson 2 | `n_results` too small, a `where` filter on the wrong category, no version filter | Rule and exception together, billing results only, no outdated policy | free |
+
+## Capstone
+
+| Project | After | You build | You see | Cost |
+| --- | --- | --- | --- | --- |
+| [Build a RAG app](capstone_rag/) | lessons 1–3 | A command-line RAG app over five Markdown files, in seven steps; [tutor prompt](capstone_rag/TUTOR_PROMPT.md) included | Cited answers, a refusal for missing information, and an eval of your settings | free with `--dry-run`; real answers < $0.01 |
 
 ## How a lab works
 
