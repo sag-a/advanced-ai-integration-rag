@@ -22,6 +22,7 @@ Short exercises to code live in class, one per chapter. Same layout and commands
 | --- | --- | --- | --- | --- |
 | [Ch 1. Chunk boundaries](ch01_recursive_chunking/) | lesson 1 | Part 1: a `chunk_size` that cuts a refund rule from its condition. Part 2: Markdown header levels that split a rule from its exception | Retrieval finds the complete rule: 2/2 and 1/1 questions | free |
 | [Ch 2. Chroma queries](ch02_chroma_retrieval/) | lesson 2 | `n_results` too small, a `where` filter on the wrong category, no version filter | Rule and exception together, billing results only, no outdated policy | free |
+| [Ch 3. LangGraph basics](ch03_langgraph_basics/) | lesson 3 | Add an agent state with a reducer, and two search nodes that run in parallel before a merge | The trace shows both searches in the same step; two-topic questions use both sources | free |
 
 ## Capstone
 
