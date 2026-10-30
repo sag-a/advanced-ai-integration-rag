@@ -32,9 +32,3 @@ Code: `architectures/agentic_rag/retrieval.py` (agent setup), `tools.py`,
   finish within the budget.
 - It selects fewer passages than Base RAG's fixed six, at the cost of more model
   calls and latency. For simple questions Base RAG may be the better choice.
-
-## Instructor notes
-
-- [MEASUREMENTS.md](instructor_notes/MEASUREMENTS.md): the initial failure (refusing
-  without selecting evidence), the one-reminder fix, and why abstentions lower the
-  faithfulness and citation-support scores.

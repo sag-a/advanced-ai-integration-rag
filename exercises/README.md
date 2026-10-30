@@ -28,7 +28,7 @@ Short exercises to code live in class, one per chapter. Same layout and commands
 
 | Project | After | You build | You see | Cost |
 | --- | --- | --- | --- | --- |
-| [Build a RAG app](capstone_rag/) | lessons 1–3 | A command-line RAG app over five Markdown files, in seven steps; [tutor prompt](capstone_rag/TUTOR_PROMPT.md) included | Cited answers, a refusal for missing information, and an eval of your settings | free with `--dry-run`; real answers < $0.01 |
+| [Build a RAG app](capstone_rag/) | lessons 1–3 | A command-line RAG app over five Markdown files, in seven steps | Cited answers, a refusal for missing information, and an eval of your settings | free with `--dry-run`; real answers < $0.01 |
 
 ## How a lab works
 
@@ -54,12 +54,3 @@ On Windows PowerShell, set the variable first: `$env:LAB_TARGET = "solution"`.
 
 The tests never call a model or a database: they use small fixtures and fakes, so they
 run in seconds and cost nothing. CI grades the reference solutions on every push.
-
-## For instructors
-
-- Results quoted in each README were measured on 22 October 2026 with the course's
-  default settings.
-- Lab 4's `gate_scores.json` was recorded with `record.py` (about 45 Jev calls, under
-  $0.01). Re-record after changing the gate, the reranker or the corpora.
-- To hide the solutions from students, delete the `solution.py` files on the branch you
-  hand out; the tests and measure scripts only need the starter.

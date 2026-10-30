@@ -49,14 +49,3 @@ The documents do not contain this information.
 
 Remember `index --rebuild` after changing `CHUNK_SIZE`: otherwise the old chunks stay in
 the collection next to the new ones.
-
-## For instructors
-
-- Teach it with a tutor model: paste [`TUTOR_PROMPT.md`](TUTOR_PROMPT.md) and attach
-  `solution.py` and `docs/`. The prompt tells the tutor never to show the solution unless a
-  student asks for it.
-- Reference: `LAB_TARGET=solution uv run --all-extras pytest exercises/capstone_rag`, or run
-  any command with `exercises.capstone_rag.solution`.
-- The tests use a word-overlap stand-in for Nomic and never call Claude, so they run
-  offline in under a second. The numbers above were measured with Nomic.
-- The local database lives in `exercises/capstone_rag/db/` and is gitignored.

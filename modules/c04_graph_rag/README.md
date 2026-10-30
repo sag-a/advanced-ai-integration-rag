@@ -31,9 +31,3 @@ Code: `architectures/graph_rag/index.py` (build and load),
   page and clause provenance instead of assuming every connection helps.
 - Any non-default `--model` fails with “Graph index is incompatible”, because the
   extraction model is part of the index contract.
-
-## Instructor notes
-
-- [MEASUREMENTS.md](instructor_notes/MEASUREMENTS.md): baseline vs Graph RAG on ten
-  scenarios (a tie, not an improvement), extraction cost, and the “exactly 12
-  months” human-review example.

@@ -12,7 +12,7 @@ Your job: choose the threshold from data, and find out how far you can trust the
 ## The data
 
 [`gate_scores.json`](gate_scores.json) holds the real gate probability for 45 questions,
-recorded with [`record.py`](record.py) (Jev RAG retrieval, then the gate):
+recorded with Jev RAG's real retrieval, then the gate:
 
 - **30 answerable** questions from the course's two evaluation sets;
 - **15 unanswerable** ones, on-topic but not covered by the documents (support email,
@@ -62,6 +62,6 @@ held-out, so dev never sees it.
 3. Set `answer_cost=1` in `measure.py`. What changes, and for which product would that
    be the right choice?
 4. Roaming in Italy fooled the gate. Write three more questions you expect to fool it,
-   add them to `record.py`, and check.
+   and explain why each one might.
 5. The course routes topics with one Jev question and judges answerability with another.
    Why not one question for both?

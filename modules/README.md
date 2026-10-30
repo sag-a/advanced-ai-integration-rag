@@ -20,5 +20,3 @@ Not built yet: `c06_system1_rag` (semantic cache fast path) and `c07_capstone`
 
 Lessons 1–2 contain runnable Python (`python -m modules.c01_embeddings…`).
 Lessons 3–5 teach the code in `rag_core/` and `architectures/`, run through `./rag`.
-The `instructor_notes/` folders hold measured runs from before the migration; see
-their header before quoting numbers.

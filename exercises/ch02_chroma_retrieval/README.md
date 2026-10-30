@@ -50,11 +50,3 @@ Other operators: `$ne`, `$gt`, `$lt`, `$lte`, `$in`, `$nin`, `$or`. See
   status alone?
 - Slide 54 shows the same idea in SQL: `tenant_id IN (...) AND valid_to IS NULL`. In
   production, the server adds these filters, never the user's question.
-
-## For instructors
-
-Answers: `N_RESULTS = 3` (2 also works with Nomic; 1 fails), `BILLING_FILTER =
-{"category": "billing"}`, `POLICY_FILTER = {"$and": [{"category": "billing"}, {"status":
-"current"}]}` or the `$gte` version. The tests use a small word-overlap embedding so they
-run offline in under a second; `measure.py` uses the real Nomic encoder. Grade the
-reference with `LAB_TARGET=solution uv run --all-extras pytest exercises/ch02_chroma_retrieval`.

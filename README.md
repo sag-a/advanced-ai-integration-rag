@@ -12,9 +12,9 @@ comparable Ragas evaluation reports.
 ├── modules/               # lessons, in teaching order (see modules/README.md)
 │   ├── c01_embeddings/        # Nomic embeddings, contextual words, chunking, search
 │   ├── c02_vector_databases/  # pgvector + Chroma demos, hybrid search, study guide
-│   ├── c03_classic_rag/       # lesson.html + instructor_notes/
-│   ├── c04_graph_rag/         # lesson.html + instructor_notes/
-│   └── c05_agentic_rag/       # lesson.html + instructor_notes/
+│   ├── c03_classic_rag/       # lesson.html
+│   ├── c04_graph_rag/         # lesson.html
+│   └── c05_agentic_rag/       # lesson.html
 ├── rag_core/              # everything shared: corpus, store, model, answers, LangGraph turn
 ├── architectures/         # one package per retriever: classic (+ optional reranker), graph, agentic, hybrid, jev
 ├── app/                   # CLI (./rag) and Streamlit UI, generic over the registry
@@ -25,8 +25,7 @@ comparable Ragas evaluation reports.
 ├── docs/                  # prompt-template lesson
 ├── tests/                 # core/ and architectures/ suites
 ├── compose.chroma.yaml    # Chroma for the RAG architectures (loopback :8004)
-├── SETUP.md               # install uv on macOS/Linux/Windows, run every example
-└── INSTRUCTOR_GUIDE.md    # timetable, demos, whiteboard prompts, common traps
+└── SETUP.md               # install uv on macOS/Linux/Windows, run every example
 ```
 
 Dependencies only point inward: `app`/`evals` → `architectures` → `rag_core`.
@@ -36,14 +35,13 @@ Dependencies only point inward: `app`/`evals` → `architectures` → `rag_core`
 | --- | --- | --- |
 | 1. Embeddings, chunking, semantic search | [lesson.html](modules/c01_embeddings/lesson.html) | [README](modules/c01_embeddings/README.md), [guide](modules/c01_embeddings/GUIDE.md) |
 | 2. Vector databases | [study_guide.html](modules/c02_vector_databases/study_guide.html) | [pgvector](modules/c02_vector_databases/README.md), [Chroma](modules/c02_vector_databases/CHROMA.md) |
-| 3. Classic (base) RAG | [lesson.html](modules/c03_classic_rag/lesson.html) | [README](modules/c03_classic_rag/README.md), [instructor notes](modules/c03_classic_rag/instructor_notes/) |
-| 4. Graph RAG | [lesson.html](modules/c04_graph_rag/lesson.html) | [README](modules/c04_graph_rag/README.md), [instructor notes](modules/c04_graph_rag/instructor_notes/) |
-| 5. Agentic RAG | [lesson.html](modules/c05_agentic_rag/lesson.html) | [README](modules/c05_agentic_rag/README.md), [instructor notes](modules/c05_agentic_rag/instructor_notes/) |
+| 3. Classic (base) RAG | [lesson.html](modules/c03_classic_rag/lesson.html) | [README](modules/c03_classic_rag/README.md) |
+| 4. Graph RAG | [lesson.html](modules/c04_graph_rag/lesson.html) | [README](modules/c04_graph_rag/README.md) |
+| 5. Agentic RAG | [lesson.html](modules/c05_agentic_rag/lesson.html) | [README](modules/c05_agentic_rag/README.md) |
 
 Five hands-on labs follow the lessons: see [exercises/README.md](exercises/README.md).
 
 Open the HTML pages in a browser. Press **P** to present one section per screen.
-Instructors: start with [INSTRUCTOR_GUIDE.md](INSTRUCTOR_GUIDE.md).
 
 ## Install uv
 

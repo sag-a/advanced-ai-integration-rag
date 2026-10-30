@@ -52,11 +52,3 @@ passages takes about 1.5 s on a laptop CPU. Change the pool with
 Measured on the course cases (retrieval recall, `top_k=3`): it lifts the 156-passage
 tariffs corpus from 0.564 to 0.897, but slightly lowers the small Magenta PDF from
 0.922 to 0.863. See [evals/README.md](../../evals/README.md#reranking).
-
-## Instructor notes
-
-- [BASELINE.md](instructor_notes/BASELINE.md): the first measured baseline, the three
-  failures found and how they were fixed.
-- [LANGFUSE.md](instructor_notes/LANGFUSE.md): historical only, since Langfuse was removed
-  from the code. Its judge-calibration exercise (a correct answer citing only §3.2)
-  still works as a whiteboard discussion.

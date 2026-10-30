@@ -64,13 +64,3 @@ Retrieval returns the Eligibility chunk alone, and the chatbot would promise a r
 - Both parts fail the same way: a rule separated from its exception. How does the
   course's PDF pipeline avoid it for the Magenta terms? (It splits by clause number and
   repeats the section heading in every chunk: `rag_core/corpus.py`.)
-
-## For instructors
-
-Answers: Part 1 passes for any `CHUNK_SIZE` from 200 to 383 (the first paragraph is 199
-characters, both together 382); the reference uses 250. Part 2 is
-`[("#", "Document"), ("##", "Section")]`; adding `("###", "Subsection")` splits the rule
-from its exception again. Grade the reference with
-`LAB_TARGET=solution uv run --all-extras pytest exercises/ch01_recursive_chunking`.
-
-Reference: [LangChain MarkdownHeaderTextSplitter](https://docs.langchain.com/oss/python/integrations/splitters/markdown_header_metadata_splitter)

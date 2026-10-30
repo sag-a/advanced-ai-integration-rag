@@ -73,7 +73,3 @@ All 9 tests pass and `run.py` shows, for every question:
 
 Stretch: replace `write_agent_answer` with a Claude call. Use `rag_core.config.Settings` for
 the model and key, as in the capstone's `generate_answer`.
-
-## For instructors
-
-Reference: `LAB_TARGET=solution` for the tests and `run.py`.
