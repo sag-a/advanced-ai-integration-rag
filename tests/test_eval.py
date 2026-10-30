@@ -43,7 +43,7 @@ def fake_app(monkeypatch):
     resources = SimpleNamespace(
         retrieve=lambda q: RetrievalResult(DOCUMENTS[1:], 0), chat=Chat(answer()), entry=None
     )
-    monkeypatch.setattr(run, "create_resources", lambda settings: resources)
+    monkeypatch.setattr(run, "create_resources", lambda settings, **options: resources)
     monkeypatch.setattr(run, "connect", lambda settings: None)
     monkeypatch.setattr(run, "open_collection", lambda client, settings: None)
     monkeypatch.setattr(run, "read_documents", lambda collection: DOCUMENTS)

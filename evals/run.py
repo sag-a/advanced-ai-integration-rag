@@ -119,7 +119,11 @@ def evaluate_architecture(name, settings, cases, retrieval_only, progress=print)
 
     settings = replace(settings, architecture=name)
     architecture = get(name)
-    resources = create_resources(settings)
+    # Retrieval-only runs build no answer model, so they need no API key. Architectures
+    # that call a model while retrieving are skipped below, so they aren't built at all.
+    resources = None
+    if not (retrieval_only and architecture.needs_llm_for_retrieval):
+        resources = create_resources(settings, answer_model=not retrieval_only)
     documents = read_documents(open_collection(connect(settings), settings))
     rows, samples = [], []
     for case in cases:

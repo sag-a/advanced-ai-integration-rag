@@ -17,7 +17,7 @@ class Resources:
     log: LessonLog
 
 
-def create_resources(settings):
+def create_resources(settings, *, answer_model=True):
     architecture = get(settings.architecture)
     collection = open_collection(connect(settings), settings)
     if architecture.check:
@@ -28,7 +28,8 @@ def create_resources(settings):
     )
     return Resources(
         architecture,
-        AnthropicChat(settings),
+        # Retrieval-only callers pass answer_model=False and need no API key.
+        AnthropicChat(settings) if answer_model else None,
         architecture.make_retriever(settings, collection, log),
         entry,
         log,
