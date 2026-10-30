@@ -109,6 +109,9 @@ class ResearchGuard(AgentMiddleware):
             ):
                 self.loaded_skills.add(args["file_path"])
                 r.event("skill_read", path=args["file_path"])
+            if name == "write_todos":
+                todos = args.get("todos") or []
+                r.event("plan", todos=[t.get("content", "") for t in todos if isinstance(t, dict)])
             r.check()
             return result
         except Exception as error:

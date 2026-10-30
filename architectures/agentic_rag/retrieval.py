@@ -6,6 +6,7 @@ from deepagents import create_deep_agent
 from deepagents.backends import StateBackend
 from deepagents.backends.utils import create_file_data
 from langgraph.config import get_stream_writer
+from langchain.agents.middleware import TodoListMiddleware
 from langchain_core.messages import HumanMessage
 
 from rag_core.config import AppError
@@ -18,6 +19,16 @@ from .tools import Research
 from .prompts import research_prompts, skill_files
 from rag_core.templating import bundle_identity
 
+# Deep Agents 0.7 no longer adds write_todos by default. These short instructions replace
+# LangChain's general-purpose ones, which add thousands of tokens to every model call.
+PLANNING_PROMPT = """## Planning with write_todos
+For a question with two or more topics, call write_todos once before searching, with one
+todo per topic. Mark a todo completed when its evidence is retrieved. For a one-topic
+question, do not plan: search directly."""
+PLANNING_TOOL = (
+    "Plan the research: one todo per topic of the question, each pending, in_progress or "
+    "completed. Use only for questions with two or more topics. A plan is not evidence."
+)
 
 
 def build_agent(model, research):
@@ -41,7 +52,11 @@ def build_agent(model, research):
         skills=["/skills/"],
         backend=StateBackend(),
         subagents=[helper],
-        middleware=[ResearchGuard(research)],
+        # The guard comes first so it also counts and checks every write_todos call.
+        middleware=[
+            ResearchGuard(research),
+            TodoListMiddleware(system_prompt=PLANNING_PROMPT, tool_description=PLANNING_TOOL),
+        ],
         name="magenta-agentic-research",
     )
     agent.step_timeout = research.settings.deadline_seconds
