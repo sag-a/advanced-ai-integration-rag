@@ -5,6 +5,10 @@ services:
   chroma:
     image: chromadb/chroma:1.5.9
     pull_policy: missing
+    environment:
+      # Let browser-based tools (e.g. a Chroma UI) call the API. The port below is
+      # bound to 127.0.0.1, so only pages on this machine can reach the server.
+      CHROMA_CORS_ALLOW_ORIGINS: '["*"]'
     ports:
       - "127.0.0.1:${CHROMA_PORT:-8004}:8000"
     volumes:
