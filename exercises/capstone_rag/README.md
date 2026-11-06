@@ -1,26 +1,28 @@
 # Capstone: build a RAG application
 
-After lessons 1–3 · about 90 minutes · no Docker; an Anthropic key only for real answers
+After lessons 1–3 · about 60 minutes · no Docker; an Anthropic key only for real answers
 
-Build a command-line app that answers questions about five support documents in
+A command-line app that answers questions about five support documents in
 [`docs/`](docs/), cites its sources, and says so when the documents don't contain the
-answer. You write the pipeline yourself in [`starter.py`](starter.py), one step at a time.
+answer. [`starter.py`](starter.py) already runs, but it makes six mistakes. Each one is
+marked `STEP n` in the code and takes a change of one to five lines to fix. Run the
+command, fix the mistake, run the command again and compare.
 
 ## The steps
 
-| Step | You write | Check it with |
-| --- | --- | --- |
-| 1. Explore | Nothing: read `docs/`, write 3 answerable and 1 unanswerable question | Point to the file and section for each answer |
-| 2. Load | `load_documents()`: filename and front matter as metadata | `… starter load` and `-k step2` |
-| 3. Chunk | `chunk_documents()`: split at `#`/`##`, then by size | `… starter chunks` and `-k step3` |
-| 4. Store | `open_collection()`, `index_chunks()`: Nomic embeddings, stable IDs, no duplicates | `… starter index` (twice) and `-k step4` |
-| 5. Retrieve | `retrieve()`: compare `--n 1/3/5`, try `--current` | `… starter search "…"` and `-k step5` |
-| 6. Answer | `SYSTEM_PROMPT`, `build_prompt()`, `generate_answer()` | `… starter ask "…" --dry-run` and `-k step6` |
-| 7. Evaluate | Change one setting at a time and record the effect | `… starter eval --n 1` and `-k step7` |
+| Step | What goes wrong | See it with | Test |
+| --- | --- | --- | --- |
+| 1. Explore | Nothing: read `docs/`, write 3 answerable and 1 unanswerable question | Point to the file and section for each answer | — |
+| 2. Load | The front matter is thrown away: metadata has only `source` | `… load` | `-k step2` |
+| 3. Chunk | The refund rule and its exception land in different chunks | `… chunks` | `-k step3` |
+| 4. Store | Every `index` run adds the chunks again (18 → 36 records) | `… index`, twice | `-k step4` |
+| 5. Retrieve | `--current` still finds the superseded 2023 refund policy | `… search "full refund" --current` | `-k step5` |
+| 6. Answer | Unanswerable questions get an improvised excuse and no citations | `… ask "What is the customer service phone number?"` (or `--dry-run`) | `-k step6` |
+| 7. Evaluate | Add your own question from Step 1, then experiment | `… eval --chunk-size 150 --n 3` | `-k step7` |
 
-`…` stands for `uv run --all-extras python -m exercises.capstone_rag`. Tests:
-`uv run --all-extras pytest exercises/capstone_rag -k step2` (then `step3`, ...). Steps
-build on each other, so later tests fail until the earlier steps work.
+`…` stands for `uv run --all-extras python -m exercises.capstone_rag.starter`. Tests:
+`uv run --all-extras pytest exercises/capstone_rag -k step2` (then `step3`, ...). Before
+you change anything, 11 tests pass and 7 fail; each fix turns its own step green.
 
 Without an Anthropic key, use `ask --dry-run`: it prints the exact prompt the model would get.
 
@@ -39,13 +41,19 @@ $ … ask "What is the customer service phone number?"
 The documents do not contain this information.
 ```
 
-## Step 7: what to measure
+## Step 7: experiment
 
-| Setting | Evidence found (`eval`) |
+`--chunk-size N` builds a throwaway in-memory collection with that chunk size, so you can
+try settings without touching the saved one in `db/`. It works with `eval`, `search` and
+`ask`. Change one setting at a time:
+
+| Setting | Evidence found (`eval`: the six built-in questions, after Steps 2–6) |
 | --- | --- |
-| `CHUNK_SIZE = 500`, `--n 1` | 5/5 |
-| `CHUNK_SIZE = 150`, `--n 1` | 1/5: rules lose their exceptions |
-| `CHUNK_SIZE = 150`, `--n 3` | 4/5 |
+| `--n 1` (chunk size 500) | 6/6 |
+| `--chunk-size 150 --n 1` | 2/6: rules lose their exceptions |
+| `--chunk-size 150 --n 3` | 5/6 |
+| `--chunk-size 300 --n 1` | 6/6 |
 
-Remember `index --rebuild` after changing `CHUNK_SIZE`: otherwise the old chunks stay in
-the collection next to the new ones.
+To change the saved collection, edit `CHUNK_SIZE` and run `index --rebuild`: without
+`--rebuild` the old chunks stay next to the new ones. The saved collection in `db/` is
+local and shared by `starter` and `solution`, so rebuild it when you switch between them.

@@ -34,7 +34,8 @@ def test_step2_every_file_is_loaded_with_its_source(lab):
 def test_step2_front_matter_becomes_metadata(lab):
     documents = {d["metadata"]["source"]: d for d in lab.load_documents()}
     old = documents["refunds_2023.md"]
-    assert old["metadata"]["status"] == "superseded" and old["metadata"]["version"] == 1
+    assert old["metadata"].get("status") == "superseded", "put the front matter lines in the metadata"
+    assert old["metadata"]["version"] == 1, "store version as an int, not a string"
     assert documents["internet_support.md"]["metadata"]["category"] == "technical"
     assert old["text"].startswith("# "), "the front matter must not stay in the document text"
 
@@ -52,7 +53,7 @@ def test_step3_chunks_have_ids_sources_and_sections(chunks):
 def test_step3_a_rule_stays_with_its_exception(chunks):
     rule = next(c for c in chunks if "within 14 days of purchase" in flat(c["text"]) and "refunds.md" in c["id"])
     assert "already used the service" in flat(rule["text"]), (
-        "the refund rule and its exception are in different chunks: split at ## sections, not ###"
+        "the refund rule and its exception are in different chunks: split at # and ## only"
     )
 
 
@@ -76,9 +77,10 @@ def test_step4_reindexing_adds_no_duplicates(lab, chunks, collection):
     assert collection.count() == len(chunks)
 
 
-def test_step4_records_keep_their_metadata(chunks, collection):
+def test_step4_records_are_stored_under_their_chunk_ids(chunks, collection):
     record = collection.get(ids=["refunds_2023.md#0"])
-    assert record["metadatas"][0]["status"] == "superseded"
+    assert record["ids"] == ["refunds_2023.md#0"], "store each chunk under its own ID, not a random one"
+    assert record["metadatas"][0]["source"] == "refunds_2023.md"
 
 
 def test_step4_rebuild_removes_old_chunks(lab, tmp_path):
@@ -98,9 +100,15 @@ def test_step5_retrieve_returns_n_results_with_distances(lab, collection):
     assert found[0]["distance"] <= found[1]["distance"]
 
 
-def test_step5_a_filter_limits_the_results(lab, collection):
-    found = lab.retrieve(collection, "full refund", n_results=5, where={"status": "current"})
-    assert all(c["metadata"]["status"] == "current" for c in found)
+def test_step5_a_filter_limits_the_results(lab, tmp_path):
+    collection = lab.open_collection(path=tmp_path / "db", embedding_function=WordOverlap())
+    collection.upsert(
+        ids=["old", "new"],
+        documents=["full refund within 30 days", "full refund within 14 days"],
+        metadatas=[{"status": "superseded"}, {"status": "current"}],
+    )
+    found = lab.retrieve(collection, "full refund", n_results=2, where={"status": "current"})
+    assert [c["id"] for c in found] == ["new"], "pass the where filter on to collection.query"
 
 
 # Step 6: generate a grounded answer
@@ -139,3 +147,18 @@ def test_step7_the_evaluation_runs(lab, collection):
     rows = lab.evaluate(collection, n_results=3)
     assert len(rows) == len(lab.EVAL_QUESTIONS)
     assert rows[-1]["hit"] is None, "the unanswerable question has no evidence to find"
+
+
+def test_step7_you_added_a_question_with_real_evidence(lab):
+    assert len(lab.EVAL_QUESTIONS) >= 7, "add one of your own questions to EVAL_QUESTIONS"
+    docs = flat(" ".join(d["text"] for d in lab.load_documents()))
+    for question, evidence in lab.EVAL_QUESTIONS:
+        for phrase in evidence or []:
+            assert phrase in docs, f"{question!r}: {phrase!r} is not in the documents (copy it exactly)"
+
+
+def test_step7_the_in_memory_collection_starts_empty_every_time(lab, chunks):
+    first = lab.open_collection(path=None, embedding_function=WordOverlap(), rebuild=True)
+    lab.index_chunks(first, chunks)
+    again = lab.open_collection(path=None, embedding_function=WordOverlap(), rebuild=True)
+    assert again.count() == 0
