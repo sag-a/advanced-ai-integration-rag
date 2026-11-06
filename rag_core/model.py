@@ -1,4 +1,7 @@
-"""One explicit Anthropic model for structured rewriting and grounded answers."""
+"""One explicit Claude model for structured rewriting and grounded answers.
+
+Calls go to OpenRouter (the default) or Anthropic, chosen by LLM_PROVIDER. Both speak
+the Anthropic Messages API, so the same ChatAnthropic client serves both."""
 
 import json
 import time
@@ -28,12 +31,18 @@ def accepts_temperature(model):
 
 
 class AnthropicChat:
+    via = ""  # " via OpenRouter" or " via Anthropic", for error messages
+
     def __init__(self, settings, *, max_tokens=1200):
+        self.via = " via OpenRouter" if settings.provider() == "openrouter" else " via Anthropic"
+        self.key_name = settings.api_key_name()
+        base_url = settings.base_url()
         # Use the project's shell-over-dotenv convention without the existing
         # factory's env-file synchronization side effects or catalog defaults.
         self.model = ChatAnthropic(
-            model=settings.model,
+            model=settings.provider_model(),
             api_key=settings.api_key(),
+            **({"base_url": base_url} if base_url else {}),
             timeout=30,
             max_retries=1,
             max_tokens=max_tokens,
@@ -75,12 +84,12 @@ class AnthropicChat:
                         previous = text
             if combined is None or combined.response_metadata.get("stop_reason") != "tool_use":
                 raise AppError(
-                    "Anthropic stream was interrupted or truncated; no answer was accepted."
+                    f"Claude stream{self.via} was interrupted or truncated; no answer was accepted."
                 )
             calls = combined.tool_call_chunks
             if len(calls) != 1 or calls[0].get("name") != schema.__name__:
                 raise AppError(
-                    "Anthropic returned invalid structured output; no answer was accepted."
+                    f"Claude{self.via} returned invalid structured output; no answer was accepted."
                 )
             # json.loads deliberately rejects unfinished JSON accepted by the
             # partial parser above, even if it appears to contain all fields.
@@ -93,7 +102,8 @@ class AnthropicChat:
             raise
         except Exception as error:
             raise AppError(
-                f"Anthropic stream failed ({type(error).__name__}); no answer was accepted."
+                f"Claude stream{self.via} failed ({type(error).__name__}); no answer was accepted."
+                + self.key_hint(error)
             ) from error
 
     def call(self, schema, system, payload):
@@ -109,12 +119,12 @@ class AnthropicChat:
             )
             if result.get("parsing_error") or not isinstance(result.get("parsed"), schema):
                 raise AppError(
-                    "Anthropic returned incomplete or invalid structured output; no answer was accepted."
+                    f"Claude{self.via} returned incomplete or invalid structured output; no answer was accepted."
                 )
             raw = result["raw"]
             if raw.response_metadata.get("stop_reason") not in ("end_turn", "tool_use"):
                 raise AppError(
-                    "Anthropic output was interrupted or truncated; no complete answer was accepted."
+                    f"Claude output{self.via} was interrupted or truncated; no complete answer was accepted."
                 )
             return result["parsed"], {
                 "elapsed_seconds": time.perf_counter() - started,
@@ -124,5 +134,12 @@ class AnthropicChat:
             raise
         except Exception as error:
             raise AppError(
-                f"Anthropic request failed ({type(error).__name__}, status={getattr(error, 'status_code', None)}). No answer was accepted."
+                f"Claude request{self.via} failed ({type(error).__name__}, status={getattr(error, 'status_code', None)}). No answer was accepted."
+                + self.key_hint(error)
             ) from error
+
+    def key_hint(self, error):
+        """A rejected key is the most common classroom failure: name the key to check."""
+        if getattr(error, "status_code", None) == 401 or "Authentication" in type(error).__name__:
+            return f" Check {getattr(self, 'key_name', 'the API key')} in .env and restart."
+        return ""

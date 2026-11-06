@@ -3,8 +3,13 @@
 from dataclasses import dataclass, field
 from pathlib import Path
 import os
+import re
 
 from dotenv import dotenv_values
+
+
+# OpenRouter's Anthropic-compatible endpoint: the same Messages API, tools and streaming.
+OPENROUTER_URL = "https://openrouter.ai/api"
 
 
 class AppError(Exception):
@@ -48,5 +53,31 @@ class Settings:
             raise AppError(f"Set {name} in the shell or {self.env_file}.")
         return value
 
+    def provider(self):
+        """Where Claude calls go: LLM_PROVIDER=openrouter (the default) or anthropic."""
+        value = (self.env("LLM_PROVIDER") or "openrouter").lower()
+        if value not in ("openrouter", "anthropic"):
+            raise AppError("Set LLM_PROVIDER to openrouter or anthropic.")
+        return value
+
+    def api_key_name(self):
+        return "OPENROUTER_API_KEY" if self.provider() == "openrouter" else "ANTHROPIC_API_KEY"
+
     def api_key(self):
-        return self.env("ANTHROPIC_API_KEY", required=True)
+        return self.env(self.api_key_name(), required=True)
+
+    def base_url(self):
+        """The provider's API address; None means Anthropic's own."""
+        return OPENROUTER_URL if self.provider() == "openrouter" else None
+
+    def provider_model(self):
+        """The model name the provider expects. The course keeps Anthropic's ID in
+        settings.model (index and report identities use it); OpenRouter names
+        claude-haiku-4-5-20251001 anthropic/claude-haiku-4.5."""
+        if self.provider() == "anthropic":
+            return self.model
+        match = re.fullmatch(r"(claude-[a-z]+)-(\d+)(?:-(\d{1,2}))?(?:-\d{8})?", self.model)
+        if not match:
+            raise AppError(f"No OpenRouter name for {self.model}: use LLM_PROVIDER=anthropic.")
+        name, major, minor = match.groups()
+        return f"anthropic/{name}-{major}" + (f".{minor}" if minor else "")

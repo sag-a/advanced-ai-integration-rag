@@ -64,7 +64,7 @@ docker compose -f compose.chroma.yaml up -d --wait
 cp .env.example .env
 ```
 
-In PowerShell, use `Copy-Item .env.example .env`. Put your Anthropic key in `.env`;
+In PowerShell, use `Copy-Item .env.example .env`. Put your OpenRouter key in `.env` (`OPENROUTER_API_KEY`);
 the tracked example contains placeholders only.
 Shell variables take precedence. Do not commit `.env` or `outputs/`; the one
 exception is the prepared Graph RAG index, `outputs/graph_rag/graph.json`, which ships
@@ -86,6 +86,13 @@ This CPU implementation does not require MegaBlocks or an NVIDIA GPU; the course
 silences Nomic's optional MegaBlocks speed warning.
 
 ### Models
+
+Claude calls go through [OpenRouter](https://openrouter.ai) by default, using its
+Anthropic-compatible endpoint: the same Messages API, tool calls and streaming. Set
+`LLM_PROVIDER=anthropic` and `ANTHROPIC_API_KEY` in `.env` to call Anthropic directly.
+The course always names models by their Anthropic ID and translates it for OpenRouter
+(`claude-haiku-4-5-20251001` → `anthropic/claude-haiku-4.5`), so index and report
+identities don't depend on the provider.
 
 Answers use `claude-haiku-4-5-20251001` by default (`--model` to change). Anthropic
 now lists it as a legacy model: the current Haiku is `claude-haiku-5-5`, and Haiku
@@ -123,7 +130,7 @@ architectures' Chroma on 8004, so the demos never touch each other's data.
 The UI is at <http://127.0.0.1:8504>. On Windows PowerShell, replace `./rag` with
 `uv run --all-extras python -m app`; all commands have the same arguments.
 
-Graph preparation is explicit and uses Anthropic. It reads the prepared corpus,
+Graph preparation is explicit and uses Claude (via OpenRouter by default). It reads the prepared corpus,
 extracts each passage in order and saves the graph when all passages succeed:
 
 ```bash
@@ -133,8 +140,8 @@ extracts each passage in order and saves the graph when all passages succeed:
 ```
 
 Classic and local graph search use local embeddings without a research model
-call. Agentic search adds paid, bounded Anthropic research. All accepted answers
-use Anthropic and cite original PDF passages. Exact quotation matching and valid
+call. Agentic search adds paid, bounded Claude research. All accepted answers
+use Claude and cite original PDF passages. Exact quotation matching and valid
 citation IDs do not prove semantic correctness; inspect source support.
 
 Add `--process` to `ask` or `chat` to watch a turn as it runs: each graph node,
@@ -188,7 +195,7 @@ the Magenta Moments PDF and 14 on the COSMOTE tariffs list. See
 
 ```bash
 uv run --all-extras python -m evals.run --architecture classic_rag --retrieval-only   # free
-uv run --all-extras python -m evals.run --architecture all                            # Anthropic; Jev RAG also needs OpenRouter
+uv run --all-extras python -m evals.run --architecture all                            # Claude via OpenRouter (or Anthropic)
 ```
 
 These are classroom examples, not a held-out benchmark. Report ties and

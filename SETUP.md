@@ -9,7 +9,7 @@ All commands run from the repository root unless a step says otherwise.
 | [uv](https://docs.astral.sh/uv/) | Installs Python 3.12 and every dependency | `uv --version` |
 | [Docker](https://docs.docker.com/get-docker/) (Docker Desktop on macOS/Windows) | Chroma and PostgreSQL + pgvector | `docker compose version` |
 | Git | Clone the repository | `git --version` |
-| Anthropic API key | Lessons 3–5 only | — |
+| OpenRouter API key (or an Anthropic key) | Lessons 3–5 only | — |
 
 You do not need to install Python yourself. `.python-version` pins 3.12 and uv
 downloads it when it is missing.
@@ -60,7 +60,9 @@ uv run --all-extras python -m rag_core.reranker --download  # reranker for --opt
 cp .env.example .env                             # PowerShell: Copy-Item .env.example .env
 ```
 
-Put your key in `.env` as `ANTHROPIC_API_KEY=...`. Jev RAG also needs `OPENROUTER_API_KEY=...`.
+Put your key in `.env` as `OPENROUTER_API_KEY=...`: Claude calls go through OpenRouter by
+default, and Jev RAG uses the same key. To call Anthropic directly instead, set
+`LLM_PROVIDER=anthropic` and `ANTHROPIC_API_KEY=...`. Restart `./rag ui` after changing a key.
 Never commit `.env`; only `.env.example` with empty values is tracked.
 
 Every lesson uses the same pinned Nomic model, so the single download covers all of
@@ -107,7 +109,7 @@ docker compose -f modules/c02_vector_databases/compose.pgvector.yaml down
 docker compose -f modules/c02_vector_databases/compose.chroma.yaml down
 ```
 
-## 6. Lessons 3–5: the RAG architectures (Docker + Anthropic key)
+## 6. Lessons 3–5: the RAG architectures (Docker + OpenRouter key)
 
 ```bash
 docker compose -f compose.chroma.yaml up -d --wait   # architectures' Chroma, port 8004
@@ -239,6 +241,7 @@ The first turn in a new process includes loading the Nomic encoder (about 9 s).
 | `Cannot reach Chroma` | Start the matching compose file: port 8004 for `./rag`, 8002 for lesson 2 |
 | `Corpus collection does not exist` | Run `./rag prepare` |
 | `Graph index is incompatible` | Use the default `--model`, or `--option graph_index=PATH` for another index |
-| `Set ANTHROPIC_API_KEY …` | Add the key to `.env` |
+| `Set OPENROUTER_API_KEY …` | Add the key to `.env` (or `LLM_PROVIDER=anthropic` with `ANTHROPIC_API_KEY`) |
+| `… failed (AuthenticationError) … Check …_API_KEY` | The key was rejected: copy it again, save `.env`, restart `./rag ui` |
 | UI port already in use | `./rag ui --ui-port 8600` |
 | Optional packages disappear | Keep `--all-extras` on every `uv run` command |

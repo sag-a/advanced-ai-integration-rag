@@ -1,6 +1,6 @@
 # Capstone: build a RAG application
 
-After lessons 1–3 · about 60 minutes · no Docker; an Anthropic key only for real answers
+After lessons 1–3 · about 60 minutes · no Docker; an OpenRouter key only for real answers
 
 A command-line app that answers questions about five support documents in
 [`docs/`](docs/), cites its sources, and says so when the documents don't contain the
@@ -29,7 +29,7 @@ of about one line. For every step:
 `uv run --all-extras pytest exercises/capstone_rag -k step2` (then `step3`, ...). Before
 you change anything, 13 tests pass and 8 fail; each fix turns its own step green.
 
-Without an Anthropic key, use `ask --dry-run`: it prints the exact prompt the model would get.
+Without a key, use `ask --dry-run`: it prints the exact prompt the model would get.
 
 ## What a finished app does
 

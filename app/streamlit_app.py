@@ -52,7 +52,7 @@ def sidebar(settings, architecture, thread):
             switch_thread(str(uuid4()))
         st.caption("Current conversation ID")
         st.code(thread, language=None)
-        st.caption(f"Anthropic · {settings.model}\n\nCollection · {settings.collection}")
+        st.caption(f"{'OpenRouter' if settings.provider() == 'openrouter' else 'Anthropic'} · {settings.model}\n\nCollection · {settings.collection}")
         st.caption("History lasts for this browser session. Refresh starts an empty chat.")
         st.caption("Each turn's steps are printed in the terminal running `./rag ui`.")
 

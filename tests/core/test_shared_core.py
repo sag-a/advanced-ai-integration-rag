@@ -69,6 +69,7 @@ def test_optional_entry_can_continue_or_finish_without_core_architecture_branche
 
 def test_default_env_is_optional_but_shell_takes_precedence(tmp_path, monkeypatch):
     monkeypatch.chdir(tmp_path)
+    monkeypatch.setenv("LLM_PROVIDER", "anthropic")
     monkeypatch.setenv("ANTHROPIC_API_KEY", "shell-example")
     assert Settings().api_key() == "shell-example"
     Path(".env").write_text("ANTHROPIC_API_KEY=file-example\n")

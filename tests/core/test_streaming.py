@@ -124,7 +124,7 @@ def test_configured_anthropic_wrapper_really_uses_streaming(tmp_path, monkeypatc
     monkeypatch.setattr(ChatAnthropic, "_stream", stream)
     monkeypatch.setattr(ChatAnthropic, "_generate", buffered_request)
     key_file = tmp_path / "example.env"
-    key_file.write_text("ANTHROPIC_API_KEY=example-only\n")
+    key_file.write_text("OPENROUTER_API_KEY=example-only\n")
     chat = AnthropicChat(replace(Settings(), env_file=key_file))
     drafts = []
     result, _ = chat.stream(Answer, "system", {}, drafts.append)

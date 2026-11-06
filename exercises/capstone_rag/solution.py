@@ -145,9 +145,12 @@ def generate_answer(question, chunks, dry_run=False):
 
     from rag_core.config import Settings
 
-    settings = Settings()  # the course's model and the ANTHROPIC_API_KEY from .env
-    response = anthropic.Anthropic(api_key=settings.api_key()).messages.create(
-        model=settings.model,
+    # The course's model and key from .env: OpenRouter by default (OPENROUTER_API_KEY),
+    # or Anthropic itself with LLM_PROVIDER=anthropic. Both speak the same Messages API.
+    settings = Settings()
+    client = anthropic.Anthropic(api_key=settings.api_key(), base_url=settings.base_url())
+    response = client.messages.create(
+        model=settings.provider_model(),
         max_tokens=500,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": prompt}],
