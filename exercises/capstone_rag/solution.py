@@ -6,6 +6,7 @@
     uv run --all-extras python -m exercises.capstone_rag.solution search "How many days do I have to get a full refund?"
     uv run --all-extras python -m exercises.capstone_rag.solution ask "..." --dry-run
     uv run --all-extras python -m exercises.capstone_rag.solution eval
+    uv run --all-extras python -m exercises.capstone_rag.solution eval --chunk-size 150 --n 3
 """
 
 import argparse
@@ -79,12 +80,17 @@ def chunk_documents(documents, chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLA
 
 # Step 4: store embeddings in ChromaDB
 def open_collection(path=DB, embedding_function=None, rebuild=False):
-    """The persistent collection. rebuild=True deletes it first, e.g. after changing CHUNK_SIZE."""
+    """The persistent collection, or an in-memory one when path is None.
+    rebuild=True deletes it first, e.g. after changing CHUNK_SIZE."""
     if embedding_function is None:
         from modules.c02_vector_databases.nomic_embedding_function import NomicEmbeddingFunction
 
         embedding_function = NomicEmbeddingFunction()
-    client = chromadb.PersistentClient(path=str(path), settings=ChromaSettings(anonymized_telemetry=False))
+    settings = ChromaSettings(anonymized_telemetry=False)
+    if path is None:
+        client = chromadb.EphemeralClient(settings=settings)
+    else:
+        client = chromadb.PersistentClient(path=str(path), settings=settings)
     if rebuild and COLLECTION in [c.name for c in client.list_collections()]:
         client.delete_collection(COLLECTION)
     return client.get_or_create_collection(
@@ -155,6 +161,7 @@ EVAL_QUESTIONS = [
     ("Can I get a full refund within 14 days if I already used the service?",
      ["within 14 days", "already used the service"]),
     ("Do I have to wait 30 days to cancel if I move abroad?", ["30 days after", "move abroad"]),
+    ("Can I get a full refund for a promotional bundle?", ["discount of 50% or more"]),
     ("What is the customer service phone number?", None),
 ]
 
@@ -179,6 +186,7 @@ def main():
     parser.add_argument("--current", action="store_true", help="skip superseded documents")
     parser.add_argument("--rebuild", action="store_true", help="index: delete the collection first")
     parser.add_argument("--dry-run", action="store_true", help="ask: print the prompt, call no model")
+    parser.add_argument("--chunk-size", type=int, help="try a chunk size in a throwaway in-memory collection")
     args = parser.parse_args()
     if args.command in ("search", "ask") and not args.question:
         parser.error(f"{args.command} needs a question")
@@ -191,7 +199,8 @@ def main():
         for document in load_documents():
             print(f"{document['metadata']}\n  {document['text'][:70]!r}…")
         return
-    chunks = chunk_documents(load_documents())
+    chunk_size = args.chunk_size or CHUNK_SIZE
+    chunks = chunk_documents(load_documents(), chunk_size=chunk_size)
     if args.command == "chunks":
         for c in chunks:
             print(f"\n{c['id']} · {len(c['text'])} chars · {c['metadata']}\n{c['text']}")
@@ -201,7 +210,12 @@ def main():
         print(f"{len(chunks)} chunks → collection holds {index_chunks(collection, chunks)} records")
         print("Sample:", collection.get(ids=[chunks[0]["id"]]))
         return
-    collection = open_collection()
+    if args.chunk_size:
+        # Experiment without touching db/: a fresh in-memory collection, rebuilt every run.
+        collection = open_collection(path=None, rebuild=True)
+        index_chunks(collection, chunks)
+    else:
+        collection = open_collection()
     if collection.count() == 0:
         parser.error("the collection is empty: run the index command first")
     if args.command == "eval":
@@ -210,11 +224,11 @@ def main():
             mark = {True: "found", False: "MISSED", None: "(no answer exists)"}[row["hit"]]
             print(f"{mark:18} {row['question']}\n{'':18} {row['retrieved']}")
         scored = [r["hit"] for r in rows if r["hit"] is not None]
-        print(f"\nn_results={args.n}: evidence found for {sum(scored)}/{len(scored)} answerable questions")
+        print(f"\nchunk_size={chunk_size}, n_results={args.n}: evidence found for {sum(scored)}/{len(scored)} answerable questions")
         return
     found = retrieve(collection, args.question, args.n, where)
     for c in found:
-        print(f"\n{c['id']} · distance {c['distance']:.3f} · {c['metadata']['status']}\n{c['text']}")
+        print(f"\n{c['id']} · distance {c['distance']:.3f} · {c['metadata'].get('status', '?')}\n{c['text']}")
     if args.command == "ask":
         answer = generate_answer(args.question, found, dry_run=args.dry_run)
         print(f"\n=== {'PROMPT (dry run)' if args.dry_run else 'ANSWER'} ===\n{answer}")
