@@ -162,3 +162,27 @@ def test_step7_the_in_memory_collection_starts_empty_every_time(lab, chunks):
     lab.index_chunks(first, chunks)
     again = lab.open_collection(path=None, embedding_function=WordOverlap(), rebuild=True)
     assert again.count() == 0
+
+
+# Step 8: the pipeline as a LangGraph graph
+
+
+def test_step8_route_picks_the_next_node(lab):
+    assert lab.route({"chunks": [{"distance": 0.2}]}) == "answer"
+    assert lab.route({"chunks": [{"distance": 0.9}]}) == "refuse"
+    assert lab.route({"chunks": []}) == "refuse"
+
+
+def test_step8_a_far_question_is_refused_without_the_model(lab, collection, monkeypatch):
+    import anthropic
+
+    monkeypatch.setattr(anthropic, "Anthropic", lambda *a, **k: pytest.fail(
+        "the graph called the model for a question no chunk is close to: use route() after retrieve"))
+    path, state = lab.ask_graph(collection, "What are your opening hours?")
+    assert path == ["retrieve", "refuse"] and state["answer"] == lab.REFUSAL
+
+
+def test_step8_a_close_question_goes_to_the_model(lab, collection):
+    question = "Customers can receive a full refund if they cancel within 14 days of purchase."
+    path, state = lab.ask_graph(collection, question, dry_run=True)
+    assert path == ["retrieve", "answer"] and question in state["answer"]

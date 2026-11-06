@@ -28,7 +28,7 @@ Short exercises to code live in class, one per chapter. Same layout and commands
 
 | Project | After | You fix | You see | Cost |
 | --- | --- | --- | --- | --- |
-| [Build a RAG app](capstone_rag/) | lessons 1–3 | A working command-line RAG app over five Markdown files with six mistakes, one small fix per step, then experiments with `--chunk-size` | Cited answers, a refusal for missing information, and an eval of your settings | free with `--dry-run`; real answers < $0.01 |
+| [Build a RAG app](capstone_rag/) | lessons 1–3 | A working command-line RAG app over five Markdown files with seven mistakes, about one line to fix per step, ending with a LangGraph graph that refuses without calling the model | Cited answers, a refusal for missing information, and an eval of your settings | free with `--dry-run`; real answers < $0.01 |
 
 ## How a lab works
 
