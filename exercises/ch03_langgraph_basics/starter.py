@@ -1,11 +1,15 @@
 """Chapter 3 exercise: a basic LangGraph, then an agent state with two parallel searches.
 
-Part 1 works: run it and read it. Part 2 has three TODOs.
+Part 1 works: run it and read it. Part 2 is written too, but has three mistakes, marked
+FIX 1, FIX 2 and FIX 3. Fix them in that order; each is about one line. After each fix:
+
+    uv run --all-extras python -m exercises.ch03_langgraph_basics.run
+    uv run --all-extras pytest exercises/ch03_langgraph_basics -k fix1     (then fix2, fix3)
 """
 
-import operator  # noqa: F401  (TODO 1)
+import operator  # noqa: F401  (FIX 2)
 import re
-from typing import Annotated, TypedDict  # noqa: F401  (TODO 1)
+from typing import Annotated, TypedDict  # noqa: F401  (FIX 2)
 
 from langgraph.graph import END, START, StateGraph
 
@@ -85,25 +89,30 @@ def build_basic_graph():
 
 class AgentState(TypedDict):
     question: str
-    # TODO 1: add the fields the nodes below read and write:
-    #   billing_hits, support_hits, evidence (each a list[dict]), answer (str), and
-    #   steps: a list[str] that every node appends its name to. Two nodes write steps
-    #   in the same step, so it needs a reducer (hint: Annotated and operator.add).
+    billing_hits: list[dict]
+    support_hits: list[dict]
+    evidence: list[dict]
+    answer: str
+    # FIX 2 · You see (after FIX 1): InvalidUpdateError: At key 'steps': Can receive only one
+    #         value per step. Both searches now write steps in the same step.
+    #         Fix: give steps a reducer, a rule that joins the two updates:
+    #         Annotated[list[str], operator.add]
+    steps: list[str]
 
 
 def search_billing(state):
-    """TODO 2: search BILLING with top_matches; write billing_hits and add "search_billing" to steps."""
-    raise NotImplementedError
+    return {"billing_hits": top_matches(state["question"], BILLING), "steps": ["search_billing"]}
 
 
 def search_support(state):
-    """TODO 2: search SUPPORT with top_matches; write support_hits and add "search_support" to steps."""
-    raise NotImplementedError
+    return {"support_hits": top_matches(state["question"], SUPPORT), "steps": ["search_support"]}
 
 
 def merge(state):
     """Runs once both searches are done: put their hits together."""
-    return {"evidence": state["billing_hits"] + state["support_hits"], "steps": ["merge"]}
+    # FIX 3 · You see: the two-topic question's answer has no router passage.
+    #         Fix: the evidence must hold the hits of both searches.
+    return {"evidence": state["billing_hits"], "steps": ["merge"]}
 
 
 def write_agent_answer(state):
@@ -112,10 +121,16 @@ def write_agent_answer(state):
 
 def build_agent_graph():
     graph = StateGraph(AgentState)
+    graph.add_node("search_billing", search_billing)
+    graph.add_node("search_support", search_support)
     graph.add_node("merge", merge)
     graph.add_node("write_agent_answer", write_agent_answer)
-    # TODO 3: add the two search nodes. Connect both to START so they run in parallel,
-    # and connect both to "merge" so it waits for both. (Look at build_basic_graph.)
+    graph.add_edge(START, "search_billing")
+    # FIX 1 · You see: run.py shows search_billing in step 1 and search_support in step 2.
+    #         Fix: start search_support from START too, so both searches run in the same step.
+    graph.add_edge("search_billing", "search_support")
+    # A list of sources: merge waits until both searches have finished.
+    graph.add_edge(["search_billing", "search_support"], "merge")
     graph.add_edge("merge", "write_agent_answer")
     graph.add_edge("write_agent_answer", END)
     return graph.compile()

@@ -39,7 +39,12 @@ def main():
     print(app.get_graph().draw_mermaid())
     for question in QUESTIONS:
         print(f"\nQ: {question}")
-        by_step, final = trace(app, question)
+        try:
+            by_step, final = trace(app, question)
+        except Exception as error:
+            # Before FIX 2, two nodes write `steps` in the same step and LangGraph stops here.
+            print(f"  LangGraph stopped: {type(error).__name__}: {str(error).splitlines()[0]}")
+            return
         for step, nodes in sorted(by_step.items()):
             together = "   ← in parallel" if len(nodes) > 1 else ""
             print(f"  step {step}: {', '.join(sorted(nodes))}{together}")
